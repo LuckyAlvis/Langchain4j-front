@@ -144,7 +144,7 @@ export default {
 }
 
 .sidebar {
-  width: 260px;
+  width: 180px;
   background: white;
   border-right: 1px solid #eee;
   display: flex;
@@ -153,26 +153,26 @@ export default {
 }
 
 .sidebar-header {
-  padding: 20px;
+  padding: 12px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   border-bottom: 1px solid #eee;
 }
 
 .logo {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
 }
 
 .sidebar-header h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: 15px;
   color: #333;
 }
 
 .sidebar-nav {
-  padding: 20px 0;
+  padding: 12px 0;
 }
 
 .sidebar-nav ul {
@@ -186,8 +186,8 @@ export default {
 .sidebar-nav a {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 6px;
+  padding: 6px 12px;
   color: #666;
   transition: all 0.2s;
 }
@@ -215,19 +215,19 @@ export default {
 }
 
 .top-nav {
-  height: 64px;
+  height: 44px;
   background: white;
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 18px;
 }
 
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
 }
 
 .menu-toggle {
@@ -320,8 +320,8 @@ export default {
 }
 
 .user-profile img {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
 }
 

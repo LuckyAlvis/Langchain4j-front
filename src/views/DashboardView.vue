@@ -61,12 +61,12 @@
         <!-- 收支趋势图 -->
         <div class="chart-card">
           <h3>收支趋势</h3>
-          <div ref="trendChart" style="height: 300px;"></div>
+          <div ref="trendChart" style="height: 200px;"></div>
         </div>
         <!-- 支出分类图 -->
         <div class="chart-card">
           <h3>支出分类</h3>
-          <div ref="categoryChart" style="height: 300px;"></div>
+          <div ref="categoryChart" style="height: 200px;"></div>
         </div>
       </div>
 
@@ -276,48 +276,48 @@ export default {
 
 <style scoped>
 .dashboard {
-  padding: 20px;
+  padding: 18px;
   background: var(--background-light);
 }
 
 .stats-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .stat-card {
+  padding: 12px;
+  border-radius: 6px;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .stat-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
 }
 
 .stat-header h3 {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .icon-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .icon-wrapper i {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
 }
 
@@ -338,13 +338,15 @@ export default {
 }
 
 .amount {
-  margin: 10px 0;
-  font-size: 24px;
-  font-weight: bold;
+  margin: 8px 0;
+  font-size: 22px;
+  font-weight: 500;
+  color: #333;
 }
 
 .trend {
-  font-size: 14px;
+  font-size: 11px;
+  margin-top: 6px;
 }
 
 .trend.positive {
@@ -358,31 +360,31 @@ export default {
 .charts-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 18px;
+  margin-bottom: 18px;
 }
 
 .chart-card {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 18px;
+  border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .chart-card h3 {
-  margin: 0 0 20px 0;
+  margin: 0 0 18px 0;
   color: var(--text-primary);
 }
 
 .recent-transactions {
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 18px;
+  border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .recent-transactions h3 {
-  margin: 0 0 20px 0;
+  margin: 0 0 18px 0;
   color: var(--text-primary);
 }
 
@@ -392,7 +394,7 @@ table {
 }
 
 th, td {
-  padding: 12px;
+  padding: 10px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
 }
@@ -412,9 +414,9 @@ th {
 
 .status {
   display: inline-block;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 11px;
 }
 
 .status.completed {
