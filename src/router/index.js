@@ -7,6 +7,7 @@ import FamilySavingsView from '@/views/FamilySavingsView.vue'
 import FinancialHealthView from '@/views/FinancialHealthView.vue'
 import LoginView from '@/views/LoginView.vue'
 
+// 创建路由实例
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,7 +20,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
+      component: () => import('../views/LoginView.vue'),
       meta: { requiresAuth: false }
     },
     {
@@ -55,10 +56,11 @@ const router = createRouter({
   ]
 })
 
-// 路由守卫
+// 添加全局前置守卫
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('token') // 检查是否已登录
+  const isAuthenticated = localStorage.getItem('token')
   
+  // 如果路由需要认证且用户未登录，则重定向到登录页
   if (to.meta.requiresAuth && !isAuthenticated) {
     next('/login')
   } else {
@@ -66,4 +68,4 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-export default router 
+export default router

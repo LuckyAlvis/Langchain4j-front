@@ -7,23 +7,23 @@
       <form @submit.prevent="handleLogin" class="login-form">
         <div class="form-group">
           <div class="input-with-icon">
-            <i class="fas fa-user"></i>
-            <input 
-              type="text" 
-              v-model="form.username" 
+            <el-input
+              v-model="form.username"
               placeholder="用户名/邮箱"
-            >
+              :prefix-icon="User"
+            />
           </div>
         </div>
         
         <div class="form-group">
           <div class="input-with-icon">
-            <i class="fas fa-lock"></i>
-            <input 
-              type="password" 
-              v-model="form.password" 
+            <el-input
+              v-model="form.password"
+              type="password"
               placeholder="密码"
-            >
+              :prefix-icon="Lock"
+              show-password
+            />
           </div>
         </div>
         
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import { User, Lock } from '@element-plus/icons-vue'
+
 export default {
   name: 'LoginView',
   data() {
@@ -59,7 +61,9 @@ export default {
         password: '',
         remember: false
       },
-      loading: false
+      loading: false,
+      User,
+      Lock
     }
   },
   methods: {
@@ -127,28 +131,23 @@ export default {
 
 .input-with-icon {
   position: relative;
-}
-
-.input-with-icon i {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-}
-
-.input-with-icon input {
   width: 100%;
-  padding: 12px 12px 12px 40px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  transition: border-color 0.2s;
 }
 
-.input-with-icon input:focus {
-  outline: none;
-  border-color: #1976d2;
+/* 覆盖 Element Plus 的默认样式 */
+:deep(.el-input__wrapper) {
+  padding: 1px 11px;
+  background-color: white;
+}
+
+:deep(.el-input__inner) {
+  height: 42px;
+  font-size: 14px;
+}
+
+:deep(.el-input__prefix) {
+  font-size: 16px;
+  color: #909399;
 }
 
 .form-options {
@@ -206,4 +205,4 @@ export default {
 .register-link:hover {
   text-decoration: underline;
 }
-</style> 
+</style>

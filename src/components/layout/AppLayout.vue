@@ -43,18 +43,34 @@
           </div>
         </div>
         <div class="nav-right">
-          <div class="search-box">
+          <!-- 移除搜索框 -->
+          <!-- <div class="search-box">
             <i class="fas fa-search"></i>
             <input type="text" placeholder="搜索...">
-          </div>
-          <div class="notifications">
+          </div> -->
+          
+          <!-- 注释掉消息通知 -->
+          <!-- <div class="notifications">
             <i class="fas fa-bell"></i>
             <span class="badge">3</span>
-          </div>
+          </div> -->
+          
+          <!-- 修改用户头像部分，添加下拉菜单 -->
           <div class="user-profile">
-            <img src="@/assets/avatar.png" alt="用户头像">
-            <span>张三</span>
-            <i class="fas fa-chevron-down"></i>
+            <el-dropdown trigger="click" @command="handleCommand">
+              <div class="user-info">
+                <img src="@/assets/avatar.png" alt="用户头像">
+                <span>张三</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item command="profile">个人信息</el-dropdown-item>
+                  <el-dropdown-item command="settings">设置</el-dropdown-item>
+                  <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
           </div>
         </div>
       </header>
@@ -68,8 +84,17 @@
 </template>
 
 <script>
+// 引入Element Plus组件
+import { ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
+import 'element-plus/dist/index.css' // 引入样式
+
 export default {
   name: 'AppLayout',
+  components: {
+    ElDropdown,
+    ElDropdownMenu,
+    ElDropdownItem
+  },
   data() {
     return {
       sidebarCollapsed: false
@@ -92,6 +117,21 @@ export default {
     toggleSidebar() {
       this.sidebarCollapsed = !this.sidebarCollapsed
       document.querySelector('.app-container').classList.toggle('sidebar-collapsed')
+    },
+    // 添加处理下拉菜单命令的方法
+    handleCommand(command) {
+      if (command === 'logout') {
+        // 清除登录状态
+        localStorage.removeItem('token')
+        // 跳转到登录页
+        this.$router.push('/login')
+      } else if (command === 'profile') {
+        // 处理个人信息
+        console.log('跳转到个人信息页面')
+      } else if (command === 'settings') {
+        // 处理设置
+        console.log('跳转到设置页面')
+      }
     }
   }
 }
@@ -319,4 +359,24 @@ export default {
     display: none;
   }
 }
-</style> 
+
+/* 调整下拉菜单样式 */
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.user-info img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* 确保下拉菜单可见 */
+:deep(.el-dropdown-menu) {
+  z-index: 2000;
+}
+</style>
