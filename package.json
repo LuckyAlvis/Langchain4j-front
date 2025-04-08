@@ -9,12 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "run": "^1.5.0",
-    "vue": "^3.5.13"
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "@fortawesome/fontawesome-free": "^6.5.1",
+    "echarts": "^5.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.3",
-    "vite": "^6.2.4",
-    "vite-plugin-vue-devtools": "^7.7.2"
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.1.6"
   }
 }
