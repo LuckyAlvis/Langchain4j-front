@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人财务管理系统 - 家庭储蓄计划</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/family-savings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="images/logo.png" alt="Logo" class="logo">
+                <h2>财务管理系统</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="index.html"><i class="fas fa-chart-line"></i>看板</a>
+                    </li>
+                    <li>
+                        <a href="personal-transactions.html"><i class="fas fa-wallet"></i>个人记账</a>
+                    </li>
+                    <li>
+                        <a href="family-bills.html"><i class="fas fa-home"></i>家庭账单</a>
+                    </li>
+                    <li>
+                        <a href="personal-savings.html"><i class="fas fa-piggy-bank"></i>个人储蓄计划</a>
+                    </li>
+                    <li class="active">
+                        <a href="family-savings.html"><i class="fas fa-users"></i>家庭储蓄计划</a>
+                    </li>
+                    <li>
+                        <a href="financial-health.html"><i class="fas fa-heartbeat"></i>财务健康看板</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 顶部导航栏 -->
+            <header class="top-nav">
+                <div class="nav-left">
+                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <div class="breadcrumb">
+                        <span>首页</span> / <span>家庭储蓄计划</span>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="搜索储蓄计划...">
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="images/avatar.png" alt="用户头像">
+                        <span>张三</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 内容区域 -->
+            <div class="content">
+                <!-- 家庭成员贡献 -->
+                <div class="member-contributions">
+                    <div class="member-card">
+                        <img src="images/avatar.png" alt="张三">
+                        <span>张三</span>
+                        <div class="contribution-info">
+                            <div class="info-item">
+                                <span class="label">本月贡献</span>
+                                <span class="value">¥3,000</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">总贡献</span>
+                                <span class="value">¥15,000</span>
+                            </div>
+                        </div>
+                        <div class="contribution-chart">
+                            <div class="chart-bar">
+                                <div class="bar" style="width: 60%"></div>
+                            </div>
+                            <span class="percentage">60%</span>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <img src="images/avatar2.png" alt="李四">
+                        <span>李四</span>
+                        <div class="contribution-info">
+                            <div class="info-item">
+                                <span class="label">本月贡献</span>
+                                <span class="value">¥2,000</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">总贡献</span>
+                                <span class="value">¥10,000</span>
+                            </div>
+                        </div>
+                        <div class="contribution-chart">
+                            <div class="chart-bar">
+                                <div class="bar" style="width: 40%"></div>
+                            </div>
+                            <span class="percentage">40%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 储蓄概览 -->
+                <div class="savings-overview">
+                    <div class="overview-card total">
+                        <div class="card-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>家庭总储蓄</h3>
+                            <p class="amount">¥25,000</p>
+                            <p class="progress">目标完成率 50%</p>
+                        </div>
+                    </div>
+                    <div class="overview-card monthly">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>本月储蓄</h3>
+                            <p class="amount">¥5,000</p>
+                            <p class="progress">目标完成率 83%</p>
+                        </div>
+                    </div>
+                    <div class="overview-card interest">
+                        <div class="card-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>预计收益</h3>
+                            <p class="amount">¥1,500</p>
+                            <p class="progress">年化收益率 4.2%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 操作栏 -->
+                <div class="action-bar">
+                    <div class="left-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i> 新建家庭储蓄计划
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-chart-pie"></i> 储蓄分析
+                        </button>
+                    </div>
+                    <div class="right-actions">
+                        <div class="view-options">
+                            <button class="btn-secondary active">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                            <button class="btn-secondary">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 储蓄计划列表 -->
+                <div class="savings-plans">
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h3>购房首付</h3>
+                            <span class="status active">进行中</span>
+                        </div>
+                        <div class="plan-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 50%"></div>
+                            </div>
+                            <div class="progress-info">
+                                <span>已储蓄: ¥150,000</span>
+                                <span>目标: ¥300,000</span>
+                            </div>
+                        </div>
+                        <div class="plan-details">
+                            <div class="detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>预计完成: 2025年6月</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-piggy-bank"></i>
+                                <span>每月储蓄: ¥15,000</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-users"></i>
+                                <span>参与人数: 2人</span>
+                            </div>
+                        </div>
+                        <div class="plan-actions">
+                            <button class="btn-secondary">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn-secondary">
+                                <i class="fas fa-chart-line"></i> 详情
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <h3>家庭旅游基金</h3>
+                            <span class="status active">进行中</span>
+                        </div>
+                        <div class="plan-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 30%"></div>
+                            </div>
+                            <div class="progress-info">
+                                <span>已储蓄: ¥6,000</span>
+                                <span>目标: ¥20,000</span>
+                            </div>
+                        </div>
+                        <div class="plan-details">
+                            <div class="detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>预计完成: 2024年12月</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-piggy-bank"></i>
+                                <span>每月储蓄: ¥2,000</span>
+                            </div>
+                            <div class="detail">
+                                <i class="fas fa-users"></i>
+                                <span>参与人数: 2人</span>
+                            </div>
+                        </div>
+                        <div class="plan-actions">
+                            <button class="btn-secondary">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn-secondary">
+                                <i class="fas fa-chart-line"></i> 详情
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="add-plan-card">
+                        <i class="fas fa-plus"></i>
+                        <span>新建家庭储蓄计划</span>
+                    </div>
+                </div>
+
+                <!-- 储蓄趋势图表 -->
+                <div class="savings-chart">
+                    <div class="chart-header">
+                        <h3>家庭储蓄趋势</h3>
+                        <div class="chart-filters">
+                            <select>
+                                <option value="month">月度</option>
+                                <option value="quarter">季度</option>
+                                <option value="year">年度</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container" id="familySavingsTrendChart"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

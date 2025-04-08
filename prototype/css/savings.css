@@ -1,0 +1,240 @@
+/* 储蓄概览样式 */
+.savings-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.overview-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.total .card-icon {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.monthly .card-icon {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.interest .card-icon {
+    background-color: #fff3e0;
+    color: #f57c00;
+}
+
+.card-info h3 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.progress {
+    font-size: 12px;
+    color: #666;
+}
+
+/* 储蓄计划列表样式 */
+.savings-plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.plan-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.plan-header h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.status.active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status.completed {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.plan-progress {
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #f5f7fa;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #4a90e2;
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+}
+
+.plan-details {
+    margin-bottom: 15px;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+.detail i {
+    width: 16px;
+    color: #999;
+}
+
+.plan-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.add-plan-card {
+    background-color: #f5f7fa;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-plan-card:hover {
+    background-color: #e9ecef;
+    border-color: #4a90e2;
+}
+
+.add-plan-card i {
+    font-size: 24px;
+    color: #666;
+}
+
+.add-plan-card span {
+    color: #666;
+}
+
+/* 储蓄趋势图表样式 */
+.savings-chart {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-header h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.chart-filters select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-width: 150px;
+}
+
+.chart-container {
+    height: 300px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .savings-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .savings-plans {
+        grid-template-columns: 1fr;
+    }
+    
+    .plan-actions {
+        flex-direction: column;
+    }
+    
+    .plan-actions button {
+        width: 100%;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .chart-filters select {
+        width: 100%;
+    }
+} 

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人财务管理系统 - 财务健康看板</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/financial-health.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="images/logo.png" alt="Logo" class="logo">
+                <h2>财务管理系统</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="index.html"><i class="fas fa-chart-line"></i>看板</a>
+                    </li>
+                    <li>
+                        <a href="personal-transactions.html"><i class="fas fa-wallet"></i>个人记账</a>
+                    </li>
+                    <li>
+                        <a href="family-bills.html"><i class="fas fa-home"></i>家庭账单</a>
+                    </li>
+                    <li>
+                        <a href="personal-savings.html"><i class="fas fa-piggy-bank"></i>个人储蓄计划</a>
+                    </li>
+                    <li>
+                        <a href="family-savings.html"><i class="fas fa-users"></i>家庭储蓄计划</a>
+                    </li>
+                    <li class="active">
+                        <a href="financial-health.html"><i class="fas fa-heartbeat"></i>财务健康看板</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 顶部导航栏 -->
+            <header class="top-nav">
+                <div class="nav-left">
+                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <div class="breadcrumb">
+                        <span>首页</span> / <span>财务健康看板</span>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="搜索...">
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">1</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="images/avatar.png" alt="用户头像">
+                        <span>张三</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 内容区域 -->
+            <div class="content">
+                <!-- 财务健康评分 -->
+                <div class="health-score">
+                    <div class="score-card">
+                        <div class="score-circle">
+                            <div class="score-value">85</div>
+                            <div class="score-label">财务健康评分</div>
+                        </div>
+                        <div class="score-details">
+                            <div class="score-item">
+                                <span class="label">上月评分</span>
+                                <span class="value">82</span>
+                                <span class="trend up">+3</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="label">年度平均</span>
+                                <span class="value">80</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="label">目标评分</span>
+                                <span class="value">90</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="score-factors">
+                        <h3>评分因素</h3>
+                        <div class="factor-list">
+                            <div class="factor-item">
+                                <div class="factor-header">
+                                    <span class="factor-name">储蓄率</span>
+                                    <span class="factor-score">92</span>
+                                </div>
+                                <div class="factor-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 92%"></div>
+                                    </div>
+                                </div>
+                                <p class="factor-desc">您的储蓄率高于80%的用户</p>
+                            </div>
+                            <div class="factor-item">
+                                <div class="factor-header">
+                                    <span class="factor-name">债务收入比</span>
+                                    <span class="factor-score">78</span>
+                                </div>
+                                <div class="factor-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 78%"></div>
+                                    </div>
+                                </div>
+                                <p class="factor-desc">您的债务收入比处于健康范围</p>
+                            </div>
+                            <div class="factor-item">
+                                <div class="factor-header">
+                                    <span class="factor-name">应急基金</span>
+                                    <span class="factor-score">85</span>
+                                </div>
+                                <div class="factor-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <p class="factor-desc">您的应急基金可覆盖5个月支出</p>
+                            </div>
+                            <div class="factor-item">
+                                <div class="factor-header">
+                                    <span class="factor-name">投资多样性</span>
+                                    <span class="factor-score">75</span>
+                                </div>
+                                <div class="factor-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <p class="factor-desc">建议增加投资品种的多样性</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 财务健康指标 -->
+                <div class="health-indicators">
+                    <h3>财务健康指标</h3>
+                    <div class="indicators-grid">
+                        <div class="indicator-card">
+                            <div class="indicator-icon">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>储蓄率</h4>
+                                <p class="value">32%</p>
+                                <p class="target">目标: 30%</p>
+                                <div class="indicator-status good">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>良好</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="indicator-card">
+                            <div class="indicator-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>债务收入比</h4>
+                                <p class="value">28%</p>
+                                <p class="target">目标: < 30%</p>
+                                <div class="indicator-status good">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>良好</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="indicator-card">
+                            <div class="indicator-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>应急基金覆盖率</h4>
+                                <p class="value">5个月</p>
+                                <p class="target">目标: 6个月</p>
+                                <div class="indicator-status warning">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>接近目标</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="indicator-card">
+                            <div class="indicator-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>投资多样性</h4>
+                                <p class="value">中等</p>
+                                <p class="target">目标: 高</p>
+                                <div class="indicator-status warning">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>需改进</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="indicator-card">
+                            <div class="indicator-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>账单支付及时率</h4>
+                                <p class="value">98%</p>
+                                <p class="target">目标: 100%</p>
+                                <div class="indicator-status good">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>良好</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="indicator-card">
+                            <div class="indicator-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="indicator-info">
+                                <h4>预算执行率</h4>
+                                <p class="value">92%</p>
+                                <p class="target">目标: 95%</p>
+                                <div class="indicator-status good">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>良好</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 财务健康趋势 -->
+                <div class="health-trends">
+                    <div class="trend-header">
+                        <h3>财务健康趋势</h3>
+                        <div class="trend-filters">
+                            <select>
+                                <option value="month">月度</option>
+                                <option value="quarter">季度</option>
+                                <option value="year">年度</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="trend-chart" id="healthTrendChart"></div>
+                </div>
+
+                <!-- 财务健康建议 -->
+                <div class="health-recommendations">
+                    <h3>财务健康建议</h3>
+                    <div class="recommendations-list">
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h4>增加应急基金</h4>
+                                <p>您的应急基金目前可覆盖5个月支出，建议增加至6个月，以提高财务安全性。</p>
+                                <div class="recommendation-actions">
+                                    <button class="btn-secondary">查看详情</button>
+                                    <button class="btn-primary">开始行动</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h4>多样化投资组合</h4>
+                                <p>您的投资组合多样性为中等，建议增加不同类型的投资，如股票、债券、房地产等，以分散风险。</p>
+                                <div class="recommendation-actions">
+                                    <button class="btn-secondary">查看详情</button>
+                                    <button class="btn-primary">开始行动</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h4>优化预算执行</h4>
+                                <p>您的预算执行率为92%，接近目标但仍有提升空间。建议检查超出预算的类别，找出原因并调整。</p>
+                                <div class="recommendation-actions">
+                                    <button class="btn-secondary">查看详情</button>
+                                    <button class="btn-primary">开始行动</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 财务健康目标 -->
+                <div class="health-goals">
+                    <div class="goals-header">
+                        <h3>财务健康目标</h3>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i> 添加目标
+                        </button>
+                    </div>
+                    <div class="goals-list">
+                        <div class="goal-card">
+                            <div class="goal-header">
+                                <h4>提高储蓄率至35%</h4>
+                                <span class="goal-status in-progress">进行中</span>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 65%"></div>
+                                </div>
+                                <div class="progress-info">
+                                    <span>当前: 32%</span>
+                                    <span>目标: 35%</span>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>预计完成: 2023年12月</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-tasks"></i>
+                                    <span>完成度: 65%</span>
+                                </div>
+                            </div>
+                            <div class="goal-actions">
+                                <button class="btn-secondary">
+                                    <i class="fas fa-edit"></i> 编辑
+                                </button>
+                                <button class="btn-secondary">
+                                    <i class="fas fa-chart-line"></i> 详情
+                                </button>
+                            </div>
+                        </div>
+                        <div class="goal-card">
+                            <div class="goal-header">
+                                <h4>建立6个月应急基金</h4>
+                                <span class="goal-status in-progress">进行中</span>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 83%"></div>
+                                </div>
+                                <div class="progress-info">
+                                    <span>当前: 5个月</span>
+                                    <span>目标: 6个月</span>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>预计完成: 2023年10月</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-tasks"></i>
+                                    <span>完成度: 83%</span>
+                                </div>
+                            </div>
+                            <div class="goal-actions">
+                                <button class="btn-secondary">
+                                    <i class="fas fa-edit"></i> 编辑
+                                </button>
+                                <button class="btn-secondary">
+                                    <i class="fas fa-chart-line"></i> 详情
+                                </button>
+                            </div>
+                        </div>
+                        <div class="goal-card">
+                            <div class="goal-header">
+                                <h4>提高投资多样性</h4>
+                                <span class="goal-status in-progress">进行中</span>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 40%"></div>
+                                </div>
+                                <div class="progress-info">
+                                    <span>当前: 中等</span>
+                                    <span>目标: 高</span>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <div class="detail">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>预计完成: 2024年3月</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-tasks"></i>
+                                    <span>完成度: 40%</span>
+                                </div>
+                            </div>
+                            <div class="goal-actions">
+                                <button class="btn-secondary">
+                                    <i class="fas fa-edit"></i> 编辑
+                                </button>
+                                <button class="btn-secondary">
+                                    <i class="fas fa-chart-line"></i> 详情
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 
