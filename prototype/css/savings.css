@@ -216,24 +216,24 @@
     .savings-overview {
         grid-template-columns: 1fr;
     }
-    
+
     .savings-plans {
         grid-template-columns: 1fr;
     }
-    
+
     .plan-actions {
         flex-direction: column;
     }
-    
+
     .plan-actions button {
         width: 100%;
     }
-    
+
     .chart-header {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .chart-filters select {
         width: 100%;
     }

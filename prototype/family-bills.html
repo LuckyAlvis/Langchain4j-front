@@ -9,381 +9,381 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- 侧边栏 -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="images/logo.png" alt="Logo" class="logo">
-                <h2>财务管理系统</h2>
+<div class="app-container">
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <h2>财务管理系统</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="index.html"><i class="fas fa-chart-line"></i>看板</a>
+                </li>
+                <li>
+                    <a href="personal-transactions.html"><i class="fas fa-wallet"></i>个人记账</a>
+                </li>
+                <li class="active">
+                    <a href="family-bills.html"><i class="fas fa-home"></i>家庭账单</a>
+                </li>
+                <li>
+                    <a href="personal-savings.html"><i class="fas fa-piggy-bank"></i>个人储蓄计划</a>
+                </li>
+                <li>
+                    <a href="family-savings.html"><i class="fas fa-users"></i>家庭储蓄计划</a>
+                </li>
+                <li>
+                    <a href="financial-health.html"><i class="fas fa-heartbeat"></i>财务健康看板</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 顶部导航栏 -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div class="breadcrumb">
+                    <span>首页</span> / <span>家庭账单</span>
+                </div>
             </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li>
-                        <a href="index.html"><i class="fas fa-chart-line"></i>看板</a>
-                    </li>
-                    <li>
-                        <a href="personal-transactions.html"><i class="fas fa-wallet"></i>个人记账</a>
-                    </li>
-                    <li class="active">
-                        <a href="family-bills.html"><i class="fas fa-home"></i>家庭账单</a>
-                    </li>
-                    <li>
-                        <a href="personal-savings.html"><i class="fas fa-piggy-bank"></i>个人储蓄计划</a>
-                    </li>
-                    <li>
-                        <a href="family-savings.html"><i class="fas fa-users"></i>家庭储蓄计划</a>
-                    </li>
-                    <li>
-                        <a href="financial-health.html"><i class="fas fa-heartbeat"></i>财务健康看板</a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜索账单...">
+                </div>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">2</span>
+                </div>
+                <div class="user-profile">
+                    <img src="images/avatar.png" alt="用户头像">
+                    <span>张三</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
 
-        <!-- 主内容区 -->
-        <main class="main-content">
-            <!-- 顶部导航栏 -->
-            <header class="top-nav">
-                <div class="nav-left">
-                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-                    <div class="breadcrumb">
-                        <span>首页</span> / <span>家庭账单</span>
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 账单概览 -->
+            <div class="bills-overview">
+                <div class="overview-card total">
+                    <div class="card-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>本月家庭支出</h3>
+                        <p class="amount">¥8,500</p>
+                        <p class="trend up">较上月 +5.2%</p>
                     </div>
                 </div>
-                <div class="nav-right">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="搜索账单...">
+                <div class="overview-card shared">
+                    <div class="card-icon">
+                        <i class="fas fa-share-alt"></i>
                     </div>
-                    <div class="notifications">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge">2</span>
-                    </div>
-                    <div class="user-profile">
-                        <img src="images/avatar.png" alt="用户头像">
-                        <span>张三</span>
-                        <i class="fas fa-chevron-down"></i>
+                    <div class="card-info">
+                        <h3>待分摊金额</h3>
+                        <p class="amount">¥3,200</p>
+                        <p class="trend">2笔待分摊</p>
                     </div>
                 </div>
-            </header>
-
-            <!-- 内容区域 -->
-            <div class="content">
-                <!-- 账单概览 -->
-                <div class="bills-overview">
-                    <div class="overview-card total">
-                        <div class="card-icon">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                        </div>
-                        <div class="card-info">
-                            <h3>本月家庭支出</h3>
-                            <p class="amount">¥8,500</p>
-                            <p class="trend up">较上月 +5.2%</p>
-                        </div>
+                <div class="overview-card average">
+                    <div class="card-icon">
+                        <i class="fas fa-calculator"></i>
                     </div>
-                    <div class="overview-card shared">
-                        <div class="card-icon">
-                            <i class="fas fa-share-alt"></i>
-                        </div>
-                        <div class="card-info">
-                            <h3>待分摊金额</h3>
-                            <p class="amount">¥3,200</p>
-                            <p class="trend">2笔待分摊</p>
-                        </div>
-                    </div>
-                    <div class="overview-card average">
-                        <div class="card-icon">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                        <div class="card-info">
-                            <h3>人均支出</h3>
-                            <p class="amount">¥4,250</p>
-                            <p class="trend down">较上月 -2.1%</p>
-                        </div>
+                    <div class="card-info">
+                        <h3>人均支出</h3>
+                        <p class="amount">¥4,250</p>
+                        <p class="trend down">较上月 -2.1%</p>
                     </div>
                 </div>
+            </div>
 
-                <!-- 操作栏 -->
-                <div class="action-bar">
-                    <div class="left-actions">
-                        <button class="btn-primary">
-                            <i class="fas fa-plus"></i> 添加家庭账单
+            <!-- 操作栏 -->
+            <div class="action-bar">
+                <div class="left-actions">
+                    <button class="btn-primary">
+                        <i class="fas fa-plus"></i> 添加家庭账单
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fas fa-share-alt"></i> 分摊账单
+                    </button>
+                </div>
+                <div class="right-actions">
+                    <div class="filter-group">
+                        <select class="filter-select">
+                            <option value="all">所有类型</option>
+                            <option value="food">餐饮</option>
+                            <option value="housing">住房</option>
+                            <option value="utilities">水电煤</option>
+                            <option value="entertainment">娱乐</option>
+                            <option value="other">其他</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="all">所有成员</option>
+                            <option value="me">我</option>
+                            <option value="spouse">配偶</option>
+                            <option value="shared">共同</option>
+                        </select>
+                        <div class="date-range">
+                            <input type="date" class="date-input">
+                            <span>至</span>
+                            <input type="date" class="date-input">
+                        </div>
+                    </div>
+                    <div class="view-options">
+                        <button class="btn-secondary active">
+                            <i class="fas fa-th-large"></i>
                         </button>
                         <button class="btn-secondary">
-                            <i class="fas fa-share-alt"></i> 分摊账单
+                            <i class="fas fa-list"></i>
                         </button>
                     </div>
-                    <div class="right-actions">
-                        <div class="filter-group">
-                            <select class="filter-select">
-                                <option value="all">所有类型</option>
-                                <option value="food">餐饮</option>
-                                <option value="housing">住房</option>
-                                <option value="utilities">水电煤</option>
-                                <option value="entertainment">娱乐</option>
-                                <option value="other">其他</option>
-                            </select>
-                            <select class="filter-select">
-                                <option value="all">所有成员</option>
-                                <option value="me">我</option>
-                                <option value="spouse">配偶</option>
-                                <option value="shared">共同</option>
-                            </select>
-                            <div class="date-range">
-                                <input type="date" class="date-input">
-                                <span>至</span>
-                                <input type="date" class="date-input">
-                            </div>
+                </div>
+            </div>
+
+            <!-- 账单分类统计 -->
+            <div class="bills-categories">
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3>餐饮</h3>
+                        <span class="amount">¥2,500</span>
+                    </div>
+                    <div class="category-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 29%"></div>
                         </div>
-                        <div class="view-options">
-                            <button class="btn-secondary active">
-                                <i class="fas fa-th-large"></i>
-                            </button>
-                            <button class="btn-secondary">
-                                <i class="fas fa-list"></i>
-                            </button>
+                        <span class="percentage">29%</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3>住房</h3>
+                        <span class="amount">¥3,000</span>
+                    </div>
+                    <div class="category-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 35%"></div>
                         </div>
+                        <span class="percentage">35%</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3>水电煤</h3>
+                        <span class="amount">¥1,200</span>
+                    </div>
+                    <div class="category-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 14%"></div>
+                        </div>
+                        <span class="percentage">14%</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3>娱乐</h3>
+                        <span class="amount">¥800</span>
+                    </div>
+                    <div class="category-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 9%"></div>
+                        </div>
+                        <span class="percentage">9%</span>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3>其他</h3>
+                        <span class="amount">¥1,000</span>
+                    </div>
+                    <div class="category-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 13%"></div>
+                        </div>
+                        <span class="percentage">13%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 账单列表 -->
+            <div class="bills-list">
+                <div class="bill-card">
+                    <div class="bill-header">
+                        <div class="bill-title">
+                            <i class="fas fa-utensils"></i>
+                            <h3>周末家庭聚餐</h3>
+                        </div>
+                        <span class="amount">¥500</span>
+                    </div>
+                    <div class="bill-details">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>2023-06-15</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-user"></i>
+                            <span>张三</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-share-alt"></i>
+                            <span>待分摊</span>
+                        </div>
+                    </div>
+                    <div class="bill-actions">
+                        <button class="btn-secondary">
+                            <i class="fas fa-edit"></i> 编辑
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-share-alt"></i> 分摊
+                        </button>
                     </div>
                 </div>
 
-                <!-- 账单分类统计 -->
-                <div class="bills-categories">
-                    <div class="category-card">
-                        <div class="category-header">
-                            <h3>餐饮</h3>
-                            <span class="amount">¥2,500</span>
+                <div class="bill-card">
+                    <div class="bill-header">
+                        <div class="bill-title">
+                            <i class="fas fa-home"></i>
+                            <h3>房租</h3>
                         </div>
-                        <div class="category-progress">
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 29%"></div>
-                            </div>
-                            <span class="percentage">29%</span>
+                        <span class="amount">¥3,000</span>
+                    </div>
+                    <div class="bill-details">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>2023-06-01</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-users"></i>
+                            <span>共同</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-check-circle"></i>
+                            <span>已分摊</span>
                         </div>
                     </div>
-                    <div class="category-card">
-                        <div class="category-header">
-                            <h3>住房</h3>
-                            <span class="amount">¥3,000</span>
-                        </div>
-                        <div class="category-progress">
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 35%"></div>
-                            </div>
-                            <span class="percentage">35%</span>
-                        </div>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-header">
-                            <h3>水电煤</h3>
-                            <span class="amount">¥1,200</span>
-                        </div>
-                        <div class="category-progress">
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 14%"></div>
-                            </div>
-                            <span class="percentage">14%</span>
-                        </div>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-header">
-                            <h3>娱乐</h3>
-                            <span class="amount">¥800</span>
-                        </div>
-                        <div class="category-progress">
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 9%"></div>
-                            </div>
-                            <span class="percentage">9%</span>
-                        </div>
-                    </div>
-                    <div class="category-card">
-                        <div class="category-header">
-                            <h3>其他</h3>
-                            <span class="amount">¥1,000</span>
-                        </div>
-                        <div class="category-progress">
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 13%"></div>
-                            </div>
-                            <span class="percentage">13%</span>
-                        </div>
+                    <div class="bill-actions">
+                        <button class="btn-secondary">
+                            <i class="fas fa-edit"></i> 编辑
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-eye"></i> 详情
+                        </button>
                     </div>
                 </div>
 
-                <!-- 账单列表 -->
-                <div class="bills-list">
-                    <div class="bill-card">
-                        <div class="bill-header">
-                            <div class="bill-title">
-                                <i class="fas fa-utensils"></i>
-                                <h3>周末家庭聚餐</h3>
-                            </div>
-                            <span class="amount">¥500</span>
+                <div class="bill-card">
+                    <div class="bill-header">
+                        <div class="bill-title">
+                            <i class="fas fa-bolt"></i>
+                            <h3>电费</h3>
                         </div>
-                        <div class="bill-details">
-                            <div class="detail">
-                                <i class="fas fa-calendar-alt"></i>
-                                <span>2023-06-15</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-user"></i>
-                                <span>张三</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-share-alt"></i>
-                                <span>待分摊</span>
-                            </div>
+                        <span class="amount">¥350</span>
+                    </div>
+                    <div class="bill-details">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>2023-06-10</span>
                         </div>
-                        <div class="bill-actions">
-                            <button class="btn-secondary">
-                                <i class="fas fa-edit"></i> 编辑
-                            </button>
-                            <button class="btn-secondary">
-                                <i class="fas fa-share-alt"></i> 分摊
-                            </button>
+                        <div class="detail">
+                            <i class="fas fa-user"></i>
+                            <span>李四</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-check-circle"></i>
+                            <span>已分摊</span>
                         </div>
                     </div>
-
-                    <div class="bill-card">
-                        <div class="bill-header">
-                            <div class="bill-title">
-                                <i class="fas fa-home"></i>
-                                <h3>房租</h3>
-                            </div>
-                            <span class="amount">¥3,000</span>
-                        </div>
-                        <div class="bill-details">
-                            <div class="detail">
-                                <i class="fas fa-calendar-alt"></i>
-                                <span>2023-06-01</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-users"></i>
-                                <span>共同</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-check-circle"></i>
-                                <span>已分摊</span>
-                            </div>
-                        </div>
-                        <div class="bill-actions">
-                            <button class="btn-secondary">
-                                <i class="fas fa-edit"></i> 编辑
-                            </button>
-                            <button class="btn-secondary">
-                                <i class="fas fa-eye"></i> 详情
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="bill-card">
-                        <div class="bill-header">
-                            <div class="bill-title">
-                                <i class="fas fa-bolt"></i>
-                                <h3>电费</h3>
-                            </div>
-                            <span class="amount">¥350</span>
-                        </div>
-                        <div class="bill-details">
-                            <div class="detail">
-                                <i class="fas fa-calendar-alt"></i>
-                                <span>2023-06-10</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-user"></i>
-                                <span>李四</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-check-circle"></i>
-                                <span>已分摊</span>
-                            </div>
-                        </div>
-                        <div class="bill-actions">
-                            <button class="btn-secondary">
-                                <i class="fas fa-edit"></i> 编辑
-                            </button>
-                            <button class="btn-secondary">
-                                <i class="fas fa-eye"></i> 详情
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="bill-card">
-                        <div class="bill-header">
-                            <div class="bill-title">
-                                <i class="fas fa-film"></i>
-                                <h3>电影票</h3>
-                            </div>
-                            <span class="amount">¥200</span>
-                        </div>
-                        <div class="bill-details">
-                            <div class="detail">
-                                <i class="fas fa-calendar-alt"></i>
-                                <span>2023-06-12</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-user"></i>
-                                <span>张三</span>
-                            </div>
-                            <div class="detail">
-                                <i class="fas fa-share-alt"></i>
-                                <span>待分摊</span>
-                            </div>
-                        </div>
-                        <div class="bill-actions">
-                            <button class="btn-secondary">
-                                <i class="fas fa-edit"></i> 编辑
-                            </button>
-                            <button class="btn-secondary">
-                                <i class="fas fa-share-alt"></i> 分摊
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="add-bill-card">
-                        <i class="fas fa-plus"></i>
-                        <span>添加家庭账单</span>
+                    <div class="bill-actions">
+                        <button class="btn-secondary">
+                            <i class="fas fa-edit"></i> 编辑
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-eye"></i> 详情
+                        </button>
                     </div>
                 </div>
 
-                <!-- 分摊记录 -->
-                <div class="sharing-records">
-                    <h3>最近分摊记录</h3>
-                    <div class="record-list">
-                        <div class="record-item">
-                            <div class="record-info">
-                                <span class="record-title">房租分摊</span>
-                                <span class="record-date">2023-06-01</span>
-                            </div>
-                            <div class="record-amount">
-                                <span class="amount">¥1,500</span>
-                                <span class="status">已支付</span>
-                            </div>
+                <div class="bill-card">
+                    <div class="bill-header">
+                        <div class="bill-title">
+                            <i class="fas fa-film"></i>
+                            <h3>电影票</h3>
                         </div>
-                        <div class="record-item">
-                            <div class="record-info">
-                                <span class="record-title">电费分摊</span>
-                                <span class="record-date">2023-06-10</span>
-                            </div>
-                            <div class="record-amount">
-                                <span class="amount">¥175</span>
-                                <span class="status">已支付</span>
-                            </div>
+                        <span class="amount">¥200</span>
+                    </div>
+                    <div class="bill-details">
+                        <div class="detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>2023-06-12</span>
                         </div>
-                        <div class="record-item">
-                            <div class="record-info">
-                                <span class="record-title">水费分摊</span>
-                                <span class="record-date">2023-06-05</span>
-                            </div>
-                            <div class="record-amount">
-                                <span class="amount">¥80</span>
-                                <span class="status">已支付</span>
-                            </div>
+                        <div class="detail">
+                            <i class="fas fa-user"></i>
+                            <span>张三</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-share-alt"></i>
+                            <span>待分摊</span>
+                        </div>
+                    </div>
+                    <div class="bill-actions">
+                        <button class="btn-secondary">
+                            <i class="fas fa-edit"></i> 编辑
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-share-alt"></i> 分摊
+                        </button>
+                    </div>
+                </div>
+
+                <div class="add-bill-card">
+                    <i class="fas fa-plus"></i>
+                    <span>添加家庭账单</span>
+                </div>
+            </div>
+
+            <!-- 分摊记录 -->
+            <div class="sharing-records">
+                <h3>最近分摊记录</h3>
+                <div class="record-list">
+                    <div class="record-item">
+                        <div class="record-info">
+                            <span class="record-title">房租分摊</span>
+                            <span class="record-date">2023-06-01</span>
+                        </div>
+                        <div class="record-amount">
+                            <span class="amount">¥1,500</span>
+                            <span class="status">已支付</span>
+                        </div>
+                    </div>
+                    <div class="record-item">
+                        <div class="record-info">
+                            <span class="record-title">电费分摊</span>
+                            <span class="record-date">2023-06-10</span>
+                        </div>
+                        <div class="record-amount">
+                            <span class="amount">¥175</span>
+                            <span class="status">已支付</span>
+                        </div>
+                    </div>
+                    <div class="record-item">
+                        <div class="record-info">
+                            <span class="record-title">水费分摊</span>
+                            <span class="record-date">2023-06-05</span>
+                        </div>
+                        <div class="record-amount">
+                            <span class="amount">¥80</span>
+                            <span class="status">已支付</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
+</div>
 </body>
 </html> 

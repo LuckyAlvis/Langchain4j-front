@@ -166,33 +166,33 @@ th {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .left-actions, .right-actions {
         width: 100%;
         justify-content: center;
     }
-    
+
     .filters {
         flex-direction: column;
     }
-    
+
     .filter-group {
         width: 100%;
     }
-    
+
     .filter-group select,
     .range-inputs input {
         width: 100%;
     }
-    
+
     .transactions-list {
         padding: 10px;
     }
-    
+
     table {
         font-size: 14px;
     }
-    
+
     th, td {
         padding: 8px;
     }

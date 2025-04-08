@@ -48,13 +48,13 @@
             <i class="fas fa-search"></i>
             <input type="text" placeholder="搜索...">
           </div> -->
-          
+
           <!-- 注释掉消息通知 -->
           <!-- <div class="notifications">
             <i class="fas fa-bell"></i>
             <span class="badge">3</span>
           </div> -->
-          
+
           <!-- 修改用户头像部分，添加下拉菜单 -->
           <div class="user-profile">
             <el-dropdown trigger="click" @command="handleCommand">
@@ -85,7 +85,7 @@
 
 <script>
 // 引入Element Plus组件
-import { ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
+import {ElDropdown, ElDropdownMenu, ElDropdownItem} from 'element-plus'
 import 'element-plus/dist/index.css' // 引入样式
 
 export default {

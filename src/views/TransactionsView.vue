@@ -15,11 +15,11 @@
       </div>
       <div class="right-actions">
         <div class="date-filter">
-          <button 
-            v-for="period in datePeriods" 
-            :key="period.value"
-            :class="['btn-secondary', { active: selectedPeriod === period.value }]"
-            @click="selectedPeriod = period.value"
+          <button
+              v-for="period in datePeriods"
+              :key="period.value"
+              :class="['btn-secondary', { active: selectedPeriod === period.value }]"
+              @click="selectedPeriod = period.value"
           >
             {{ period.label }}
           </button>
@@ -60,37 +60,37 @@
     <div class="transactions-list">
       <table>
         <thead>
-          <tr>
-            <th>日期</th>
-            <th>描述</th>
-            <th>分类</th>
-            <th>金额</th>
-            <th>状态</th>
-            <th>操作</th>
-          </tr>
+        <tr>
+          <th>日期</th>
+          <th>描述</th>
+          <th>分类</th>
+          <th>金额</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
         </thead>
         <tbody>
-          <tr v-for="transaction in filteredTransactions" :key="transaction.id">
-            <td>{{ transaction.date }}</td>
-            <td>{{ transaction.description }}</td>
-            <td>{{ transaction.category }}</td>
-            <td :class="['amount', transaction.type]">
-              {{ transaction.type === 'income' ? '+' : '-' }}¥{{ transaction.amount }}
-            </td>
-            <td>
-              <span :class="['status', transaction.status]">{{ getStatusText(transaction.status) }}</span>
-            </td>
-            <td>
-              <div class="actions">
-                <button class="btn-icon" @click="editTransaction(transaction)">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn-icon" @click="deleteTransaction(transaction)">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
+        <tr v-for="transaction in filteredTransactions" :key="transaction.id">
+          <td>{{ transaction.date }}</td>
+          <td>{{ transaction.description }}</td>
+          <td>{{ transaction.category }}</td>
+          <td :class="['amount', transaction.type]">
+            {{ transaction.type === 'income' ? '+' : '-' }}¥{{ transaction.amount }}
+          </td>
+          <td>
+            <span :class="['status', transaction.status]">{{ getStatusText(transaction.status) }}</span>
+          </td>
+          <td>
+            <div class="actions">
+              <button class="btn-icon" @click="editTransaction(transaction)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn-icon" @click="deleteTransaction(transaction)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
@@ -100,19 +100,19 @@
       <button class="btn-secondary" @click="prevPage" :disabled="currentPage === 1">
         <i class="fas fa-chevron-left"></i>
       </button>
-      <button 
-        v-for="page in displayedPages" 
-        :key="page"
-        :class="['btn-secondary', { active: currentPage === page }]"
-        @click="currentPage = page"
+      <button
+          v-for="page in displayedPages"
+          :key="page"
+          :class="['btn-secondary', { active: currentPage === page }]"
+          @click="currentPage = page"
       >
         {{ page }}
       </button>
       <span v-if="totalPages > maxDisplayPages">...</span>
-      <button 
-        class="btn-secondary" 
-        v-if="totalPages > maxDisplayPages"
-        @click="currentPage = totalPages"
+      <button
+          class="btn-secondary"
+          v-if="totalPages > maxDisplayPages"
+          @click="currentPage = totalPages"
       >
         {{ totalPages }}
       </button>
@@ -232,22 +232,22 @@ export default {
   computed: {
     datePeriods() {
       return [
-        { value: 'week', label: '本周' },
-        { value: 'month', label: '本月' },
-        { value: 'year', label: '本年' },
-        { value: 'custom', label: '自定义' }
+        {value: 'week', label: '本周'},
+        {value: 'month', label: '本月'},
+        {value: 'year', label: '本年'},
+        {value: 'custom', label: '自定义'}
       ]
     },
     categories() {
       return [
-        { value: 'salary', label: '工资' },
-        { value: 'bonus', label: '奖金' },
-        { value: 'food', label: '餐饮' },
-        { value: 'transport', label: '交通' },
-        { value: 'shopping', label: '购物' },
-        { value: 'housing', label: '住房' },
-        { value: 'entertainment', label: '娱乐' },
-        { value: 'medical', label: '医疗' }
+        {value: 'salary', label: '工资'},
+        {value: 'bonus', label: '奖金'},
+        {value: 'food', label: '餐饮'},
+        {value: 'transport', label: '交通'},
+        {value: 'shopping', label: '购物'},
+        {value: 'housing', label: '住房'},
+        {value: 'entertainment', label: '娱乐'},
+        {value: 'medical', label: '医疗'}
       ]
     },
     filteredCategories() {
@@ -297,7 +297,7 @@ export default {
     },
     editTransaction(transaction) {
       this.editingTransaction = transaction
-      this.transactionForm = { ...transaction }
+      this.transactionForm = {...transaction}
       this.showModal = true
     },
     deleteTransaction(transaction) {

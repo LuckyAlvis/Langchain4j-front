@@ -196,25 +196,25 @@
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .member-card, .add-member {
         width: 100%;
     }
-    
+
     .bill-stats {
         grid-template-columns: 1fr;
     }
-    
+
     .list-header {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .list-filters {
         width: 100%;
         flex-direction: column;
     }
-    
+
     .list-filters select {
         width: 100%;
     }
@@ -612,7 +612,7 @@
     .bills-overview {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .bills-categories {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -622,25 +622,25 @@
     .bills-overview {
         grid-template-columns: 1fr;
     }
-    
+
     .bills-categories {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .bills-list {
         grid-template-columns: 1fr;
     }
-    
+
     .action-bar {
         flex-direction: column;
         gap: 16px;
     }
-    
+
     .right-actions {
         width: 100%;
         flex-direction: column;
     }
-    
+
     .filter-group {
         flex-wrap: wrap;
     }

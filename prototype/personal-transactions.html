@@ -9,190 +9,190 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- 侧边栏 -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="images/logo.png" alt="Logo" class="logo">
-                <h2>财务管理系统</h2>
-            </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li>
-                        <a href="index.html"><i class="fas fa-chart-line"></i>看板</a>
-                    </li>
-                    <li class="active">
-                        <a href="personal-transactions.html"><i class="fas fa-wallet"></i>个人记账</a>
-                    </li>
-                    <li>
-                        <a href="family-bills.html"><i class="fas fa-home"></i>家庭账单</a>
-                    </li>
-                    <li>
-                        <a href="personal-savings.html"><i class="fas fa-piggy-bank"></i>个人储蓄计划</a>
-                    </li>
-                    <li>
-                        <a href="family-savings.html"><i class="fas fa-users"></i>家庭储蓄计划</a>
-                    </li>
-                    <li>
-                        <a href="financial-health.html"><i class="fas fa-heartbeat"></i>财务健康看板</a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+<div class="app-container">
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <h2>财务管理系统</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="index.html"><i class="fas fa-chart-line"></i>看板</a>
+                </li>
+                <li class="active">
+                    <a href="personal-transactions.html"><i class="fas fa-wallet"></i>个人记账</a>
+                </li>
+                <li>
+                    <a href="family-bills.html"><i class="fas fa-home"></i>家庭账单</a>
+                </li>
+                <li>
+                    <a href="personal-savings.html"><i class="fas fa-piggy-bank"></i>个人储蓄计划</a>
+                </li>
+                <li>
+                    <a href="family-savings.html"><i class="fas fa-users"></i>家庭储蓄计划</a>
+                </li>
+                <li>
+                    <a href="financial-health.html"><i class="fas fa-heartbeat"></i>财务健康看板</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
 
-        <!-- 主内容区 -->
-        <main class="main-content">
-            <!-- 顶部导航栏 -->
-            <header class="top-nav">
-                <div class="nav-left">
-                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-                    <div class="breadcrumb">
-                        <span>首页</span> / <span>个人记账</span>
-                    </div>
-                </div>
-                <div class="nav-right">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="搜索交易...">
-                    </div>
-                    <div class="notifications">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge">3</span>
-                    </div>
-                    <div class="user-profile">
-                        <img src="images/avatar.png" alt="用户头像">
-                        <span>张三</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                </div>
-            </header>
-
-            <!-- 内容区域 -->
-            <div class="content">
-                <!-- 操作栏 -->
-                <div class="action-bar">
-                    <div class="left-actions">
-                        <button class="btn-primary">
-                            <i class="fas fa-plus"></i> 新增交易
-                        </button>
-                        <button class="btn-secondary">
-                            <i class="fas fa-file-import"></i> 导入
-                        </button>
-                        <button class="btn-secondary">
-                            <i class="fas fa-file-export"></i> 导出
-                        </button>
-                    </div>
-                    <div class="right-actions">
-                        <div class="date-filter">
-                            <button class="btn-secondary active">本周</button>
-                            <button class="btn-secondary">本月</button>
-                            <button class="btn-secondary">本年</button>
-                            <button class="btn-secondary">
-                                <i class="fas fa-calendar"></i> 自定义
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 筛选器 -->
-                <div class="filters">
-                    <div class="filter-group">
-                        <label>类型</label>
-                        <select>
-                            <option value="all">全部</option>
-                            <option value="income">收入</option>
-                            <option value="expense">支出</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>分类</label>
-                        <select>
-                            <option value="all">全部分类</option>
-                            <option value="salary">工资</option>
-                            <option value="food">餐饮</option>
-                            <option value="transport">交通</option>
-                            <option value="shopping">购物</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>金额范围</label>
-                        <div class="range-inputs">
-                            <input type="number" placeholder="最小">
-                            <span>-</span>
-                            <input type="number" placeholder="最大">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 交易列表 -->
-                <div class="transactions-list">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>日期</th>
-                                <th>描述</th>
-                                <th>分类</th>
-                                <th>金额</th>
-                                <th>状态</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2024-04-08</td>
-                                <td>工资收入</td>
-                                <td>工资</td>
-                                <td class="amount income">+¥12,500</td>
-                                <td><span class="status completed">已完成</span></td>
-                                <td>
-                                    <div class="actions">
-                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2024-04-07</td>
-                                <td>超市购物</td>
-                                <td>日常支出</td>
-                                <td class="amount expense">-¥328.50</td>
-                                <td><span class="status completed">已完成</span></td>
-                                <td>
-                                    <div class="actions">
-                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2024-04-06</td>
-                                <td>房租支出</td>
-                                <td>住房</td>
-                                <td class="amount expense">-¥3,500</td>
-                                <td><span class="status pending">处理中</span></td>
-                                <td>
-                                    <div class="actions">
-                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
-                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- 分页 -->
-                <div class="pagination">
-                    <button class="btn-secondary"><i class="fas fa-chevron-left"></i></button>
-                    <button class="btn-secondary active">1</button>
-                    <button class="btn-secondary">2</button>
-                    <button class="btn-secondary">3</button>
-                    <span>...</span>
-                    <button class="btn-secondary">10</button>
-                    <button class="btn-secondary"><i class="fas fa-chevron-right"></i></button>
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 顶部导航栏 -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div class="breadcrumb">
+                    <span>首页</span> / <span>个人记账</span>
                 </div>
             </div>
-        </main>
-    </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜索交易...">
+                </div>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="images/avatar.png" alt="用户头像">
+                    <span>张三</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 操作栏 -->
+            <div class="action-bar">
+                <div class="left-actions">
+                    <button class="btn-primary">
+                        <i class="fas fa-plus"></i> 新增交易
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fas fa-file-import"></i> 导入
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fas fa-file-export"></i> 导出
+                    </button>
+                </div>
+                <div class="right-actions">
+                    <div class="date-filter">
+                        <button class="btn-secondary active">本周</button>
+                        <button class="btn-secondary">本月</button>
+                        <button class="btn-secondary">本年</button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-calendar"></i> 自定义
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 筛选器 -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label>类型</label>
+                    <select>
+                        <option value="all">全部</option>
+                        <option value="income">收入</option>
+                        <option value="expense">支出</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>分类</label>
+                    <select>
+                        <option value="all">全部分类</option>
+                        <option value="salary">工资</option>
+                        <option value="food">餐饮</option>
+                        <option value="transport">交通</option>
+                        <option value="shopping">购物</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>金额范围</label>
+                    <div class="range-inputs">
+                        <input type="number" placeholder="最小">
+                        <span>-</span>
+                        <input type="number" placeholder="最大">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 交易列表 -->
+            <div class="transactions-list">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>描述</th>
+                        <th>分类</th>
+                        <th>金额</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>2024-04-08</td>
+                        <td>工资收入</td>
+                        <td>工资</td>
+                        <td class="amount income">+¥12,500</td>
+                        <td><span class="status completed">已完成</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-04-07</td>
+                        <td>超市购物</td>
+                        <td>日常支出</td>
+                        <td class="amount expense">-¥328.50</td>
+                        <td><span class="status completed">已完成</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-04-06</td>
+                        <td>房租支出</td>
+                        <td>住房</td>
+                        <td class="amount expense">-¥3,500</td>
+                        <td><span class="status pending">处理中</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 分页 -->
+            <div class="pagination">
+                <button class="btn-secondary"><i class="fas fa-chevron-left"></i></button>
+                <button class="btn-secondary active">1</button>
+                <button class="btn-secondary">2</button>
+                <button class="btn-secondary">3</button>
+                <span>...</span>
+                <button class="btn-secondary">10</button>
+                <button class="btn-secondary"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </main>
+</div>
 </body>
 </html> 

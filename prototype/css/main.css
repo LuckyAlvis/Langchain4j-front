@@ -333,11 +333,11 @@ th {
     .sidebar {
         width: 200px;
     }
-    
+
     .main-content {
         margin-left: 200px;
     }
-    
+
     .charts-container {
         grid-template-columns: 1fr;
     }
@@ -349,15 +349,15 @@ th {
         position: fixed;
         z-index: 1000;
     }
-    
+
     .main-content {
         margin-left: 0;
     }
-    
+
     .overview-cards {
         grid-template-columns: 1fr;
     }
-    
+
     .search-box input {
         width: 150px;
     }

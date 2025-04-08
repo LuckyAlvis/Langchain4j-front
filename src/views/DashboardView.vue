@@ -75,36 +75,36 @@
         <h3>最近交易</h3>
         <table>
           <thead>
-            <tr>
-              <th>日期</th>
-              <th>描述</th>
-              <th>分类</th>
-              <th>金额</th>
-              <th>状态</th>
-            </tr>
+          <tr>
+            <th>日期</th>
+            <th>描述</th>
+            <th>分类</th>
+            <th>金额</th>
+            <th>状态</th>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2024-04-08</td>
-              <td>工资收入</td>
-              <td>收入</td>
-              <td class="amount positive">+¥12,500</td>
-              <td><span class="status completed">已完成</span></td>
-            </tr>
-            <tr>
-              <td>2024-04-07</td>
-              <td>超市购物</td>
-              <td>日常支出</td>
-              <td class="amount negative">-¥328.50</td>
-              <td><span class="status completed">已完成</span></td>
-            </tr>
-            <tr>
-              <td>2024-04-06</td>
-              <td>房租支出</td>
-              <td>住房</td>
-              <td class="amount negative">-¥3,500</td>
-              <td><span class="status pending">处理中</span></td>
-            </tr>
+          <tr>
+            <td>2024-04-08</td>
+            <td>工资收入</td>
+            <td>收入</td>
+            <td class="amount positive">+¥12,500</td>
+            <td><span class="status completed">已完成</span></td>
+          </tr>
+          <tr>
+            <td>2024-04-07</td>
+            <td>超市购物</td>
+            <td>日常支出</td>
+            <td class="amount negative">-¥328.50</td>
+            <td><span class="status completed">已完成</span></td>
+          </tr>
+          <tr>
+            <td>2024-04-06</td>
+            <td>房租支出</td>
+            <td>住房</td>
+            <td class="amount negative">-¥3,500</td>
+            <td><span class="status pending">处理中</span></td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -208,7 +208,7 @@ export default {
         ]
       }
       chart.setOption(option)
-      
+
       // 响应式处理
       window.addEventListener('resize', () => {
         chart.resize()
@@ -251,20 +251,20 @@ export default {
               show: false
             },
             data: [
-              { value: 2500, name: '餐饮', itemStyle: { color: '#5470C6' } },
-              { value: 1800, name: '交通', itemStyle: { color: '#91CC75' } },
-              { value: 3500, name: '购物', itemStyle: { color: '#FAC858' } },
-              { value: 1200, name: '娱乐', itemStyle: { color: '#EE6666' } },
-              { value: 800, name: '医疗', itemStyle: { color: '#73C0DE' } },
-              { value: 3800, name: '居住', itemStyle: { color: '#3BA272' } },
-              { value: 1500, name: '教育', itemStyle: { color: '#FC8452' } },
-              { value: 1000, name: '其他', itemStyle: { color: '#9A60B4' } }
+              {value: 2500, name: '餐饮', itemStyle: {color: '#5470C6'}},
+              {value: 1800, name: '交通', itemStyle: {color: '#91CC75'}},
+              {value: 3500, name: '购物', itemStyle: {color: '#FAC858'}},
+              {value: 1200, name: '娱乐', itemStyle: {color: '#EE6666'}},
+              {value: 800, name: '医疗', itemStyle: {color: '#73C0DE'}},
+              {value: 3800, name: '居住', itemStyle: {color: '#3BA272'}},
+              {value: 1500, name: '教育', itemStyle: {color: '#FC8452'}},
+              {value: 1000, name: '其他', itemStyle: {color: '#9A60B4'}}
             ]
           }
         ]
       }
       chart.setOption(option)
-      
+
       // 响应式处理
       window.addEventListener('resize', () => {
         chart.resize()
@@ -437,7 +437,7 @@ th {
   .stats-cards {
     grid-template-columns: 1fr;
   }
-  
+
   .charts-container {
     grid-template-columns: 1fr;
   }

@@ -2,8 +2,8 @@ import './assets/main.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import '@fortawesome/fontawesome-free/js/all.min.js'
 
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import {createApp} from 'vue'
+import {createRouter, createWebHistory} from 'vue-router'
 import App from './App.vue'
 import router from './router'
 
@@ -18,7 +18,7 @@ const app = createApp(App)
 // 使用插件
 app.use(router)
 app.use(ElementPlus, {
-  locale: zhCn
+    locale: zhCn
 })
 
 // 挂载应用

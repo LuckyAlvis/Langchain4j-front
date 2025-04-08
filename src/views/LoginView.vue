@@ -3,30 +3,30 @@
     <div class="login-box">
       <h1 class="title">个人财务管理系统</h1>
       <p class="subtitle">管理您的个人和家庭财务</p>
-      
+
       <form @submit.prevent="handleLogin" class="login-form">
         <div class="form-group">
           <div class="input-with-icon">
             <el-input
-              v-model="form.username"
-              placeholder="用户名/邮箱"
-              :prefix-icon="User"
+                v-model="form.username"
+                placeholder="用户名/邮箱"
+                :prefix-icon="User"
             />
           </div>
         </div>
-        
+
         <div class="form-group">
           <div class="input-with-icon">
             <el-input
-              v-model="form.password"
-              type="password"
-              placeholder="密码"
-              :prefix-icon="Lock"
-              show-password
+                v-model="form.password"
+                type="password"
+                placeholder="密码"
+                :prefix-icon="Lock"
+                show-password
             />
           </div>
         </div>
-        
+
         <div class="form-options">
           <label class="remember-me">
             <input type="checkbox" v-model="form.remember">
@@ -34,13 +34,13 @@
           </label>
           <a href="#" class="forgot-password">忘记密码?</a>
         </div>
-        
+
         <button type="submit" class="btn-login" :disabled="loading">
           <span v-if="!loading">登录</span>
           <i v-else class="fas fa-spinner fa-spin"></i>
         </button>
       </form>
-      
+
       <div class="login-footer">
         <span>还没有账号? </span>
         <a href="#" class="register-link">立即注册</a>
@@ -49,39 +49,35 @@
   </div>
 </template>
 
-<script>
-import { User, Lock } from '@element-plus/icons-vue'
+<script setup lang="ts">
+import {ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {User, Lock} from '@element-plus/icons-vue'
+import {authService} from '@/services/auth'
+import type {LoginRequest} from '@/types/auth'
 
-export default {
-  name: 'LoginView',
-  data() {
-    return {
-      form: {
-        username: '',
-        password: '',
-        remember: false
-      },
-      loading: false,
-      User,
-      Lock
-    }
-  },
-  methods: {
-    async handleLogin() {
-      this.loading = true
-      try {
-        // 模拟登录请求
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        // 存储token
-        localStorage.setItem('token', 'demo-token')
-        // 跳转到首页
-        this.$router.push('/')
-      } catch (error) {
-        console.error('登录失败:', error)
-      } finally {
-        this.loading = false
-      }
-    }
+const router = useRouter()
+const loading = ref(false)
+const form = ref<LoginRequest>({
+  username: '',
+  password: ''
+})
+
+const handleLogin = async () => {
+  if (!form.value.username || !form.value.password) {
+    alert('请输入用户名和密码')
+    return
+  }
+
+  loading.value = true
+  try {
+    const response = await authService.login(form.value)
+    localStorage.setItem('token', response.data.token)
+    router.push('/')
+  } catch (error) {
+    alert('登录失败，请稍后重试')
+  } finally {
+    loading.value = false
   }
 }
 </script>
