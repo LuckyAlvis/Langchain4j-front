@@ -14,38 +14,8 @@
   --text-primary: #333;
   --text-secondary: #666;
   --text-light: #999;
-  --border-color: #ddd;
+  --border-color: #eee;
   --background-light: #f5f5f5;
-  font-size: 67%; /* 设置基础字体大小为原来的67% */
-}
-
-/* 重置 Element Plus 的基础大小 */
-:root {
-  --el-font-size-base: 14px;
-  --el-font-size-small: 13px;
-  --el-font-size-large: 16px;
-}
-
-/* 确保图标大小也相应调整 */
-.fas, .far, .fab {
-  font-size: 1rem;
-}
-
-/* 调整图表容器大小 */
-.echarts {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* 调整卡片和容器的padding和margin */
-.el-card {
-  --el-card-padding: 15px;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 1rem;
 }
 
 * {
@@ -59,7 +29,7 @@ html, body, #app {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 body {
@@ -102,5 +72,11 @@ input, select, textarea {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #999;
+}
+
+/* 图表容器调整 */
+.echarts {
+  width: 100% !important;
+  height: 100% !important;
 }
 </style>

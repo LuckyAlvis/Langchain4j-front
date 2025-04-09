@@ -58,9 +58,10 @@ import type {LoginRequest} from '@/types/auth'
 
 const router = useRouter()
 const loading = ref(false)
-const form = ref<LoginRequest>({
+const form = ref<LoginRequest & { remember: boolean }>({
   username: '',
-  password: ''
+  password: '',
+  remember: false
 })
 
 const handleLogin = async () => {

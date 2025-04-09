@@ -1,32 +1,50 @@
 <template>
   <div class="app-container">
     <!-- 侧边栏 -->
-    <aside class="sidebar">
+    <aside class="sidebar" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
       <div class="sidebar-header">
         <img src="@/assets/logo.png" alt="Logo" class="logo">
-        <h2>财务管理系统</h2>
+        <h2>
+          <span>财务管理系统</span>
+          <span>Financial System</span>
+        </h2>
       </div>
+      
       <nav class="sidebar-nav">
-        <ul>
-          <li :class="{ active: $route.path === '/' }">
-            <router-link to="/"><i class="fas fa-chart-line"></i>看板</router-link>
-          </li>
-          <li :class="{ active: $route.path === '/transactions' }">
-            <router-link to="/transactions"><i class="fas fa-wallet"></i>个人记账</router-link>
-          </li>
-          <li :class="{ active: $route.path === '/family-bills' }">
-            <router-link to="/family-bills"><i class="fas fa-home"></i>家庭账单</router-link>
-          </li>
-          <li :class="{ active: $route.path === '/personal-savings' }">
-            <router-link to="/personal-savings"><i class="fas fa-piggy-bank"></i>个人储蓄计划</router-link>
-          </li>
-          <li :class="{ active: $route.path === '/family-savings' }">
-            <router-link to="/family-savings"><i class="fas fa-users"></i>家庭储蓄计划</router-link>
-          </li>
-          <li :class="{ active: $route.path === '/financial-health' }">
-            <router-link to="/financial-health"><i class="fas fa-heartbeat"></i>财务健康看板</router-link>
-          </li>
-        </ul>
+        <router-link to="/" class="nav-item" active-class="active">
+          <i class="fas fa-chart-line" style="margin-right: 8px"></i>
+          <span>看板</span>
+        </router-link>
+        
+        <router-link to="/transactions" class="nav-item" active-class="active">
+          <i class="fas fa-wallet"></i>
+          <span>个人记账</span>
+        </router-link>
+        
+        <router-link to="/family-bills" class="nav-item" active-class="active">
+          <i class="fas fa-home"></i>
+          <span>家庭账单</span>
+        </router-link>
+        
+        <router-link to="/personal-savings" class="nav-item" active-class="active">
+          <i class="fas fa-piggy-bank"></i>
+          <span>个人储蓄计划</span>
+        </router-link>
+        
+        <router-link to="/family-savings" class="nav-item" active-class="active">
+          <i class="fas fa-users"></i>
+          <span>家庭储蓄计划</span>
+        </router-link>
+        
+        <router-link to="/financial-health" class="nav-item" active-class="active">
+          <i class="fas fa-heartbeat"></i>
+          <span>财务健康看板</span>
+        </router-link>
+        
+        <router-link to="/chat" class="nav-item" active-class="active">
+          <i class="fas fa-comment-dots"></i>
+          <span>AI财务助手</span>
+        </router-link>
       </nav>
     </aside>
 
@@ -39,7 +57,7 @@
             <i class="fas fa-bars"></i>
           </button>
           <div class="breadcrumb">
-            <span>{{ breadcrumbs[0] }}</span> / <span>{{ breadcrumbs[1] }}</span>
+            <span>{{ currentPageName }}</span>
           </div>
         </div>
         <div class="nav-right">
@@ -56,21 +74,23 @@
           </div> -->
 
           <!-- 修改用户头像部分，添加下拉菜单 -->
-          <div class="user-profile">
-            <el-dropdown trigger="click" @command="handleCommand">
-              <div class="user-info">
-                <img src="@/assets/avatar.png" alt="用户头像">
-                <span>张三</span>
-                <i class="fas fa-chevron-down"></i>
-              </div>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item command="profile">个人信息</el-dropdown-item>
-                  <el-dropdown-item command="settings">设置</el-dropdown-item>
-                  <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
+          <div class="user-profile" @click="toggleUserMenu">
+            <img src="@/assets/avatar.png" alt="User Avatar" class="avatar">
+            <span class="username">张三</span>
+            <i class="fas fa-chevron-down"></i>
+            
+            <!-- 用户菜单 -->
+            <div class="user-menu" v-if="showUserMenu">
+              <a href="#" class="menu-item">
+                <i class="fas fa-user"></i> 个人资料
+              </a>
+              <a href="#" class="menu-item">
+                <i class="fas fa-cog"></i> 设置
+              </a>
+              <a href="#" class="menu-item" @click.prevent="logout">
+                <i class="fas fa-sign-out-alt"></i> 退出登录
+              </a>
+            </div>
           </div>
         </div>
       </header>
@@ -84,54 +104,66 @@
 </template>
 
 <script>
-// 引入Element Plus组件
-import {ElDropdown, ElDropdownMenu, ElDropdownItem} from 'element-plus'
-import 'element-plus/dist/index.css' // 引入样式
+import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 export default {
   name: 'AppLayout',
-  components: {
-    ElDropdown,
-    ElDropdownMenu,
-    ElDropdownItem
-  },
-  data() {
-    return {
-      sidebarCollapsed: false
-    }
-  },
-  computed: {
-    breadcrumbs() {
+  setup() {
+    const route = useRoute()
+    const router = useRouter()
+    const isSidebarCollapsed = ref(false)
+    const showUserMenu = ref(false)
+    
+    // 当前页面名称
+    const currentPageName = computed(() => {
       const routeMap = {
-        '/': ['首页', '看板'],
-        '/transactions': ['首页', '个人记账'],
-        '/family-bills': ['首页', '家庭账单'],
-        '/personal-savings': ['首页', '个人储蓄计划'],
-        '/family-savings': ['首页', '家庭储蓄计划'],
-        '/financial-health': ['首页', '财务健康看板']
+        '/': '首页',
+        '/transactions': '个人记账',
+        '/family-bills': '家庭账单',
+        '/personal-savings': '个人储蓄计划',
+        '/family-savings': '家庭储蓄计划',
+        '/financial-health': '财务健康看板',
+        '/chat': 'AI财务助手'
       }
-      return routeMap[this.$route.path] || ['首页', '未知页面']
+      
+      return routeMap[route.path] || '未知页面'
+    })
+    
+    // 切换侧边栏
+    const toggleSidebar = () => {
+      isSidebarCollapsed.value = !isSidebarCollapsed.value
     }
-  },
-  methods: {
-    toggleSidebar() {
-      this.sidebarCollapsed = !this.sidebarCollapsed
-      document.querySelector('.app-container').classList.toggle('sidebar-collapsed')
-    },
-    // 添加处理下拉菜单命令的方法
-    handleCommand(command) {
-      if (command === 'logout') {
-        // 清除登录状态
-        localStorage.removeItem('token')
-        // 跳转到登录页
-        this.$router.push('/login')
-      } else if (command === 'profile') {
-        // 处理个人信息
-        console.log('跳转到个人信息页面')
-      } else if (command === 'settings') {
-        // 处理设置
-        console.log('跳转到设置页面')
+    
+    // 切换用户菜单
+    const toggleUserMenu = () => {
+      showUserMenu.value = !showUserMenu.value
+    }
+    
+    // 退出登录
+    const logout = () => {
+      localStorage.removeItem('token')
+      router.push('/login')
+    }
+    
+    // 点击外部关闭用户菜单
+    const handleClickOutside = (event) => {
+      const userProfile = document.querySelector('.user-profile')
+      if (userProfile && !userProfile.contains(event.target)) {
+        showUserMenu.value = false
       }
+    }
+    
+    // 监听点击事件
+    window.addEventListener('click', handleClickOutside)
+    
+    return {
+      isSidebarCollapsed,
+      showUserMenu,
+      currentPageName,
+      toggleSidebar,
+      toggleUserMenu,
+      logout
     }
   }
 }
@@ -141,87 +173,111 @@ export default {
 .app-container {
   display: flex;
   min-height: 100vh;
+  width: 100%;
+  position: relative;
 }
 
+/* 侧边栏样式 */
 .sidebar {
-  width: 180px;
+  width: 230px;
   background: white;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 0;
   border-right: 1px solid #eee;
-  display: flex;
-  flex-direction: column;
-  transition: width 0.3s;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  overflow-y: auto;
 }
 
 .sidebar-header {
-  padding: 12px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  border-bottom: 1px solid #eee;
+  padding: 20px 15px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .logo {
-  width: 22px;
-  height: 22px;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 8px;
 }
 
 .sidebar-header h2 {
   margin: 0;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 600;
   color: #333;
+  display: flex;
+  flex-direction: column;
 }
 
+.sidebar-header h2 span:first-child {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.sidebar-header h2 span:last-child {
+  font-size: 12px;
+  color: #999;
+}
+
+/* 侧边栏导航项 */
 .sidebar-nav {
-  padding: 12px 0;
+  padding: 15px 10px;
 }
 
-.sidebar-nav ul {
-  list-style: none;
-}
-
-.sidebar-nav li {
-  margin-bottom: 4px;
-}
-
-.sidebar-nav a {
+.nav-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
+  padding: 12px 15px;
   color: #666;
-  transition: all 0.2s;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  transition: all 0.3s;
 }
 
-.sidebar-nav a i {
-  width: 20px;
-  text-align: center;
+.nav-item:hover {
+  background-color: #4a90e2;
+  color: white;
 }
 
-.sidebar-nav li.active a {
+.nav-item.active {
   background: #e3f2fd;
   color: #1976d2;
 }
 
-.sidebar-nav a:hover {
-  background: #f5f5f5;
-  color: #333;
+.nav-item i {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  margin-right: 16px;
 }
 
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+.nav-item span {
+  font-size: 14px;
 }
 
+/* 顶部导航样式 */
 .top-nav {
-  height: 44px;
+  height: 60px;
   background: white;
   border-bottom: 1px solid #eee;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 230px;
+  z-index: 5;
+  margin-bottom: 0;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 18px;
 }
 
 .nav-left {
@@ -230,15 +286,23 @@ export default {
   gap: 10px;
 }
 
+.breadcrumb span:last-child {
+  color: #333;
+  font-weight: 500;
+}
+
 .menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 18px;
   color: #666;
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
-  display: none;
+  margin-right: 10px;
 }
 
 .menu-toggle:hover {
@@ -246,65 +310,7 @@ export default {
   color: #333;
 }
 
-.breadcrumb {
-  color: #666;
-}
-
-.breadcrumb span:last-child {
-  color: #333;
-  font-weight: 500;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.search-box {
-  position: relative;
-}
-
-.search-box i {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-}
-
-.search-box input {
-  padding: 8px 12px 8px 36px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-  width: 200px;
-  transition: all 0.2s;
-}
-
-.search-box input:focus {
-  outline: none;
-  border-color: #1976d2;
-  width: 300px;
-}
-
-.notifications {
-  position: relative;
-  color: #666;
-  cursor: pointer;
-}
-
-.badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #ff1744;
-  color: white;
-  font-size: 12px;
-  padding: 2px 6px;
-  border-radius: 10px;
-}
-
+/* 用户资料样式 */
 .user-profile {
   display: flex;
   align-items: center;
@@ -320,37 +326,80 @@ export default {
 }
 
 .user-profile img {
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
 }
 
-.content {
+.user-profile i {
+  font-size: 12px;
+  color: #666;
+}
+
+.main-content {
   flex: 1;
-  overflow: auto;
+  margin-left: 230px;
+  padding-top: 60px;
+  min-height: 100vh;
+  width: calc(100% - 230px);
+}
+
+.content {
+  padding: 0;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+/* 用户菜单 */
+.user-menu {
+  position: absolute;
+  top: 45px;
+  right: 10px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  z-index: 100;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.menu-item:hover {
   background: #f5f5f5;
+  color: #333;
+}
+
+.menu-item i {
+  width: 16px;
+  text-align: center;
 }
 
 /* 响应式设计 */
 @media (max-width: 1024px) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1000;
-  }
-
-  .menu-toggle {
-    display: block;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
   }
 
   .sidebar-collapsed .sidebar {
     transform: translateX(-100%);
   }
-
-  .search-box {
-    display: none;
+  
+  .top-nav {
+    left: 0;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    width: 100%;
   }
 }
 
@@ -358,25 +407,5 @@ export default {
   .user-profile span {
     display: none;
   }
-}
-
-/* 调整下拉菜单样式 */
-.user-info {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 5px;
-}
-
-.user-info img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-/* 确保下拉菜单可见 */
-:deep(.el-dropdown-menu) {
-  z-index: 2000;
 }
 </style>

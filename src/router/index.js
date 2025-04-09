@@ -5,6 +5,7 @@ import FamilyBillsView from '@/views/FamilyBillsView.vue'
 import PersonalSavingsView from '@/views/PersonalSavingsView.vue'
 import FamilySavingsView from '@/views/FamilySavingsView.vue'
 import FinancialHealthView from '@/views/FinancialHealthView.vue'
+import ChatView from '@/views/ChatView.vue'
 import LoginView from '@/views/LoginView.vue'
 
 // 创建路由实例
@@ -51,6 +52,12 @@ const router = createRouter({
             path: '/financial-health',
             name: 'financial-health',
             component: FinancialHealthView,
+            meta: {requiresAuth: true}
+        },
+        {
+            path: '/chat',
+            name: 'chat',
+            component: ChatView,
             meta: {requiresAuth: true}
         }
     ]

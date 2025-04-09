@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宠物助手 - 记账</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部 -->
+        <header class="app-header">
+            <div class="app-title">记账</div>
+            <div class="header-actions">
+                <button class="btn btn-icon">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-icon">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 宠物选择器 -->
+            <div class="pet-selector">
+                <div class="pet-card active">
+                    <img src="https://via.placeholder.com/60" alt="宠物头像" class="pet-avatar">
+                    <div class="pet-info">
+                        <div class="pet-name">团团</div>
+                        <div class="pet-breed">金毛犬 · 2岁</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 消费概览 -->
+            <div class="stats-card">
+                <div class="stat-item">
+                    <div class="stat-value">¥5,280</div>
+                    <div class="stat-label">总支出</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">¥680</div>
+                    <div class="stat-label">本月支出</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">¥130</div>
+                    <div class="stat-label">人均日消费</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">15次</div>
+                    <div class="stat-label">消费次数</div>
+                </div>
+            </div>
+
+            <!-- 消费分类 -->
+            <div class="card">
+                <div class="card-title">消费分类</div>
+                <div class="expense-pie-chart">
+                    <!-- 这里实际应用中会使用图表库 -->
+                    <div class="chart-placeholder">
+                        <img src="https://via.placeholder.com/320x180?text=消费分类饼图" alt="消费分类饼图" style="width: 100%; border-radius: 8px;">
+                    </div>
+                    <div class="expense-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #4285F4;"></div>
+                            <div class="legend-text">食品 (45%)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #0F9D58;"></div>
+                            <div class="legend-text">医疗 (25%)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #F4B400;"></div>
+                            <div class="legend-text">用品 (15%)</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: #DB4437;"></div>
+                            <div class="legend-text">其他 (15%)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 消费趋势 -->
+            <div class="card">
+                <div class="card-title">消费趋势</div>
+                <div class="expense-chart">
+                    <!-- 这里实际应用中会使用图表库 -->
+                    <div class="chart-placeholder">
+                        <img src="https://via.placeholder.com/320x180?text=月度消费趋势图" alt="月度消费趋势图" style="width: 100%; border-radius: 8px;">
+                    </div>
+                </div>
+                <div class="period-selector">
+                    <button class="period-btn active">周</button>
+                    <button class="period-btn">月</button>
+                    <button class="period-btn">年</button>
+                </div>
+            </div>
+
+            <!-- 消费记录 -->
+            <div class="card">
+                <div class="expenses-header">
+                    <div class="card-title">消费记录</div>
+                    <select class="filter-select">
+                        <option>全部分类</option>
+                        <option>食品</option>
+                        <option>医疗</option>
+                        <option>用品</option>
+                        <option>其他</option>
+                    </select>
+                </div>
+                <ul class="list expenses-list">
+                    <li class="list-item expense-record">
+                        <div class="expense-category food">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="expense-content">
+                            <div class="expense-title">宠物食品</div>
+                            <div class="expense-detail">皇家狗粮 10kg</div>
+                            <div class="expense-date">2024-04-08</div>
+                        </div>
+                        <div class="expense-amount">-¥256</div>
+                    </li>
+                    <li class="list-item expense-record">
+                        <div class="expense-category medical">
+                            <i class="fas fa-clinic-medical"></i>
+                        </div>
+                        <div class="expense-content">
+                            <div class="expense-title">兽医诊所</div>
+                            <div class="expense-detail">年度体检</div>
+                            <div class="expense-date">2024-04-01</div>
+                        </div>
+                        <div class="expense-amount">-¥350</div>
+                    </li>
+                    <li class="list-item expense-record">
+                        <div class="expense-category supplies">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="expense-content">
+                            <div class="expense-title">宠物用品</div>
+                            <div class="expense-detail">洗澡用品</div>
+                            <div class="expense-date">2024-03-25</div>
+                        </div>
+                        <div class="expense-amount">-¥128</div>
+                    </li>
+                    <li class="list-item expense-record">
+                        <div class="expense-category other">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div class="expense-content">
+                            <div class="expense-title">宠物美容</div>
+                            <div class="expense-detail">洗澡+造型</div>
+                            <div class="expense-date">2024-03-20</div>
+                        </div>
+                        <div class="expense-amount">-¥180</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 添加记录悬浮按钮 -->
+        <div class="fab">
+            <i class="fas fa-plus"></i>
+        </div>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span>首页</span>
+            </a>
+            <a href="pets.html" class="nav-item">
+                <i class="fas fa-paw nav-icon"></i>
+                <span>宠物</span>
+            </a>
+            <a href="health.html" class="nav-item">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span>健康</span>
+            </a>
+            <a href="albums.html" class="nav-item">
+                <i class="fas fa-images nav-icon"></i>
+                <span>相册</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user nav-icon"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <style>
+        /* 记账页面特定样式 */
+        .expense-pie-chart {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .expense-legend {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .period-selector {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .period-btn {
+            padding: var(--spacing-xs) var(--spacing-md);
+            border: 1px solid var(--border-color);
+            background-color: white;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .period-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .expenses-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .filter-select {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .expense-record {
+            align-items: flex-start;
+        }
+
+        .expense-category {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: var(--spacing-md);
+        }
+
+        .expense-category.food {
+            background-color: #4285F4;
+        }
+
+        .expense-category.medical {
+            background-color: #0F9D58;
+        }
+
+        .expense-category.supplies {
+            background-color: #F4B400;
+        }
+
+        .expense-category.other {
+            background-color: #DB4437;
+        }
+
+        .expense-content {
+            flex: 1;
+        }
+
+        .expense-title {
+            font-weight: 500;
+        }
+
+        .expense-detail {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin: var(--spacing-xs) 0;
+        }
+
+        .expense-date {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .expense-amount {
+            font-weight: 500;
+            color: var(--error-color);
+        }
+    </style>
+</body>
+</html> 

@@ -342,13 +342,19 @@ export default {
 </script>
 
 <style scoped>
+/* 添加整体容器样式 */
+:deep(.content) {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
 .action-bar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 16px;
-  background: #fff;
+  margin-bottom: 16px;
+  padding: 15px;
+  background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }

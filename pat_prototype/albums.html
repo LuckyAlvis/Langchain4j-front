@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宠物助手 - 相册</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部 -->
+        <header class="app-header">
+            <div class="app-title">相册</div>
+            <div class="header-actions">
+                <button class="btn btn-icon">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-icon">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 宠物选择器 -->
+            <div class="pet-selector">
+                <div class="pet-card active">
+                    <img src="https://via.placeholder.com/60" alt="宠物头像" class="pet-avatar">
+                    <div class="pet-info">
+                        <div class="pet-name">团团</div>
+                        <div class="pet-breed">金毛犬 · 2岁</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 相册分类 -->
+            <div class="album-categories">
+                <button class="category-btn active">全部</button>
+                <button class="category-btn">日常</button>
+                <button class="category-btn">外出</button>
+                <button class="category-btn">纪念日</button>
+                <button class="category-btn">搞笑</button>
+            </div>
+
+            <!-- 相册统计 -->
+            <div class="albums-stats">
+                <div class="stats-item">
+                    <div class="stats-value">256</div>
+                    <div class="stats-label">总照片</div>
+                </div>
+                <div class="stats-item">
+                    <div class="stats-value">12</div>
+                    <div class="stats-label">相册</div>
+                </div>
+                <div class="stats-item">
+                    <div class="stats-value">18</div>
+                    <div class="stats-label">本月新增</div>
+                </div>
+            </div>
+
+            <!-- 精选相册 -->
+            <div class="featured-albums">
+                <div class="section-header">
+                    <h2 class="section-title">精选相册</h2>
+                    <a href="#" class="view-all">查看全部</a>
+                </div>
+                <div class="albums-grid">
+                    <div class="album-card">
+                        <div class="album-cover">
+                            <img src="https://via.placeholder.com/150" alt="相册封面">
+                            <div class="album-count">24张</div>
+                        </div>
+                        <div class="album-title">外出记录</div>
+                    </div>
+                    <div class="album-card">
+                        <div class="album-cover">
+                            <img src="https://via.placeholder.com/150" alt="相册封面">
+                            <div class="album-count">36张</div>
+                        </div>
+                        <div class="album-title">团团的第一年</div>
+                    </div>
+                    <div class="album-card">
+                        <div class="album-cover">
+                            <img src="https://via.placeholder.com/150" alt="相册封面">
+                            <div class="album-count">18张</div>
+                        </div>
+                        <div class="album-title">日常萌照</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最近照片 -->
+            <div class="recent-photos">
+                <div class="section-header">
+                    <h2 class="section-title">最近照片</h2>
+                    <a href="#" class="view-all">查看全部</a>
+                </div>
+                <div class="media-grid">
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                    <div class="media-item">
+                        <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 回忆闪回 -->
+            <div class="memories-card">
+                <div class="memory-header">
+                    <div class="memory-title">回忆闪回</div>
+                    <div class="memory-date">1年前的今天</div>
+                </div>
+                <div class="memory-content">
+                    <img src="https://via.placeholder.com/320x180" alt="一年前的照片" class="memory-image">
+                    <div class="memory-caption">团团第一次去公园玩耍</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加照片悬浮按钮 -->
+        <div class="fab">
+            <i class="fas fa-camera"></i>
+        </div>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span>首页</span>
+            </a>
+            <a href="pets.html" class="nav-item">
+                <i class="fas fa-paw nav-icon"></i>
+                <span>宠物</span>
+            </a>
+            <a href="health.html" class="nav-item">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span>健康</span>
+            </a>
+            <a href="albums.html" class="nav-item active">
+                <i class="fas fa-images nav-icon"></i>
+                <span>相册</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user nav-icon"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <style>
+        /* 相册页面特定样式 */
+        .album-categories {
+            display: flex;
+            overflow-x: auto;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+        }
+
+        .album-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-btn {
+            padding: var(--spacing-xs) var(--spacing-md);
+            border: 1px solid var(--border-color);
+            background-color: white;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .category-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .albums-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: var(--spacing-md);
+            background-color: var(--background-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-md);
+        }
+
+        .stats-item {
+            text-align: center;
+        }
+
+        .stats-value {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .stats-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .album-card {
+            cursor: pointer;
+        }
+
+        .album-cover {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: var(--spacing-xs);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .album-cover img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        .album-count {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: 0.75rem;
+            border-top-left-radius: var(--border-radius);
+        }
+
+        .album-title {
+            font-size: 0.875rem;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recent-photos {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .memories-card {
+            background-color: var(--background-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .memory-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .memory-title {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .memory-date {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .memory-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .memory-caption {
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</body>
+</html> 

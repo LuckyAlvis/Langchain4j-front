@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宠物助手 - 健康记录</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部 -->
+        <header class="app-header">
+            <div class="app-title">健康记录</div>
+            <div class="header-actions">
+                <button class="btn btn-icon">
+                    <i class="fas fa-filter"></i>
+                </button>
+                <button class="btn btn-icon">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 宠物选择器 -->
+            <div class="pet-selector">
+                <div class="pet-card active">
+                    <img src="https://via.placeholder.com/60" alt="宠物头像" class="pet-avatar">
+                    <div class="pet-info">
+                        <div class="pet-name">团团</div>
+                        <div class="pet-breed">金毛犬 · 2岁</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 健康数据概览 -->
+            <div class="stats-card">
+                <div class="stat-item">
+                    <div class="stat-value">32.5kg</div>
+                    <div class="stat-label">当前体重</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">90%</div>
+                    <div class="stat-label">健康指数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">已完成</div>
+                    <div class="stat-label">年度体检</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">12/20</div>
+                    <div class="stat-label">已完成/总疫苗</div>
+                </div>
+            </div>
+
+            <!-- 体重趋势 -->
+            <div class="card">
+                <div class="card-title">体重趋势</div>
+                <div class="weight-chart">
+                    <!-- 这里实际应用中会使用图表库 -->
+                    <div class="chart-placeholder">
+                        <img src="https://via.placeholder.com/320x180?text=体重趋势图" alt="体重趋势图" style="width: 100%; border-radius: 8px;">
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: var(--primary-color);"></div>
+                            <div class="legend-text">实际体重</div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background-color: var(--text-light);"></div>
+                            <div class="legend-text">健康范围</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 健康记录分类 -->
+            <div class="health-categories">
+                <a href="weight.html" class="health-category">
+                    <div class="category-icon">
+                        <i class="fas fa-weight"></i>
+                    </div>
+                    <div class="category-name">体重</div>
+                </a>
+                <a href="vaccine.html" class="health-category">
+                    <div class="category-icon">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <div class="category-name">疫苗</div>
+                </a>
+                <a href="medical.html" class="health-category">
+                    <div class="category-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <div class="category-name">就医</div>
+                </a>
+                <a href="diet.html" class="health-category">
+                    <div class="category-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="category-name">饮食</div>
+                </a>
+            </div>
+
+            <!-- 最近健康记录 -->
+            <div class="card">
+                <div class="card-title">最近记录</div>
+                <ul class="list">
+                    <li class="list-item health-record">
+                        <div class="record-icon vaccine">
+                            <i class="fas fa-syringe"></i>
+                        </div>
+                        <div class="record-content">
+                            <div class="record-title">狂犬疫苗</div>
+                            <div class="record-detail">第一针，医院：宠爱动物医院</div>
+                            <div class="record-date">2024-04-01</div>
+                        </div>
+                        <button class="btn btn-icon">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </li>
+                    <li class="list-item health-record">
+                        <div class="record-icon weight">
+                            <i class="fas fa-weight"></i>
+                        </div>
+                        <div class="record-content">
+                            <div class="record-title">体重记录</div>
+                            <div class="record-detail">32.5kg，较上次增加0.8kg</div>
+                            <div class="record-date">2024-04-05</div>
+                        </div>
+                        <button class="btn btn-icon">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </li>
+                    <li class="list-item health-record">
+                        <div class="record-icon medical">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <div class="record-content">
+                            <div class="record-title">年度体检</div>
+                            <div class="record-detail">结果：良好，医院：宠爱动物医院</div>
+                            <div class="record-date">2024-03-15</div>
+                        </div>
+                        <button class="btn btn-icon">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 健康提醒 -->
+            <div class="card">
+                <div class="card-title">健康提醒</div>
+                <ul class="list">
+                    <li class="list-item reminder">
+                        <div class="reminder-icon">
+                            <i class="fas fa-syringe"></i>
+                        </div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">狂犬疫苗第二针</div>
+                            <div class="reminder-date">2024-05-01</div>
+                        </div>
+                        <button class="btn btn-secondary btn-sm">
+                            设置提醒
+                        </button>
+                    </li>
+                    <li class="list-item reminder">
+                        <div class="reminder-icon">
+                            <i class="fas fa-capsules"></i>
+                        </div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">体内外驱虫</div>
+                            <div class="reminder-date">2024-05-15</div>
+                        </div>
+                        <button class="btn btn-secondary btn-sm">
+                            设置提醒
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 添加记录悬浮按钮 -->
+        <div class="fab">
+            <i class="fas fa-plus"></i>
+        </div>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span>首页</span>
+            </a>
+            <a href="pets.html" class="nav-item">
+                <i class="fas fa-paw nav-icon"></i>
+                <span>宠物</span>
+            </a>
+            <a href="health.html" class="nav-item active">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span>健康</span>
+            </a>
+            <a href="albums.html" class="nav-item">
+                <i class="fas fa-images nav-icon"></i>
+                <span>相册</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user nav-icon"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <style>
+        /* 健康页面特定样式 */
+        .pet-selector {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .stats-card {
+            grid-template-columns: repeat(2, 1fr);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .weight-chart {
+            width: 100%;
+        }
+
+        .chart-placeholder {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+        }
+
+        .legend-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .health-categories {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .health-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+        }
+
+        .category-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: rgba(66, 133, 244, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .category-name {
+            font-size: 0.75rem;
+        }
+
+        .health-record {
+            align-items: flex-start;
+        }
+
+        .record-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: var(--spacing-md);
+        }
+
+        .record-icon.vaccine {
+            background-color: var(--primary-color);
+        }
+
+        .record-icon.weight {
+            background-color: var(--warning-color);
+        }
+
+        .record-icon.medical {
+            background-color: var(--error-color);
+        }
+
+        .record-detail {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin: var(--spacing-xs) 0;
+        }
+
+        .reminder-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(66, 133, 244, 0.1);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--spacing-md);
+        }
+
+        .reminder-date {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: var(--spacing-xs);
+        }
+
+        .btn-sm {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: 0.75rem;
+        }
+    </style>
+</body>
+</html> 

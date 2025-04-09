@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宠物助手 - 宠物日记</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部 -->
+        <header class="app-header">
+            <div class="app-title">宠物日记</div>
+            <div class="header-actions">
+                <button class="btn btn-icon">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 宠物选择器 -->
+            <div class="pet-selector">
+                <div class="pet-card active">
+                    <img src="https://via.placeholder.com/60" alt="宠物头像" class="pet-avatar">
+                    <div class="pet-info">
+                        <div class="pet-name">团团</div>
+                        <div class="pet-breed">金毛犬 · 2岁</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 日记分类标签 -->
+            <div class="diary-categories">
+                <button class="category-btn active">全部</button>
+                <button class="category-btn">日常</button>
+                <button class="category-btn">训练</button>
+                <button class="category-btn">外出</button>
+                <button class="category-btn">纪念日</button>
+                <button class="category-btn">成长</button>
+            </div>
+
+            <!-- 日记统计 -->
+            <div class="diary-stats">
+                <div class="stat-item">
+                    <div class="stat-value">84</div>
+                    <div class="stat-label">总日记</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">成长记录</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">本月新增</div>
+                </div>
+            </div>
+
+            <!-- 今日心情 -->
+            <div class="mood-selector">
+                <div class="mood-title">今天感觉如何？</div>
+                <div class="mood-options">
+                    <div class="mood-option">
+                        <div class="mood-icon">😊</div>
+                        <div class="mood-label">开心</div>
+                    </div>
+                    <div class="mood-option active">
+                        <div class="mood-icon">🥰</div>
+                        <div class="mood-label">超开心</div>
+                    </div>
+                    <div class="mood-option">
+                        <div class="mood-icon">😴</div>
+                        <div class="mood-label">困倦</div>
+                    </div>
+                    <div class="mood-option">
+                        <div class="mood-icon">🤒</div>
+                        <div class="mood-label">不舒服</div>
+                    </div>
+                    <div class="mood-option">
+                        <div class="mood-icon">😢</div>
+                        <div class="mood-label">难过</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 里程碑 -->
+            <div class="milestone-section">
+                <div class="section-header">
+                    <h2 class="section-title">里程碑</h2>
+                    <a href="#" class="view-all">查看全部</a>
+                </div>
+                <div class="milestone-card">
+                    <div class="milestone-header">
+                        <div class="milestone-title">第一次游泳</div>
+                        <div class="milestone-date">2024-03-15</div>
+                    </div>
+                    <div class="milestone-content">
+                        <p>今天带团团去湖边玩，没想到它竟然自己跳进了水里！虽然有点不熟练，但游了起来，真是太棒了！</p>
+                        <div class="media-grid milestone-photos">
+                            <div class="media-item">
+                                <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                            </div>
+                            <div class="media-item">
+                                <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 日记列表 -->
+            <div class="diary-list">
+                <div class="section-header">
+                    <h2 class="section-title">最近日记</h2>
+                </div>
+
+                <!-- 日记项 -->
+                <div class="diary-item">
+                    <div class="diary-date">
+                        <div class="diary-day">22</div>
+                        <div class="diary-month">4月</div>
+                    </div>
+                    <div class="diary-content">
+                        <div class="diary-header">
+                            <div class="diary-title">公园遛狗</div>
+                            <div class="diary-mood">🥰</div>
+                        </div>
+                        <div class="diary-text">今天天气超好，带团团去了市中心公园。它和其他几只狗狗玩得特别开心，还交到了新朋友。</div>
+                        <div class="media-grid diary-photos">
+                            <div class="media-item">
+                                <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diary-item">
+                    <div class="diary-date">
+                        <div class="diary-day">20</div>
+                        <div class="diary-month">4月</div>
+                    </div>
+                    <div class="diary-content">
+                        <div class="diary-header">
+                            <div class="diary-title">新玩具</div>
+                            <div class="diary-mood">😊</div>
+                        </div>
+                        <div class="diary-text">给团团买了个新玩具，它爱不释手，一整天都在玩。看它这么开心，我也很满足。</div>
+                        <div class="media-grid diary-photos">
+                            <div class="media-item">
+                                <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                            </div>
+                            <div class="media-item">
+                                <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                            </div>
+                            <div class="media-item">
+                                <img src="https://via.placeholder.com/120" alt="照片" class="media-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diary-item">
+                    <div class="diary-date">
+                        <div class="diary-day">18</div>
+                        <div class="diary-month">4月</div>
+                    </div>
+                    <div class="diary-content">
+                        <div class="diary-header">
+                            <div class="diary-title">训练日</div>
+                            <div class="diary-mood">😊</div>
+                        </div>
+                        <div class="diary-text">今天继续训练团团握手和坐下的指令，它学得越来越好了，真是个聪明的孩子！</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 添加日记悬浮按钮 -->
+        <div class="fab">
+            <i class="fas fa-pen"></i>
+        </div>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span>首页</span>
+            </a>
+            <a href="pets.html" class="nav-item">
+                <i class="fas fa-paw nav-icon"></i>
+                <span>宠物</span>
+            </a>
+            <a href="health.html" class="nav-item">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span>健康</span>
+            </a>
+            <a href="albums.html" class="nav-item">
+                <i class="fas fa-images nav-icon"></i>
+                <span>相册</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user nav-icon"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <style>
+        /* 日记页面特定样式 */
+        .diary-categories {
+            display: flex;
+            overflow-x: auto;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+        }
+
+        .diary-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .diary-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: var(--spacing-md);
+            background-color: var(--background-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-md);
+        }
+
+        .mood-selector {
+            background-color: var(--background-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .mood-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+
+        .mood-options {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .mood-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: var(--spacing-xs);
+            border-radius: var(--border-radius);
+        }
+
+        .mood-option.active {
+            background-color: rgba(66, 133, 244, 0.1);
+        }
+
+        .mood-icon {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .mood-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .milestone-section {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .milestone-card {
+            background-color: var(--background-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .milestone-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .milestone-title {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .milestone-date {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .milestone-content p {
+            margin-bottom: var(--spacing-md);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .milestone-photos {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .diary-item {
+            display: flex;
+            background-color: var(--background-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .diary-date {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+            margin-right: var(--spacing-md);
+            padding-right: var(--spacing-md);
+            border-right: 1px solid var(--border-color);
+        }
+
+        .diary-day {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .diary-month {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .diary-content {
+            flex: 1;
+        }
+
+        .diary-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .diary-title {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .diary-mood {
+            font-size: 1.25rem;
+        }
+
+        .diary-text {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .diary-photos {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    </style>
+</body>
+</html> 

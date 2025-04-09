@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人财务管理系统 - AI财务助手</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/ui-updates.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<div class="app-container">
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <h2>财务管理系统</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="index.html"><i class="fas fa-chart-line"></i>看板</a>
+                </li>
+                <li>
+                    <a href="personal-transactions.html"><i class="fas fa-wallet"></i>个人记账</a>
+                </li>
+                <li>
+                    <a href="family-bills.html"><i class="fas fa-home"></i>家庭账单</a>
+                </li>
+                <li>
+                    <a href="personal-savings.html"><i class="fas fa-piggy-bank"></i>个人储蓄计划</a>
+                </li>
+                <li>
+                    <a href="family-savings.html"><i class="fas fa-users"></i>家庭储蓄计划</a>
+                </li>
+                <li>
+                    <a href="financial-health.html"><i class="fas fa-heartbeat"></i>财务健康看板</a>
+                </li>
+                <li class="active">
+                    <a href="chat.html"><i class="fas fa-comment-dots"></i>AI财务助手</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 顶部导航栏 -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div class="breadcrumb">
+                    <span>首页</span> / <span>AI财务助手</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="user-profile">
+                    <img src="images/avatar.png" alt="用户头像">
+                    <span>张三</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <div class="chat-container">
+                <!-- 聊天头部 -->
+                <div class="chat-header">
+                    <div class="chat-title">AI财务助手</div>
+                    <div class="chat-actions">
+                        <button class="chat-action-btn" id="showConversations"><i class="fas fa-history"></i></button>
+                        <button class="chat-action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                    </div>
+                </div>
+
+                <!-- 对话标签栏 -->
+                <div class="conversation-tabs">
+                    <button class="tab-btn active">财务分析</button>
+                    <button class="tab-btn">预算规划</button>
+                    <button class="tab-btn">投资建议</button>
+                    <button class="tab-btn">债务管理</button>
+                    <button class="tab-btn">储蓄技巧</button>
+                    <button class="tab-btn">税务咨询</button>
+                </div>
+
+                <!-- 聊天消息区域 -->
+                <div class="chat-messages">
+                    <div class="system-message">今天 14:30</div>
+                    
+                    <div class="message bot-message">
+                        <img src="images/logo.png" alt="AI助手" class="message-avatar">
+                        <div class="message-content">
+                            你好！我是你的AI财务助手。我可以帮你分析财务状况、提供预算建议、回答财务问题，以及为你的财务决策提供支持。请问你有什么需要帮助的吗？
+                            <span class="message-time">14:30</span>
+                        </div>
+                    </div>
+                    
+                    <div class="message user-message">
+                        <div class="message-content">
+                            你好，我想了解我的本月支出情况，并分析一下我可以在哪些方面节省开支。
+                            <span class="message-time">14:31</span>
+                        </div>
+                        <img src="images/avatar.png" alt="用户头像" class="message-avatar">
+                    </div>
+                    
+                    <div class="message bot-message">
+                        <img src="images/logo.png" alt="AI助手" class="message-avatar">
+                        <div class="message-content">
+                            根据你的记账数据，本月你的总支出为¥8,300，主要分布在以下几个类别：<br><br>
+                            
+                            🏠 住房：¥3,500 (42.2%)<br>
+                            🍽️ 餐饮：¥1,850 (22.3%)<br>
+                            🚗 交通：¥950 (11.4%)<br>
+                            🛒 购物：¥1,200 (14.5%)<br>
+                            🎭 娱乐：¥800 (9.6%)<br><br>
+                            
+                            与上月相比，你的餐饮支出增加了15%，购物支出增加了20%。如果你想节省开支，这两个类别可能是最佳的切入点。我可以为你提供具体的节省建议。
+                            <span class="message-time">14:32</span>
+                        </div>
+                    </div>
+                    
+                    <div class="message user-message">
+                        <div class="message-content">
+                            请给我一些关于餐饮和购物方面的省钱建议。
+                            <span class="message-time">14:33</span>
+                        </div>
+                        <img src="images/avatar.png" alt="用户头像" class="message-avatar">
+                    </div>
+                    
+                    <div class="message bot-message">
+                        <img src="images/logo.png" alt="AI助手" class="message-avatar">
+                        <div class="message-content">
+                            关于餐饮方面的省钱建议：<br><br>
+                            
+                            1️⃣ 餐前规划：每周做一次餐饮计划，并据此准备食材<br>
+                            2️⃣ 自己做饭：减少外卖和外出就餐的频率，每周多做2-3次饭可节省约25%餐饮支出<br>
+                            3️⃣ 批量烹饪：周末准备多份食物，分装冷冻，工作日热食<br>
+                            4️⃣ 利用优惠：使用餐饮APP的首单优惠和满减活动<br>
+                            5️⃣ 带午餐：自带工作午餐，每月可节省约¥600<br><br>
+                            
+                            关于购物方面的省钱建议：<br><br>
+                            
+                            1️⃣ 制定购物清单：减少冲动消费<br>
+                            2️⃣ 比价APP：使用比价软件在购买前比较不同平台价格<br>
+                            3️⃣ 等待促销：非必需品可等到大促时购买<br>
+                            4️⃣ 考虑必要性：购买前问自己是否真的需要<br>
+                            5️⃣ 延迟满足：重要购物决定延迟48小时再做决定<br><br>
+                            
+                            根据你的消费习惯，如果实施这些建议，你有可能在下个月节省约¥800-¥1,000的支出。
+                            <span class="message-time">14:35</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 输入区域 -->
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input type="text" class="chat-input" placeholder="输入消息...">
+                        <button class="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 快速提问区域 -->
+                <div class="quick-questions">
+                    <div class="quick-questions-title">快速提问</div>
+                    <div class="questions-list">
+                        <button class="question-item">如何制定月度预算？</button>
+                        <button class="question-item">我应该如何开始投资？</button>
+                        <button class="question-item">我的储蓄率合理吗？</button>
+                        <button class="question-item">如何快速还清信用卡债务？</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对话管理面板 -->
+        <div class="conversation-panel" id="conversationPanel">
+            <div class="panel-header">
+                <div class="panel-title">历史对话</div>
+                <button class="close-panel" id="closePanel"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="conversations-list">
+                <div class="conversation-item">
+                    <div class="conversation-details">
+                        <div class="conversation-title">财务分析</div>
+                        <div class="conversation-preview">本月支出分析和节省建议</div>
+                    </div>
+                    <div class="conversation-time">今天</div>
+                </div>
+                <div class="conversation-item">
+                    <div class="conversation-details">
+                        <div class="conversation-title">投资规划</div>
+                        <div class="conversation-preview">基金定投与股票投资策略咨询</div>
+                    </div>
+                    <div class="conversation-time">昨天</div>
+                </div>
+                <div class="conversation-item">
+                    <div class="conversation-details">
+                        <div class="conversation-title">税务优化</div>
+                        <div class="conversation-preview">个人所得税专项附加扣除申报指导</div>
+                    </div>
+                    <div class="conversation-time">3天前</div>
+                </div>
+                <div class="conversation-item">
+                    <div class="conversation-details">
+                        <div class="conversation-title">房贷咨询</div>
+                        <div class="conversation-preview">房贷提前还款与利率调整分析</div>
+                    </div>
+                    <div class="conversation-time">上周</div>
+                </div>
+                <div class="conversation-item">
+                    <div class="conversation-details">
+                        <div class="conversation-title">理财产品对比</div>
+                        <div class="conversation-preview">银行理财与货币基金收益率比较</div>
+                    </div>
+                    <div class="conversation-time">上周</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-overlay" id="panelOverlay"></div>
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 显示对话面板
+        const showConversationsBtn = document.getElementById('showConversations');
+        const conversationPanel = document.getElementById('conversationPanel');
+        const panelOverlay = document.getElementById('panelOverlay');
+        const closePanel = document.getElementById('closePanel');
+        
+        showConversationsBtn.addEventListener('click', function() {
+            conversationPanel.classList.add('show');
+            panelOverlay.classList.add('show');
+        });
+        
+        closePanel.addEventListener('click', function() {
+            conversationPanel.classList.remove('show');
+            panelOverlay.classList.remove('show');
+        });
+        
+        panelOverlay.addEventListener('click', function() {
+            conversationPanel.classList.remove('show');
+            panelOverlay.classList.remove('show');
+        });
+        
+        // 快速提问点击
+        const questionItems = document.querySelectorAll('.question-item');
+        const chatInput = document.querySelector('.chat-input');
+        
+        questionItems.forEach(item => {
+            item.addEventListener('click', function() {
+                chatInput.value = this.textContent;
+                chatInput.focus();
+            });
+        });
+        
+        // 发送按钮点击
+        const sendBtn = document.querySelector('.send-btn');
+        
+        sendBtn.addEventListener('click', function() {
+            const message = chatInput.value.trim();
+            if (message) {
+                // 这里可以添加发送消息的逻辑
+                // 为了演示，我们只清空输入框
+                chatInput.value = '';
+            }
+        });
+        
+        // 回车发送
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+    });
+</script>
+</body>
+</html> 

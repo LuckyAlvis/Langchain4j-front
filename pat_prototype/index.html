@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宠物助手 - 首页</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部 -->
+        <header class="app-header">
+            <div class="app-title">宠物助手</div>
+            <div class="header-actions">
+                <button class="btn btn-icon">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <button class="btn btn-icon">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 宠物选择器 -->
+            <div class="pet-selector card">
+                <div class="card-title">我的宠物</div>
+                <div class="pet-list">
+                    <div class="pet-card active">
+                        <img src="https://via.placeholder.com/60" alt="宠物头像" class="pet-avatar">
+                        <div class="pet-info">
+                            <div class="pet-name">团团</div>
+                            <div class="pet-breed">金毛犬 · 2岁</div>
+                        </div>
+                    </div>
+                    <div class="pet-card">
+                        <img src="https://via.placeholder.com/60" alt="宠物头像" class="pet-avatar">
+                        <div class="pet-info">
+                            <div class="pet-name">咪咪</div>
+                            <div class="pet-breed">英短 · 3岁</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary btn-add-pet">
+                    <i class="fas fa-plus"></i> 添加宠物
+                </button>
+            </div>
+
+            <!-- 功能模块 -->
+            <div class="features-grid">
+                <a href="health.html" class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="feature-name">健康记录</div>
+                </a>
+                <a href="reminders.html" class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="feature-name">提醒</div>
+                </a>
+                <a href="finances.html" class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="feature-name">记账</div>
+                </a>
+                <a href="albums.html" class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <div class="feature-name">相册</div>
+                </a>
+                <a href="weight.html" class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-weight"></i>
+                    </div>
+                    <div class="feature-name">体重管理</div>
+                </a>
+                <a href="diary.html" class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="feature-name">宠物日记</div>
+                </a>
+            </div>
+
+            <!-- 今日提醒 -->
+            <div class="today-reminders card">
+                <div class="card-title">今日提醒</div>
+                <ul class="list reminders-list">
+                    <li class="list-item">
+                        <div class="reminder-content">
+                            <div class="reminder-time">09:00</div>
+                            <div class="reminder-title">团团洗澡</div>
+                        </div>
+                        <button class="btn btn-icon">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </li>
+                    <li class="list-item">
+                        <div class="reminder-content">
+                            <div class="reminder-time">12:00</div>
+                            <div class="reminder-title">喂食</div>
+                        </div>
+                        <button class="btn btn-icon">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </li>
+                    <li class="list-item">
+                        <div class="reminder-content">
+                            <div class="reminder-time">18:00</div>
+                            <div class="reminder-title">喂食</div>
+                        </div>
+                        <button class="btn btn-icon">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 最近记录 -->
+            <div class="recent-records card">
+                <div class="card-title">最近记录</div>
+                <ul class="list records-list">
+                    <li class="list-item">
+                        <div class="record-content">
+                            <div class="record-title">健康检查</div>
+                            <div class="record-date">今天 10:30</div>
+                        </div>
+                        <div class="record-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <div class="record-content">
+                            <div class="record-title">体重记录: 32.5kg</div>
+                            <div class="record-date">昨天 09:15</div>
+                        </div>
+                        <div class="record-icon">
+                            <i class="fas fa-weight"></i>
+                        </div>
+                    </li>
+                    <li class="list-item">
+                        <div class="record-content">
+                            <div class="record-title">宠物店消费：¥128</div>
+                            <div class="record-date">2024-04-05</div>
+                        </div>
+                        <div class="record-icon">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <i class="fas fa-home nav-icon"></i>
+                <span>首页</span>
+            </a>
+            <a href="pets.html" class="nav-item">
+                <i class="fas fa-paw nav-icon"></i>
+                <span>宠物</span>
+            </a>
+            <a href="health.html" class="nav-item">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span>健康</span>
+            </a>
+            <a href="albums.html" class="nav-item">
+                <i class="fas fa-images nav-icon"></i>
+                <span>相册</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user nav-icon"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <style>
+        /* 特定于首页的样式 */
+        .pet-selector {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .pet-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .pet-card {
+            position: relative;
+            margin-bottom: var(--spacing-sm);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .pet-card.active {
+            border: 2px solid var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-add-pet {
+            width: 100%;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-item {
+            background-color: var(--background-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: transform 0.2s;
+        }
+
+        .feature-item:active {
+            transform: scale(0.95);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(66, 133, 244, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .feature-name {
+            font-size: 0.875rem;
+            text-align: center;
+        }
+
+        .reminder-content, .record-content {
+            flex: 1;
+        }
+
+        .reminder-time {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .reminder-title {
+            font-weight: 500;
+        }
+
+        .record-date {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: var(--spacing-xs);
+        }
+
+        .record-icon {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+        }
+    </style>
+</body>
+</html> 

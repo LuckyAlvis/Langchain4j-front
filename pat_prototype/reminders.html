@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宠物助手 - 提醒</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部 -->
+        <header class="app-header">
+            <div class="app-title">提醒</div>
+            <div class="header-actions">
+                <button class="btn btn-icon">
+                    <i class="fas fa-filter"></i>
+                </button>
+                <button class="btn btn-icon">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 内容区域 -->
+        <div class="content">
+            <!-- 宠物选择器 -->
+            <div class="pet-selector">
+                <div class="pet-card active">
+                    <img src="https://via.placeholder.com/60" alt="宠物头像" class="pet-avatar">
+                    <div class="pet-info">
+                        <div class="pet-name">团团</div>
+                        <div class="pet-breed">金毛犬 · 2岁</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 日历视图 -->
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button class="calendar-nav">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="calendar-title">2024年4月</div>
+                    <button class="calendar-nav">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day">日</div>
+                    <div class="calendar-day">一</div>
+                    <div class="calendar-day">二</div>
+                    <div class="calendar-day">三</div>
+                    <div class="calendar-day">四</div>
+                    <div class="calendar-day">五</div>
+                    <div class="calendar-day">六</div>
+
+                    <!-- 第一行（4月前几天是3月的日期） -->
+                    <div class="calendar-date prev-month">30</div>
+                    <div class="calendar-date prev-month">31</div>
+                    <div class="calendar-date">1</div>
+                    <div class="calendar-date">2</div>
+                    <div class="calendar-date">3</div>
+                    <div class="calendar-date">4</div>
+                    <div class="calendar-date">5</div>
+
+                    <!-- 第二行 -->
+                    <div class="calendar-date">6</div>
+                    <div class="calendar-date">7</div>
+                    <div class="calendar-date has-event">8</div>
+                    <div class="calendar-date">9</div>
+                    <div class="calendar-date has-event">10</div>
+                    <div class="calendar-date">11</div>
+                    <div class="calendar-date">12</div>
+
+                    <!-- 第三行 -->
+                    <div class="calendar-date">13</div>
+                    <div class="calendar-date has-event">14</div>
+                    <div class="calendar-date">15</div>
+                    <div class="calendar-date">16</div>
+                    <div class="calendar-date">17</div>
+                    <div class="calendar-date">18</div>
+                    <div class="calendar-date">19</div>
+
+                    <!-- 第四行 -->
+                    <div class="calendar-date">20</div>
+                    <div class="calendar-date">21</div>
+                    <div class="calendar-date active">22</div>
+                    <div class="calendar-date has-event">23</div>
+                    <div class="calendar-date">24</div>
+                    <div class="calendar-date">25</div>
+                    <div class="calendar-date">26</div>
+
+                    <!-- 第五行 -->
+                    <div class="calendar-date">27</div>
+                    <div class="calendar-date">28</div>
+                    <div class="calendar-date">29</div>
+                    <div class="calendar-date">30</div>
+                    <div class="calendar-date next-month">1</div>
+                    <div class="calendar-date next-month">2</div>
+                    <div class="calendar-date next-month">3</div>
+                </div>
+            </div>
+
+            <!-- 提醒分类标签 -->
+            <div class="reminder-categories">
+                <button class="category-btn active">全部</button>
+                <button class="category-btn">药物</button>
+                <button class="category-btn">喂食</button>
+                <button class="category-btn">疫苗</button>
+                <button class="category-btn">体检</button>
+                <button class="category-btn">洗澡</button>
+            </div>
+
+            <!-- 今日提醒 -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">今日提醒</h2>
+                    <span class="section-date">4月22日</span>
+                </div>
+                <ul class="list">
+                    <li class="list-item reminder-item">
+                        <div class="reminder-time">08:00</div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">早餐喂食</div>
+                            <div class="reminder-detail">皇家狗粮 250g</div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-icon">
+                                <i class="fas fa-bell-slash"></i>
+                            </button>
+                        </div>
+                    </li>
+                    <li class="list-item reminder-item">
+                        <div class="reminder-time">12:00</div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">服用药物</div>
+                            <div class="reminder-detail">驱虫药，每日一次</div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-icon">
+                                <i class="fas fa-bell-slash"></i>
+                            </button>
+                        </div>
+                    </li>
+                    <li class="list-item reminder-item">
+                        <div class="reminder-time">18:00</div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">晚餐喂食</div>
+                            <div class="reminder-detail">皇家狗粮 250g</div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-icon">
+                                <i class="fas fa-bell-slash"></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 明日提醒 -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">明日提醒</h2>
+                    <span class="section-date">4月23日</span>
+                </div>
+                <ul class="list">
+                    <li class="list-item reminder-item">
+                        <div class="reminder-time">08:00</div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">早餐喂食</div>
+                            <div class="reminder-detail">皇家狗粮 250g</div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </li>
+                    <li class="list-item reminder-item">
+                        <div class="reminder-time">10:00</div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">宠物美容</div>
+                            <div class="reminder-detail">洗澡+修毛，萌宠美容院</div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </li>
+                    <li class="list-item reminder-item">
+                        <div class="reminder-time">18:00</div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">晚餐喂食</div>
+                            <div class="reminder-detail">皇家狗粮 250g</div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 未来提醒 -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">未来提醒</h2>
+                </div>
+                <ul class="list">
+                    <li class="list-item reminder-item">
+                        <div class="reminder-date">5月1日</div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">狂犬疫苗</div>
+                            <div class="reminder-detail">第二针，宠爱动物医院</div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </li>
+                    <li class="list-item reminder-item">
+                        <div class="reminder-date">5月15日</div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">体内外驱虫</div>
+                            <div class="reminder-detail">每3个月一次</div>
+                        </div>
+                        <div class="reminder-actions">
+                            <button class="btn btn-icon">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 添加提醒悬浮按钮 -->
+        <div class="fab">
+            <i class="fas fa-plus"></i>
+        </div>
+
+        <!-- 底部导航 -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-home nav-icon"></i>
+                <span>首页</span>
+            </a>
+            <a href="pets.html" class="nav-item">
+                <i class="fas fa-paw nav-icon"></i>
+                <span>宠物</span>
+            </a>
+            <a href="health.html" class="nav-item">
+                <i class="fas fa-heartbeat nav-icon"></i>
+                <span>健康</span>
+            </a>
+            <a href="albums.html" class="nav-item">
+                <i class="fas fa-images nav-icon"></i>
+                <span>相册</span>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user nav-icon"></i>
+                <span>我的</span>
+            </a>
+        </nav>
+    </div>
+
+    <style>
+        /* 提醒页面特定样式 */
+        .calendar {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .calendar-title {
+            font-weight: 500;
+        }
+
+        .calendar-nav {
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .calendar-day {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            padding-bottom: var(--spacing-xs);
+        }
+
+        .calendar-date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .calendar-date.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .calendar-date.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        .calendar-date.prev-month,
+        .calendar-date.next-month {
+            color: var(--text-light);
+            opacity: 0.5;
+        }
+
+        .reminder-categories {
+            display: flex;
+            overflow-x: auto;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+        }
+
+        .reminder-categories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .section {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .section-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .reminder-item {
+            background-color: var(--background-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .reminder-time,
+        .reminder-date {
+            min-width: 60px;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background-color: rgba(66, 133, 244, 0.1);
+            border-radius: 16px;
+            font-size: 0.75rem;
+            text-align: center;
+            margin-right: var(--spacing-md);
+            color: var(--primary-color);
+        }
+
+        .reminder-content {
+            flex: 1;
+        }
+
+        .reminder-title {
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .reminder-detail {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .reminder-actions {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+    </style>
+</body>
+</html> 

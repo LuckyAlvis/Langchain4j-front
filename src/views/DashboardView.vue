@@ -276,15 +276,18 @@ export default {
 
 <style scoped>
 .dashboard {
-  padding: 18px;
-  background: var(--background-light);
+  padding: 15px;
+  height: 100%;
+  width: 100%;
+  background: #f5f5f5;
+  overflow-y: auto;
 }
 
 .stats-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .stat-card {
@@ -359,16 +362,17 @@ export default {
 
 .charts-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 18px;
-  margin-bottom: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .chart-card {
   background: white;
-  padding: 18px;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
+  height: 250px;
 }
 
 .chart-card h3 {
