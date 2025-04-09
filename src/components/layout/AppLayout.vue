@@ -12,37 +12,37 @@
       
       <nav class="sidebar-nav">
         <router-link to="/" class="nav-item" active-class="active">
-          <i class="fas fa-chart-line" style="margin-right: 8px"></i>
+          <i class="fas fa-chart-line" style="margin-right: 10px"></i>
           <span>看板</span>
         </router-link>
         
         <router-link to="/transactions" class="nav-item" active-class="active">
-          <i class="fas fa-wallet"></i>
+          <i class="fas fa-wallet" style="margin-right: 10px"></i>
           <span>个人记账</span>
         </router-link>
         
         <router-link to="/family-bills" class="nav-item" active-class="active">
-          <i class="fas fa-home"></i>
+          <i class="fas fa-home" style="margin-right: 10px"></i>
           <span>家庭账单</span>
         </router-link>
         
         <router-link to="/personal-savings" class="nav-item" active-class="active">
-          <i class="fas fa-piggy-bank"></i>
+          <i class="fas fa-piggy-bank" style="margin-right: 10px"></i>
           <span>个人储蓄计划</span>
         </router-link>
         
         <router-link to="/family-savings" class="nav-item" active-class="active">
-          <i class="fas fa-users"></i>
+          <i class="fas fa-users" style="margin-right: 10px"></i>
           <span>家庭储蓄计划</span>
         </router-link>
         
         <router-link to="/financial-health" class="nav-item" active-class="active">
-          <i class="fas fa-heartbeat"></i>
+          <i class="fas fa-heartbeat" style="margin-right: 10px"></i>
           <span>财务健康看板</span>
         </router-link>
         
         <router-link to="/chat" class="nav-item" active-class="active">
-          <i class="fas fa-comment-dots"></i>
+          <i class="fas fa-comment-dots" style="margin-right: 10px"></i>
           <span>AI财务助手</span>
         </router-link>
       </nav>
