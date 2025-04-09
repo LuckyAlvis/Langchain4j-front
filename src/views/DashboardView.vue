@@ -61,12 +61,12 @@
         <!-- 收支趋势图 -->
         <div class="chart-card">
           <h3>收支趋势</h3>
-          <div ref="trendChart" style="height: 200px;"></div>
+          <div ref="trendChart" class="chart-content"></div>
         </div>
         <!-- 支出分类图 -->
         <div class="chart-card">
           <h3>支出分类</h3>
-          <div ref="categoryChart" style="height: 200px;"></div>
+          <div ref="categoryChart" class="chart-content"></div>
         </div>
       </div>
 
@@ -166,9 +166,10 @@ export default {
           data: ['收入', '支出', '结余']
         },
         grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
+          top: 30,
+          right: 30,
+          bottom: 30,
+          left: 50,
           containLabel: true
         },
         xAxis: {
@@ -369,15 +370,22 @@ export default {
 
 .chart-card {
   background: white;
-  padding: 15px;
+  padding: 15px 15px 20px;
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05);
-  height: 250px;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-card h3 {
-  margin: 0 0 18px 0;
+  margin: 0 0 12px 0;
   color: var(--text-primary);
+}
+
+.chart-content {
+  height: 210px;
+  width: 100%;
+  position: relative;
 }
 
 .recent-transactions {
