@@ -21,6 +21,11 @@
           <span>个人记账</span>
         </router-link>
         
+        <router-link to="/all-records" class="nav-item" active-class="active">
+          <i class="fas fa-list-alt" style="margin-right: 10px"></i>
+          <span>记账记录</span>
+        </router-link>
+        
         <router-link to="/family-bills" class="nav-item" active-class="active">
           <i class="fas fa-home" style="margin-right: 10px"></i>
           <span>家庭账单</span>
@@ -124,7 +129,8 @@ export default {
         '/personal-savings': '个人储蓄计划',
         '/family-savings': '家庭储蓄计划',
         '/financial-health': '财务健康看板',
-        '/chat': 'AI财务助手'
+        '/chat': 'AI财务助手',
+        '/all-records': '记账记录'
       }
       
       return routeMap[route.path] || '未知页面'
