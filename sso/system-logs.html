@@ -7,6 +7,19 @@
     <title>耀耀工厂 - 系统日志</title>
     <link rel="stylesheet" href="permission-admin.css">
     <link rel="stylesheet" href="system-logs.css">
+    <style>
+        /* 添加直接授权的图标样式 */
+        .log-icon.direct {
+            background-color: #8c52ff; /* 紫色背景 */
+            color: white;
+        }
+
+        /* 状态标签样式 */
+        .status-direct {
+            background-color: #8c52ff;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -69,6 +82,7 @@
                                 <option value="login">登录系统</option>
                                 <option value="new">权限申请</option>
                                 <option value="revoke">权限收回</option>
+                                <option value="direct">直接授权</option>
                             </select>
                         </div>
                         <div class="filter-item">
@@ -96,6 +110,23 @@
                 </div>
                 <div class="card-body">
                     <div class="logs-list">
+                        <!-- 添加直接授权的样例数据 -->
+                        <div class="log-item">
+                            <div class="log-icon direct">+</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">直接授权 - 陈八</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">5分钟前</span>
+                                        <span class="log-operator">戴倚凡</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="log-item">
                             <div class="log-icon approved">✓</div>
                             <div class="log-content">
@@ -274,7 +305,7 @@
                                 </div>
                                 <div class="detail-item">
                                     <div class="detail-label">申请时间</div>
-                                    <div class="detail-value">2023-10-26 10:20:35</div>
+                                    <div class="detail-value">2024-10-26 10:20:35</div>
                                 </div>
                             </div>
                         </div>
@@ -302,28 +333,6 @@
     </div>
 
     <script>
-        // 模态框功能
-        const modal = document.getElementById('log-detail-modal');
-        const detailButtons = document.querySelectorAll('.view-detail-btn');
-        const closeBtn = document.querySelector('.close-btn');
-        const cancelBtn = document.querySelector('.modal-btn.cancel-btn');
-        
-        // 为所有查看详情按钮添加点击事件
-        detailButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // 获取日志类型
-                const logItem = this.closest('.log-item');
-                const logIcon = logItem.querySelector('.log-icon');
-                const logTitle = logItem.querySelector('.log-title').textContent;
-                
-                // 根据类型设置不同的模态框内容
-                updateModalContent(logIcon.className, logTitle);
-                
-                // 显示模态框
-                modal.style.display = 'flex';
-            });
-        });
-        
         // 根据日志类型更新模态框内容
         function updateModalContent(iconClass, title) {
             // 设置模态框标题
@@ -333,12 +342,40 @@
             // 获取模态框内容区域
             const modalBody = document.querySelector('.modal-body');
             
-            // 获取申请人名称
+            // 获取申请人名称和操作人
             let userName = '';
+            let operatorName = ''; // 操作人姓名
+            
             if (title.includes('-')) {
                 userName = title.split('-')[1].trim();
             } else if (title.includes('的')) {
                 userName = title.split('的')[0].trim();
+            }
+            
+            // 修复：使用更安全的方式查找操作人，避免使用不兼容的:contains()选择器
+            try {
+                // 查找所有日志标题
+                const logTitles = document.querySelectorAll('.log-title');
+                let targetLogItem = null;
+                
+                // 遍历查找匹配标题的日志项
+                for(let i = 0; i < logTitles.length; i++) {
+                    if(logTitles[i].textContent === title) {
+                        targetLogItem = logTitles[i].closest('.log-item');
+                        break;
+                    }
+                }
+                
+                // 如果找到日志项，尝试获取操作人
+                if (targetLogItem) {
+                    const operatorEl = targetLogItem.querySelector('.log-operator');
+                    if (operatorEl) {
+                        operatorName = operatorEl.textContent;
+                    }
+                }
+            } catch(e) {
+                console.error('查找操作人时出错：', e);
+                operatorName = '戴倚凡'; // 默认值
             }
             
             // 添加申请时长信息
@@ -356,9 +393,9 @@
             }
             
             // 设置各种审批时间
-            const applyTime = '2023-10-26 10:20:35';
-            const approvalTime = '2023-10-26 15:45:12'; // 审批通过时间
-            const rejectionTime = '2023-10-26 14:30:08'; // 拒绝时间
+            const applyTime = '2024-10-26 10:20:35';
+            const approvalTime = '2024-10-26 15:45:12'; // 审批通过时间
+            const rejectionTime = '2024-10-26 14:30:08'; // 拒绝时间
             
             // 根据用户名设置相关信息
             let jobId = 'ZH001';
@@ -529,7 +566,7 @@
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">授权时间</div>
-                                <div class="detail-value">2023-09-16 09:12</div>
+                                <div class="detail-value">2024-09-16 09:12</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">收回时间</div>
@@ -540,6 +577,48 @@
                             <h4>操作备注</h4>
                             <div class="detail-remarks" style="border-left-color: #bfbfbf; background-color: #fafafa;">
                                 根据公司权限管理规定，用户${duration}权限有效期已到，系统自动收回。用户可重新申请。
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // 处理直接授权类型
+            if (iconClass.includes('direct')) {
+                modalContent += `
+                    
+                    
+                    <div class="detail-section">
+                        <h4>权限信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">授权时长</div>
+                                <div class="detail-value">60天</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">授权时间</div>
+                                <div class="detail-value">${applyTime}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>授权备注</h4>
+                        <div class="detail-remarks" style="border-left-color: #8c52ff; background-color: #f5f0ff;">
+                            管理员戴倚凡直接授予用户访问权限，时长：60天。
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>操作信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">操作人</div>
+                                <div class="detail-value">${operatorName || '戴倚凡'}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">操作时间</div>
+                                <div class="detail-value">${applyTime}</div>
                             </div>
                         </div>
                     </div>
@@ -566,18 +645,132 @@
             return '';
         }
         
-        // 关闭模态框的事件处理
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-        
-        cancelBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-        
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
+        // 页面加载完成后初始化所有功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模态框功能
+            const modal = document.getElementById('log-detail-modal');
+            const closeBtn = document.querySelector('.close-btn');
+            const cancelBtn = document.querySelector('.modal-btn.cancel-btn');
+            
+            // 为所有查看详情按钮添加点击事件
+            const detailButtons = document.querySelectorAll('.view-detail-btn');
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 获取日志类型
+                    const logItem = this.closest('.log-item');
+                    const logIcon = logItem.querySelector('.log-icon');
+                    const logTitle = logItem.querySelector('.log-title').textContent;
+                    
+                    // 根据类型设置不同的模态框内容
+                    updateModalContent(logIcon.className, logTitle);
+                    
+                    // 显示模态框
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            // 关闭模态框的事件处理
+            closeBtn.addEventListener('click', () => {
                 modal.style.display = 'none';
+            });
+            
+            cancelBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // 修改系统日志页面中的操作文本描述
+            const logItems = document.querySelectorAll('.log-item');
+            logItems.forEach(item => {
+                const titleElement = item.querySelector('.log-title');
+                if (titleElement) {
+                    // 将"通过中海通登录系统"改为"系统登录"
+                    if (titleElement.textContent.includes('通过中海通登录系统')) {
+                        titleElement.textContent = titleElement.textContent.replace('通过中海通登录系统', '系统登录');
+                    }
+                    
+                    // 将"新的访问权限申请"改为"权限申请"
+                    if (titleElement.textContent.includes('新的访问权限申请')) {
+                        titleElement.textContent = titleElement.textContent.replace('新的访问权限申请', '权限申请');
+                    }
+                }
+            });
+            
+            // 检查localStorage中是否有系统日志记录
+            const storedLogs = JSON.parse(localStorage.getItem('systemLogs') || '[]');
+            
+            if (storedLogs.length > 0) {
+                // 使用正确的选择器找到日志列表
+                const logList = document.querySelector('.logs-list');
+                
+                if (logList) {
+                    // 遍历存储的日志，添加到页面
+                    storedLogs.forEach(logData => {
+                        if (logData.type === 'direct') {
+                            // 创建时间显示文本
+                            const logDate = new Date(logData.timestamp);
+                            const today = new Date();
+                            let timeText = '';
+                            
+                            if (logDate.toDateString() === today.toDateString()) {
+                                timeText = '今天 ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            } else {
+                                const yesterday = new Date(today);
+                                yesterday.setDate(today.getDate() - 1);
+                                
+                                if (logDate.toDateString() === yesterday.toDateString()) {
+                                    timeText = '昨天 ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                                } else {
+                                    timeText = logDate.toLocaleDateString() + ' ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                                }
+                            }
+                            
+                            // 创建新的日志项
+                            const logItem = document.createElement('div');
+                            logItem.className = 'log-item';
+                            logItem.innerHTML = `
+                                <div class="log-icon direct">+</div>
+                                <div class="log-content">
+                                    <div class="log-text">
+                                        <div class="log-title">直接授权 - ${logData.userName}</div>
+                                        <div class="log-meta">
+                                            <span class="log-time">${timeText}</span>
+                                            <span class="log-operator">${logData.operatorName}</span>
+                                        </div>
+                                    </div>
+                                    <div class="log-detail">
+                                        <button class="view-detail-btn">查看详情</button>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            // 将新日志项添加到日志列表顶部
+                            logList.insertBefore(logItem, logList.firstChild);
+                            
+                            // 绑定查看详情按钮事件
+                            const viewBtn = logItem.querySelector('.view-detail-btn');
+                            viewBtn.addEventListener('click', function() {
+                                const modal = document.getElementById('log-detail-modal');
+                                const modalHeader = modal.querySelector('.modal-header h3');
+                                modalHeader.textContent = `直接授权 - ${logData.userName}`;
+                                
+                                // 更新模态框内容
+                                updateModalContent('direct', `直接授权 - ${logData.userName}`);
+                                
+                                // 显示模态框
+                                modal.style.display = 'flex';
+                            });
+                        }
+                    });
+                    
+                    // 清除已处理的日志记录
+                    localStorage.removeItem('systemLogs');
+                }
             }
         });
         
@@ -605,26 +798,6 @@
                 window.location.href = 'login.html';
             }
         }
-
-        // 修改系统日志页面中的操作文本描述
-        document.addEventListener('DOMContentLoaded', function() {
-            // 获取所有日志项
-            const logItems = document.querySelectorAll('.log-item');
-            logItems.forEach(item => {
-                const titleElement = item.querySelector('.log-title');
-                if (titleElement) {
-                    // 将"通过中海通登录系统"改为"系统登录"
-                    if (titleElement.textContent.includes('通过中海通登录系统')) {
-                        titleElement.textContent = titleElement.textContent.replace('通过中海通登录系统', '系统登录');
-                    }
-                    
-                    // 将"新的访问权限申请"改为"权限申请"
-                    if (titleElement.textContent.includes('新的访问权限申请')) {
-                        titleElement.textContent = titleElement.textContent.replace('新的访问权限申请', '权限申请');
-                    }
-                }
-            });
-        });
     </script>
 </body>
 </html> 

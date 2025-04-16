@@ -23,7 +23,7 @@
                 
                 <div class="form-group">
                     <label for="password">密码</label>
-                    <input type="password" id="password" name="password" placeholder="请输入密码" required>
+                    <input type="password" id="password" name="password" placeholder="请输入密码">
                 </div>
                 
                 <div class="remember-me">
@@ -35,27 +35,44 @@
             </form>
             
             <div class="login-footer">
-                <p>© 2023 耀耀工厂 版权所有</p>
+                <p>© 2025 耀耀工厂 版权所有</p>
             </div>
         </div>
     </div>
     
     <script>
+        // 登录处理函数
         function handleLogin(event) {
             event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const remember = document.getElementById('remember').checked;
             
-            // 模拟登录验证（实际应用中应替换为真实API调用）
-            if (username === 'admin' && password === 'admin123') {
-                // 登录成功，跳转到首页
+            // 获取用户名
+            const username = document.getElementById('username').value.trim();
+            
+            // 简单验证，只检查用户名是否为空
+            if (!username) {
+                alert('请输入用户名');
+                return;
+            }
+            
+            // 不管密码是什么，都允许登录
+            // 根据用户名判断跳转到哪个页面
+            if (username.includes('admin') || username === 'admin' || username === '戴倚凡') {
+                // 管理员用户跳转到系统概览页面
                 window.location.href = 'dashboard.html';
             } else {
-                // 登录失败，显示错误信息
-                alert('用户名或密码错误，请重试');
+                // 普通用户跳转到权限申请页面
+                window.location.href = 'permission-request.html';
             }
         }
+        
+        // 为登录表单添加提交事件监听
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.querySelector('.login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', handleLogin);
+            }
+        });
     </script>
 </body>
+</html> 
 </html> 
