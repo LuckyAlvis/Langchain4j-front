@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>居中嵌套div</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 外部div样式 */
+        .outer-box {
+            width: 400px;
+            height: 400px;
+            background-color: #4c4c4c;
+            /* 使用弹性布局实现居中 */
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center;     /* 垂直居中 */
+        }
+
+        /* 内部div样式 */
+        .inner-box {
+            width: 200px;
+            height: 200px;
+            background-color: #b27b3d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer-box">
+        <div class="inner-box"></div>
+    </div>
+</body>
+
+</html>

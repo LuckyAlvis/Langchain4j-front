@@ -8,9 +8,10 @@
         <div class="form-group">
           <div class="input-with-icon">
             <el-input
-                v-model="form.username"
+                v-model="username"
                 placeholder="用户名/邮箱"
                 :prefix-icon="User"
+                :disabled="loading"
             />
           </div>
         </div>
@@ -18,21 +19,26 @@
         <div class="form-group">
           <div class="input-with-icon">
             <el-input
-                v-model="form.password"
+                v-model="password"
                 type="password"
                 placeholder="密码"
                 :prefix-icon="Lock"
                 show-password
+                :disabled="loading"
             />
           </div>
         </div>
 
         <div class="form-options">
           <label class="remember-me">
-            <input type="checkbox" v-model="form.remember">
+            <input type="checkbox" v-model="remember" :disabled="loading">
             <span>记住我</span>
           </label>
           <a href="#" class="forgot-password">忘记密码?</a>
+        </div>
+
+        <div v-if="errorMessage" class="error-message">
+          {{ errorMessage }}
         </div>
 
         <button type="submit" class="btn-login" :disabled="loading">
@@ -49,36 +55,90 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import {ref} from 'vue'
-import {useRouter} from 'vue-router'
-import {User, Lock} from '@element-plus/icons-vue'
-import {authService} from '@/services/auth'
-import type {LoginRequest} from '@/types/auth'
+<script>
+import { ref, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import { User, Lock } from '@element-plus/icons-vue'
 
-const router = useRouter()
-const loading = ref(false)
-const form = ref<LoginRequest & { remember: boolean }>({
-  username: '',
-  password: '',
-  remember: false
-})
+export default {
+  name: 'LoginView',
+  setup() {
+    const router = useRouter()
+    const username = ref('')
+    const password = ref('')
+    const remember = ref(true)
+    const loading = ref(false)
+    const errorMessage = ref('')
 
-const handleLogin = async () => {
-  if (!form.value.username || !form.value.password) {
-    alert('请输入用户名和密码')
-    return
-  }
+    // 添加取消标记
+    let isComponentMounted = true
 
-  loading.value = true
-  try {
-    const response = await authService.login(form.value)
-    localStorage.setItem('token', response.data.token)
-    router.push('/')
-  } catch (error) {
-    alert('登录失败，请稍后重试')
-  } finally {
-    loading.value = false
+    onUnmounted(() => {
+      // 组件卸载时设置标记
+      isComponentMounted = false
+    })
+
+    const handleLogin = async () => {
+      // 表单验证
+      if (!username.value || !password.value) {
+        errorMessage.value = '用户名和密码不能为空'
+        return
+      }
+
+      loading.value = true
+      errorMessage.value = ''
+
+      try {
+        // 调用登录API
+        const response = await axios.post('/api/auth/login', {
+          username: username.value,
+          password: password.value,
+          remember: remember.value
+        })
+
+        // 如果组件已卸载，不执行后续操作
+        if (!isComponentMounted) return
+
+        if (response.data && response.data.code === 200) {
+          // 保存登录信息
+          const userData = response.data.data
+          localStorage.setItem('token', userData.token)
+          localStorage.setItem('user', JSON.stringify({
+            id: userData.userId,
+            username: userData.username,
+            avatar: userData.avatar || ''
+          }))
+
+          // 跳转到首页
+          router.push('/')
+        } else {
+          errorMessage.value = (response.data && response.data.message) || '登录失败，请重试'
+        }
+      } catch (error) {
+        // 如果组件已卸载，不执行后续操作
+        if (!isComponentMounted) return
+
+        console.error('登录请求失败:', error)
+        errorMessage.value = error.response?.data?.message || '网络错误，请稍后再试'
+      } finally {
+        // 如果组件已卸载，不执行后续操作
+        if (isComponentMounted) {
+          loading.value = false
+        }
+      }
+    }
+
+    return {
+      username,
+      password,
+      remember,
+      loading,
+      errorMessage,
+      handleLogin,
+      User,
+      Lock
+    }
   }
 }
 </script>
@@ -201,5 +261,11 @@ const handleLogin = async () => {
 
 .register-link:hover {
   text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
 }
 </style>
