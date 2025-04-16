@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>耀耀工厂 - 权限管理后台</title>
+    <link rel="stylesheet" href="permission-admin.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="logo.png" alt="耀耀工厂">
+                </div>
+                <h2>耀耀工厂</h2>
+            </div>
+            <div class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i>📊</i>
+                    <span>系统概览</span>
+                </a>
+                <a href="permission-admin.html" class="nav-item active">
+                    <i>🔑</i>
+                    <span>权限管理</span>
+                </a>
+                <a href="system-logs.html" class="nav-item">
+                    <i>📝</i>
+                    <span>系统日志</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <!-- 顶部导航 -->
+            <div class="top-nav">
+                <div class="breadcrumb">
+                    权限管理
+                </div>
+                <div class="user-profile">
+                    <div class="user-info" onclick="toggleUserMenu()">
+                        <div class="avatar">戴</div>
+                        <span class="username">管理员-戴倚凡</span>
+                        <i class="dropdown-icon">▼</i>
+                    </div>
+                    <div class="user-menu" id="userMenu">
+                        <div class="menu-item" onclick="logout()">
+                            <i class="menu-icon">↩</i>
+                            <span>退出登录</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 标签页 -->
+            <div class="tabs">
+                <div class="tab-item" onclick="showTab('approval')">权限审批</div>
+                <div class="tab-item active" onclick="showTab('authorized')">已授权用户</div>
+                <div class="tab-item" onclick="showTab('active')">当前登录用户</div>
+            </div>
+
+            <!-- 权限审批内容卡片 -->
+            <div id="approval-tab" class="card tab-content" style="display: none;">
+                <div class="card-header">
+                    <h3 class="card-title">权限申请列表</h3>
+                </div>
+                <div class="card-body">
+                    <!-- 筛选区域 -->
+                    <div class="filter-area">
+                        <div class="filter-item">
+                            <label>姓名:</label>
+                            <input type="text" placeholder="请输入姓名">
+                        </div>
+                        <div class="filter-item">
+                            <label>工号:</label>
+                            <input type="text" placeholder="请输入工号">
+                        </div>
+                        <div class="filter-item">
+                            <label>部门:</label>
+                            <select>
+                                <option value="">全部</option>
+                                <option value="tech">技术部</option>
+                                <option value="marketing">市场部</option>
+                                <option value="product">产品部</option>
+                                <option value="hr">人力资源</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>申请时间:</label>
+                            <input type="date" class="date-picker">
+                            <span class="date-separator">至</span>
+                            <input type="date" class="date-picker">
+                        </div>
+                        <div class="filter-item">
+                            <label>状态:</label>
+                            <select>
+                                <option value="">全部</option>
+                                <option value="pending">待审批</option>
+                                <option value="approved">已通过</option>
+                                <option value="rejected">已拒绝</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <button class="search-btn">搜索</button>
+                            <button class="reset-btn">重置</button>
+                        </div>
+                    </div>
+
+                    <!-- 批量操作 -->
+                    <div class="batch-actions">
+                        <button class="action-btn approve-btn">批量通过</button>
+                        <button class="action-btn reject-btn">批量拒绝</button>
+                    </div>
+
+                    <!-- 表格内容 -->
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox"></th>
+                                    <th>姓名</th>
+                                    <th>工号</th>
+                                    <th>部门</th>
+                                    <th>申请时间</th>
+                                    <th>申请理由</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>张三</td>
+                                    <td>ZH001</td>
+                                    <td>技术部</td>
+                                    <td>2023-10-15 14:30</td>
+                                    <td>需要使用AI工具提升工作效率</td>
+                                    <td><span class="status status-pending">待审批</span></td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn approve-btn">通过</button>
+                                        <button class="action-btn reject-btn">拒绝</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>李四</td>
+                                    <td>ZH002</td>
+                                    <td>市场部</td>
+                                    <td>2023-10-15 10:15</td>
+                                    <td>需要调研AI产品功能</td>
+                                    <td><span class="status status-pending">待审批</span></td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn approve-btn">通过</button>
+                                        <button class="action-btn reject-btn">拒绝</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>王五</td>
+                                    <td>ZH003</td>
+                                    <td>产品部</td>
+                                    <td>2023-07-05</td>
+                                    <td>产品设计需要使用AI助手</td>
+                                    <td><span class="status status-approved">已通过</span></td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn remove-btn">拒绝</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>赵六</td>
+                                    <td>ZH004</td>
+                                    <td>人力资源</td>
+                                    <td>2023-09-30</td>
+                                    <td>需要使用系统管理员工培训数据</td>
+                                    <td><span class="status status-rejected">已拒绝</span></td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn approve-btn">通过</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>钱七</td>
+                                    <td>ZH005</td>
+                                    <td>技术部</td>
+                                    <td>2023-10-01</td>
+                                    <td>开发需要使用AI接口</td>
+                                    <td><span class="status status-pending">待审批</span></td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn approve-btn">通过</button>
+                                        <button class="action-btn reject-btn">拒绝</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 分页 -->
+                    <div class="pagination">
+                        <button>&lt;</button>
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>&gt;</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 已授权用户内容卡片 -->
+            <div id="authorized-tab" class="card tab-content">
+                <div class="card-header">
+                    <h3 class="card-title">已授权用户列表</h3>
+                    <button class="add-btn">+ 添加用户权限</button>
+                </div>
+                <div class="card-body">
+                    <!-- 筛选区域 -->
+                    <div class="filter-area">
+                        <div class="filter-item">
+                            <label>姓名:</label>
+                            <input type="text" placeholder="请输入姓名">
+                        </div>
+                        <div class="filter-item">
+                            <label>工号:</label>
+                            <input type="text" placeholder="请输入工号">
+                        </div>
+                        <div class="filter-item">
+                            <label>部门:</label>
+                            <select>
+                                <option value="">全部</option>
+                                <option value="tech">技术部</option>
+                                <option value="marketing">市场部</option>
+                                <option value="product">产品部</option>
+                                <option value="hr">人力资源</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>授权时间:</label>
+                            <input type="date" class="date-picker">
+                            <span class="date-separator">至</span>
+                            <input type="date" class="date-picker">
+                        </div>
+                        <div class="filter-item filter-buttons">
+                            <button class="search-btn">搜索</button>
+                            <button class="reset-btn">重置</button>
+                        </div>
+                    </div>
+
+                    <!-- 添加批量操作区域 -->
+                    <div class="batch-actions">
+                        <button class="action-btn remove-btn">批量收回权限</button>
+                    </div>
+
+                    <!-- 表格内容 -->
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox"></th>
+                                    <th>姓名</th>
+                                    <th>工号</th>
+                                    <th>部门</th>
+                                    <th>授权时间</th>
+                                    <th>最近登录</th>
+                                    <th>访问次数</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>张三</td>
+                                    <td>ZH001</td>
+                                    <td>技术部</td>
+                                    <td>2023-09-15</td>
+                                    <td>2023-10-15 14:30</td>
+                                    <td>42次</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn remove-btn">收回权限</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>李四</td>
+                                    <td>ZH002</td>
+                                    <td>市场部</td>
+                                    <td>2023-08-20</td>
+                                    <td>2023-10-15 09:15</td>
+                                    <td>68次</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn remove-btn">收回权限</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>王五</td>
+                                    <td>ZH003</td>
+                                    <td>产品部</td>
+                                    <td>2023-07-05</td>
+                                    <td>2023-10-14 16:45</td>
+                                    <td>126次</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn remove-btn">收回权限</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>赵六</td>
+                                    <td>ZH004</td>
+                                    <td>人力资源</td>
+                                    <td>2023-09-30</td>
+                                    <td>2023-10-13 11:20</td>
+                                    <td>18次</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn remove-btn">收回权限</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>钱七</td>
+                                    <td>ZH005</td>
+                                    <td>技术部</td>
+                                    <td>2023-10-01</td>
+                                    <td>2023-10-15 08:30</td>
+                                    <td>24次</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn remove-btn">收回权限</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 分页 -->
+                    <div class="pagination">
+                        <button>&lt;</button>
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>&gt;</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 当前登录用户内容卡片 -->
+            <div id="active-tab" class="card tab-content" style="display: none;">
+                <div class="card-header">
+                    <h3 class="card-title">当前登录用户</h3>
+                </div>
+                <div class="card-body">
+                    <!-- 筛选区域 -->
+                    <div class="filter-area">
+                        <div class="filter-item">
+                            <label>姓名:</label>
+                            <input type="text" placeholder="请输入姓名">
+                        </div>
+                        <div class="filter-item">
+                            <label>工号:</label>
+                            <input type="text" placeholder="请输入工号">
+                        </div>
+                        <div class="filter-item">
+                            <label>部门:</label>
+                            <select>
+                                <option value="">全部</option>
+                                <option value="tech">技术部</option>
+                                <option value="marketing">市场部</option>
+                                <option value="product">产品部</option>
+                                <option value="hr">人力资源</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>登录时间:</label>
+                            <input type="date" class="date-picker">
+                            <span class="date-separator">至</span>
+                            <input type="date" class="date-picker">
+                        </div>
+                        <div class="filter-item">
+                            <button class="search-btn">搜索</button>
+                            <button class="reset-btn">重置</button>
+                        </div>
+                    </div>
+
+                    <!-- 添加批量操作区域 -->
+                    <div class="batch-actions">
+                        <button class="action-btn force-logout-btn">批量强制退出</button>
+                    </div>
+
+                    <!-- 表格内容 -->
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox"></th>
+                                    <th>姓名</th>
+                                    <th>工号</th>
+                                    <th>部门</th>
+                                    <th>登录时间</th>
+                                    <th>IP地址</th>
+                                    <th>登录设备</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>张三</td>
+                                    <td>ZH001</td>
+                                    <td>技术部</td>
+                                    <td>2023-10-15 14:30</td>
+                                    <td>192.168.1.101</td>
+                                    <td>Chrome Windows</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看详情</button>
+                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>李四</td>
+                                    <td>ZH002</td>
+                                    <td>市场部</td>
+                                    <td>2023-10-15 09:15</td>
+                                    <td>192.168.1.102</td>
+                                    <td>Safari MacOS</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看详情</button>
+                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>王五</td>
+                                    <td>ZH003</td>
+                                    <td>产品部</td>
+                                    <td>2023-10-15 10:45</td>
+                                    <td>192.168.1.103</td>
+                                    <td>Edge Windows</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看详情</button>
+                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>赵六</td>
+                                    <td>ZH004</td>
+                                    <td>人力资源</td>
+                                    <td>2023-10-15 11:30</td>
+                                    <td>192.168.1.104</td>
+                                    <td>Firefox Linux</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看详情</button>
+                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>钱七</td>
+                                    <td>ZH005</td>
+                                    <td>技术部</td>
+                                    <td>2023-10-15 08:30</td>
+                                    <td>192.168.1.105</td>
+                                    <td>Chrome Android</td>
+                                    <td>
+                                        <button class="action-btn view-btn">查看详情</button>
+                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用户详情弹窗 -->
+            <div id="user-detail-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>申请详情 - 张三</h3>
+                        <span class="close-btn">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="detail-section">
+                            <h4>申请信息</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">申请人</div>
+                                    <div class="detail-value">张三</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">所属部门</div>
+                                    <div class="detail-value">技术部</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">工号</div>
+                                    <div class="detail-value">ZH001</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">岗位名称</div>
+                                    <div class="detail-value">高级开发工程师</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">邮箱</div>
+                                    <div class="detail-value">zhangsan@example.com</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">申请时间</div>
+                                    <div class="detail-value">2023-10-15 14:30</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">申请时长</div>
+                                    <div class="detail-value">30天</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">状态</div>
+                                    <div class="detail-value">待审批</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>申请原因</h4>
+                            <div class="detail-remarks">
+                                需要使用AI工具提升工作效率
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 审批操作弹窗 -->
+            <div id="approval-action-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>审批操作</h3>
+                        <span class="close-btn">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="approval-form">
+                            <div class="form-group">
+                                <label for="approval-comment">审批意见</label>
+                                <textarea id="approval-comment" rows="3" placeholder="请输入您的审批意见..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-btn submit-btn">提交</button>
+                        <button class="modal-btn cancel-btn">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载时显示默认标签页
+        document.addEventListener('DOMContentLoaded', function() {
+            // 修改默认显示为权限审批标签页
+            showTab('approval');
+            
+            // 确保模态框初始隐藏
+            const modal = document.getElementById('user-detail-modal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            
+            // 使用正确的选择器绑定查看按钮事件
+            const viewButtons = document.querySelectorAll('.view-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 获取当前行的数据
+                    const row = this.closest('tr');
+                    const name = row.querySelector('td:nth-child(2)').textContent;
+                    const jobId = row.querySelector('td:nth-child(3)').textContent;
+                    const department = row.querySelector('td:nth-child(4)').textContent;
+                    const applyTime = row.querySelector('td:nth-child(5)').textContent;
+                    const reason = row.querySelector('td:nth-child(6)').textContent;
+                    const statusEl = row.querySelector('td:nth-child(7) .status');
+                    const status = statusEl ? statusEl.textContent : '待审批';
+                    
+                    // 根据不同用户设置不同信息
+                    let email = '';
+                    let position = '';
+                    let duration = '30天';
+                    
+                    if (name === '张三') {
+                        email = 'zhangsan@example.com';
+                        position = '高级开发工程师';
+                    } else if (name === '李四') {
+                        email = 'lisi@example.com';
+                        position = '市场专员';
+                        duration = '7天';
+                    } else if (name === '王五') {
+                        email = 'wangwu@example.com';
+                        position = '产品经理';
+                        duration = '90天';
+                    } else if (name === '赵六') {
+                        email = 'zhaoliu@example.com';
+                        position = 'HR专员';
+                        duration = '1年';
+                    } else if (name === '钱七') {
+                        email = 'qianqi@example.com';
+                        position = '开发工程师';
+                        duration = '60天';
+                    }
+                    
+                    // 更新模态框内容 - 使用HTML模板
+                    modal.querySelector('.modal-content').innerHTML = `
+                        <div class="modal-header">
+                            <h3>申请详情 - ${name}</h3>
+                            <span class="close-btn">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="detail-section">
+                                <h4>申请信息</h4>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <div class="detail-label">申请人</div>
+                                        <div class="detail-value">${name}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">所属部门</div>
+                                        <div class="detail-value">${department}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">工号</div>
+                                        <div class="detail-value">${jobId}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">岗位名称</div>
+                                        <div class="detail-value">${position}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">邮箱</div>
+                                        <div class="detail-value">${email}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">申请时间</div>
+                                        <div class="detail-value">${applyTime}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">申请时长</div>
+                                        <div class="detail-value">${duration}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">状态</div>
+                                        <div class="detail-value">${status}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>申请原因</h4>
+                                <div class="detail-remarks">
+                                    ${reason}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // 为新生成的关闭按钮添加事件
+                    const newCloseBtn = modal.querySelector('.close-btn');
+                    if (newCloseBtn) {
+                        newCloseBtn.addEventListener('click', function() {
+                            modal.style.display = 'none';
+                        });
+                    }
+                    
+                    // 显示模态框
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            // 点击模态框外部关闭
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('user-detail-modal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        function showTab(tabName) {
+            // 隐藏所有tab内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // 显示选中的tab内容
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            
+            // 更新tab状态
+            document.querySelectorAll('.tab-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // 找到对应的tab项并添加active类
+            const tabs = document.querySelectorAll('.tab-item');
+            switch(tabName) {
+                case 'approval':
+                    tabs[0].classList.add('active');
+                    break;
+                case 'authorized':
+                    tabs[1].classList.add('active');
+                    break;
+                case 'active':
+                    tabs[2].classList.add('active');
+                    break;
+            }
+        }
+        
+        // 为标签项添加点击事件监听器
+        document.querySelectorAll('.tab-item').forEach((tab, index) => {
+            tab.addEventListener('click', function() {
+                const tabNames = ['approval', 'authorized', 'active'];
+                showTab(tabNames[index]);
+            });
+        });
+
+        function toggleUserMenu() {
+            const menu = document.getElementById('userMenu');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+
+        // 点击页面其他地方关闭菜单
+        document.addEventListener('click', function(event) {
+            const userInfo = document.querySelector('.user-info');
+            const userMenu = document.getElementById('userMenu');
+            
+            if (!userInfo.contains(event.target) && userMenu.style.display === 'block') {
+                userMenu.style.display = 'none';
+            }
+        }, true);
+
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // 审批操作弹窗功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取模态框元素
+            const approvalModal = document.getElementById('approval-action-modal');
+            
+            // 确保审批模态框初始隐藏
+            if (approvalModal) {
+                approvalModal.style.display = 'none';
+            }
+            
+            // 保存当前操作类型(通过/拒绝)
+            let currentAction = '';
+            
+            // 获取通过和拒绝按钮
+            const approveButtons = document.querySelectorAll('.approve-btn');
+            const rejectButtons = document.querySelectorAll('.reject-btn');
+            
+            // 为通过按钮添加事件监听器
+            approveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 设置当前操作为通过
+                    currentAction = 'approve';
+                    
+                    // 设置模态框标题
+                    approvalModal.querySelector('.modal-header h3').textContent = '审批通过';
+                    
+                    // 显示模态框
+                    approvalModal.style.display = 'flex';
+                    
+                    // 聚焦到文本框
+                    setTimeout(() => {
+                        document.getElementById('approval-comment').focus();
+                    }, 100);
+                });
+            });
+            
+            // 为拒绝按钮添加事件监听器
+            rejectButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 设置当前操作为拒绝
+                    currentAction = 'reject';
+                    
+                    // 设置模态框标题
+                    approvalModal.querySelector('.modal-header h3').textContent = '审批拒绝';
+                    
+                    // 显示模态框
+                    approvalModal.style.display = 'flex';
+                    
+                    // 聚焦到文本框
+                    setTimeout(() => {
+                        document.getElementById('approval-comment').focus();
+                    }, 100);
+                });
+            });
+            
+            // 为提交按钮添加事件监听器
+            const submitBtn = approvalModal.querySelector('.submit-btn');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', function() {
+                    // 获取审批意见
+                    const comment = document.getElementById('approval-comment').value.trim();
+                    
+                    // 执行审批操作（这里只是简单的提示，实际中应该向后端发送请求）
+                    if (currentAction === 'approve') {
+                        alert('已审批通过！\n审批意见: ' + (comment || '无'));
+                    } else if (currentAction === 'reject') {
+                        alert('已审批拒绝！\n拒绝理由: ' + (comment || '无'));
+                    }
+                    
+                    // 关闭模态框
+                    approvalModal.style.display = 'none';
+                    
+                    // 清空文本框
+                    document.getElementById('approval-comment').value = '';
+                });
+            }
+            
+            // 为关闭按钮添加事件监听器
+            const closeButtons = approvalModal.querySelectorAll('.close-btn, .cancel-btn');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 关闭模态框
+                    approvalModal.style.display = 'none';
+                    
+                    // 清空文本框
+                    document.getElementById('approval-comment').value = '';
+                });
+            });
+            
+            // 点击模态框外部关闭
+            window.addEventListener('click', function(event) {
+                if (event.target === approvalModal) {
+                    approvalModal.style.display = 'none';
+                    
+                    // 清空文本框
+                    document.getElementById('approval-comment').value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

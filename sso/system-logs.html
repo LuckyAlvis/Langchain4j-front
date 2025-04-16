@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>耀耀工厂 - 系统日志</title>
+    <link rel="stylesheet" href="permission-admin.css">
+    <link rel="stylesheet" href="system-logs.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="logo.png" alt="耀耀工厂" width="28" height="28">
+                </div>
+                <h2>耀耀工厂</h2>
+            </div>
+            <div class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i>📊</i>
+                    <span>系统概览</span>
+                </a>
+                <a href="permission-admin.html" class="nav-item">
+                    <i>🔑</i>
+                    <span>权限管理</span>
+                </a>
+                <a href="system-logs.html" class="nav-item active">
+                    <i>📝</i>
+                    <span>系统日志</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <!-- 顶部导航 -->
+            <div class="top-nav">
+                <div class="breadcrumb">
+                    系统日志
+                </div>
+                <div class="user-profile">
+                    <div class="user-info" onclick="toggleUserMenu()">
+                        <div class="avatar">戴</div>
+                        <span class="username">管理员-戴倚凡</span>
+                        <i class="dropdown-icon">▼</i>
+                    </div>
+                    <div class="user-menu" id="userMenu">
+                        <div class="menu-item" onclick="logout()">
+                            <i class="menu-icon">↩</i>
+                            <span>退出登录</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 日志筛选 -->
+            <div class="card filter-card">
+                <div class="card-body">
+                    <div class="filter-area">
+                        <div class="filter-item">
+                            <label>操作类型:</label>
+                            <select>
+                                <option value="">全部</option>
+                                <option value="approve">审批通过</option>
+                                <option value="reject">审批拒绝</option>
+                                <option value="login">登录系统</option>
+                                <option value="new">权限申请</option>
+                                <option value="revoke">权限收回</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>操作人:</label>
+                            <input type="text" placeholder="请输入操作人姓名">
+                        </div>
+                        <div class="filter-item">
+                            <label>时间范围:</label>
+                            <input type="date" class="date-picker">
+                            <span class="date-separator">至</span>
+                            <input type="date" class="date-picker">
+                        </div>
+                        <div class="filter-item">
+                            <button class="search-btn">搜索</button>
+                            <button class="reset-btn">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 日志列表 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">操作日志</h3>
+                </div>
+                <div class="card-body">
+                    <div class="logs-list">
+                        <div class="log-item">
+                            <div class="log-icon approved">✓</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">审批通过 - 张三</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">10分钟前</span>
+                                        <span class="log-operator">戴倚凡</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="log-item">
+                            <div class="log-icon login">→</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">系统登录 - 李四</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">30分钟前</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="log-item">
+                            <div class="log-icon rejected">✗</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">审批拒绝 - 王五</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">1小时前</span>
+                                        <span class="log-operator">戴倚凡</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="log-item">
+                            <div class="log-icon new">+</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">权限申请 - 赵六</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">3小时前</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="log-item">
+                            <div class="log-icon revoked">-</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">权限收回 - 孙七</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">昨天 15:30</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="log-item">
+                            <div class="log-icon login">→</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">系统登录 - 周八</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">昨天 14:45</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="log-item">
+                            <div class="log-icon approved">✓</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">审批通过 - 吴九</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">昨天 10:20</span>
+                                        <span class="log-operator">林舒悦</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="log-item">
+                            <div class="log-icon new">+</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">权限申请 - 郑十</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">前天 16:50</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 分页 -->
+                    <div class="pagination">
+                        <button disabled>&lt;</button>
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>&gt;</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 日志详情模态框 -->
+            <div id="log-detail-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>操作详情</h3>
+                        <span class="close-btn">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="detail-section">
+                            <h4>用户信息</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">用户名</div>
+                                    <div class="detail-value">张三</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">工号</div>
+                                    <div class="detail-value">ZH001</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">所属部门</div>
+                                    <div class="detail-value">技术部</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">所属岗位</div>
+                                    <div class="detail-value">高级开发工程师</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">邮箱</div>
+                                    <div class="detail-value">zhangsan@example.com</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>权限信息</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">申请时长</div>
+                                    <div class="detail-value">30天</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">申请时间</div>
+                                    <div class="detail-value">2023-10-26 10:20:35</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>申请原因</h4>
+                            <div class="detail-remarks">
+                                因工作需要，需要访问中海通系统查询客户订单数据，以便进行技术支持和问题排查。系统中的用户日志和订单流程数据对解决客户反馈的问题至关重要。
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>审批备注</h4>
+                            <div class="detail-remarks">
+                                已核实用户身份和需求，符合公司安全政策要求，予以批准。权限有效期30天，到期后自动收回。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-btn cancel-btn">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模态框功能
+        const modal = document.getElementById('log-detail-modal');
+        const detailButtons = document.querySelectorAll('.view-detail-btn');
+        const closeBtn = document.querySelector('.close-btn');
+        const cancelBtn = document.querySelector('.modal-btn.cancel-btn');
+        
+        // 为所有查看详情按钮添加点击事件
+        detailButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // 获取日志类型
+                const logItem = this.closest('.log-item');
+                const logIcon = logItem.querySelector('.log-icon');
+                const logTitle = logItem.querySelector('.log-title').textContent;
+                
+                // 根据类型设置不同的模态框内容
+                updateModalContent(logIcon.className, logTitle);
+                
+                // 显示模态框
+                modal.style.display = 'flex';
+            });
+        });
+        
+        // 根据日志类型更新模态框内容
+        function updateModalContent(iconClass, title) {
+            // 设置模态框标题
+            document.querySelector('.modal-header h3').textContent = title.includes('-') ? 
+                title.split('-')[0].trim() + '详情' : '操作详情';
+            
+            // 获取模态框内容区域
+            const modalBody = document.querySelector('.modal-body');
+            
+            // 获取申请人名称
+            let userName = '';
+            if (title.includes('-')) {
+                userName = title.split('-')[1].trim();
+            } else if (title.includes('的')) {
+                userName = title.split('的')[0].trim();
+            }
+            
+            // 添加申请时长信息
+            let duration = '30天'; // 默认30天
+            
+            // 根据用户名设置不同的申请时长
+            if (userName.includes('李四')) {
+                duration = '7天';
+            } else if (userName.includes('王五')) {
+                duration = '90天';
+            } else if (userName.includes('赵六')) {
+                duration = '长期';
+            } else if (userName.includes('孙七')) {
+                duration = '1年';
+            }
+            
+            // 设置各种审批时间
+            const applyTime = '2023-10-26 10:20:35';
+            const approvalTime = '2023-10-26 15:45:12'; // 审批通过时间
+            const rejectionTime = '2023-10-26 14:30:08'; // 拒绝时间
+            
+            // 根据用户名设置相关信息
+            let jobId = 'ZH001';
+            let department = '技术部';
+            let position = '高级开发工程师';
+            let email = 'zhangsan@example.com';
+            
+            if (userName.includes('李四')) {
+                jobId = 'ZH002';
+                department = '市场部';
+                position = '市场专员';
+                email = 'lisi@example.com';
+            } else if (userName.includes('王五')) {
+                jobId = 'ZH003';
+                department = '产品部';
+                position = '产品经理';
+                email = 'wangwu@example.com';
+            } else if (userName.includes('赵六')) {
+                jobId = 'ZH004';
+                department = '人力资源';
+                position = 'HR专员';
+                email = 'zhaoliu@example.com';
+            } else if (userName.includes('钱七') || userName.includes('孙七')) {
+                jobId = 'ZH005';
+                department = '技术部';
+                position = '开发工程师';
+                email = 'qianqi@example.com';
+            }
+            
+            // 创建HTML内容
+            let modalContent = '';
+            
+            // 第一部分：用户信息（所有操作类型都显示）
+            modalContent += `
+                <div class="detail-section">
+                    <h4>用户信息</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">用户名</div>
+                            <div class="detail-value">${userName}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">工号</div>
+                            <div class="detail-value">${jobId}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">所属部门</div>
+                            <div class="detail-value">${department}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">所属岗位</div>
+                            <div class="detail-value">${position}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">邮箱</div>
+                            <div class="detail-value">${email}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // 第二部分：权限信息（根据操作类型显示不同内容）
+            if (iconClass.includes('login')) {
+                // 登录操作 - 显示登录信息
+                modalContent += `
+                    <div class="detail-section">
+                        <h4>登录信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">登录时间</div>
+                                <div class="detail-value">${applyTime}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">登录IP</div>
+                                <div class="detail-value">192.168.1.101</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">设备信息</div>
+                                <div class="detail-value">Windows 10, Chrome</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">登录位置</div>
+                                <div class="detail-value">公司内网</div>
+                            </div>
+                        </div>
+                        <div class="detail-remarks" style="border-left-color: #1890ff; background-color: #e6f7ff;">
+                            登录成功。设备信息：Windows 10，Chrome 浏览器。登录位置：公司内网，IP地址匹配常用位置。
+                        </div>
+                    </div>
+                `;
+            } 
+            else if (iconClass.includes('approved') || iconClass.includes('rejected') || iconClass.includes('new')) {
+                // 审批通过/审批拒绝/新申请 - 显示权限申请信息
+                modalContent += `
+                    <div class="detail-section">
+                        <h4>权限信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">申请时长</div>
+                                <div class="detail-value">${duration}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">申请时间</div>
+                                <div class="detail-value">${applyTime}</div>
+                            </div>
+                            ${iconClass.includes('approved') ? `
+                            <div class="detail-item">
+                                <div class="detail-label">通过时间</div>
+                                <div class="detail-value">${approvalTime}</div>
+                            </div>
+                            ` : ''}
+                            ${iconClass.includes('rejected') ? `
+                            <div class="detail-item">
+                                <div class="detail-label">拒绝时间</div>
+                                <div class="detail-value">${rejectionTime}</div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>申请原因</h4>
+                        <div class="detail-remarks" style="border-left-color: #faad14; background-color: #fffbe6;">
+                            因工作需要，需要访问中海通系统查询客户订单数据，以便进行技术支持和问题排查。系统中的用户日志和订单流程数据对解决客户反馈的问题至关重要。
+                        </div>
+                    </div>
+                `;
+                
+                // 为审批通过和审批拒绝添加备注/理由
+                if (iconClass.includes('approved')) {
+                    modalContent += `
+                        <div class="detail-section">
+                            <h4>审批备注</h4>
+                            <div class="detail-remarks" style="border-left-color: #52c41a; background-color: #f6ffed;">
+                                已核实用户身份和需求，符合公司安全政策要求，予以批准。权限有效期${duration}，到期后自动收回。
+                            </div>
+                        </div>
+                    `;
+                } else if (iconClass.includes('rejected')) {
+                    modalContent += `
+                        <div class="detail-section">
+                            <h4>拒绝理由</h4>
+                            <div class="detail-remarks" style="border-left-color: #f5222d; background-color: #fff1f0;">
+                                申请用途与用户岗位职责不符，无法确认业务需求的真实性。建议由部门主管重新提交申请并详细说明业务需求。
+                            </div>
+                        </div>
+                    `;
+                } else if (iconClass.includes('new')) {
+                    modalContent += `
+                        <div class="detail-section">
+                            <h4>申请状态</h4>
+                            <div class="detail-remarks" style="border-left-color: #faad14; background-color: #fffbe6;">
+                                申请已提交，等待管理员审批。预计处理时间：24小时内。
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            else if (iconClass.includes('revoked')) {
+                // 权限收回 - 显示操作信息，但不包括操作人
+                modalContent += `
+                    <div class="detail-section">
+                        <h4>权限信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">权限时长</div>
+                                <div class="detail-value">${duration}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">授权时间</div>
+                                <div class="detail-value">2023-09-16 09:12</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">收回时间</div>
+                                <div class="detail-value">${applyTime}</div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <h4>操作备注</h4>
+                            <div class="detail-remarks" style="border-left-color: #bfbfbf; background-color: #fafafa;">
+                                根据公司权限管理规定，用户${duration}权限有效期已到，系统自动收回。用户可重新申请。
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // 更新模态框内容
+            modalBody.innerHTML = modalContent;
+        }
+        
+        // 辅助函数：根据图标类获取状态文本
+        function getStatusText(iconClass) {
+            if (iconClass.includes('approved')) {
+                return '已通过';
+            } else if (iconClass.includes('rejected')) {
+                return '已拒绝';
+            } else if (iconClass.includes('new')) {
+                return '待审批';
+            } else if (iconClass.includes('revoked')) {
+                return '已收回';
+            } else if (iconClass.includes('login')) {
+                return '登录成功';
+            }
+            return '';
+        }
+        
+        // 关闭模态框的事件处理
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        cancelBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // 用户菜单功能
+        function toggleUserMenu() {
+            const menu = document.getElementById('userMenu');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+        
+        document.addEventListener('click', (event) => {
+            const userInfo = document.querySelector('.user-info');
+            const userMenu = document.getElementById('userMenu');
+            
+            if (userInfo && userMenu && !userInfo.contains(event.target) && userMenu.style.display === 'block') {
+                userMenu.style.display = 'none';
+            }
+        }, true);
+        
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // 修改系统日志页面中的操作文本描述
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有日志项
+            const logItems = document.querySelectorAll('.log-item');
+            logItems.forEach(item => {
+                const titleElement = item.querySelector('.log-title');
+                if (titleElement) {
+                    // 将"通过中海通登录系统"改为"系统登录"
+                    if (titleElement.textContent.includes('通过中海通登录系统')) {
+                        titleElement.textContent = titleElement.textContent.replace('通过中海通登录系统', '系统登录');
+                    }
+                    
+                    // 将"新的访问权限申请"改为"权限申请"
+                    if (titleElement.textContent.includes('新的访问权限申请')) {
+                        titleElement.textContent = titleElement.textContent.replace('新的访问权限申请', '权限申请');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

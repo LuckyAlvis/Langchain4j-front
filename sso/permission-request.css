@@ -1,0 +1,400 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.request-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 24px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    background-color: transparent;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.logo-container h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background-color: #faad14;
+    color: #fff;
+}
+
+.status-badge.waiting {
+    background-color: #1890ff;
+    color: #fff;
+}
+
+.status-badge.approved {
+    background-color: #52c41a;
+    color: #fff;
+}
+
+.status-badge.rejected {
+    background-color: #f5222d;
+    color: #fff;
+}
+
+.card-divider {
+    height: 1px;
+    background-color: #f0f0f0;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.welcome-message {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.welcome-message h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.welcome-message p {
+    font-size: 14px;
+    color: #666;
+}
+
+.user-info-section {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.user-info-section h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-item {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.info-item:last-child {
+    margin-right: 0;
+}
+
+.info-item label {
+    display: block;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-size: 14px;
+    color: #333;
+}
+
+.request-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.required {
+    color: #f5222d;
+}
+
+textarea, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+textarea:focus, select:focus {
+    border-color: #1890ff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+textarea.error, select.error {
+    border-color: #f5222d;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.checkbox-label input {
+    margin-right: 8px;
+}
+
+.checkbox-label.error {
+    color: #f5222d;
+}
+
+.text-link {
+    color: #1890ff;
+    text-decoration: none;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+.form-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.submit-btn {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #40a9ff;
+}
+
+.card-footer {
+    padding: 20px 30px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.contact-info {
+    font-size: 12px;
+    color: #666;
+}
+
+/* 成功弹窗样式 */
+.success-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #52c41a;
+    color: white;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.modal-content h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.modal-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.notification-text {
+    font-weight: 500;
+    color: #1890ff;
+}
+
+.modal-actions {
+    margin-top: 24px;
+}
+
+.close-modal-btn {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 状态消息样式 */
+.status-message {
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    color: #1890ff;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* 申请时长选择样式 */
+.duration-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.duration-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.duration-option input[type="radio"] {
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.duration-option label {
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+    .info-row {
+        flex-direction: column;
+    }
+    
+    .info-item {
+        margin-right: 0;
+        margin-bottom: 12px;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .status-container {
+        margin-top: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .duration-options {
+        gap: 10px;
+    }
+    
+    .duration-option {
+        width: calc(50% - 5px);
+    }
+} 

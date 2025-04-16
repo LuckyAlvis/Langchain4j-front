@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>耀耀工厂 - 系统概览</title>
+    <link rel="stylesheet" href="permission-admin.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- 引入 ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="logo.png" alt="耀耀工厂">
+                </div>
+                <h2>耀耀工厂</h2>
+            </div>
+            <div class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i>📊</i>
+                    <span>系统概览</span>
+                </a>
+                <a href="permission-admin.html" class="nav-item">
+                    <i>🔑</i>
+                    <span>权限管理</span>
+                </a>
+                <a href="system-logs.html" class="nav-item">
+                    <i>📝</i>
+                    <span>系统日志</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="main-content">
+            <!-- 顶部导航 -->
+            <div class="top-nav">
+                <div class="breadcrumb">
+                    系统概览
+                </div>
+                <div class="user-profile">
+                    <div class="user-info" onclick="toggleUserMenu()">
+                        <div class="avatar">戴</div>
+                        <span class="username">管理员-戴倚凡</span>
+                        <i class="dropdown-icon">▼</i>
+                    </div>
+                    <div class="user-menu" id="userMenu">
+                        <div class="menu-item" onclick="logout()">
+                            <i class="menu-icon">↩</i>
+                            <span>退出登录</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 数据看板 -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon online-users-icon">👥</div>
+                    <div class="stat-content">
+                        <div class="stat-value">42</div>
+                        <div class="stat-label">当前在线用户</div>
+                    </div>
+                    <div class="stat-trend up">12% 较上周</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon daily-visits-icon">📈</div>
+                    <div class="stat-content">
+                        <div class="stat-value">256</div>
+                        <div class="stat-label">今日访问人次</div>
+                    </div>
+                    <div class="stat-trend up">8% 较昨日</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon pending-approvals-icon">⏳</div>
+                    <div class="stat-content">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label">待审批申请</div>
+                    </div>
+                    <div class="stat-trend down">5% 较上周</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon authorized-users-icon">✅</div>
+                    <div class="stat-content">
+                        <div class="stat-value">328</div>
+                        <div class="stat-label">已授权用户</div>
+                    </div>
+                    <div class="stat-trend up">3% 较上月</div>
+                </div>
+            </div>
+
+            <!-- 在统计卡片下方添加图表区域，包含部门分布和岗位分布两个饼图 -->
+            <div class="chart-row">
+                <!-- 岗位分布饼图 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">岗位分布</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="jobDistributionChart" class="chart-container"></div>
+                    </div>
+                </div>
+
+                <!-- 部门分布饼图 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">部门分布</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="userDistributionChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最近活动
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">最近活动</h3>
+                </div>
+                <div class="card-body">
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon approved">✓</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <div class="activity-title">审批通过 - 张三</div>
+                                    <div class="activity-meta">
+                                        <span class="activity-time">10分钟前</span>
+                                        <span class="activity-user">戴倚凡</span>
+                                    </div>
+                                </div>
+                                <div class="activity-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon login">→</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <div class="activity-title">系统登录 - 李四</div>
+                                    <div class="activity-meta">
+                                        <span class="activity-time">30分钟前</span>
+                                    </div>
+                                </div>
+                                <div class="activity-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon rejected">✗</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <div class="activity-title">审批拒绝 - 王五</div>
+                                    <div class="activity-meta">
+                                        <span class="activity-time">1小时前</span>
+                                        <span class="activity-user">戴倚凡</span>
+                                    </div>
+                                </div>
+                                <div class="activity-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon new">+</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <div class="activity-title">权限申请 - 赵六</div>
+                                    <div class="activity-meta">
+                                        <span class="activity-time">3小时前</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="activity-detail">
+                                <button class="view-detail-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon revoked">-</div>
+                            <div class="activity-content">
+                                <div class="activity-text">
+                                    <div class="activity-title">权限收回 - 孙七</div>
+                                    <div class="activity-meta">
+                                        <span class="activity-time">昨天 15:30</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="activity-detail">
+                                <button class="view-detail-btn">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- 在dashboard.html底部添加的模态框，与system-logs.html中相同 -->
+    <div id="activity-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>操作详情</h3>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="detail-section">
+                    <h4>基本信息</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">操作类型</div>
+                            <div class="detail-value">审批通过</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">操作时间</div>
+                            <div class="detail-value">2023-10-26 14:35:22</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">操作人</div>
+                            <div class="detail-value">戴倚凡（管理员）</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">IP地址</div>
+                            <div class="detail-value">192.168.1.102</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h4>申请信息</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">申请人</div>
+                            <div class="detail-value">张三</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">所属部门</div>
+                            <div class="detail-value">技术部</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">工号</div>
+                            <div class="detail-value">ZH001</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">岗位名称</div>
+                            <div class="detail-value">高级开发工程师</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">邮箱</div>
+                            <div class="detail-value">zhangsan@example.com</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">申请权限</div>
+                            <div class="detail-value">耀耀工厂登录权限</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">申请时间</div>
+                            <div class="detail-value">2023-10-26 10:20:35</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">申请时长</div>
+                            <div class="detail-value">30天</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h4>申请原因</h4>
+                    <div class="detail-remarks">
+                        因工作需要，需要访问中海通系统查询客户订单数据，以便进行技术支持和问题排查。系统中的用户日志和订单流程数据对解决客户反馈的问题至关重要。
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h4>操作备注</h4>
+                    <div class="detail-remarks">
+                        已核实用户身份和需求，符合公司安全政策要求，予以批准。权限有效期30天，到期后自动收回。
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel-btn">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 修复系统概览页面的问题
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... existing code ...
+            
+            // 修复重复活动项的问题
+            const activityItems = document.querySelectorAll('.activity-item');
+            activityItems.forEach(item => {
+                const titleElement = item.querySelector('.activity-title');
+                if (titleElement) {
+                    // 将"系统登录"改为"登录系统"
+                    if (titleElement.textContent.includes('系统登录')) {
+                        titleElement.textContent = titleElement.textContent.replace('系统登录', '登录系统');
+                    }
+                    
+                    // 将"收回权限"改为"权限收回"
+                    if (titleElement.textContent.includes('收回权限')) {
+                        titleElement.textContent = titleElement.textContent.replace('收回权限', '权限收回');
+                    }
+                    
+                    // 针对权限收回操作，移除操作人
+                    if (titleElement.textContent.includes('权限收回')) {
+                        const operatorElement = item.querySelector('.activity-user');
+                        if (operatorElement) {
+                            operatorElement.style.display = 'none';
+                        }
+                    }
+                }
+            });
+            
+            // 确保图表正确初始化
+            initCharts();
+        });
+
+        // 确保图表初始化函数正确定义
+        function initCharts() {
+            // 岗位分布图表
+            const positionChart = echarts.init(document.getElementById('position-chart'));
+            positionChart.setOption({
+                title: {
+                    text: '岗位分布',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                series: [
+                    {
+                        name: '岗位分布',
+                        type: 'pie',
+                        radius: '50%',
+                        data: [
+                            { value: 48, name: '开发' },
+                            { value: 32, name: '设计' },
+                            { value: 20, name: '产品' },
+                            { value: 15, name: '测试' },
+                            { value: 10, name: '运营' }
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            });
+            
+            // 部门分布图表
+            const departmentChart = echarts.init(document.getElementById('department-chart'));
+            departmentChart.setOption({
+                title: {
+                    text: '部门分布',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left'
+                },
+                series: [
+                    {
+                        name: '部门分布',
+                        type: 'pie',
+                        radius: '50%',
+                        data: [
+                            { value: 60, name: '技术部' },
+                            { value: 40, name: '产品部' },
+                            { value: 30, name: '设计部' },
+                            { value: 20, name: '市场部' },
+                            { value: 10, name: '行政部' }
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            });
+        }
+
+        // 初始化部门分布ECharts实例
+        var deptChartDom = document.getElementById('userDistributionChart');
+        var deptChart = echarts.init(deptChartDom);
+
+        // 部门分布配置项和数据
+        var deptOption = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'horizontal',
+                bottom: 0,
+                data: ['技术部', '市场部', '产品部', '其他部门']
+            },
+            series: [
+                {
+                    name: '部门分布',
+                    type: 'pie',
+                    radius: ['45%', '70%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '18',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [
+                        {value: 148, name: '技术部', itemStyle: {color: '#1890ff'}},
+                        {value: 82, name: '市场部', itemStyle: {color: '#faad14'}},
+                        {value: 66, name: '产品部', itemStyle: {color: '#722ed1'}},
+                        {value: 32, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
+                    ]
+                }
+            ]
+        };
+
+        // 使用配置项显示部门分布图表
+        deptChart.setOption(deptOption);
+
+        // 初始化岗位分布ECharts实例
+        var jobChartDom = document.getElementById('jobDistributionChart');
+        var jobChart = echarts.init(jobChartDom);
+
+        // 岗位分布配置项和数据
+        var jobOption = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'horizontal',
+                bottom: 0,
+                data: ['开发工程师', '产品经理', '设计师', '市场营销', '其他岗位']
+            },
+            series: [
+                {
+                    name: '岗位分布',
+                    type: 'pie',
+                    radius: ['45%', '70%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '18',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [
+                        {value: 120, name: '开发工程师', itemStyle: {color: '#52c41a'}},
+                        {value: 56, name: '产品经理', itemStyle: {color: '#13c2c2'}},
+                        {value: 42, name: '设计师', itemStyle: {color: '#eb2f96'}},
+                        {value: 68, name: '市场营销', itemStyle: {color: '#faad14'}},
+                        {value: 42, name: '其他岗位', itemStyle: {color: '#d9d9d9'}}
+                    ]
+                }
+            ]
+        };
+
+        // 使用配置项显示岗位分布图表
+        jobChart.setOption(jobOption);
+
+        // 窗口大小变化时调整图表大小
+        window.addEventListener('resize', function () {
+            deptChart.resize();
+            jobChart.resize();
+        });
+
+        // 用户菜单相关功能
+        function toggleUserMenu() {
+            const menu = document.getElementById('userMenu');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+
+        // 点击页面其他地方关闭菜单
+        document.addEventListener('click', function (event) {
+            const userInfo = document.querySelector('.user-info');
+            const userMenu = document.getElementById('userMenu');
+
+            if (!userInfo.contains(event.target) && userMenu.style.display === 'block') {
+                userMenu.style.display = 'none';
+            }
+        }, true);
+
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // 确保在DOM完全加载后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取模态框和相关元素
+            const activityModal = document.getElementById('activity-detail-modal');
+            
+            // 确保模态框存在
+            if (!activityModal) {
+                console.error('活动详情模态框不存在');
+                return;
+            }
+            
+            const detailButtons = document.querySelectorAll('.activity-detail .view-detail-btn');
+            const closeBtn = activityModal.querySelector('.close-btn');
+            const cancelBtn = activityModal.querySelector('.modal-btn.cancel-btn');
+            
+            console.log('找到查看详情按钮数量:', detailButtons.length); // 调试信息
+            
+            // 为所有查看详情按钮添加点击事件
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // 防止按钮默认行为
+                    
+                    // 获取活动类型
+                    const activityItem = this.closest('.activity-item');
+                    
+                    if (!activityItem) {
+                        console.error('无法找到父级活动项元素');
+                        return;
+                    }
+                    
+                    const activityIcon = activityItem.querySelector('.activity-icon');
+                    const activityTitle = activityItem.querySelector('.activity-title');
+                    
+                    if (!activityIcon || !activityTitle) {
+                        console.error('活动图标或标题不存在');
+                        return;
+                    }
+                    
+                    console.log('点击查看详情:', activityTitle.textContent); // 调试信息
+                    
+                    // 根据类型设置不同的模态框内容
+                    updateActivityModalContent(activityIcon.className, activityTitle.textContent);
+                    
+                    // 显示模态框
+                    activityModal.style.display = 'flex';
+                });
+            });
+            
+            // 根据活动类型更新模态框内容
+            function updateActivityModalContent(iconClass, title) {
+                console.log('更新模态框内容:', iconClass, title); // 调试信息
+                
+                // 设置模态框标题
+                const modalTitle = activityModal.querySelector('.modal-header h3');
+                if (modalTitle) {
+                    modalTitle.textContent = title.includes('-') ? 
+                        title.split('-')[0].trim() + '详情' : '操作详情';
+                }
+                
+                // 获取申请人名称
+                let userName = '';
+                if (title.includes('-')) {
+                    userName = title.split('-')[1].trim();
+                } else if (title.includes('的')) {
+                    userName = title.split('的')[0].trim();
+                }
+                
+                // 根据用户名设置相关信息
+                let jobId = 'ZH001';
+                let department = '技术部';
+                let position = '高级开发工程师';
+                let email = 'zhangsan@example.com';
+                let duration = '30天';
+                
+                // 与系统日志页面和权限审批页面保持一致的用户信息
+                if (userName.includes('李四')) {
+                    jobId = 'ZH002';
+                    department = '市场部';
+                    position = '市场专员';
+                    email = 'lisi@example.com';
+                    duration = '7天';
+                } else if (userName.includes('王五')) {
+                    jobId = 'ZH003';
+                    department = '产品部';
+                    position = '产品经理';
+                    email = 'wangwu@example.com';
+                    duration = '90天';
+                } else if (userName.includes('赵六')) {
+                    jobId = 'ZH004';
+                    department = '人力资源';
+                    position = 'HR专员';
+                    email = 'zhaoliu@example.com';
+                    duration = '1年';
+                } else if (userName.includes('钱七') || userName.includes('孙七')) {
+                    jobId = 'ZH005';
+                    department = '技术部';
+                    position = '开发工程师';
+                    email = 'qianqi@example.com';
+                    duration = '长期';
+                }
+                
+                // 更新用户相关信息
+                const detailItems = activityModal.querySelectorAll('.detail-item');
+                detailItems.forEach(item => {
+                    const label = item.querySelector('.detail-label');
+                    const value = item.querySelector('.detail-value');
+                    
+                    if (label && value) {
+                        if (label.textContent === '申请人') {
+                            value.textContent = userName;
+                        } else if (label.textContent === '工号') {
+                            value.textContent = jobId;
+                        } else if (label.textContent === '所属部门') {
+                            value.textContent = department;
+                        } else if (label.textContent === '岗位名称') {
+                            value.textContent = position;
+                        } else if (label.textContent === '邮箱') {
+                            value.textContent = email;
+                        } else if (label.textContent === '申请时长') {
+                            value.textContent = duration;
+                        }
+                    }
+                });
+                
+                // 获取备注部分元素
+                const remarkSection = activityModal.querySelector('.detail-section:nth-of-type(4)');
+                if (!remarkSection) {
+                    console.error('无法找到备注部分');
+                    return;
+                }
+                
+                const remarkContent = remarkSection.querySelector('.detail-remarks');
+                
+                // 获取申请原因部分元素
+                const reasonSection = activityModal.querySelector('.detail-section:nth-of-type(3)');
+                
+                // 根据图标类名判断活动类型
+                if (iconClass.includes('approved')) {
+                    // 审批通过
+                    remarkSection.querySelector('h4').textContent = '审批备注';
+                    remarkContent.textContent = '已核实用户身份和需求，符合公司安全政策要求，予以批准。权限有效期' + duration + '，到期后自动收回。';
+                    remarkContent.style.borderLeftColor = '#52c41a'; // 绿色
+                    remarkContent.style.backgroundColor = '#f6ffed';
+                    reasonSection.style.display = 'block'; // 显示申请原因
+                } 
+                else if (iconClass.includes('rejected')) {
+                    // 审批拒绝
+                    remarkSection.querySelector('h4').textContent = '拒绝理由';
+                    remarkContent.textContent = '申请用途与用户岗位职责不符，无法确认业务需求的真实性。建议由部门主管重新提交申请并详细说明业务需求。';
+                    remarkContent.style.borderLeftColor = '#f5222d'; // 红色
+                    remarkContent.style.backgroundColor = '#fff1f0';
+                    reasonSection.style.display = 'block'; // 显示申请原因
+                }
+                else if (iconClass.includes('login')) {
+                    // 登录操作
+                    remarkSection.querySelector('h4').textContent = '登录信息';
+                    remarkContent.textContent = '登录成功。设备信息：Windows 10，Chrome 浏览器。登录位置：公司内网，IP地址匹配常用位置。';
+                    remarkContent.style.borderLeftColor = '#1890ff'; // 蓝色
+                    remarkContent.style.backgroundColor = '#e6f7ff';
+                    reasonSection.style.display = 'none'; // 隐藏申请原因
+                }
+                else if (iconClass.includes('new')) {
+                    // 新申请
+                    remarkSection.querySelector('h4').textContent = '申请状态';
+                    remarkContent.textContent = '申请已提交，等待管理员审批。预计处理时间：24小时内。';
+                    remarkContent.style.borderLeftColor = '#faad14'; // 黄色
+                    remarkContent.style.backgroundColor = '#fffbe6';
+                    reasonSection.style.display = 'block'; // 显示申请原因
+                }
+                else if (iconClass.includes('revoked')) {
+                    // 收回权限
+                    remarkSection.querySelector('h4').textContent = '操作备注';
+                    remarkContent.textContent = '根据公司权限管理规定，用户30天未使用该权限，系统自动收回。用户可重新申请。';
+                    remarkContent.style.borderLeftColor = '#bfbfbf'; // 灰色
+                    remarkContent.style.backgroundColor = '#fafafa';
+                    reasonSection.style.display = 'none'; // 隐藏申请原因
+                }
+                
+                // 调整申请信息部分的显示与隐藏
+                const appInfoSection = activityModal.querySelector('.detail-section:nth-of-type(2)');
+                if (iconClass.includes('login')) {
+                    // 登录操作不显示申请信息，而是显示用户信息
+                    appInfoSection.querySelector('h4').textContent = '用户信息';
+                    appInfoSection.querySelectorAll('.detail-item').forEach((item, index) => {
+                        const label = item.querySelector('.detail-label');
+                        const value = item.querySelector('.detail-value');
+                        
+                        switch(index) {
+                            case 0:
+                                label.textContent = '用户名';
+                                value.textContent = '李四';
+                                break;
+                            case 1:
+                                label.textContent = '所属部门';
+                                value.textContent = '市场部';
+                                break;
+                            case 2:
+                                label.textContent = '用户角色';
+                                value.textContent = '普通用户';
+                                break;
+                            case 3:
+                                label.textContent = '登录时间';
+                                value.textContent = '2023-10-26 14:30:22';
+                                break;
+                        }
+                    });
+                } else {
+                    // 其他操作显示申请信息
+                    appInfoSection.querySelector('h4').textContent = '申请信息';
+                    
+                    // 根据标题获取用户名
+                    let userName = '张三'; // 默认
+                    if (title.includes('-')) {
+                        userName = title.split('-')[1].trim().split('的')[0];
+                    }
+                    
+                    appInfoSection.querySelectorAll('.detail-item').forEach((item, index) => {
+                        const label = item.querySelector('.detail-label');
+                        const value = item.querySelector('.detail-value');
+                        
+                        switch(index) {
+                            case 0:
+                                label.textContent = '申请人';
+                                value.textContent = userName;
+                                break;
+                            case 1:
+                                label.textContent = '所属部门';
+                                value.textContent = userName === '张三' ? '技术部' : 
+                                                    userName === '王五' ? '财务部' : 
+                                                    userName === '赵六' ? '产品部' : '市场部';
+                                break;
+                            case 2:
+                                label.textContent = '工号';
+                                value.textContent = 'ZH001';
+                                break;
+                            case 3:
+                                label.textContent = '岗位名称';
+                                value.textContent = '高级开发工程师';
+                                break;
+                            case 4:
+                                label.textContent = '邮箱';
+                                value.textContent = 'zhangsan@example.com';
+                                break;
+                            case 5:
+                                label.textContent = '申请权限';
+                                value.textContent = '中海通登录权限';
+                                break;
+                            case 6:
+                                label.textContent = '申请时间';
+                                value.textContent = '2023-10-26 10:20:35';
+                                break;
+                            case 7:
+                                label.textContent = '申请时长';
+                                value.textContent = '30天';
+                                break;
+                        }
+                    });
+                }
+            }
+            
+            // 关闭模态框的事件处理
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    activityModal.style.display = 'none';
+                });
+            }
+            
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', () => {
+                    activityModal.style.display = 'none';
+                });
+            }
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === activityModal) {
+                    activityModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

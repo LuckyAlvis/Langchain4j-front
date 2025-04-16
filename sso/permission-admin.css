@@ -1,0 +1,867 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    width: 220px;
+    background-color: #001529;
+    color: #fff;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    background-color: transparent;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.sidebar-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.sidebar-nav {
+    padding: 15px 0;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    margin-bottom: 5px;
+    transition: all 0.3s;
+}
+
+.nav-item:hover, .nav-item.active {
+    background-color: #1890ff;
+    color: white;
+}
+
+.nav-item i {
+    margin-right: 10px;
+    width: 16px;
+    text-align: center;
+}
+
+/* 主内容区域 */
+.main-content {
+    flex: 1;
+    margin-left: 220px;
+    padding: 20px;
+}
+
+/* 顶部导航栏 */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #666;
+}
+
+.breadcrumb span {
+    color: #333;
+    font-weight: 500;
+}
+
+/* 用户信息和下拉菜单样式 */
+.user-profile {
+    position: relative;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.user-info:hover {
+    background-color: #f5f5f5;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    background-color: #1890ff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.username {
+    font-size: 14px;
+    color: #333;
+    margin-right: 8px;
+}
+
+.dropdown-icon {
+    font-size: 12px;
+    color: #999;
+}
+
+.user-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    width: 160px;
+    padding: 8px 0;
+    display: none;
+    z-index: 1000;
+    margin-top: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.menu-item:hover {
+    background-color: #f5f5f5;
+}
+
+.menu-icon {
+    color: #ff4d4f;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+/* 移除旧的退出登录按钮样式 */
+.logout-container, .logout-btn {
+    display: none;
+}
+
+/* 内容卡片样式 */
+.card {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fafafa;
+    height: 60px;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* 表格样式 */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 6px 12px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+table th {
+    background-color: #fafafa;
+    font-weight: 500;
+    color: #666;
+}
+
+/* 固定各表格相同字段的宽度 */
+table th:nth-child(1), 
+table td:nth-child(1) {
+    width: 5%; /* 复选框列 */
+}
+
+table th:nth-child(2), 
+table td:nth-child(2) {
+    width: 10%; /* 姓名列 */
+}
+
+table th:nth-child(3), 
+table td:nth-child(3) {
+    width: 10%; /* 工号列 */
+}
+
+table th:nth-child(4), 
+table td:nth-child(4) {
+    width: 10%; /* 部门列 */
+}
+
+table th:nth-child(5), 
+table td:nth-child(5) {
+    width: 15%; /* 时间列 */
+}
+
+/* 操作列宽度固定 */
+table th:last-child, 
+table td:last-child {
+    width: 15%;
+    white-space: nowrap;
+}
+
+/* 其他列自适应 */
+table th:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(5)):not(:last-child),
+table td:not(:nth-child(1)):not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)):not(:nth-child(5)):not(:last-child) {
+    width: auto;
+}
+
+/* 确保长内容不会破坏布局 */
+table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* 防止内容过长 */
+}
+
+/* 鼠标悬停在表格行上的效果 */
+table tbody tr:hover {
+    background-color: #f5f7fa;
+}
+
+/* 表格内容垂直居中 */
+table th, table td {
+    vertical-align: middle;
+}
+
+/* 复选框样式统一 */
+table input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* 筛选区域 */
+.filter-area {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-item {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.filter-item:last-child {
+    margin-right: 0;
+}
+
+.filter-item label {
+    margin-right: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+input, select {
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-btn, .reset-btn {
+    padding: 4px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.search-btn {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+}
+
+.search-btn:hover {
+    background-color: #40a9ff;
+}
+
+.reset-btn {
+    background-color: #f0f0f0;
+    color: #666;
+    border: 1px solid #d9d9d9;
+}
+
+.reset-btn:hover {
+    background-color: #e6e6e6;
+}
+
+/* 状态标签 */
+.status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 2px;
+    font-size: 12px;
+}
+
+.status-pending {
+    background-color: #faad14;
+    color: white;
+}
+
+.status-approved {
+    background-color: #52c41a;
+    color: white;
+}
+
+.status-rejected {
+    background-color: #f5222d;
+    color: white;
+}
+
+/* 操作按钮 */
+.action-btn {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.approve-btn {
+    background-color: #52c41a;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #f5222d;
+    color: white;
+}
+
+.view-btn {
+    background-color: #1890ff;
+    color: white;
+}
+
+.remove-btn {
+    background-color: #ff4d4f;
+    color: white;
+}
+
+/* 分页样式 */
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    gap: 8px;
+}
+
+.pagination button {
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background-color: #1890ff;
+    color: white;
+    border-color: #1890ff;
+}
+
+/* 标签页样式 */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 20px;
+}
+
+.tab-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    margin-right: 20px;
+    font-size: 14px;
+    color: #666;
+    position: relative;
+}
+
+.tab-item.active {
+    color: #1890ff;
+}
+
+.tab-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #1890ff;
+}
+
+/* 批量操作区域 */
+.batch-actions {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+/* 批量操作区域按钮样式统一 */
+.batch-actions .action-btn {
+    padding: 6px 14px;
+    font-size: 13px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+/* 添加/修改按钮样式 */
+.add-btn {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.add-btn:hover {
+    background-color: #40a9ff;
+}
+
+/* 弹窗底部按钮样式 */
+.modal-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+/* 新增的查看日志按钮 */
+.modal-btn.view-logs-btn {
+    background-color: #52c41a;
+    color: white;
+}
+
+.modal-btn.view-logs-btn:hover {
+    background-color: #73d13d;
+}
+
+/* 新增的发送通知按钮 */
+.modal-btn.send-msg-btn {
+    background-color: #faad14;
+    color: white;
+}
+
+.modal-btn.send-msg-btn:hover {
+    background-color: #ffc53d;
+}
+
+/* 已有的收回权限按钮 */
+.modal-btn.remove-btn {
+    background-color: #ff4d4f;
+    color: white;
+}
+
+.modal-btn.remove-btn:hover {
+    background-color: #ff7875;
+}
+
+/* 已有的关闭按钮 */
+.modal-btn.cancel-btn {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.modal-btn.cancel-btn:hover {
+    background-color: #d9d9d9;
+}
+
+/* 确保弹窗底部按钮正确排列 */
+.modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* 强制登出按钮 */
+.force-logout-btn {
+    background-color: #ff7875;
+    color: white;
+    border: none;
+}
+
+.force-logout-btn:hover {
+    background-color: #ff4d4f;
+}
+
+/* 添加一些必要的样式以确保Tab正常工作 */
+.tab-content {
+    display: none;
+}
+
+/* 模态框样式 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none; /* 默认隐藏 */
+}
+
+/* 确保模态框显示时使用flex布局 */
+.modal[style*="display: block"],
+.modal[style*="display: flex"] {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 95vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.close-btn {
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px 24px 24px; /* 增加底部内边距，因为没有footer了 */
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* 用户信息部分样式 */
+.user-info-section {
+    margin-bottom: 24px;
+}
+
+.user-info-section h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-size: 14px;
+    color: #333;
+}
+
+/* 详情表格样式 */
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detail-table th,
+.detail-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+}
+
+.detail-table th {
+    color: #666;
+    font-weight: 500;
+    background-color: #fafafa;
+}
+
+/* 优化日期选择器样式 */
+.date-picker {
+    width: 120px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
+.date-separator {
+    margin: 0 8px;
+    color: #999;
+}
+
+/* 移除多余的date-range-filter样式 */
+/* .date-range-filter {
+    display: flex;
+    align-items: center;
+} */ 
+
+/* 如果只想调整系统日志页面的表格，可以添加特定选择器 */
+.system-logs-table th, .system-logs-table td {
+    padding: 6px 12px;
+}
+
+/* 确保信息部分有足够的间距 */
+.info-section {
+    margin-bottom: 24px;
+}
+
+.info-section h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* 确保信息网格适合6个项目 */
+.info-section:nth-child(2) .info-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* 确保detail-remarks样式与系统日志保持一致 */
+.detail-remarks {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 16px;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 8px;
+    border-left: 3px solid #faad14;
+    background-color: #fffbe6;
+}
+
+/* 修改详情项目网格样式 */
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* 确保节段标题样式 */
+.detail-section {
+    margin-bottom: 24px;
+}
+
+.detail-section h4 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+/* 详情标签和值的样式 */
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    font-size: 14px;
+    color: #333;
+}
+
+/* 审批操作弹窗样式 */
+#approval-action-modal .modal-content {
+    max-width: 500px;
+}
+
+#approval-action-modal .modal-body {
+    padding: 20px 24px;
+}
+
+.approval-form .form-group {
+    margin-bottom: 16px;
+}
+
+.approval-form label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.approval-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 80px;
+}
+
+.approval-form textarea:focus {
+    outline: none;
+    border-color: #1890ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* 模态框按钮样式 */
+.modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.submit-btn {
+    background-color: #1890ff;
+    color: white;
+}
+
+.submit-btn:hover {
+    background-color: #40a9ff;
+}
+
+.cancel-btn {
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.cancel-btn:hover {
+    background-color: #d9d9d9;
+} 
