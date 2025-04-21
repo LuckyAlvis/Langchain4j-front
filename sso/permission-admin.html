@@ -109,6 +109,50 @@
             margin-left: 5px;
             vertical-align: middle;
         }
+        
+        /* 优化登录记录表格样式 */
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            table-layout: fixed;
+        }
+        
+        .detail-table th, 
+        .detail-table td {
+            border: 1px solid #f0f0f0;
+            padding: 8px 12px;
+            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .detail-table th {
+            background-color: #fafafa;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        /* 设置列宽度 */
+        .detail-table th:first-child,
+        .detail-table td:first-child {
+            width: 40%;  /* 登录时间列宽 */
+        }
+        
+        .detail-table th:nth-child(2),
+        .detail-table td:nth-child(2) {
+            width: 35%;  /* 登录设备列宽 */
+        }
+        
+        .detail-table th:last-child,
+        .detail-table td:last-child {
+            width: 25%;  /* IP地址列宽 */
+        }
+        
+        .detail-table tbody tr:hover {
+            background-color: #f5f7fa;
+        }
     </style>
 </head>
 <body>
@@ -689,8 +733,8 @@
                                     <td>192.168.1.101</td>
                                     <td>Chrome Windows</td>
                                     <td>
-                                        <button class="action-btn view-btn">查看详情</button>
-                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn force-logout-btn">强制退出</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -704,8 +748,8 @@
                                     <td>192.168.1.102</td>
                                     <td>Safari MacOS</td>
                                     <td>
-                                        <button class="action-btn view-btn">查看详情</button>
-                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn force-logout-btn">强制退出</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -719,8 +763,8 @@
                                     <td>192.168.1.103</td>
                                     <td>Edge Windows</td>
                                     <td>
-                                        <button class="action-btn view-btn">查看详情</button>
-                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn force-logout-btn">强制退出</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -734,8 +778,8 @@
                                     <td>192.168.1.104</td>
                                     <td>Firefox Linux</td>
                                     <td>
-                                        <button class="action-btn view-btn">查看详情</button>
-                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn force-logout-btn">强制退出</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -749,8 +793,8 @@
                                     <td>192.168.1.105</td>
                                     <td>Chrome Android</td>
                                     <td>
-                                        <button class="action-btn view-btn">查看详情</button>
-                                        <button class="action-btn force-logout-btn">强制登出</button>
+                                        <button class="action-btn view-btn">查看</button>
+                                        <button class="action-btn force-logout-btn">强制退出</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -985,104 +1029,18 @@
                 button.addEventListener('click', function() {
                     // 获取当前行的数据
                     const row = this.closest('tr');
-                    const name = row.querySelector('td:nth-child(2)').textContent;
-                    const jobId = row.querySelector('td:nth-child(3)').textContent;
-                    const department = row.querySelector('td:nth-child(4)').textContent;
-                    const applyTime = row.querySelector('td:nth-child(5)').textContent;
-                    const reason = row.querySelector('td:nth-child(6)').textContent;
-                    const statusEl = row.querySelector('td:nth-child(7) .status');
-                    const status = statusEl ? statusEl.textContent : '待审批';
                     
-                    // 根据不同用户设置不同信息
-                    let email = '';
-                    let position = '';
-                    let duration = '30天';
+                    // 确定当前是哪个标签页
+                    const tabId = row.closest('.tab-content').id;
                     
-                    if (name === '张三') {
-                        email = 'zhangsan@example.com';
-                        position = '高级开发工程师';
-                    } else if (name === '李四') {
-                        email = 'lisi@example.com';
-                        position = '市场专员';
-                        duration = '7天';
-                    } else if (name === '王五') {
-                        email = 'wangwu@example.com';
-                        position = '产品经理';
-                        duration = '90天';
-                    } else if (name === '赵六') {
-                        email = 'zhaoliu@example.com';
-                        position = 'HR专员';
-                        duration = '1年';
-                    } else if (name === '钱七') {
-                        email = 'qianqi@example.com';
-                        position = '开发工程师';
-                        duration = '60天';
+                    // 根据标签页调用不同的详情展示函数
+                    if (tabId === 'approval-tab') {
+                        showApprovalDetails(row);
+                    } else if (tabId === 'authorized-tab') {
+                        showAuthorizedUserDetails(row);
+                    } else if (tabId === 'active-tab') {
+                        showActiveUserDetails(row);
                     }
-                    
-                    // 更新模态框内容 - 使用HTML模板
-                    modal.querySelector('.modal-content').innerHTML = `
-                        <div class="modal-header">
-                            <h3>申请详情 - ${name}</h3>
-                            <span class="close-btn">&times;</span>
-                        </div>
-                        <div class="modal-body">
-                            <div class="detail-section">
-                                <h4>申请信息</h4>
-                                <div class="detail-grid">
-                                    <div class="detail-item">
-                                        <div class="detail-label">申请人</div>
-                                        <div class="detail-value">${name}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">所属部门</div>
-                                        <div class="detail-value">${department}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">工号</div>
-                                        <div class="detail-value">${jobId}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">岗位名称</div>
-                                        <div class="detail-value">${position}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">邮箱</div>
-                                        <div class="detail-value">${email}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">申请时间</div>
-                                        <div class="detail-value">${applyTime}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">申请时长</div>
-                                        <div class="detail-value">${duration}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">状态</div>
-                                        <div class="detail-value">${status}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="detail-section">
-                                <h4>申请原因</h4>
-                                <div class="detail-remarks">
-                                    ${reason}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    // 为新生成的关闭按钮添加事件
-                    const newCloseBtn = modal.querySelector('.close-btn');
-                    if (newCloseBtn) {
-                        newCloseBtn.addEventListener('click', function() {
-                            modal.style.display = 'none';
-                        });
-                    }
-                    
-                    // 显示模态框
-                    modal.style.display = 'flex';
                 });
             });
             
@@ -2234,155 +2192,439 @@
                 button.addEventListener('click', function() {
                     // 获取当前行的数据
                     const row = this.closest('tr');
-                    const name = row.querySelector('td:nth-child(2)').textContent.trim();
-                    const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
-                    const department = row.querySelector('td:nth-child(4)').textContent.trim();
-                    const platform = row.querySelector('td:nth-child(5)').textContent.trim();
-                    const role = row.querySelector('td:nth-child(6)').textContent.trim();
-                    const applyTime = row.querySelector('td:nth-child(7)').textContent.trim();
-                    const reason = row.querySelector('td:nth-child(8)').textContent.trim();
-                    const statusCell = row.querySelector('td:nth-child(9)');
-                    const statusText = statusCell ? statusCell.textContent.trim() : '待审批';
                     
-                    // 获取邮箱和岗位等信息
-                    let email = '';
-                    let position = '';
-                    let duration = '30天';
+                    // 确定当前是哪个标签页
+                    const tabId = row.closest('.tab-content').id;
                     
-                    if (name.includes('张三')) {
-                        email = 'zhangsan@example.com';
-                        position = '高级开发工程师';
-                    } else if (name.includes('李四')) {
-                        email = 'lisi@example.com';
-                        position = '市场专员';
-                        duration = '7天';
-                    } else if (name.includes('王五')) {
-                        email = 'wangwu@example.com';
-                        position = '产品经理';
-                        duration = '90天';
-                    } else if (name.includes('赵六')) {
-                        email = 'zhaoliu@example.com';
-                        position = 'HR专员';
-                        duration = '1年';
-                    } else if (name.includes('钱七')) {
-                        email = 'qianqi@example.com';
-                        position = '开发工程师';
-                        duration = '60天';
+                    // 根据标签页调用不同的详情展示函数
+                    if (tabId === 'approval-tab') {
+                        showApprovalDetails(row);
+                    } else if (tabId === 'authorized-tab') {
+                        showAuthorizedUserDetails(row);
+                    } else if (tabId === 'active-tab') {
+                        showActiveUserDetails(row);
                     }
-                    
-                    // 获取审批备注或拒绝理由
-                    let approvalComment = '';
-                    if (statusText.includes('已通过')) {
-                        approvalComment = row.getAttribute('data-approval-comment') || '';
-                    } else if (statusText.includes('已拒绝')) {
-                        approvalComment = row.getAttribute('data-rejection-reason') || '';
-                    }
-                    
-                    // 获取模态框
-                    const modal = document.getElementById('user-detail-modal');
-                    
-                    // 更新模态框内容
-                    let modalContent = `
-                        <div class="modal-header">
-                            <h3>申请详情 - ${name}</h3>
-                            <span class="close-btn">&times;</span>
-                        </div>
-                        <div class="modal-body">
-                            <div class="detail-section">
-                                <h4>申请信息</h4>
-                                <div class="detail-grid">
-                                    <div class="detail-item">
-                                        <div class="detail-label">申请人</div>
-                                        <div class="detail-value">${name}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">所属部门</div>
-                                        <div class="detail-value">${department}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">工号</div>
-                                        <div class="detail-value">${jobId}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">岗位名称</div>
-                                        <div class="detail-value">${position}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">邮箱</div>
-                                        <div class="detail-value">${email}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">申请时间</div>
-                                        <div class="detail-value">${applyTime}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">申请时长</div>
-                                        <div class="detail-value">${duration}</div>
-                                    </div>
-                                    <div class="detail-item">
-                                        <div class="detail-label">状态</div>
-                                        <div class="detail-value">${statusText}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="detail-section">
-                                <h4>申请原因</h4>
-                                <div class="detail-remarks" style="border-left-color: #faad14; background-color: #fffbe6;">
-                                    ${reason}
-                                </div>
-                            </div>`;
-                    
-                    // 显示审批备注或拒绝理由（如果有）
-                    if (statusText.includes('已通过') && approvalComment) {
-                        modalContent += `
-                            <div class="detail-section">
-                                <h4>审批备注</h4>
-                                <div class="detail-remarks" style="border-left-color: #52c41a; background-color: #f6ffed;">
-                                    ${approvalComment}
-                                </div>
-                            </div>`;
-                    } else if (statusText.includes('已拒绝') && approvalComment) {
-                        modalContent += `
-                            <div class="detail-section">
-                                <h4>拒绝理由</h4>
-                                <div class="detail-remarks" style="border-left-color: #f5222d; background-color: #fff1f0;">
-                                    ${approvalComment}
-                                </div>
-                            </div>`;
-                    }
-                    
-                    // 关闭模态框的按钮
-                    modalContent += `
-                        </div>
-                        <div class="modal-footer">
-                            <button class="modal-btn cancel-btn">关闭</button>
-                        </div>
-                    `;
-                    
-                    // 设置模态框内容
-                    modal.querySelector('.modal-content').innerHTML = modalContent;
-                    
-                    // 为关闭按钮添加事件
-                    const closeBtn = modal.querySelector('.close-btn');
-                    const cancelBtn = modal.querySelector('.cancel-btn');
-                    
-                    if (closeBtn) {
-                        closeBtn.addEventListener('click', function() {
-                            modal.style.display = 'none';
-                        });
-                    }
-                    
-                    if (cancelBtn) {
-                        cancelBtn.addEventListener('click', function() {
-                            modal.style.display = 'none';
-                        });
-                    }
-                    
-                    // 显示模态框
-                    modal.style.display = 'flex';
                 });
             });
+        }
+
+        // 权限审批详情展示函数
+        function showApprovalDetails(row) {
+            // 获取基本用户信息
+            const name = row.querySelector('td:nth-child(2)').textContent.trim();
+            const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
+            const department = row.querySelector('td:nth-child(4)').textContent.trim();
+            const platform = row.querySelector('td:nth-child(5)').textContent.trim();
+            const role = row.querySelector('td:nth-child(6)').textContent.trim();
+            const applyTime = row.querySelector('td:nth-child(7)').textContent.trim();
+            const reason = row.querySelector('td:nth-child(8)').textContent.trim();
+            
+            // 获取状态和审批信息
+            const statusEl = row.querySelector('td:nth-child(9) .status');
+            const status = statusEl ? statusEl.textContent.trim() : '待审批';
+            
+            let approvalComment = '';
+            if (status === '已通过') {
+                approvalComment = row.getAttribute('data-approval-comment') || '';
+            } else if (status === '已拒绝') {
+                approvalComment = row.getAttribute('data-rejection-reason') || '';
+            }
+            
+            // 补充其他信息
+            let email = '';
+            let position = '';
+            let duration = '30天';
+            
+            // 根据不同用户设置不同信息
+            if (name.includes('张三')) {
+                email = 'zhangsan@example.com';
+                position = '高级开发工程师';
+            } else if (name.includes('李四')) {
+                email = 'lisi@example.com';
+                position = '市场专员';
+                duration = '7天';
+            } else if (name.includes('王五')) {
+                email = 'wangwu@example.com';
+                position = '产品经理';
+                duration = '90天';
+            } else if (name.includes('赵六')) {
+                email = 'zhaoliu@example.com';
+                position = 'HR专员';
+                duration = '1年';
+            } else if (name.includes('钱七')) {
+                email = 'qianqi@example.com';
+                position = '开发工程师';
+                duration = '60天';
+            }
+            
+            // 构建模态框内容
+            let modalContent = `
+                <div class="modal-header">
+                    <h3>申请详情 - ${name}</h3>
+                    <span class="close-btn">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="detail-section">
+                        <h4>申请信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">申请人</div>
+                                <div class="detail-value">${name}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">所属部门</div>
+                                <div class="detail-value">${department}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">工号</div>
+                                <div class="detail-value">${jobId}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">岗位名称</div>
+                                <div class="detail-value">${position}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">邮箱</div>
+                                <div class="detail-value">${email}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">申请时间</div>
+                                <div class="detail-value">${applyTime}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">申请时长</div>
+                                <div class="detail-value">${duration}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">状态</div>
+                                <div class="detail-value">${status}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>申请原因</h4>
+                        <div class="detail-remarks" style="border-left-color: #faad14; background-color: #fffbe6;">
+                            ${reason}
+                        </div>
+                    </div>`;
+            
+            // 根据状态添加审批备注或拒绝理由
+            if (status === '已通过' && approvalComment) {
+                modalContent += `
+                    <div class="detail-section">
+                        <h4>审批备注</h4>
+                        <div class="detail-remarks" style="border-left-color: #52c41a; background-color: #f6ffed;">
+                            ${approvalComment}
+                        </div>
+                    </div>`;
+            } else if (status === '已拒绝' && approvalComment) {
+                modalContent += `
+                    <div class="detail-section">
+                        <h4>拒绝理由</h4>
+                        <div class="detail-remarks" style="border-left-color: #f5222d; background-color: #fff1f0;">
+                            ${approvalComment}
+                        </div>
+                    </div>`;
+            }
+            
+            // 添加底部按钮
+            modalContent += `
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn cancel-btn">关闭</button>
+                </div>
+            `;
+            
+            // 显示模态框
+            showModalWithContent('user-detail-modal', modalContent);
+        }
+
+        // 已授权用户详情展示函数
+        function showAuthorizedUserDetails(row) {
+            // 获取基本用户信息
+            const name = row.querySelector('td:nth-child(2)').textContent.trim();
+            const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
+            const department = row.querySelector('td:nth-child(4)').textContent.trim();
+            const platform = row.querySelector('td:nth-child(5)').textContent.trim();
+            const role = row.querySelector('td:nth-child(6)').textContent.trim();
+            const applyTime = row.querySelector('td:nth-child(7)').textContent.trim();
+            
+            // 补充其他信息
+            let email = '';
+            let position = '';
+            let duration = '30天';
+            
+            // 根据不同用户设置不同信息
+            if (name.includes('张三')) {
+                email = 'zhangsan@example.com';
+                position = '高级开发工程师';
+            } else if (name.includes('李四')) {
+                email = 'lisi@example.com';
+                position = '市场专员';
+                duration = '7天';
+            } else if (name.includes('王五')) {
+                email = 'wangwu@example.com';
+                position = '产品经理';
+                duration = '90天';
+            } else if (name.includes('赵六')) {
+                email = 'zhaoliu@example.com';
+                position = 'HR专员';
+                duration = '1年';
+            } else if (name.includes('钱七')) {
+                email = 'qianqi@example.com';
+                position = '开发工程师';
+                duration = '60天';
+            }
+            
+            // 构建模态框内容 - 移除了申请原因部分
+            let modalContent = `
+                <div class="modal-header">
+                    <h3>权限详情 - ${name}</h3>
+                    <span class="close-btn">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="detail-section">
+                        <h4>用户信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">用户名</div>
+                                <div class="detail-value">${name}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">所属部门</div>
+                                <div class="detail-value">${department}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">所属平台</div>
+                                <div class="detail-value">${platform}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">岗位名称</div>
+                                <div class="detail-value">${position}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">邮箱</div>
+                                <div class="detail-value">${email}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">授权时间</div>
+                                <div class="detail-value">${applyTime}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">授权时长</div>
+                                <div class="detail-value">${duration}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">授权方式</div>
+                                <div class="detail-value">直接授权</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn cancel-btn">关闭</button>
+                </div>
+            `;
+            
+            // 显示模态框
+            showModalWithContent('user-detail-modal', modalContent);
+        }
+
+        // 当前登录用户详情展示函数
+        function showActiveUserDetails(row) {
+            // 获取基本用户信息
+            const name = row.querySelector('td:nth-child(2)').textContent.trim();
+            const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
+            const department = row.querySelector('td:nth-child(4)').textContent.trim();
+            const platform = row.querySelector('td:nth-child(5)').textContent.trim();
+            const role = row.querySelector('td:nth-child(6)').textContent.trim();
+            const statusEl = row.querySelector('td:nth-child(7)');
+            const status = statusEl ? statusEl.textContent.trim() : '在线';
+            
+            // 补充其他信息
+            let email = '';
+            let position = '';
+            
+            // 根据不同用户设置不同信息
+            if (name.includes('张三')) {
+                email = 'zhangsan@example.com';
+                position = '高级开发工程师';
+            } else if (name.includes('李四')) {
+                email = 'lisi@example.com';
+                position = '市场专员';
+            } else if (name.includes('王五')) {
+                email = 'wangwu@example.com';
+                position = '产品经理';
+            } else if (name.includes('赵六')) {
+                email = 'zhaoliu@example.com';
+                position = 'HR专员';
+            } else if (name.includes('钱七')) {
+                email = 'qianqi@example.com';
+                position = '开发工程师';
+            }
+            
+            // 生成随机的浏览器信息
+            const browsers = [
+                'Chrome 96.0.4664.110', 
+                'Firefox 95.0.2', 
+                'Edge 97.0.1072.69', 
+                'Safari 15.2', 
+                'Chrome 97.0.4692.71'
+            ];
+            const randomBrowser = browsers[Math.floor(Math.random() * browsers.length)];
+            
+            // 获取当前日期时间
+            const currentDate = new Date();
+            const formattedDateTime = currentDate.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }).replace(/\//g, '-');
+            
+            // 构建模态框内容
+            let modalContent = `
+                <div class="modal-header">
+                    <h3>在线用户详情 - ${name}</h3>
+                    <span class="close-btn">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="detail-section">
+                        <h4>用户信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">用户名</div>
+                                <div class="detail-value">${name}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">所属部门</div>
+                                <div class="detail-value">${department}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">工号</div>
+                                <div class="detail-value">${jobId}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">岗位名称</div>
+                                <div class="detail-value">${position}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">邮箱</div>
+                                <div class="detail-value">${email}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">登录时间</div>
+                                <div class="detail-value">${formattedDateTime}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">IP地址</div>
+                                <div class="detail-value">192.168.1.${Math.floor(Math.random() * 255) + 1}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">登录设备</div>
+                                <div class="detail-value">${randomBrowser}</div>
+                            </div>
+                        </div>
+                    </div>`;
+            
+            // 创建3条随机的登录记录，日期逐渐往前
+            const loginRecords = [];
+            for (let i = 0; i < 3; i++) {
+                // 创建时间偏移，每次多一些
+                const offset = (i === 0) ? 2 : (i === 1) ? 6 : 24; // 小时偏移
+                
+                // 计算日期和格式化
+                const recordDate = new Date(Date.now() - offset * 3600000);
+                const formattedDate = recordDate.toLocaleString('zh-CN', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                }).replace(/\//g, '-');
+                
+                // 随机浏览器和IP
+                const loginBrowser = browsers[Math.floor(Math.random() * browsers.length)];
+                const loginIP = `192.168.1.${Math.floor(Math.random() * 255) + 1}`;
+                
+                loginRecords.push({
+                    time: formattedDate,
+                    browser: loginBrowser,
+                    ip: loginIP
+                });
+            }
+            
+            // 添加登录记录表格
+            modalContent += `
+                <div class="detail-section">
+                    <h4>登录记录</h4>
+                    <table class="detail-table" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>登录时间</th>
+                                <th>登录设备</th>
+                                <th>IP地址</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+            
+            // 添加每条登录记录
+            loginRecords.forEach(record => {
+                modalContent += `
+                            <tr>
+                                <td>${record.time}</td>
+                                <td>${record.browser}</td>
+                                <td>${record.ip}</td>
+                            </tr>`;
+            });
+            
+            modalContent += `
+                        </tbody>
+                    </table>
+                </div>`;
+            
+            // 添加底部按钮
+            modalContent += `
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn cancel-btn">关闭</button>
+                </div>
+            `;
+            
+            // 显示模态框
+            showModalWithContent('user-detail-modal', modalContent);
+        }
+
+        // 辅助函数：显示带有特定内容的模态框
+        function showModalWithContent(modalId, content) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            
+            // 设置模态框内容
+            modal.querySelector('.modal-content').innerHTML = content;
+            
+            // 为关闭按钮添加事件
+            const closeBtn = modal.querySelector('.close-btn');
+            const cancelBtn = modal.querySelector('.cancel-btn');
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+            }
+            
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+            }
+            
+            // 显示模态框
+            modal.style.display = 'flex';
         }
 
         // 初始化已处理审批单的数据属性 - 修改为仅检查状态，不添加默认备注
