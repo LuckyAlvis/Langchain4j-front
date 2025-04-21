@@ -1321,7 +1321,7 @@
             const reason = document.querySelector('#add-user-modal textarea[name="reason"]').value.trim();
             
             // 获取平台和角色
-            const platform = document.querySelector('#add-user-modal select[name="platform"]').value;
+            const platform = document.getElementById('platform-input').value;
             const role = document.querySelector('#add-user-modal input[name="role"]:checked').value;
             
             // 验证授权理由
