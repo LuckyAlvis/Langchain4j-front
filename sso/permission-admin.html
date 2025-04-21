@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>耀耀工厂 - 权限管理后台</title>
     <link rel="stylesheet" href="permission-admin.css">
+    <style>
+        /* 添加到现有样式表或添加到<head>部分 */
+        .action-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* 可以添加实际禁用状态的样式 */
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* 添加一个样式，用于当复选框处于indeterminate状态时更改外观 */
+        input[type="checkbox"]:indeterminate {
+            background-color: #e0e0e0;
+            border-color: #999;
+        }
+        
+        /* 添加到现有样式 */
+        input[type="checkbox"]:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f0f0f0;
+        }
+        
+        /* 可以为已处理行添加一个轻微的背景色 */
+        #approval-tab tbody tr:has(td:nth-child(9) .status-approved),
+        #approval-tab tbody tr:has(td:nth-child(9) .status-rejected) {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -1397,11 +1429,11 @@
                 <td>${dateFormatted}</td>
                 <td>${expiryFormatted}</td>
                 <td>
-                    <div class="status status-active">已授权</div>
+                    <div class="status status-active">0次</div>
                 </td>
                 <td>
                     <button class="action-btn view-btn">查看</button>
-                    <button class="action-btn remove-btn">收回</button>
+                    <button class="action-btn remove-btn">收回权限</button>
                 </td>
             `;
             
@@ -1416,16 +1448,17 @@
                 if (viewBtn) {
                     viewBtn.addEventListener('click', function() {
                         // 显示用户详情
-                        showUserDetail(name, employeeId, department, dateFormatted, reason, '已授权');
+                        showUserDetail(name, employeeId, department, dateFormatted, reason, '0次');
                     });
                 }
                 
                 if (revokeBtn) {
                     revokeBtn.addEventListener('click', function() {
                         if (confirm(`确定要收回 ${name} 的权限吗？`)) {
-                            newRow.querySelector('.status').className = 'status status-revoked';
-                            newRow.querySelector('.status').textContent = '已收回';
-                            revokeBtn.disabled = true;
+                            // 删除整行，而不只是更改状态
+                            authorizedTable.removeChild(newRow);
+                            // 显示收回成功的消息
+                            alert(`已成功收回 ${name} 的权限`);
                         }
                     });
                 }
@@ -1554,6 +1587,342 @@
             } else {
                 header.textContent = `已选 ${selectedOptions.length} 项`;
             }
+        }
+
+        // 显示用户详情
+        function showUserDetail(name, employeeId, department, addTime, reason, usageCount) {
+            // 获取用户详情模态框
+            const modal = document.getElementById('user-detail-modal');
+            
+            // 更新模态框标题和内容
+            modal.querySelector('.modal-header h3').textContent = `用户详情 - ${name}`;
+            
+            // 填充用户信息
+            const modalBody = modal.querySelector('.modal-body');
+            modalBody.innerHTML = `
+                <div class="detail-section">
+                    <h4>用户信息</h4>
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">姓名</div>
+                            <div class="detail-value">${name}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">工号</div>
+                            <div class="detail-value">${employeeId}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">部门</div>
+                            <div class="detail-value">${department}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">授权时间</div>
+                            <div class="detail-value">${addTime}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">使用次数</div>
+                            <div class="detail-value">${usageCount}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h4>授权备注</h4>
+                    <div class="detail-remarks">
+                        ${reason || '无'}
+                    </div>
+                </div>
+            `;
+            
+            // 显示模态框
+            modal.style.display = 'flex';
+            
+            // 确保关闭按钮有事件
+            const closeBtn = modal.querySelector('.close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+            }
+        }
+
+        // 在页面加载时为已存在的收回权限按钮添加点击事件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为已授权用户表格中的所有收回权限按钮添加事件
+            const removeButtons = document.querySelectorAll('#authorized-tab .remove-btn');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const name = row.querySelector('td:nth-child(2)').textContent;
+                    
+                    if (confirm(`确定要收回 ${name} 的权限吗？`)) {
+                        // 获取表格的tbody元素，然后移除整行
+                        const tbody = row.parentNode;
+                        tbody.removeChild(row);
+                    }
+                });
+            });
+            
+            // 为已授权用户表格中的所有查看按钮添加事件
+            const viewButtons = document.querySelectorAll('#authorized-tab .view-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const name = row.querySelector('td:nth-child(2)').textContent;
+                    const employeeId = row.querySelector('td:nth-child(3)').textContent;
+                    const department = row.querySelector('td:nth-child(4)').textContent;
+                    const addTime = row.querySelector('td:nth-child(7)').textContent;
+                    const usageCount = row.querySelector('td:nth-child(9)').textContent;
+                    
+                    // 模拟授权备注
+                    const reasons = {
+                        '张三': '需要使用AI工具提升工作效率',
+                        '李四': '需要调研AI产品功能',
+                        '王五': '产品设计需要使用AI助手',
+                        '赵六': '需要使用系统管理员工培训数据',
+                        '钱七': '开发需要使用AI接口'
+                    };
+                    
+                    const reason = reasons[name] || '用户申请使用系统';
+                    
+                    // 显示用户详情
+                    showUserDetail(name, employeeId, department, addTime, reason, usageCount);
+                });
+            });
+        });
+
+        // 添加表格全选/取消全选功能
+        function setupTableCheckboxes() {
+            // 获取已授权用户表格的表头复选框
+            const authorizedHeaderCheckbox = document.querySelector('#authorized-tab table thead th:first-child input[type="checkbox"]');
+            
+            // 为表头复选框添加点击事件
+            if (authorizedHeaderCheckbox) {
+                authorizedHeaderCheckbox.addEventListener('change', function() {
+                    // 获取表格中所有行的复选框
+                    const rowCheckboxes = document.querySelectorAll('#authorized-tab table tbody td:first-child input[type="checkbox"]');
+                    
+                    // 设置所有行的复选框状态与表头复选框一致
+                    rowCheckboxes.forEach(checkbox => {
+                        checkbox.checked = authorizedHeaderCheckbox.checked;
+                    });
+                    
+                    // 更新批量操作按钮的状态
+                    updateBatchActionStatus('authorized');
+                });
+            }
+            
+            // 获取当前登录用户表格的表头复选框
+            const activeHeaderCheckbox = document.querySelector('#active-tab table thead th:first-child input[type="checkbox"]');
+            
+            // 为表头复选框添加点击事件
+            if (activeHeaderCheckbox) {
+                activeHeaderCheckbox.addEventListener('change', function() {
+                    // 获取表格中所有行的复选框
+                    const rowCheckboxes = document.querySelectorAll('#active-tab table tbody td:first-child input[type="checkbox"]');
+                    
+                    // 设置所有行的复选框状态与表头复选框一致
+                    rowCheckboxes.forEach(checkbox => {
+                        checkbox.checked = activeHeaderCheckbox.checked;
+                    });
+                    
+                    // 更新批量操作按钮的状态
+                    updateBatchActionStatus('active');
+                });
+            }
+            
+            // 移除原来的审批表格表头复选框逻辑 (由新函数替代)
+            
+            // 为每个表格中的行复选框添加事件，以便在单个选择变化时更新表头复选框状态
+            setupRowCheckboxes('authorized');
+            setupRowCheckboxes('active');
+            setupApprovalRowCheckboxes(); // 为审批表格使用特殊处理
+        }
+
+        // 设置表格行复选框的事件
+        function setupRowCheckboxes(tabId) {
+            const rowCheckboxes = document.querySelectorAll(`#${tabId}-tab table tbody td:first-child input[type="checkbox"]`);
+            const headerCheckbox = document.querySelector(`#${tabId}-tab table thead th:first-child input[type="checkbox"]`);
+            
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // 检查是否所有行都被选中
+                    const allChecked = Array.from(rowCheckboxes).every(cb => cb.checked);
+                    const anyChecked = Array.from(rowCheckboxes).some(cb => cb.checked);
+                    
+                    // 更新表头复选框状态
+                    if (headerCheckbox) {
+                        headerCheckbox.checked = allChecked;
+                        // 可以添加indeterminate状态表示部分选中
+                        headerCheckbox.indeterminate = anyChecked && !allChecked;
+                    }
+                    
+                    // 更新批量操作按钮的状态
+                    updateBatchActionStatus(tabId);
+                });
+            });
+        }
+
+        // 更新批量操作按钮的状态（启用/禁用）
+        function updateBatchActionStatus(tabId) {
+            const rowCheckboxes = document.querySelectorAll(`#${tabId}-tab table tbody td:first-child input[type="checkbox"]`);
+            const batchActionButtons = document.querySelectorAll(`#${tabId}-tab .batch-actions button`);
+            
+            // 检查是否有任何行被选中
+            const anyChecked = Array.from(rowCheckboxes).some(cb => cb.checked);
+            
+            // 更新批量操作按钮的禁用状态
+            batchActionButtons.forEach(button => {
+                button.disabled = !anyChecked;
+                if (anyChecked) {
+                    button.classList.remove('disabled');
+                } else {
+                    button.classList.add('disabled');
+                }
+            });
+        }
+
+        // 初始化页面中所有批量操作按钮的状态
+        function initBatchActionButtons() {
+            // 为每个标签页更新批量操作按钮状态
+            updateBatchActionStatus('authorized');
+            updateBatchActionStatus('approval');
+            updateBatchActionStatus('active');
+        }
+
+        // 修改批量收回权限功能
+        function setupBatchRemovePermission() {
+            // 获取批量收回权限按钮
+            const batchRemoveBtn = document.querySelector('#authorized-tab .batch-actions .remove-btn');
+            
+            if (batchRemoveBtn) {
+                batchRemoveBtn.addEventListener('click', function() {
+                    // 获取所有选中的行复选框
+                    const checkedRows = document.querySelectorAll('#authorized-tab table tbody td:first-child input[type="checkbox"]:checked');
+                    
+                    // 如果没有选中的行，按钮应该是禁用的，所以这里不需要额外检查
+                    // 直接获取选中用户的姓名
+                    const selectedUsers = Array.from(checkedRows).map(checkbox => {
+                        const row = checkbox.closest('tr');
+                        return row.querySelector('td:nth-child(2)').textContent;
+                    });
+                    
+                    // 显示确认对话框
+                    if (confirm(`确定要收回以下用户的权限吗？\n${selectedUsers.join('\n')}`)) {
+                        // 遍历选中的行并删除
+                        checkedRows.forEach(checkbox => {
+                            const row = checkbox.closest('tr');
+                            if (row && row.parentNode) {
+                                row.parentNode.removeChild(row);
+                            }
+                        });
+                        
+                        // 重置表头复选框
+                        const headerCheckbox = document.querySelector('#authorized-tab table thead th:first-child input[type="checkbox"]');
+                        if (headerCheckbox) {
+                            headerCheckbox.checked = false;
+                            headerCheckbox.indeterminate = false;
+                        }
+                        
+                        // 更新批量操作按钮状态
+                        updateBatchActionStatus('authorized');
+                    }
+                });
+            }
+        }
+
+        // 在页面加载完成后设置复选框联动
+        document.addEventListener('DOMContentLoaded', function() {
+            // ...现有的DOMContentLoaded事件处理程序...
+            
+            // 设置表格复选框联动
+            setupTableCheckboxes();
+            
+            // 专门设置审批表头复选框
+            setupApprovalHeaderCheckbox();
+            
+            // 禁用已处理的审批单复选框
+            disableProcessedApprovalCheckboxes();
+            
+            // 设置批量收回权限功能
+            setupBatchRemovePermission();
+            
+            // 初始化批量操作按钮状态 (禁用)
+            initBatchActionButtons();
+        });
+
+        // 添加一个函数来禁用已处理审批单的复选框
+        function disableProcessedApprovalCheckboxes() {
+            // 获取所有审批单行
+            const approvalRows = document.querySelectorAll('#approval-tab table tbody tr');
+            
+            approvalRows.forEach(row => {
+                // 获取状态列，检查是否为"已通过"或"已拒绝"
+                const statusElement = row.querySelector('td:nth-child(9) .status');
+                if (statusElement) {
+                    const status = statusElement.textContent;
+                    
+                    // 如果是已处理的状态，禁用复选框
+                    if (status === '已通过' || status === '已拒绝') {
+                        const checkbox = row.querySelector('td:first-child input[type="checkbox"]');
+                        if (checkbox) {
+                            checkbox.disabled = true;
+                            checkbox.checked = false; // 确保未被选中
+                            checkbox.parentElement.title = '已处理的审批单不可选择'; // 添加提示
+                        }
+                    }
+                }
+            });
+        }
+
+        // 修改表头复选框事件，只影响未禁用的复选框
+        function setupApprovalHeaderCheckbox() {
+            const approvalHeaderCheckbox = document.querySelector('#approval-tab table thead th:first-child input[type="checkbox"]');
+            
+            if (approvalHeaderCheckbox) {
+                approvalHeaderCheckbox.addEventListener('change', function() {
+                    // 只获取未禁用的行复选框
+                    const availableRowCheckboxes = document.querySelectorAll('#approval-tab table tbody td:first-child input[type="checkbox"]:not([disabled])');
+                    
+                    // 设置所有可用行的复选框状态与表头复选框一致
+                    availableRowCheckboxes.forEach(checkbox => {
+                        checkbox.checked = approvalHeaderCheckbox.checked;
+                    });
+                    
+                    // 更新批量操作按钮的状态
+                    updateBatchActionStatus('approval');
+                });
+            }
+        }
+
+        // 专门为审批表格行复选框设置事件
+        function setupApprovalRowCheckboxes() {
+            const rowCheckboxes = document.querySelectorAll('#approval-tab table tbody td:first-child input[type="checkbox"]');
+            const headerCheckbox = document.querySelector('#approval-tab table thead th:first-child input[type="checkbox"]');
+            
+            rowCheckboxes.forEach(checkbox => {
+                // 只为未禁用的复选框添加事件
+                if (!checkbox.disabled) {
+                    checkbox.addEventListener('change', function() {
+                        // 获取所有未禁用的复选框
+                        const availableCheckboxes = document.querySelectorAll('#approval-tab table tbody td:first-child input[type="checkbox"]:not([disabled])');
+                        
+                        // 检查是否所有可用行都被选中
+                        const allChecked = Array.from(availableCheckboxes).every(cb => cb.checked);
+                        const anyChecked = Array.from(availableCheckboxes).some(cb => cb.checked);
+                        
+                        // 更新表头复选框状态
+                        if (headerCheckbox) {
+                            headerCheckbox.checked = allChecked;
+                            // 可以添加indeterminate状态表示部分选中
+                            headerCheckbox.indeterminate = anyChecked && !allChecked;
+                        }
+                        
+                        // 更新批量操作按钮的状态
+                        updateBatchActionStatus('approval');
+                    });
+                }
+            });
         }
     </script>
 </body>
