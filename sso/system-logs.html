@@ -83,6 +83,7 @@
                                 <option value="new">权限申请</option>
                                 <option value="revoke">权限收回</option>
                                 <option value="direct">直接授权</option>
+                                <option value="force-logout">强制退出</option>
                             </select>
                         </div>
                         <div class="filter-item">
@@ -242,6 +243,23 @@
                                     <div class="log-title">权限申请 - 郑十</div>
                                     <div class="log-meta">
                                         <span class="log-time">前天 16:50</span>
+                                    </div>
+                                </div>
+                                <div class="log-detail">
+                                    <button class="view-detail-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 添加强制退出的样例数据 -->
+                        <div class="log-item">
+                            <div class="log-icon force-logout">⊗</div>
+                            <div class="log-content">
+                                <div class="log-text">
+                                    <div class="log-title">强制退出 - 李四</div>
+                                    <div class="log-meta">
+                                        <span class="log-time">2分钟前</span>
+                                        <span class="log-operator">戴倚凡</span>
                                     </div>
                                 </div>
                                 <div class="log-detail">
@@ -638,6 +656,36 @@
                 `;
             }
             
+            // 添加强制退出类型的处理
+            if (iconClass.includes('force-logout')) {
+                modalContent += `
+                    <div class="detail-section">
+                        <h4>登录信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">登录时间</div>
+                                <div class="detail-value">2024-10-26 10:20:35</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">登录IP</div>
+                                <div class="detail-value">192.168.1.101</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">设备信息</div>
+                                <div class="detail-value">Windows 10, Chrome</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">登录位置</div>
+                                <div class="detail-value">公司内网</div>
+                            </div>
+                        </div>
+                        <div class="detail-remarks" style="border-left-color: #ff4d4f; background-color: #fff1f0;">
+                            被管理员${operatorName || '戴倚凡'}强制退出。设备信息：Windows 10，Chrome 浏览器。登录位置：公司内网，IP地址匹配常用位置。
+                        </div>
+                    </div>
+                `;
+            }
+            
             // 更新模态框内容
             modalBody.innerHTML = modalContent;
         }
@@ -724,25 +772,31 @@
                 if (logList) {
                     // 遍历存储的日志，添加到页面
                     storedLogs.forEach(logData => {
-                        if (logData.type === 'direct') {
-                            // 创建时间显示文本
-                            const logDate = new Date(logData.timestamp);
-                            const today = new Date();
-                            let timeText = '';
-                            
-                            if (logDate.toDateString() === today.toDateString()) {
-                                timeText = '今天 ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        // 创建时间显示文本
+                        const logDate = new Date(logData.timestamp);
+                        const today = new Date();
+                        let timeText = '';
+                        
+                        if (logDate.toDateString() === today.toDateString()) {
+                            const minutesAgo = Math.floor((today - logDate) / 60000);
+                            if (minutesAgo < 60) {
+                                timeText = minutesAgo === 0 ? '刚刚' : `${minutesAgo}分钟前`;
                             } else {
-                                const yesterday = new Date(today);
-                                yesterday.setDate(today.getDate() - 1);
-                                
-                                if (logDate.toDateString() === yesterday.toDateString()) {
-                                    timeText = '昨天 ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                                } else {
-                                    timeText = logDate.toLocaleDateString() + ' ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                                }
+                                timeText = '今天 ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                             }
+                        } else {
+                            const yesterday = new Date(today);
+                            yesterday.setDate(today.getDate() - 1);
                             
+                            if (logDate.toDateString() === yesterday.toDateString()) {
+                                timeText = '昨天 ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            } else {
+                                timeText = logDate.toLocaleDateString() + ' ' + logDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            }
+                        }
+                        
+                        // 处理不同类型的日志
+                        if (logData.type === 'direct') {
                             // 创建新的日志项
                             const logItem = document.createElement('div');
                             logItem.className = 'log-item';
@@ -774,6 +828,41 @@
                                 
                                 // 更新模态框内容
                                 updateModalContent('direct', `直接授权 - ${logData.userName}`);
+                                
+                                // 显示模态框
+                                modal.style.display = 'flex';
+                            });
+                        } else if (logData.type === 'force-logout') {
+                            // 创建强制退出日志项
+                            const logItem = document.createElement('div');
+                            logItem.className = 'log-item';
+                            logItem.innerHTML = `
+                                <div class="log-icon force-logout">⊗</div>
+                                <div class="log-content">
+                                    <div class="log-text">
+                                        <div class="log-title">强制退出 - ${logData.userName}</div>
+                                        <div class="log-meta">
+                                            <span class="log-time">${timeText}</span>
+                                            <span class="log-operator">${logData.operatorName}</span>
+                                        </div>
+                                    </div>
+                                    <div class="log-detail">
+                                        <button class="view-detail-btn">查看详情</button>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            // 将新日志项添加到日志列表顶部
+                            logList.insertBefore(logItem, logList.firstChild);
+                            
+                            // 绑定查看详情按钮事件
+                            const viewBtn = logItem.querySelector('.view-detail-btn');
+                            viewBtn.addEventListener('click', function() {
+                                // 显示模态框
+                                const modal = document.getElementById('log-detail-modal');
+                                
+                                // 更新模态框内容
+                                updateModalContent('force-logout', `强制退出 - ${logData.userName}`);
                                 
                                 // 显示模态框
                                 modal.style.display = 'flex';

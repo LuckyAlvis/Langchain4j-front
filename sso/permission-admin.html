@@ -3008,6 +3008,87 @@
             // 可以添加实际的后端操作代码，例如发送API请求
             console.log('已强制用户退出');
         }
+
+        // 强制退出功能
+        function forceLogout(btn) {
+            const row = btn.closest('tr');
+            const name = row.querySelector('td:nth-child(2)').textContent.trim();
+            const loginDevice = row.querySelector('td:nth-child(8)').textContent.trim();
+            const ipAddress = row.querySelector('td:nth-child(7)').textContent.trim();
+            
+            if (confirm(`确定要强制 ${name} 退出登录吗？`)) {
+                // 删除行
+                row.remove();
+                
+                // 记录系统日志
+                const logData = {
+                    type: 'force-logout',
+                    userName: name,
+                    operatorName: '戴倚凡', // 当前登录管理员
+                    device: loginDevice,
+                    ip: ipAddress,
+                    timestamp: new Date().getTime()
+                };
+                
+                // 获取现有日志
+                const storedLogs = JSON.parse(localStorage.getItem('systemLogs') || '[]');
+                storedLogs.push(logData);
+                localStorage.setItem('systemLogs', JSON.stringify(storedLogs));
+                
+                // 检查表格是否为空
+                checkEmptyTable();
+                
+                // 显示消息
+                alert(`已强制 ${name} 退出登录`);
+            }
+        }
+
+        // 批量强制退出
+        function batchForceLogout() {
+            const selectedRows = document.querySelectorAll('#active-tab tbody tr input[type="checkbox"]:checked');
+            const count = selectedRows.length;
+            
+            if (count === 0) {
+                alert('请选择要强制退出的用户');
+                return;
+            }
+            
+            if (confirm(`确定要强制选中的 ${count} 名用户退出登录吗？`)) {
+                const storedLogs = JSON.parse(localStorage.getItem('systemLogs') || '[]');
+                
+                // 处理每一行
+                selectedRows.forEach(checkbox => {
+                    const row = checkbox.closest('tr');
+                    const name = row.querySelector('td:nth-child(2)').textContent.trim();
+                    const loginDevice = row.querySelector('td:nth-child(8)').textContent.trim();
+                    const ipAddress = row.querySelector('td:nth-child(7)').textContent.trim();
+                    
+                    // 记录系统日志
+                    const logData = {
+                        type: 'force-logout',
+                        userName: name,
+                        operatorName: '戴倚凡', // 当前登录管理员
+                        device: loginDevice,
+                        ip: ipAddress,
+                        timestamp: new Date().getTime()
+                    };
+                    
+                    storedLogs.push(logData);
+                    
+                    // 删除行
+                    row.remove();
+                });
+                
+                // 保存所有日志
+                localStorage.setItem('systemLogs', JSON.stringify(storedLogs));
+                
+                // 检查表格是否为空
+                checkEmptyTable();
+                
+                // 显示消息
+                alert(`已强制 ${count} 名用户退出登录`);
+            }
+        }
     </script>
 </body>
 </html> 
