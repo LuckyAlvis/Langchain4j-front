@@ -36,6 +36,79 @@
         #approval-tab tbody tr:has(td:nth-child(9) .status-rejected) {
             background-color: #f9f9f9;
         }
+
+        /* 状态标签 - 恢复原始样式 */
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 2px;
+            font-size: 12px;
+        }
+
+        .status-pending {
+            background-color: #faad14;
+            color: white;
+        }
+
+        .status-approved {
+            background-color: #52c41a;
+            color: white;
+        }
+
+        .status-rejected {
+            background-color: #f5222d;
+            color: white;
+        }
+        
+        /* 参考system-logs.css中的detail-remarks样式 */
+        .detail-remarks {
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+            margin-top: 6px;
+            border-left: 3px solid #e6f7ff;
+        }
+        
+        /* 申请原因样式 */
+        .detail-section:nth-of-type(2) .detail-remarks {
+            border-left-color: #faad14;
+            background-color: #fffbe6;
+        }
+        
+        /* 审批通过备注样式 */
+        .detail-section:nth-of-type(3) .detail-remarks.approved {
+            border-left-color: #52c41a;
+            background-color: #f6ffed;
+        }
+        
+        /* 审批拒绝理由样式 */
+        .detail-section:nth-of-type(3) .detail-remarks.rejected {
+            border-left-color: #f5222d;
+            background-color: #fff1f0;
+        }
+        
+        /* 批量操作按钮禁用状态样式 */
+        .batch-actions .action-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        /* 数量指示器样式 */
+        .count-indicator {
+            display: inline-block;
+            background-color: #1890ff;
+            color: white;
+            border-radius: 12px;
+            padding: 0px 8px;
+            font-size: 12px;
+            line-height: 20px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -1084,101 +1157,343 @@
             }
         }
 
-        // 审批操作弹窗功能
-        document.addEventListener('DOMContentLoaded', function() {
-            // 获取模态框元素
-            const approvalModal = document.getElementById('approval-action-modal');
+        // 完善审批通过操作函数
+        function approveApproval(row, comment) {
+            if (!row) return;
             
-            // 确保审批模态框初始隐藏
-            if (approvalModal) {
-                approvalModal.style.display = 'none';
+            // 1. 更新状态列
+            const statusCell = row.querySelector('td:nth-child(9)');
+            if (statusCell) {
+                statusCell.innerHTML = '<span class="status status-approved">已通过</span>';
             }
             
-            // 保存当前操作类型(通过/拒绝)
-            let currentAction = '';
+            // 2. 移除拒绝按钮，并禁用复选框
+            const actionsCell = row.querySelector('td:nth-child(10)');
+            if (actionsCell) {
+                // 保留查看按钮，移除其他按钮
+                const viewBtn = actionsCell.querySelector('.view-btn');
+                actionsCell.innerHTML = '';
+                if (viewBtn) {
+                    const newViewBtn = viewBtn.cloneNode(true);
+                    actionsCell.appendChild(newViewBtn);
+                }
+            }
             
-            // 获取通过和拒绝按钮
-            const approveButtons = document.querySelectorAll('.approve-btn');
-            const rejectButtons = document.querySelectorAll('.reject-btn');
+            // 3. 禁用复选框
+            const checkbox = row.querySelector('td:first-child input[type="checkbox"]');
+            if (checkbox) {
+                checkbox.disabled = true;
+                checkbox.checked = false;
+                checkbox.parentElement.title = '已处理的审批单不可选择';
+            }
             
-            // 为通过按钮添加事件监听器
-            approveButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // 设置当前操作为通过
-                    currentAction = 'approve';
-                    
-                    // 设置模态框标题
-                    approvalModal.querySelector('.modal-header h3').textContent = '审批通过';
-                    
-                    // 显示模态框
-                    approvalModal.style.display = 'flex';
-                    
-                    // 聚焦到文本框
-                    setTimeout(() => {
-                        document.getElementById('approval-comment').focus();
-                    }, 100);
-                });
-            });
+            // 4. 记录审批意见（实际应该发送到后端）
+            console.log('审批通过，意见：', comment || '无');
             
-            // 为拒绝按钮添加事件监听器
-            rejectButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // 设置当前操作为拒绝
-                    currentAction = 'reject';
-                    
-                    // 设置模态框标题
-                    approvalModal.querySelector('.modal-header h3').textContent = '审批拒绝';
-                    
-                    // 显示模态框
-                    approvalModal.style.display = 'flex';
-                    
-                    // 聚焦到文本框
-                    setTimeout(() => {
-                        document.getElementById('approval-comment').focus();
-                    }, 100);
-                });
-            });
+            // 5. 存储审批备注到行上的自定义属性，以便查看详情时显示
+            row.setAttribute('data-approval-comment', comment || '');
             
-            // 为提交按钮添加事件监听器
-            const submitBtn = approvalModal.querySelector('.submit-btn');
+            // 6. 更新表头复选框状态和批量操作按钮状态
+            updateApprovalHeaderCheckboxState();
+            updateBatchActionStatus('approval');
+            
+            // 7. 重新绑定查看按钮事件
+            setupViewButtonEvents();
+        }
+
+        // 完善审批拒绝操作函数
+        function rejectApproval(row, comment) {
+            if (!row) return;
+            
+            // 1. 更新状态列
+            const statusCell = row.querySelector('td:nth-child(9)');
+            if (statusCell) {
+                statusCell.innerHTML = '<span class="status status-rejected">已拒绝</span>';
+            }
+            
+            // 2. 移除通过/拒绝按钮
+            const actionsCell = row.querySelector('td:nth-child(10)');
+            if (actionsCell) {
+                // 保留查看按钮，移除其他按钮
+                const viewBtn = actionsCell.querySelector('.view-btn');
+                actionsCell.innerHTML = '';
+                if (viewBtn) {
+                    const newViewBtn = viewBtn.cloneNode(true);
+                    actionsCell.appendChild(newViewBtn);
+                }
+            }
+            
+            // 3. 禁用复选框
+            const checkbox = row.querySelector('td:first-child input[type="checkbox"]');
+            if (checkbox) {
+                checkbox.disabled = true;
+                checkbox.checked = false;
+                checkbox.parentElement.title = '已处理的审批单不可选择';
+            }
+            
+            // 4. 记录审批意见（实际应该发送到后端）
+            console.log('审批拒绝，理由：', comment || '无');
+            
+            // 5. 存储拒绝理由到行上的自定义属性，以便查看详情时显示
+            row.setAttribute('data-rejection-reason', comment || '');
+            
+            // 6. 更新表头复选框状态和批量操作按钮状态
+            updateApprovalHeaderCheckboxState();
+            updateBatchActionStatus('approval');
+            
+            // 7. 重新绑定查看按钮事件
+            setupViewButtonEvents();
+        }
+
+        // 更新表头复选框状态
+        function updateApprovalHeaderCheckboxState() {
+            const availableCheckboxes = document.querySelectorAll('#approval-tab table tbody td:first-child input[type="checkbox"]:not([disabled])');
+            const checkedCheckboxes = document.querySelectorAll('#approval-tab table tbody td:first-child input[type="checkbox"]:checked:not([disabled])');
+            const headerCheckbox = document.querySelector('#approval-tab table thead th:first-child input[type="checkbox"]');
+            
+            if (headerCheckbox && availableCheckboxes.length > 0) {
+                const allChecked = Array.from(availableCheckboxes).every(cb => cb.checked);
+                const anyChecked = Array.from(availableCheckboxes).some(cb => cb.checked);
+                
+                headerCheckbox.checked = allChecked;
+                headerCheckbox.indeterminate = anyChecked && !allChecked;
+            } else if (headerCheckbox) {
+                // 如果没有可用的复选框，则取消选中表头复选框
+                headerCheckbox.checked = false;
+                headerCheckbox.indeterminate = false;
+            }
+            
+            // 更新批量操作按钮状态
+            updateBatchActionStatus('approval', checkedCheckboxes.length);
+        }
+
+        // 更新批量操作按钮状态
+        function updateBatchActionStatus(tabName, checkedCount) {
+            // 获取批量操作按钮
+            const batchApproveBtn = document.querySelector(`#${tabName}-tab .batch-actions .approve-btn`);
+            const batchRejectBtn = document.querySelector(`#${tabName}-tab .batch-actions .reject-btn`);
+            
+            if (batchApproveBtn && batchRejectBtn) {
+                if (checkedCount > 0) {
+                    // 有选中项，启用按钮并显示数量
+                    batchApproveBtn.classList.remove('disabled');
+                    batchRejectBtn.classList.remove('disabled');
+                    
+                    // 更新按钮文本，显示选中数量
+                    batchApproveBtn.textContent = `批量通过 (${checkedCount})`;
+                    batchRejectBtn.textContent = `批量拒绝 (${checkedCount})`;
+                } else {
+                    // 无选中项，禁用按钮
+                    batchApproveBtn.classList.add('disabled');
+                    batchRejectBtn.classList.add('disabled');
+                    
+                    // 恢复默认文本
+                    batchApproveBtn.textContent = '批量通过';
+                    batchRejectBtn.textContent = '批量拒绝';
+                }
+            }
+        }
+
+        // 批量审批操作
+        function batchApprovalAction(action) {
+            // 获取所有选中的未处理行
+            const checkedRows = document.querySelectorAll('#approval-tab table tbody td:first-child input[type="checkbox"]:checked:not([disabled])');
+            
+            if (checkedRows.length === 0) {
+                alert('请先选择待处理的申请');
+                return;
+            }
+            
+            // 显示批量审批模态框
+            const modal = document.getElementById('approval-action-modal');
+            if (!modal) return;
+            
+            // 设置模态框标题，添加选中数量显示
+            modal.querySelector('.modal-header h3').innerHTML = formatBatchTitle(action, checkedRows.length);
+            
+            // 显示模态框
+            modal.style.display = 'flex';
+            
+            // 聚焦到文本框
+            setTimeout(() => {
+                document.getElementById('approval-comment').focus();
+            }, 100);
+            
+            // 保存当前批量操作类型和选中的行
+            modal.dataset.action = action;
+            modal.dataset.rows = Array.from(checkedRows).map(cb => {
+                return Array.from(cb.closest('tr').parentNode.children).indexOf(cb.closest('tr'));
+            }).join(',');
+            
+            // 将提交按钮的事件处理程序改为批量处理
+            const submitBtn = modal.querySelector('.submit-btn');
             if (submitBtn) {
-                submitBtn.addEventListener('click', function() {
-                    // 获取审批意见
+                // 移除现有的事件监听器（如果有）
+                const newSubmitBtn = submitBtn.cloneNode(true);
+                submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
+                
+                // 添加新的事件监听器
+                newSubmitBtn.addEventListener('click', function() {
+                    // 获取批量审批意见
                     const comment = document.getElementById('approval-comment').value.trim();
                     
-                    // 执行审批操作（这里只是简单的提示，实际中应该向后端发送请求）
-                    if (currentAction === 'approve') {
-                        alert('已审批通过！\n审批意见: ' + (comment || '无'));
-                    } else if (currentAction === 'reject') {
-                        alert('已审批拒绝！\n拒绝理由: ' + (comment || '无'));
-                    }
+                    // 获取选中的行索引
+                    const rowIndices = modal.dataset.rows.split(',').map(Number);
+                    const tbody = document.querySelector('#approval-tab table tbody');
+                    const rows = tbody.querySelectorAll('tr');
+                    
+                    // 执行批量操作
+                    rowIndices.forEach(index => {
+                        if (index >= 0 && index < rows.length) {
+                            const row = rows[index];
+                            if (modal.dataset.action === 'approve') {
+                                approveApproval(row, comment);
+                            } else {
+                                rejectApproval(row, comment);
+                            }
+                        }
+                    });
                     
                     // 关闭模态框
-                    approvalModal.style.display = 'none';
+                    modal.style.display = 'none';
                     
                     // 清空文本框
                     document.getElementById('approval-comment').value = '';
+                    
+                    // 显示操作成功消息
+                    alert(`已${modal.dataset.action === 'approve' ? '批量通过' : '批量拒绝'} ${rowIndices.length} 条申请`);
+                });
+            }
+        }
+
+        // 为审批操作弹窗添加事件处理
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取单个审批按钮
+            const approveButtons = document.querySelectorAll('#approval-tab .approve-btn:not(.batch-actions .approve-btn)');
+            const rejectButtons = document.querySelectorAll('#approval-tab .reject-btn:not(.batch-actions .reject-btn)');
+            
+            // 为单个审批按钮添加事件监听器
+            approveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 获取当前行
+                    const row = this.closest('tr');
+                    
+                    // 获取审批模态框
+                    const modal = document.getElementById('approval-action-modal');
+                    if (!modal) return;
+                    
+                    // 设置模态框标题
+                    modal.querySelector('.modal-header h3').textContent = '审批通过';
+                    
+                    // 显示模态框
+                    modal.style.display = 'flex';
+                    
+                    // 聚焦到文本框
+                    setTimeout(() => {
+                        document.getElementById('approval-comment').focus();
+                    }, 100);
+                    
+                    // 获取提交按钮
+                    const submitBtn = modal.querySelector('.submit-btn');
+                    if (submitBtn) {
+                        // 移除现有的事件监听器
+                        const newSubmitBtn = submitBtn.cloneNode(true);
+                        submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
+                        
+                        // 添加新的事件监听器
+                        newSubmitBtn.addEventListener('click', function() {
+                            // 获取审批意见
+                            const comment = document.getElementById('approval-comment').value.trim();
+                            
+                            // 执行审批通过操作
+                            approveApproval(row, comment);
+                            
+                            // 关闭模态框
+                            modal.style.display = 'none';
+                            
+                            // 清空文本框
+                            document.getElementById('approval-comment').value = '';
+                        });
+                    }
+                });
+            });
+            
+            rejectButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 获取当前行
+                    const row = this.closest('tr');
+                    
+                    // 获取审批模态框
+                    const modal = document.getElementById('approval-action-modal');
+                    if (!modal) return;
+                    
+                    // 设置模态框标题
+                    modal.querySelector('.modal-header h3').textContent = '审批拒绝';
+                    
+                    // 显示模态框
+                    modal.style.display = 'flex';
+                    
+                    // 聚焦到文本框
+                    setTimeout(() => {
+                        document.getElementById('approval-comment').focus();
+                    }, 100);
+                    
+                    // 获取提交按钮
+                    const submitBtn = modal.querySelector('.submit-btn');
+                    if (submitBtn) {
+                        // 移除现有的事件监听器
+                        const newSubmitBtn = submitBtn.cloneNode(true);
+                        submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
+                        
+                        // 添加新的事件监听器
+                        newSubmitBtn.addEventListener('click', function() {
+                            // 获取审批意见
+                            const comment = document.getElementById('approval-comment').value.trim();
+                            
+                            // 执行审批拒绝操作
+                            rejectApproval(row, comment);
+                            
+                            // 关闭模态框
+                            modal.style.display = 'none';
+                            
+                            // 清空文本框
+                            document.getElementById('approval-comment').value = '';
+                        });
+                    }
+                });
+            });
+            
+            // 获取批量操作按钮
+            const batchApproveBtn = document.querySelector('#approval-tab .batch-actions .approve-btn');
+            const batchRejectBtn = document.querySelector('#approval-tab .batch-actions .reject-btn');
+            
+            // 为批量审批按钮添加事件监听器
+            if (batchApproveBtn) {
+                batchApproveBtn.addEventListener('click', function() {
+                    batchApprovalAction('approve');
                 });
             }
             
-            // 为关闭按钮添加事件监听器
-            const closeButtons = approvalModal.querySelectorAll('.close-btn, .cancel-btn');
+            if (batchRejectBtn) {
+                batchRejectBtn.addEventListener('click', function() {
+                    batchApprovalAction('reject');
+                });
+            }
+            
+            // 为关闭按钮添加事件
+            const closeButtons = document.querySelectorAll('#approval-action-modal .close-btn, #approval-action-modal .cancel-btn');
             closeButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    // 关闭模态框
-                    approvalModal.style.display = 'none';
-                    
-                    // 清空文本框
+                    document.getElementById('approval-action-modal').style.display = 'none';
                     document.getElementById('approval-comment').value = '';
                 });
             });
             
             // 点击模态框外部关闭
             window.addEventListener('click', function(event) {
-                if (event.target === approvalModal) {
-                    approvalModal.style.display = 'none';
-                    
-                    // 清空文本框
+                const modal = document.getElementById('approval-action-modal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
                     document.getElementById('approval-comment').value = '';
                 }
             });
@@ -1763,25 +2078,6 @@
             });
         }
 
-        // 更新批量操作按钮的状态（启用/禁用）
-        function updateBatchActionStatus(tabId) {
-            const rowCheckboxes = document.querySelectorAll(`#${tabId}-tab table tbody td:first-child input[type="checkbox"]`);
-            const batchActionButtons = document.querySelectorAll(`#${tabId}-tab .batch-actions button`);
-            
-            // 检查是否有任何行被选中
-            const anyChecked = Array.from(rowCheckboxes).some(cb => cb.checked);
-            
-            // 更新批量操作按钮的禁用状态
-            batchActionButtons.forEach(button => {
-                button.disabled = !anyChecked;
-                if (anyChecked) {
-                    button.classList.remove('disabled');
-                } else {
-                    button.classList.add('disabled');
-                }
-            });
-        }
-
         // 初始化页面中所有批量操作按钮的状态
         function initBatchActionButtons() {
             // 为每个标签页更新批量操作按钮状态
@@ -1849,6 +2145,12 @@
             
             // 初始化批量操作按钮状态 (禁用)
             initBatchActionButtons();
+            
+            // 初始化查看按钮事件，以显示审批备注/拒绝理由
+            setupViewButtonEvents();
+            
+            // 初始化已处理审批单的数据
+            initProcessedApprovalComments();
         });
 
         // 添加一个函数来禁用已处理审批单的复选框
@@ -1923,6 +2225,546 @@
                     });
                 }
             });
+        }
+
+        // 为查看按钮绑定事件，显示包含审批备注/拒绝理由的用户详情
+        function setupViewButtonEvents() {
+            const viewButtons = document.querySelectorAll('.view-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // 获取当前行的数据
+                    const row = this.closest('tr');
+                    const name = row.querySelector('td:nth-child(2)').textContent.trim();
+                    const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
+                    const department = row.querySelector('td:nth-child(4)').textContent.trim();
+                    const platform = row.querySelector('td:nth-child(5)').textContent.trim();
+                    const role = row.querySelector('td:nth-child(6)').textContent.trim();
+                    const applyTime = row.querySelector('td:nth-child(7)').textContent.trim();
+                    const reason = row.querySelector('td:nth-child(8)').textContent.trim();
+                    const statusCell = row.querySelector('td:nth-child(9)');
+                    const statusText = statusCell ? statusCell.textContent.trim() : '待审批';
+                    
+                    // 获取邮箱和岗位等信息
+                    let email = '';
+                    let position = '';
+                    let duration = '30天';
+                    
+                    if (name.includes('张三')) {
+                        email = 'zhangsan@example.com';
+                        position = '高级开发工程师';
+                    } else if (name.includes('李四')) {
+                        email = 'lisi@example.com';
+                        position = '市场专员';
+                        duration = '7天';
+                    } else if (name.includes('王五')) {
+                        email = 'wangwu@example.com';
+                        position = '产品经理';
+                        duration = '90天';
+                    } else if (name.includes('赵六')) {
+                        email = 'zhaoliu@example.com';
+                        position = 'HR专员';
+                        duration = '1年';
+                    } else if (name.includes('钱七')) {
+                        email = 'qianqi@example.com';
+                        position = '开发工程师';
+                        duration = '60天';
+                    }
+                    
+                    // 获取审批备注或拒绝理由
+                    let approvalComment = '';
+                    if (statusText.includes('已通过')) {
+                        approvalComment = row.getAttribute('data-approval-comment') || '';
+                    } else if (statusText.includes('已拒绝')) {
+                        approvalComment = row.getAttribute('data-rejection-reason') || '';
+                    }
+                    
+                    // 获取模态框
+                    const modal = document.getElementById('user-detail-modal');
+                    
+                    // 更新模态框内容
+                    let modalContent = `
+                        <div class="modal-header">
+                            <h3>申请详情 - ${name}</h3>
+                            <span class="close-btn">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <div class="detail-section">
+                                <h4>申请信息</h4>
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <div class="detail-label">申请人</div>
+                                        <div class="detail-value">${name}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">所属部门</div>
+                                        <div class="detail-value">${department}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">工号</div>
+                                        <div class="detail-value">${jobId}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">岗位名称</div>
+                                        <div class="detail-value">${position}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">邮箱</div>
+                                        <div class="detail-value">${email}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">申请时间</div>
+                                        <div class="detail-value">${applyTime}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">申请时长</div>
+                                        <div class="detail-value">${duration}</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">状态</div>
+                                        <div class="detail-value">${statusText}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4>申请原因</h4>
+                                <div class="detail-remarks" style="border-left-color: #faad14; background-color: #fffbe6;">
+                                    ${reason}
+                                </div>
+                            </div>`;
+                    
+                    // 显示审批备注或拒绝理由（如果有）
+                    if (statusText.includes('已通过') && approvalComment) {
+                        modalContent += `
+                            <div class="detail-section">
+                                <h4>审批备注</h4>
+                                <div class="detail-remarks" style="border-left-color: #52c41a; background-color: #f6ffed;">
+                                    ${approvalComment}
+                                </div>
+                            </div>`;
+                    } else if (statusText.includes('已拒绝') && approvalComment) {
+                        modalContent += `
+                            <div class="detail-section">
+                                <h4>拒绝理由</h4>
+                                <div class="detail-remarks" style="border-left-color: #f5222d; background-color: #fff1f0;">
+                                    ${approvalComment}
+                                </div>
+                            </div>`;
+                    }
+                    
+                    // 关闭模态框的按钮
+                    modalContent += `
+                        </div>
+                        <div class="modal-footer">
+                            <button class="modal-btn cancel-btn">关闭</button>
+                        </div>
+                    `;
+                    
+                    // 设置模态框内容
+                    modal.querySelector('.modal-content').innerHTML = modalContent;
+                    
+                    // 为关闭按钮添加事件
+                    const closeBtn = modal.querySelector('.close-btn');
+                    const cancelBtn = modal.querySelector('.cancel-btn');
+                    
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', function() {
+                            modal.style.display = 'none';
+                        });
+                    }
+                    
+                    if (cancelBtn) {
+                        cancelBtn.addEventListener('click', function() {
+                            modal.style.display = 'none';
+                        });
+                    }
+                    
+                    // 显示模态框
+                    modal.style.display = 'flex';
+                });
+            });
+        }
+
+        // 初始化已处理审批单的数据属性 - 修改为仅检查状态，不添加默认备注
+        function initProcessedApprovalComments() {
+            // 获取所有已处理的审批单行
+            const approvedRows = document.querySelectorAll('#approval-tab tbody tr:has(td:nth-child(9) .status-approved)');
+            const rejectedRows = document.querySelectorAll('#approval-tab tbody tr:has(td:nth-child(9) .status-rejected)');
+            
+            // 检查已通过的行是否有审批备注属性
+            approvedRows.forEach(row => {
+                // 仅确保有属性，不填充默认值
+                if (!row.hasAttribute('data-approval-comment')) {
+                    row.setAttribute('data-approval-comment', '');
+                }
+            });
+            
+            // 检查已拒绝的行是否有拒绝理由属性
+            rejectedRows.forEach(row => {
+                // 仅确保有属性，不填充默认值
+                if (!row.hasAttribute('data-rejection-reason')) {
+                    row.setAttribute('data-rejection-reason', '');
+                }
+            });
+        }
+
+        // 为初始化数据添加审批备注/拒绝理由
+        function initSampleApprovalComments() {
+            // 获取所有已处理的审批单行
+            const rows = document.querySelectorAll('#approval-tab tbody tr');
+            
+            rows.forEach(row => {
+                const statusCell = row.querySelector('td:nth-child(9)');
+                const statusText = statusCell ? statusCell.textContent.trim() : '';
+                const name = row.querySelector('td:nth-child(2)').textContent.trim();
+                
+                // 为已通过的行添加审批备注
+                if (statusText.includes('已通过')) {
+                    let comment = '已核实用户身份和需求，符合公司安全政策要求，予以批准。';
+                    
+                    // 根据用户名设置不同的备注
+                    if (name === '张三') {
+                        comment += ' 用户是技术部门核心成员，需使用此权限处理客户反馈问题。';
+                    } else if (name === '李四') {
+                        comment += ' 用户需短期访问系统进行市场数据分析。';
+                    } else if (name === '王五') {
+                        comment += ' 用户是产品核心成员，需要长期使用此功能。';
+                    }
+                    
+                    row.setAttribute('data-approval-comment', comment);
+                }
+                
+                // 为已拒绝的行添加拒绝理由
+                if (statusText.includes('已拒绝')) {
+                    let reason = '申请用途与用户岗位职责不符，无法确认业务需求的真实性。';
+                    
+                    // 根据用户名设置不同的理由
+                    if (name === '赵六') {
+                        reason += ' 人力资源部门人员无权限访问该系统的敏感数据。';
+                    } else if (name === '钱七') {
+                        reason += ' 该权限需要由部门主管提出申请，请按正规流程重新申请。';
+                    }
+                    
+                    row.setAttribute('data-rejection-reason', reason);
+                }
+            });
+        }
+
+        // 添加调试函数
+        function debugApprovalComments() {
+            console.log('调试审批备注/拒绝理由:');
+            
+            // 获取所有行
+            const rows = document.querySelectorAll('#approval-tab tbody tr');
+            
+            rows.forEach((row, index) => {
+                const name = row.querySelector('td:nth-child(2)').textContent.trim();
+                const statusCell = row.querySelector('td:nth-child(9)');
+                const statusText = statusCell ? statusCell.textContent.trim() : '待审批';
+                const approvalComment = row.getAttribute('data-approval-comment');
+                const rejectionReason = row.getAttribute('data-rejection-reason');
+                
+                console.log(`行 ${index+1} - ${name}:`);
+                console.log('  状态:', statusText);
+                console.log('  审批备注:', approvalComment || '无');
+                console.log('  拒绝理由:', rejectionReason || '无');
+            });
+        }
+
+        // 在初始化后调用调试函数
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化样例数据的审批备注/拒绝理由
+            initSampleApprovalComments();
+            
+            // 初始化查看按钮事件
+            setupViewButtonEvents();
+            
+            // 调试输出
+            setTimeout(debugApprovalComments, 1000);
+            
+            // ... 其他初始化代码 ...
+        });
+
+        // 为表格复选框添加事件处理（通用函数）
+        function setupAllCheckboxEvents() {
+            // 为每个标签页设置复选框事件
+            setupTabCheckboxEvents('approval');
+            setupTabCheckboxEvents('authorized');
+            setupTabCheckboxEvents('active');
+        }
+
+        // 为单个标签页的表格复选框添加事件处理
+        function setupTabCheckboxEvents(tabName) {
+            // 获取表头复选框
+            const headerCheckbox = document.querySelector(`#${tabName}-tab table thead th:first-child input[type="checkbox"]`);
+            
+            // 获取所有行复选框
+            const rowCheckboxes = document.querySelectorAll(`#${tabName}-tab table tbody td:first-child input[type="checkbox"]`);
+            
+            // 为表头复选框添加事件
+            if (headerCheckbox) {
+                headerCheckbox.addEventListener('change', function() {
+                    // 获取所有未禁用的行复选框
+                    const availableCheckboxes = document.querySelectorAll(`#${tabName}-tab table tbody td:first-child input[type="checkbox"]:not([disabled])`);
+                    
+                    // 设置所有可用复选框的状态与表头复选框一致
+                    availableCheckboxes.forEach(checkbox => {
+                        checkbox.checked = headerCheckbox.checked;
+                    });
+                    
+                    // 更新批量操作按钮状态
+                    const checkedCount = headerCheckbox.checked ? availableCheckboxes.length : 0;
+                    updateBatchActionButtons(tabName, checkedCount);
+                });
+            }
+            
+            // 为所有行复选框添加事件
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    // 更新表头复选框状态和批量操作按钮状态
+                    updateTableHeaderCheckboxState(tabName);
+                });
+            });
+        }
+
+        // 批量审批操作弹窗样式设置
+        function setupModalStyles() {
+            // 获取审批操作模态框
+            const modal = document.getElementById('approval-action-modal');
+            if (!modal) return;
+            
+            // 添加强调样式
+            const style = document.createElement('style');
+            style.textContent = `
+                .approval-count {
+                    font-size: 16px;
+                    background-color: #1890ff;
+                    color: white;
+                    padding: 3px 8px;
+                    border-radius: 12px;
+                    margin-left: 10px;
+                    display: inline-block;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // 格式化批量操作标题
+        function formatBatchTitle(action, count) {
+            return `
+                <span>${action === 'approve' ? '批量通过' : '批量拒绝'}</span>
+                <span class="approval-count">${count}条</span>
+            `;
+        }
+
+        // 在 batchApprovalAction 函数中设置标题时调用
+        // 将
+        // modal.querySelector('.modal-header h3').textContent = `批量通过 (${checkedRows.length}条)`;
+        // 改为
+        // modal.querySelector('.modal-header h3').innerHTML = formatBatchTitle(action, checkedRows.length);
+
+        // 在页面加载时初始化样式
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... 其他初始化代码 ...
+            
+            // 设置模态框样式
+            setupModalStyles();
+            
+            // ... 其他初始化代码 ...
+        });
+
+        // 批量收回权限操作
+        function batchRevokePermission() {
+            // 获取所有选中的行
+            // const checkedRows = document.querySelectorAll('#authorized-tab table tbody td:first-child input[type="checkbox"]:checked:not([disabled])');
+            
+            // if (checkedRows.length === 0) {
+            //     alert('请先选择要收回权限的用户');
+            //     return;
+            // }
+            
+            // 确认操作
+            if (!confirm(`确定要收回 ${checkedRows.length} 名用户的权限吗？此操作不可撤销。`)) {
+                return;
+            }
+            
+            // 执行批量收回操作
+            checkedRows.forEach(checkbox => {
+                const row = checkbox.closest('tr');
+                revokePermission(row);
+            });
+            
+            // 更新表头复选框状态
+            updateTableHeaderCheckboxState('authorized');
+            
+            // 显示操作成功消息
+            alert(`已成功收回 ${checkedRows.length} 名用户的权限`);
+        }
+
+        // 批量强制退出操作
+        function batchForceLogout() {
+            // 获取所有选中的行
+            const checkedRows = document.querySelectorAll('#active-tab table tbody td:first-child input[type="checkbox"]:checked:not([disabled])');
+            
+            if (checkedRows.length === 0) {
+                alert('请先选择要强制退出的用户');
+                return;
+            }
+            
+            // 确认操作
+            if (!confirm(`确定要强制 ${checkedRows.length} 名用户退出登录吗？这将中断他们当前的操作。`)) {
+                return;
+            }
+            
+            // 执行批量强制退出操作
+            checkedRows.forEach(checkbox => {
+                const row = checkbox.closest('tr');
+                forceLogout(row);
+            });
+            
+            // 更新表头复选框状态
+            updateTableHeaderCheckboxState('active');
+            
+            // 显示操作成功消息
+            alert(`已成功强制 ${checkedRows.length} 名用户退出登录`);
+        }
+
+        // 更新表头复选框状态和批量操作按钮状态（通用函数）
+        function updateTableHeaderCheckboxState(tabName) {
+            const availableCheckboxes = document.querySelectorAll(`#${tabName}-tab table tbody td:first-child input[type="checkbox"]:not([disabled])`);
+            const checkedCheckboxes = document.querySelectorAll(`#${tabName}-tab table tbody td:first-child input[type="checkbox"]:checked:not([disabled])`);
+            const headerCheckbox = document.querySelector(`#${tabName}-tab table thead th:first-child input[type="checkbox"]`);
+            
+            if (headerCheckbox && availableCheckboxes.length > 0) {
+                const allChecked = Array.from(availableCheckboxes).every(cb => cb.checked);
+                const anyChecked = Array.from(availableCheckboxes).some(cb => cb.checked);
+                
+                headerCheckbox.checked = allChecked;
+                headerCheckbox.indeterminate = anyChecked && !allChecked;
+            } else if (headerCheckbox) {
+                // 如果没有可用的复选框，则取消选中表头复选框
+                headerCheckbox.checked = false;
+                headerCheckbox.indeterminate = false;
+            }
+            
+            // 更新批量操作按钮状态
+            updateBatchActionButtons(tabName, checkedCheckboxes.length);
+        }
+
+        // 更新批量操作按钮状态和数量显示
+        function updateBatchActionButtons(tabName, checkedCount) {
+            // 获取对应标签页的批量操作按钮
+            let batchButtons = [];
+            
+            if (tabName === 'approval') {
+                // 审批标签页
+                batchButtons = [
+                    { el: document.querySelector(`#${tabName}-tab .batch-actions .approve-btn`), text: '批量通过' },
+                    { el: document.querySelector(`#${tabName}-tab .batch-actions .reject-btn`), text: '批量拒绝' }
+                ];
+            } else if (tabName === 'authorized') {
+                // 已授权标签页
+                batchButtons = [
+                    { el: document.querySelector(`#${tabName}-tab .batch-actions .remove-btn`), text: '批量收回权限' }
+                ];
+            } else if (tabName === 'active') {
+                // 在线用户标签页
+                batchButtons = [
+                    { el: document.querySelector(`#${tabName}-tab .batch-actions .force-logout-btn`), text: '批量强制退出' }
+                ];
+            }
+            
+            // 更新按钮文本和状态
+            batchButtons.forEach(button => {
+                if (button.el) {
+                    if (checkedCount > 0) {
+                        button.el.classList.remove('disabled');
+                        button.el.textContent = `${button.text} (${checkedCount})`;
+                    } else {
+                        button.el.classList.add('disabled');
+                        button.el.textContent = button.text;
+                    }
+                }
+            });
+        }
+
+        // 在页面加载完成后初始化所有复选框事件和批量操作按钮状态
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... 其他初始化代码 ...
+            
+            // 设置所有标签页的复选框事件
+            setupAllCheckboxEvents();
+            
+            // 初始化所有标签页的批量操作按钮状态
+            updateBatchActionButtons('approval', 0);
+            updateBatchActionButtons('authorized', 0);
+            updateBatchActionButtons('active', 0);
+            
+            // 添加批量收回和批量强制退出的事件处理
+            setupBatchActionEvents();
+            
+            // ... 其他初始化代码 ...
+        });
+
+        // 设置批量操作按钮的事件处理
+        function setupBatchActionEvents() {
+            // 批量收回权限按钮
+            const batchRevokeBtn = document.querySelector('#authorized-tab .batch-actions .remove-btn');
+            if (batchRevokeBtn) {
+                batchRevokeBtn.addEventListener('click', batchRevokePermission);
+            }
+            
+            // 批量强制退出按钮
+            const batchLogoutBtn = document.querySelector('#active-tab .batch-actions .force-logout-btn');
+            if (batchLogoutBtn) {
+                batchLogoutBtn.addEventListener('click', batchForceLogout);
+            }
+            
+            // ... 审批相关的批量按钮事件已在其他地方设置 ...
+        }
+
+        // 收回用户权限操作
+        function revokePermission(row) {
+            if (!row) return;
+            
+            // 从表格中移除该行
+            row.parentNode.removeChild(row);
+            
+            // 更新表头复选框状态和批量操作按钮状态
+            updateTableHeaderCheckboxState('authorized');
+            
+            // 可以添加实际的后端操作代码，例如发送API请求
+            console.log('已收回用户权限');
+        }
+
+        // 强制用户退出操作
+        function forceLogout(row) {
+            if (!row) return;
+            
+            // 修改用户状态为"已强制退出"
+            const statusCell = row.querySelector('td:nth-child(7)');
+            if (statusCell) {
+                statusCell.innerHTML = '<span class="status status-rejected">已强制退出</span>';
+            }
+            
+            // 禁用复选框
+            const checkbox = row.querySelector('td:first-child input[type="checkbox"]');
+            if (checkbox) {
+                checkbox.disabled = true;
+                checkbox.checked = false;
+            }
+            
+            // 修改操作按钮
+            const actionsCell = row.querySelector('td:last-child');
+            if (actionsCell) {
+                actionsCell.innerHTML = '<button class="action-btn view-btn">查看</button>';
+            }
+            
+            // 更新表头复选框状态和批量操作按钮状态
+            updateTableHeaderCheckboxState('active');
+            
+            // 可以添加实际的后端操作代码，例如发送API请求
+            console.log('已强制用户退出');
         }
     </script>
 </body>
