@@ -115,7 +115,7 @@
                             <div class="log-icon direct">+</div>
                             <div class="log-content">
                                 <div class="log-text">
-                                    <div class="log-title">直接授权 - 陈八</div>
+                                    <div class="log-title">直接授权 - 刘二</div>
                                     <div class="log-meta">
                                         <span class="log-time">5分钟前</span>
                                         <span class="log-operator">戴倚凡</span>
@@ -396,6 +396,7 @@
             const applyTime = '2024-10-26 10:20:35';
             const approvalTime = '2024-10-26 15:45:12'; // 审批通过时间
             const rejectionTime = '2024-10-26 14:30:08'; // 拒绝时间
+            let roleType = 'role-user'; // 默认角色类型
             
             // 根据用户名设置相关信息
             let jobId = 'ZH001';
@@ -423,6 +424,12 @@
                 department = '技术部';
                 position = '开发工程师';
                 email = 'qianqi@example.com';
+            } else if (userName.includes('刘二')) {
+                jobId = 'ZH003';
+                department = '产品部';
+                position = '产品经理';
+                email = 'liuer@example.com';
+                roleType = 'platform-admin'; // 默认角色类型
             }
             
             // 创建HTML内容
@@ -452,6 +459,14 @@
                         <div class="detail-item">
                             <div class="detail-label">邮箱</div>
                             <div class="detail-value">${email}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">权限类型</div>
+                            <div class="detail-value">
+                                <span class="role-badge ${roleType === 'platform-admin' ? 'role-platform-admin' : 'role-user'}">
+                                    ${roleType === 'platform-admin' ? '平台管理员' : '普通用户'}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -586,14 +601,12 @@
             // 处理直接授权类型
             if (iconClass.includes('direct')) {
                 modalContent += `
-                    
-                    
                     <div class="detail-section">
                         <h4>权限信息</h4>
                         <div class="detail-grid">
                             <div class="detail-item">
                                 <div class="detail-label">授权时长</div>
-                                <div class="detail-value">60天</div>
+                                <div class="detail-value">${duration || '60天'}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">授权时间</div>
@@ -604,8 +617,8 @@
                     
                     <div class="detail-section">
                         <h4>授权备注</h4>
-                        <div class="detail-remarks" style="border-left-color: #8c52ff; background-color: #f5f0ff;">
-                            管理员戴倚凡直接授予用户访问权限，时长：60天。
+                        <div class="detail-remarks">
+                            管理员戴倚凡直接授予用户<b>${roleType === 'platform-admin' ? '平台管理员' : '普通用户'}</b>权限，时长${duration || '60天'}。
                         </div>
                     </div>
                     

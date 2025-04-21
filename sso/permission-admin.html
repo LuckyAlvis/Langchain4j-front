@@ -103,6 +103,49 @@
                             </select>
                         </div>
                         <div class="filter-item">
+                            <label>平台:</label>
+                            <div class="multi-select" id="approval-platform-filter">
+                                <div class="multi-select-header">
+                                    <span>全部</span>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="multi-select-dropdown">
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="一" checked> 第一平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="二" checked> 第二平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="三" checked> 第三平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="四" checked> 第四平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="五" checked> 第五平台
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <label>角色:</label>
+                            <div class="multi-select" id="approval-role-filter">
+                                <div class="multi-select-header">
+                                    <span>全部</span>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="multi-select-dropdown">
+                                    <div class="multi-select-option">
+                                    <input type="checkbox" value="user" checked> 普通用户
+                                </div>
+                                    <div class="multi-select-option">
+                                    <input type="checkbox" value="platform-admin" checked> 平台管理员
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
                             <button class="search-btn">搜索</button>
                             <button class="reset-btn">重置</button>
                         </div>
@@ -123,6 +166,8 @@
                                     <th>姓名</th>
                                     <th>工号</th>
                                     <th>部门</th>
+                                    <th>平台</th>
+                                    <th>角色</th>
                                     <th>申请时间</th>
                                     <th>申请理由</th>
                                     <th>状态</th>
@@ -135,6 +180,8 @@
                                     <td>张三</td>
                                     <td>ZH001</td>
                                     <td>技术部</td>
+                                    <td><span class="platform-badge platform-1">第一平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-10-15 14:30</td>
                                     <td>需要使用AI工具提升工作效率</td>
                                     <td><span class="status status-pending">待审批</span></td>
@@ -149,6 +196,8 @@
                                     <td>李四</td>
                                     <td>ZH002</td>
                                     <td>市场部</td>
+                                    <td><span class="platform-badge platform-2">第二平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-10-15 10:15</td>
                                     <td>需要调研AI产品功能</td>
                                     <td><span class="status status-pending">待审批</span></td>
@@ -163,7 +212,9 @@
                                     <td>王五</td>
                                     <td>ZH003</td>
                                     <td>产品部</td>
-                                    <td>2024-07-05</td>
+                                    <td><span class="platform-badge platform-3">第三平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
+                                    <td>2024-07-05 10:00</td>
                                     <td>产品设计需要使用AI助手</td>
                                     <td><span class="status status-approved">已通过</span></td>
                                     <td>
@@ -176,7 +227,9 @@
                                     <td>赵六</td>
                                     <td>ZH004</td>
                                     <td>人力资源</td>
-                                    <td>2024-09-30</td>
+                                    <td><span class="platform-badge platform-4">第四平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
+                                    <td>2024-09-30 09:30</td>
                                     <td>需要使用系统管理员工培训数据</td>
                                     <td><span class="status status-rejected">已拒绝</span></td>
                                     <td>
@@ -189,7 +242,9 @@
                                     <td>钱七</td>
                                     <td>ZH005</td>
                                     <td>技术部</td>
-                                    <td>2024-10-01</td>
+                                    <td><span class="platform-badge platform-5">第五平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
+                                    <td>2024-10-01 09:30</td>
                                     <td>开发需要使用AI接口</td>
                                     <td><span class="status status-pending">待审批</span></td>
                                     <td>
@@ -246,6 +301,52 @@
                             <span class="date-separator">至</span>
                             <input type="date" class="date-picker">
                         </div>
+                        <div class="filter-item">
+                            <label>平台:</label>
+                            <div class="multi-select" id="authorized-platform-filter">
+                                <div class="multi-select-header">
+                                    <span>全部</span>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="multi-select-dropdown">
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="一" checked> 第一平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="二" checked> 第二平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="三" checked> 第三平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="四" checked> 第四平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="五" checked> 第五平台
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <label>角色:</label>
+                            <div class="multi-select" id="authorized-role-filter">
+                                <div class="multi-select-header">
+                                    <span>全部</span>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="multi-select-dropdown">
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="user" checked> 普通用户
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="platform-admin" checked> 平台管理员
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="admin" checked> 超级管理员
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="filter-item filter-buttons">
                             <button class="search-btn">搜索</button>
                             <button class="reset-btn">重置</button>
@@ -266,6 +367,8 @@
                                     <th>姓名</th>
                                     <th>工号</th>
                                     <th>部门</th>
+                                    <th>平台</th>
+                                    <th>角色</th>
                                     <th>授权时间</th>
                                     <th>最近登录</th>
                                     <th>访问次数</th>
@@ -278,6 +381,8 @@
                                     <td>张三</td>
                                     <td>ZH001</td>
                                     <td>技术部</td>
+                                    <td><span class="platform-badge platform-1">第一平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-09-15</td>
                                     <td>2024-10-15 14:30</td>
                                     <td>42次</td>
@@ -291,6 +396,8 @@
                                     <td>李四</td>
                                     <td>ZH002</td>
                                     <td>市场部</td>
+                                    <td><span class="platform-badge platform-2">第二平台</span></td>
+                                    <td><span class="role-badge role-platform-admin">平台管理员</span></td>
                                     <td>2024-08-20</td>
                                     <td>2024-10-15 09:15</td>
                                     <td>68次</td>
@@ -304,6 +411,8 @@
                                     <td>王五</td>
                                     <td>ZH003</td>
                                     <td>产品部</td>
+                                    <td><span class="platform-badge platform-3">第三平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-07-05</td>
                                     <td>2024-10-14 16:45</td>
                                     <td>126次</td>
@@ -317,6 +426,8 @@
                                     <td>赵六</td>
                                     <td>ZH004</td>
                                     <td>人力资源</td>
+                                    <td><span class="platform-badge platform-4">第四平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-09-30</td>
                                     <td>2024-10-13 11:20</td>
                                     <td>18次</td>
@@ -330,6 +441,8 @@
                                     <td>钱七</td>
                                     <td>ZH005</td>
                                     <td>技术部</td>
+                                    <td><span class="platform-badge platform-5">第五平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-10-01</td>
                                     <td>2024-10-15 08:30</td>
                                     <td>24次</td>
@@ -380,6 +493,52 @@
                             </select>
                         </div>
                         <div class="filter-item">
+                            <label>平台:</label>
+                            <div class="multi-select" id="platform-filter">
+                                <div class="multi-select-header">
+                                    <span>全部</span>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="multi-select-dropdown">
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="一" checked> 第一平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="二" checked> 第二平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="三" checked> 第三平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="四" checked> 第四平台
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="五" checked> 第五平台
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <label>角色:</label>
+                            <div class="multi-select" id="role-filter">
+                                <div class="multi-select-header">
+                                    <span>全部</span>
+                                    <span class="arrow">▼</span>
+                                </div>
+                                <div class="multi-select-dropdown">
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="user" checked> 普通用户
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="platform-admin" checked> 平台管理员
+                                    </div>
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" value="admin" checked> 超级管理员
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
                             <label>登录时间:</label>
                             <input type="date" class="date-picker">
                             <span class="date-separator">至</span>
@@ -405,6 +564,8 @@
                                     <th>姓名</th>
                                     <th>工号</th>
                                     <th>部门</th>
+                                    <th>平台</th>
+                                    <th>角色</th>
                                     <th>登录时间</th>
                                     <th>IP地址</th>
                                     <th>登录设备</th>
@@ -417,6 +578,8 @@
                                     <td>张三</td>
                                     <td>ZH001</td>
                                     <td>技术部</td>
+                                    <td><span class="platform-badge platform-1">第一平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-10-15 14:30</td>
                                     <td>192.168.1.101</td>
                                     <td>Chrome Windows</td>
@@ -430,6 +593,8 @@
                                     <td>李四</td>
                                     <td>ZH002</td>
                                     <td>市场部</td>
+                                    <td><span class="platform-badge platform-2">第二平台</span></td>
+                                    <td><span class="role-badge role-platform-admin">平台管理员</span></td>
                                     <td>2024-10-15 09:15</td>
                                     <td>192.168.1.102</td>
                                     <td>Safari MacOS</td>
@@ -443,6 +608,8 @@
                                     <td>王五</td>
                                     <td>ZH003</td>
                                     <td>产品部</td>
+                                    <td><span class="platform-badge platform-3">第三平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-10-15 10:45</td>
                                     <td>192.168.1.103</td>
                                     <td>Edge Windows</td>
@@ -456,6 +623,8 @@
                                     <td>赵六</td>
                                     <td>ZH004</td>
                                     <td>人力资源</td>
+                                    <td><span class="platform-badge platform-4">第四平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-10-15 11:30</td>
                                     <td>192.168.1.104</td>
                                     <td>Firefox Linux</td>
@@ -469,6 +638,8 @@
                                     <td>钱七</td>
                                     <td>ZH005</td>
                                     <td>技术部</td>
+                                    <td><span class="platform-badge platform-5">第五平台</span></td>
+                                    <td><span class="role-badge role-user">普通用户</span></td>
                                     <td>2024-10-15 08:30</td>
                                     <td>192.168.1.105</td>
                                     <td>Chrome Android</td>
@@ -576,7 +747,7 @@
                                     <label class="form-label required">用户邮箱</label>
                                     <div class="email-search-container">
                                         <input type="email" class="form-input" id="search-email" placeholder="请输入企业邮箱进行查找" required>
-                                        <button type="button" class="search-user-btn" onclick="searchUserByEmail()">查找用户</button>
+                                        <!-- <button type="button" class="search-user-btn" onclick="searchUserByEmail()">查找用户</button> -->
                                     </div>
                                     <span class="field-hint">请输入用户的完整企业邮箱，将从企业IM系统中查找对应的用户信息</span>
                                 </div>
@@ -617,11 +788,45 @@
                                                 <span class="detail-label">邮箱:</span>
                                                 <span class="detail-value" id="user-email">--</span>
                                             </div>
+                                            <!-- 添加所属平台 -->
+                                            <div class="detail-row">
+                                                <span class="detail-label">所属平台:</span>
+                                                <span class="detail-value" id="user-platform">
+                                                    <span class="platform-badge platform-1">第一平台</span>
+                                                </span>
+                                                <input type="hidden" name="platform" id="platform-input" value="1">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="confirm-message">
                                         <p>请确认以上用户信息是否正确，如不正确请返回重新查找</p>
                                     </div>
+                                </div>
+                                
+                                <div class="form-group role-selection-group" id="roleSelectionGroup">
+                                    <label class="form-label required">用户角色</label>
+                                    <div class="role-options">
+                                        <div class="role-option">
+                                            <label class="role-option-label">
+                                                <input type="radio" name="role" value="user" checked>
+                                                <div>
+                                                    <div class="role-option-title">普通用户</div>
+                                                    <div class="role-option-desc">可以使用平台的基本功能，无管理权限</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="role-option" id="platformAdminOption">
+                                            <label class="role-option-label">
+                                                <input type="radio" name="role" value="platform-admin">
+                                                <div>
+                                                    <div class="role-option-title">平台管理员</div>
+                                                    <div class="role-option-desc">可以管理所在平台的用户和审批权限申请</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <span class="field-hint">选择适合的用户角色，不同角色具有不同的权限</span>
+                                    <span class="field-hint">只有超级管理员可以看到这项，平台管理员只能开通普通用户权限</span>
                                 </div>
                                 
                                 <div class="form-group">
@@ -967,6 +1172,9 @@
             searchMessage.textContent = '';
             
             modal.style.display = 'flex';
+            
+            // Initialize role selection when modal opens
+            initRoleSelection();
         }
 
         // 关闭添加用户弹窗
@@ -1013,10 +1221,14 @@
                     
                     // 隐藏搜索消息
                     searchMessage.style.display = 'none';
+                    
+                    // Initialize role selection
+                    initRoleSelection();
                 } else {
                     // 用户未找到
                     searchMessage.className = 'search-message error';
                     searchMessage.textContent = '未找到此邮箱对应的用户，请检查邮箱地址是否正确';
+                    searchMessage.innerHTML += '<br>样例: zhangsan@example.com, lisi@example.com';
                     searchMessage.style.display = 'block';
                 }
             }, 1000); // 模拟1秒延迟
@@ -1030,34 +1242,38 @@
                     name: '张三',
                     employeeId: 'EMP1001',
                     department: '技术部',
-                    position: '高级开发工程师',
-                    email: 'zhangsan@example.com'
+                    position: '后端开发工程师',
+                    email: 'zhangsan@example.com',
+                    platform: '一'  // 添加平台信息
                 },
                 'lisi@example.com': {
                     name: '李四',
                     employeeId: 'EMP1002',
-                    department: '市场部',
-                    position: '市场专员',
-                    email: 'lisi@example.com'
+                    department: '集团科技管理部',
+                    position: '产品经理',
+                    email: 'lisi@example.com',
+                    platform: '二'  // 添加平台信息
                 },
                 'wangwu@example.com': {
                     name: '王五',
                     employeeId: 'EMP1003',
                     department: '产品部',
                     position: '产品经理',
-                    email: 'wangwu@example.com'
+                    email: 'wangwu@example.com',
+                    platform: '三'  // 添加平台信息
                 },
                 'zhaoliu@example.com': {
                     name: '赵六',
                     employeeId: 'EMP1004',
                     department: '人力资源',
                     position: 'HR专员',
-                    email: 'zhaoliu@example.com'
+                    email: 'zhaoliu@example.com',
+                    platform: '四'  // 添加平台信息
                 }
             };
             
             // 返回找到的用户或null
-            return users[email] || users['zhangsan@example.com'];
+            return users[email] || null;
         }
 
         // 填充用户信息到确认页面
@@ -1067,6 +1283,14 @@
             document.getElementById('user-department').textContent = userData.department;
             document.getElementById('user-position').textContent = userData.position;
             document.getElementById('user-email').textContent = userData.email;
+            
+            // 设置用户的平台信息
+            const platformElement = document.getElementById('user-platform');
+            const platformInput = document.getElementById('platform-input');
+            const platformNumber = userData.platform || '一'; // 如果未指定平台，默认为第一平台
+            
+            platformElement.innerHTML = `<span class="platform-badge platform-${platformNumber}">第${platformNumber}平台</span>`;
+            platformInput.value = platformNumber;
             
             // 设置头像缩写
             if (userData.name) {
@@ -1096,6 +1320,10 @@
             const duration = document.querySelector('#add-user-modal select[name="duration"]').value;
             const reason = document.querySelector('#add-user-modal textarea[name="reason"]').value.trim();
             
+            // 获取平台和角色
+            const platform = document.querySelector('#add-user-modal select[name="platform"]').value;
+            const role = document.querySelector('#add-user-modal input[name="role"]:checked').value;
+            
             // 验证授权理由
             if (!reason) {
                 alert('请填写授权备注');
@@ -1113,6 +1341,8 @@
                 },
                 duration: duration,
                 reason: reason,
+                platform: platform,
+                role: role,
                 addTime: new Date().toISOString()
             };
             
@@ -1162,6 +1392,8 @@
                 <td>${name}</td>
                 <td>${employeeId}</td>
                 <td>${department}</td>
+                <td><span class="platform-badge platform-${platform}">第${platform}平台</span></td>
+                <td><span class="role-badge ${role === 'user' ? 'role-user' : role === 'platform-admin' ? 'role-platform-admin' : 'role-admin'}">${role === 'user' ? '普通用户' : role === 'platform-admin' ? '平台管理员' : '超级管理员'}</span></td>
                 <td>${dateFormatted}</td>
                 <td>${expiryFormatted}</td>
                 <td>
@@ -1202,6 +1434,126 @@
             // 关闭弹窗
             alert('用户权限添加成功');
             closeAddUserModal();
+        }
+
+        // Function to check if current user is super admin
+        function isSuperAdmin() {
+            // In real implementation, this would check the current user's role from session/API
+            // For demo purposes, we'll assume the current user is a super admin
+            return true;
+        }
+        
+        // Handle platform change
+        function handlePlatformChange() {
+            const platformSelect = document.querySelector('.platform-select');
+            const platformAdminOption = document.getElementById('platformAdminOption');
+            
+            if (platformSelect && platformAdminOption) {
+                // Only enable platform admin role for super admins on any platform
+                // or platform admins on their own platform
+                if (isSuperAdmin()) {
+                    platformAdminOption.classList.remove('disabled');
+                    platformAdminOption.querySelector('input').disabled = false;
+                } else {
+                    // For non-super admins, disable platform admin option
+                    platformAdminOption.classList.add('disabled');
+                    platformAdminOption.querySelector('input').disabled = true;
+                    // Ensure "user" option is selected
+                    document.querySelector('input[name="role"][value="user"]').checked = true;
+                }
+            }
+        }
+        
+        // Initialize role selection when tab is switched or form is shown
+        function initRoleSelection() {
+            // Apply initial state for role selection based on user type
+            handlePlatformChange();
+            
+            // Add event listener for platform change
+            const platformSelect = document.querySelector('.platform-select');
+            if (platformSelect) {
+                platformSelect.addEventListener('change', handlePlatformChange);
+            }
+        }
+
+        // Initialize all multi-select dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize multi-select dropdowns
+            initMultiSelectDropdowns();
+        });
+
+        function initMultiSelectDropdowns() {
+            // Find all multi-select elements
+            const multiSelects = document.querySelectorAll('.multi-select');
+            
+            multiSelects.forEach(select => {
+                const header = select.querySelector('.multi-select-header');
+                const dropdown = select.querySelector('.multi-select-dropdown');
+                const options = select.querySelectorAll('.multi-select-option input');
+                const headerText = header.querySelector('span');
+                
+                // Toggle dropdown on header click
+                header.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    
+                    // Close all other open dropdowns
+                    document.querySelectorAll('.multi-select-dropdown.active').forEach(d => {
+                        if (d !== dropdown) {
+                            d.classList.remove('active');
+                            d.closest('.multi-select').querySelector('.multi-select-header').classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('active');
+                    header.classList.toggle('active');
+                });
+                
+                // Handle option selection
+                options.forEach(option => {
+                    option.addEventListener('change', (e) => {
+                        e.stopPropagation();
+                        updateHeaderText(select);
+                    });
+                    
+                    // Prevent dropdown from closing when clicking on options
+                    option.parentElement.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+                
+                // Initial header text
+                updateHeaderText(select);
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.multi-select-dropdown.active').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                    dropdown.closest('.multi-select').querySelector('.multi-select-header').classList.remove('active');
+                });
+            });
+        }
+
+        // Update the header text based on selected options
+        function updateHeaderText(select) {
+            const header = select.querySelector('.multi-select-header span');
+            const options = select.querySelectorAll('.multi-select-option input');
+            const selectedOptions = Array.from(options).filter(opt => opt.checked);
+            
+            if (selectedOptions.length === 0) {
+                header.textContent = '请选择';
+            } else if (selectedOptions.length === options.length) {
+                header.textContent = '全部';
+            } else if (selectedOptions.length <= 2) {
+                const labels = selectedOptions.map(opt => {
+                    const text = opt.parentElement.textContent.trim();
+                    return text;
+                });
+                header.textContent = labels.join(', ');
+            } else {
+                header.textContent = `已选 ${selectedOptions.length} 项`;
+            }
         }
     </script>
 </body>

@@ -1207,4 +1207,335 @@ input, select {
 #add-user-modal .form-input:disabled {
     background-color: #f8fafc;
     cursor: not-allowed;
+}
+
+/* Platform Badge Style */
+.platform-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+/* Change platform classes from numbers to Chinese characters */
+.platform-一 {
+    background-color: #722ed1;
+    color: white;
+}
+
+.platform-二 {
+    background-color: #13c2c2;
+    color: white;
+}
+
+.platform-三 {
+    background-color: #fa8c16;
+    color: white;
+}
+
+.platform-四 {
+    background-color: #1890ff;
+    color: white;
+}
+
+.platform-五 {
+    background-color: #eb2f96;
+    color: white;
+}
+
+/* Keep backward compatibility with numeric classes */
+.platform-1 {
+    background-color: #722ed1;
+    color: white;
+}
+
+.platform-2 {
+    background-color: #13c2c2;
+    color: white;
+}
+
+.platform-3 {
+    background-color: #fa8c16;
+    color: white;
+}
+
+.platform-4 {
+    background-color: #1890ff;
+    color: white;
+}
+
+.platform-5 {
+    background-color: #eb2f96;
+    color: white;
+}
+
+/* Role Badge Style */
+.role-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.role-admin {
+    background-color: #f5222d;
+    color: white;
+}
+
+.role-platform-admin {
+    background-color: #fa8c16;
+    color: white;
+}
+
+.role-user {
+    background-color: #52c41a;
+    color: white;
+}
+
+/* Role selection group in add user modal */
+#add-user-modal .role-selection-group {
+    margin-top: 0;
+}
+
+#add-user-modal .role-options {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+#add-user-modal .role-option {
+    flex: 1;
+    background-color: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#add-user-modal .role-option:hover {
+    border-color: #cbd5e1;
+    background-color: #f1f5f9;
+}
+
+#add-user-modal .role-option.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#add-user-modal .role-option input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #3b82f6;
+}
+
+#add-user-modal .role-option-label {
+    display: flex;
+    align-items: center;
+}
+
+#add-user-modal .role-option-title {
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 4px;
+}
+
+#add-user-modal .role-option-desc {
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* Platform selection in add user modal */
+#add-user-modal .platform-selection {
+    display: none;
+}
+
+#add-user-modal .platform-select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: #1e293b;
+    background-color: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+#add-user-modal .platform-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    outline: none;
+}
+
+/* Replace role filter checkbox group with dropdown multi-select style */
+.role-filter-group {
+    display: none; /* Hide the old checkbox style */
+}
+
+/* Multi-select dropdown style */
+.multi-select {
+    position: relative;
+    min-width: 180px;
+}
+
+.multi-select-header {
+    padding: 8px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+}
+
+.multi-select-header:hover {
+    border-color: #40a9ff;
+}
+
+.multi-select-header .arrow {
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+
+.multi-select-header.active .arrow {
+    transform: rotate(180deg);
+}
+
+.multi-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    margin-top: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.multi-select-dropdown.active {
+    display: block;
+}
+
+.multi-select-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.multi-select-option:hover {
+    background-color: #f5f5f5;
+}
+
+.multi-select-option input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.platform-badge-small {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-right: 3px;
+}
+
+/* Display platform and role badges in active user tab */
+.user-platform-role {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Update active users tab to accommodate the new columns */
+#active-tab table .platform-badge,
+#active-tab table .role-badge {
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+/* Fix for header alignment in active users tab */
+#active-tab table th:nth-child(5), 
+#active-tab table td:nth-child(5),
+#active-tab table th:nth-child(6), 
+#active-tab table td:nth-child(6) {
+    width: auto;
+    min-width: 80px;
+}
+
+/* Selected items display for multi-select */
+.selected-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 5px;
+}
+
+.selected-item {
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.selected-item .remove {
+    margin-left: 4px;
+    cursor: pointer;
+    color: #999;
+}
+
+.selected-item .remove:hover {
+    color: #f5222d;
+}
+
+/* Make filter dropdowns consistent width */
+.filter-item select,
+.filter-item .multi-select {
+    min-width: 150px;
+}
+
+/* Add styles for platform badge in user info card */
+#add-user-modal .detail-value .platform-badge {
+    margin-top: -2px;
+}
+
+/* Make role selection the first option after user info */
+#add-user-modal .role-selection-group {
+    margin-top: 0;
+}
+
+/* Platform read-only field style */
+.platform-readonly {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.platform-readonly-label {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.platform-readonly-value {
+    display: flex;
+    align-items: center;
 } 
