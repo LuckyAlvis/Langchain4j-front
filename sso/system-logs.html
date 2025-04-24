@@ -231,7 +231,7 @@
                                     <div class="log-title">审批通过 - 吴九</div>
                                     <div class="log-meta">
                                         <span class="log-time">昨天 10:20</span>
-                                        <span class="log-operator">林舒悦</span>
+                                        <span class="log-operator">戴倚凡</span>
                                     </div>
                                 </div>
                                 <div class="log-detail">
@@ -305,11 +305,11 @@
                                 </div>
                                 <div class="detail-item">
                                     <div class="detail-label">所属部门</div>
-                                    <div class="detail-value">技术部</div>
+                                    <div class="detail-value">中國建築國際-信息化管理部</div>
                                 </div>
                                 <div class="detail-item">
                                     <div class="detail-label">所属岗位</div>
-                                    <div class="detail-value">高级开发工程师</div>
+                                    <div class="detail-value">高级Java开发工程师</div>
                                 </div>
                                 <div class="detail-item">
                                     <div class="detail-label">邮箱</div>
@@ -322,8 +322,12 @@
                             <h4>权限信息</h4>
                             <div class="detail-grid">
                                 <div class="detail-item">
-                                    <div class="detail-label">申请时长</div>
-                                    <div class="detail-value">30天</div>
+                                    <div class="detail-label">权限类型</div>
+                                    <div class="detail-value">
+                                        <span class="role-badge ${roleType === 'platform-admin' ? 'role-platform-admin' : 'role-user'}">
+                                            ${roleType === 'platform-admin' ? '平台管理员' : '普通用户'}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="detail-item">
                                     <div class="detail-label">申请时间</div>
@@ -335,14 +339,14 @@
                         <div class="detail-section">
                             <h4>申请原因</h4>
                             <div class="detail-remarks">
-                                因工作需要，需要访问中海通系统查询客户订单数据，以便进行技术支持和问题排查。系统中的用户日志和订单流程数据对解决客户反馈的问题至关重要。
+                                因工作需要，需开发智能体，对接部门内知识库，提供智能助手，烦请审批。
                             </div>
                         </div>
                         
                         <div class="detail-section">
                             <h4>审批备注</h4>
                             <div class="detail-remarks">
-                                已核实用户身份和需求，符合公司安全政策要求，予以批准。权限有效期30天，到期后自动收回。
+                                已核实用户身份和需求，符合公司安全政策要求，予以批准。用户权限长期有效。
                             </div>
                         </div>
                     </div>
@@ -400,20 +404,6 @@
                 operatorName = '戴倚凡'; // 默认值
             }
             
-            // 添加申请时长信息
-            let duration = '30天'; // 默认30天
-            
-            // 根据用户名设置不同的申请时长
-            if (userName.includes('李四')) {
-                duration = '7天';
-            } else if (userName.includes('王五')) {
-                duration = '90天';
-            } else if (userName.includes('赵六')) {
-                duration = '长期';
-            } else if (userName.includes('孙七')) {
-                duration = '1年';
-            }
-            
             // 设置各种审批时间
             const applyTime = '2024-10-26 10:20:35';
             const approvalTime = '2024-10-26 15:45:12'; // 审批通过时间
@@ -422,34 +412,34 @@
             
             // 根据用户名设置相关信息
             let jobId = 'ZH001';
-            let department = '技术部';
-            let position = '高级开发工程师';
+            let department = '中國建築國際-信息化管理部';
+            let position = '高级Java开发工程师';
             let email = 'zhangsan@example.com';
             
             if (userName.includes('李四')) {
                 jobId = 'ZH002';
-                department = '市场部';
-                position = '市场专员';
+                department = '中國建築國際-中建香港-房屋公司-房屋公司團隊（駐深）';
+                position = '高级Java开发工程师';
                 email = 'lisi@example.com';
             } else if (userName.includes('王五')) {
                 jobId = 'ZH003';
-                department = '产品部';
-                position = '产品经理';
+                department = '中國建築國際-中建香港-海宏技術有限公司-海宏公司團隊(駐深)-數字化提升部二部';
+                position = '高级Java开发工程师';
                 email = 'wangwu@example.com';
             } else if (userName.includes('赵六')) {
                 jobId = 'ZH004';
-                department = '人力资源';
-                position = 'HR专员';
+                department = '中國建築國際-中建香港-人力资源部';
+                position = '高级Java开发工程师';
                 email = 'zhaoliu@example.com';
             } else if (userName.includes('钱七') || userName.includes('孙七')) {
                 jobId = 'ZH005';
-                department = '技术部';
-                position = '开发工程师';
+                department = '中國建築國際-金融業務部';
+                position = '高级Java开发工程师';
                 email = 'qianqi@example.com';
             } else if (userName.includes('刘二')) {
                 jobId = 'ZH003';
-                department = '产品部';
-                position = '产品经理';
+                department = '中國建築國際-中建澳門-总部部门-信息化管理部';
+                position = '高级Java开发工程师';
                 email = 'liuer@example.com';
                 roleType = 'platform-admin'; // 默认角色类型
             }
@@ -478,21 +468,13 @@
                             <div class="detail-label">邮箱</div>
                             <div class="detail-value">${email}</div>
                         </div>
-                        <div class="detail-item">
-                            <div class="detail-label">权限类型</div>
-                            <div class="detail-value">
-                                <span class="role-badge ${roleType === 'platform-admin' ? 'role-platform-admin' : 'role-user'}">
-                                    ${roleType === 'platform-admin' ? '平台管理员' : '普通用户'}
-                                </span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             `;
             
             // 第二部分：权限信息（根据操作类型显示不同内容）
             if (iconClass.includes('login')) {
-                // 登录操作 - 显示登录信息
+                // 登录 - 显示登录信息
                 modalContent += `
                     <div class="detail-section">
                         <h4>登录信息</h4>
@@ -502,24 +484,23 @@
                                 <div class="detail-value">${applyTime}</div>
                             </div>
                             <div class="detail-item">
+                                <div class="detail-label">登录状态</div>
+                                <div class="detail-value">
+                                    <span class="status-badge status-success">成功</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
                                 <div class="detail-label">登录IP</div>
-                                <div class="detail-value">192.168.1.101</div>
+                                <div class="detail-value">172.16.42.101</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">设备信息</div>
-                                <div class="detail-value">Windows 10, Chrome</div>
+                                <div class="detail-value">Windows 10 / Chrome 108.0.5359.125</div>
                             </div>
-                            <div class="detail-item">
-                                <div class="detail-label">登录位置</div>
-                                <div class="detail-value">公司内网</div>
-                            </div>
-                        </div>
-                        <div class="detail-remarks" style="border-left-color: #1890ff; background-color: #e6f7ff;">
-                            登录成功。设备信息：Windows 10，Chrome 浏览器。登录位置：公司内网，IP地址匹配常用位置。
                         </div>
                     </div>
                 `;
-            } 
+            }
             else if (iconClass.includes('approved') || iconClass.includes('rejected') || iconClass.includes('new')) {
                 // 审批通过/审批拒绝/新申请 - 显示权限申请信息
                 modalContent += `
@@ -527,8 +508,12 @@
                         <h4>权限信息</h4>
                         <div class="detail-grid">
                             <div class="detail-item">
-                                <div class="detail-label">申请时长</div>
-                                <div class="detail-value">${duration}</div>
+                                <div class="detail-label">权限类型</div>
+                                <div class="detail-value">
+                                    <span class="role-badge ${roleType === 'platform-admin' ? 'role-platform-admin' : 'role-user'}">
+                                        ${roleType === 'platform-admin' ? '平台管理员' : '普通用户'}
+                                    </span>
+                                </div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">申请时间</div>
@@ -552,7 +537,7 @@
                     <div class="detail-section">
                         <h4>申请原因</h4>
                         <div class="detail-remarks" style="border-left-color: #faad14; background-color: #fffbe6;">
-                            因工作需要，需要访问中海通系统查询客户订单数据，以便进行技术支持和问题排查。系统中的用户日志和订单流程数据对解决客户反馈的问题至关重要。
+                            因工作需要，需开发智能体，对接部门内知识库，提供智能助手，烦请审批。
                         </div>
                     </div>
                 `;
@@ -563,7 +548,21 @@
                         <div class="detail-section">
                             <h4>审批备注</h4>
                             <div class="detail-remarks" style="border-left-color: #52c41a; background-color: #f6ffed;">
-                                已核实用户身份和需求，符合公司安全政策要求，予以批准。权限有效期${duration}，到期后自动收回。
+                                已核实用户身份和需求，符合公司安全政策要求，予以批准。用户权限长期有效。
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>操作信息</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">操作人</div>
+                                    <div class="detail-value">${operatorName || '戴倚凡'}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">操作时间</div>
+                                    <div class="detail-value">${approvalTime}</div>
+                                </div>
                             </div>
                         </div>
                     `;
@@ -573,6 +572,20 @@
                             <h4>拒绝理由</h4>
                             <div class="detail-remarks" style="border-left-color: #f5222d; background-color: #fff1f0;">
                                 申请用途与用户岗位职责不符，无法确认业务需求的真实性。建议由部门主管重新提交申请并详细说明业务需求。
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>操作信息</h4>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">操作人</div>
+                                    <div class="detail-value">${operatorName || '戴倚凡'}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">操作时间</div>
+                                    <div class="detail-value">${rejectionTime}</div>
+                                </div>
                             </div>
                         </div>
                     `;
@@ -594,22 +607,37 @@
                         <h4>权限信息</h4>
                         <div class="detail-grid">
                             <div class="detail-item">
-                                <div class="detail-label">权限时长</div>
-                                <div class="detail-value">${duration}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">授权时间</div>
-                                <div class="detail-value">2024-09-16 09:12</div>
+                                <div class="detail-label">权限类型</div>
+                                <div class="detail-value">
+                                    <span class="role-badge ${roleType === 'platform-admin' ? 'role-platform-admin' : 'role-user'}">
+                                        ${roleType === 'platform-admin' ? '平台管理员' : '普通用户'}
+                                    </span>
+                                </div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">收回时间</div>
                                 <div class="detail-value">${applyTime}</div>
                             </div>
                         </div>
-                        <div class="detail-section">
-                            <h4>操作备注</h4>
-                            <div class="detail-remarks" style="border-left-color: #bfbfbf; background-color: #fafafa;">
-                                根据公司权限管理规定，用户${duration}权限有效期已到，系统自动收回。用户可重新申请。
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>操作备注</h4>
+                        <div class="detail-remarks" style="border-left-color: #bfbfbf; background-color: #fafafa;">
+                            根据公司权限管理规定，收回该用户耀耀工厂访问权限。用户可重新申请。
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>操作信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">操作人</div>
+                                <div class="detail-value">${operatorName || '戴倚凡'}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">操作时间</div>
+                                <div class="detail-value">${applyTime}</div>
                             </div>
                         </div>
                     </div>
@@ -623,8 +651,12 @@
                         <h4>权限信息</h4>
                         <div class="detail-grid">
                             <div class="detail-item">
-                                <div class="detail-label">授权时长</div>
-                                <div class="detail-value">${duration || '60天'}</div>
+                                <div class="detail-label">权限类型</div>
+                                <div class="detail-value">
+                                    <span class="role-badge ${roleType === 'platform-admin' ? 'role-platform-admin' : 'role-user'}">
+                                        ${roleType === 'platform-admin' ? '平台管理员' : '普通用户'}
+                                    </span>
+                                </div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">授权时间</div>
@@ -636,7 +668,7 @@
                     <div class="detail-section">
                         <h4>授权备注</h4>
                         <div class="detail-remarks">
-                            管理员戴倚凡直接授予用户<b>${roleType === 'platform-admin' ? '平台管理员' : '普通用户'}</b>权限，时长${duration || '60天'}。
+                            管理员戴倚凡直接授予用户权限，长期有效。
                         </div>
                     </div>
                     
@@ -679,8 +711,26 @@
                                 <div class="detail-value">公司内网</div>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>操作备注</h4>
                         <div class="detail-remarks" style="border-left-color: #ff4d4f; background-color: #fff1f0;">
-                            被管理员${operatorName || '戴倚凡'}强制退出。设备信息：Windows 10，Chrome 浏览器。登录位置：公司内网，IP地址匹配常用位置。
+                            管理员强制退出用户登录。
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>操作信息</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <div class="detail-label">操作人</div>
+                                <div class="detail-value">${operatorName || '戴倚凡'}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">操作时间</div>
+                                <div class="detail-value">${applyTime}</div>
+                            </div>
                         </div>
                     </div>
                 `;

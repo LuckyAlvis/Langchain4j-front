@@ -306,16 +306,15 @@
                                     <label class="form-label">岗位</label>
                                     <select class="form-select" name="position">
                                         <option value="">请选择岗位</option>
-                                        <option value="developer">开发</option>
-                                        <option value="product">产品</option>
-                                        <option value="design">设计</option>
-                                        <option value="test">测试</option>
-                                        <option value="operation">运营</option>
-                                        <option value="management">管理人员</option>
-                                        <option value="marketing">市场</option>
-                                        <option value="sales">销售</option>
-                                        <option value="hr">人力资源</option>
-                                        <option value="finance">财务</option>
+                                        <option value="java">高级Java开发工程师</option>
+                                        <option value="frontend">高级助理技术开发经理</option>
+                                        <option value="python">高级Python开发工程师</option>
+                                        <option value="ai">人工智能工程师</option>
+                                        <option value="devops">DevOps工程师</option>
+                                        <option value="pm">项目经理</option>
+                                        <option value="qa">测试工程师</option>
+                                        <option value="security">信息安全工程师</option>
+                                        <option value="data">数据分析师</option>
                                         <option value="other">其他</option>
                                     </select>
                                 </div>
@@ -409,36 +408,10 @@
         
         // 提交表单
         function submitForm() {
-            // 获取表单数据
-            // const name = document.querySelector('input[name="name"]').value.trim();
-            // const employeeId = document.querySelector('input[name="employeeId"]').value.trim();
-            // const department = document.querySelector('input[name="department"]').value.trim();
-            // const position = document.querySelector('select[name="position"]').value;
             const email = document.querySelector('input[name="email"]').value.trim();
-            // const duration = document.querySelector('input[name="duration"]:checked').value;
             const reason = document.querySelector('textarea[name="reason"]').value.trim();
             
-            // // 表单验证
-            // if (!name) {
-            //     alert('请输入姓名');
-            //     return;
-            // }
-            
-            // if (!employeeId) {
-            //     alert('请输入邮箱');
-            //     return;
-            // }
-            
-            // if (!department) {
-            //     alert('请输入部门');
-            //     return;
-            // }
-            
-            // if (!position) {
-            //     alert('请选择岗位');
-            //     return;
-            // }
-            
+            // 验证
             if (!email) {
                 alert('请输入电子邮箱');
                 return;
@@ -452,16 +425,14 @@
                 return;
             }
             
+            // 保存邮箱到localStorage
+            localStorage.setItem('userEmail', email);
+            
             // 构建申请数据
             const applicationData = {
                 applicant: {
-                    // name: name,
-                    // employeeId: employeeId,
-                    // department: department,
-                    // position: position,
                     email: email
                 },
-                // duration: duration,
                 reason: reason,
                 applyTime: new Date().toISOString()
             };
@@ -469,9 +440,19 @@
             // 这里可以添加发送请求的代码，将数据提交到后端
             console.log('提交的申请数据:', applicationData);
             
-            // 模拟提交成功
-            alert('申请已提交，请等待管理员审批');
-            resetForm();
+            // 获取申请状态（模拟，实际应从后端获取）
+            const requestStatus = localStorage.getItem('requestStatus');
+            
+            // 根据状态跳转到不同页面
+            if (requestStatus === 'rejected') {
+                // 如果是被拒绝状态，传递拒绝原因
+                const rejectionReason = "申请用途与用户岗位职责不符，无法确认业务需求的真实性。建议重新提交申请并详细说明业务需求。";
+                window.location.href = `success-page.html?status=rejected&reason=${encodeURIComponent(rejectionReason)}`;
+            } else {
+                // 默认为审批中状态
+                localStorage.setItem('requestStatus', 'pending');
+                window.location.href = 'success-page.html?status=pending';
+            }
         }
     </script>
 </body>

@@ -254,3 +254,14 @@
     </script>
 </body>
 </html> 
+            // 从localStorage获取状态（与URL参数结合使用）
+            const localStatus = localStorage.getItem('requestStatus');
+            if (localStatus === 'rejected' && status !== 'pending') {
+                document.getElementById('success-view').style.display = 'none';
+                document.getElementById('rejected-view').style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+</html> 
+</html> 

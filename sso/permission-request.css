@@ -343,31 +343,6 @@ textarea.error, select.error {
     line-height: 1.5;
 }
 
-/* 申请时长选择样式 */
-.duration-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 8px;
-}
-
-.duration-option {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.duration-option input[type="radio"] {
-    margin-right: 4px;
-    cursor: pointer;
-}
-
-.duration-option label {
-    font-size: 14px;
-    cursor: pointer;
-    color: #333;
-}
-
 /* 响应式调整 */
 @media (max-width: 600px) {
     .info-row {
@@ -390,11 +365,12 @@ textarea.error, select.error {
 }
 
 @media (max-width: 768px) {
-    .duration-options {
+    /* 移除时长相关响应式样式 */
+    /* .duration-options {
         gap: 10px;
     }
     
     .duration-option {
         width: calc(50% - 5px);
-    }
+    } */
 } 
