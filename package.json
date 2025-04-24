@@ -1,23 +1,200 @@
-{
-  "name": "langchain4j-front",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.5.1",
-    "axios": "^1.8.4",
-    "echarts": "^5.6.0",
-    "element-plus": "^2.9.7",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.1.6"
-  }
-}
+account_user_analytics 用户角色信息表
+account_user_base 用户基本信息表
+account_user_bind_connect 用户绑定表
+account_user_block 用户黑名单表
+account_user_channel 用户渠道表
+account_user_channel_code 用户渠道邀请码表
+account_user_delivery_address 用户地址表
+account_user_distribution 粉丝来源关系表
+account_user_friend 用户好友关系表
+account_user_group 好友管理组
+account_user_group_rel 好友组关系
+account_user_history 用户密码历史信息表
+account_user_info 用户详细信息表
+account_user_invoice 用户发票管理表
+account_user_level 用户等级表-平台
+account_user_level_log 用户等级记录表
+account_user_login 用户登录信息表
+account_user_login_history 用户登录信息表
+account_user_message 短消息-聊天记录
+account_user_sns 用户SNS信息表
+account_user_tag_base 用户标签表
+account_user_tag_group 标签分组表
+account_user_zone 群组
+account_user_zone_message 群组消息-聊天记录
+account_user_zone_rel 群组用户关系表
+admin_menu_base 系统菜单表
+admin_user_admin 管理员表
+admin_user_role 权限组表
+cms_article_analytics 新闻点赞数据
+cms_article_attachment 附件信息表
+cms_article_base 文章内容
+cms_article_category 文章分类
+cms_article_category_relationship 文章关系表
+cms_article_comment 文章评论表
+cms_article_comment_helpful 商品评价有用投票表
+cms_article_comment_reply 问答回复表
+cms_article_comment_reply_helpful 商品评价有用投票表
+cms_article_group 网站初始化内容分组表
+cms_article_id_number 文章序号表-暂时不用，为了优化高效，使用redis等
+cms_article_read 文章访问记录表
+cms_article_recommend 推荐表
+cms_article_reply 问答回复表
+cms_article_tag 文章标签表
+cms_article_tag_relationship 文章标签关系表
+invoicing_stock_bill 商品出入库单据表
+invoicing_stock_bill_item 出入库单据item表
+invoicing_warehouse_base 仓库仓库表
+invoicing_warehouse_item 商品SKU存放详情表
+live_user_apply 主播申请管理
+live_user_room 主播管理
+marketing_activity_base 活动表-通过插件实现
+marketing_activity_combo 活动套餐表
+marketing_activity_cutprice 砍价记录历史
+marketing_activity_cutprice_history 砍价记录历史
+marketing_activity_flashsale_history 秒杀记录表
+marketing_activity_groupbooking 形成的拼团
+marketing_activity_groupbooking_history 拼团记录表
+marketing_activity_item 参与活动商品表-用户筛选计算
+marketing_activity_lottery_history 砸金蛋/大转盘抽奖记录表
+marketing_activity_marketing_history 市场活动参加人员记录表
+marketing_activity_type 活动类型表
+o2o_chain_base 门店表
+o2o_chain_category 门店分类
+o2o_chain_item 门店商品表
+o2o_chain_user 门店用户表
+o2o_chain_user_rights_base 权限表
+o2o_chain_user_rights_group 权限组表
+pay_base_bank 结算银行记录表
+pay_card_history 卡片使用记录表
+pay_card_info 卡片信息表
+pay_card_type 卡片基础信息表
+pay_consume_combine 合并支付表
+pay_consume_deposit 支付表-支付回调callback使用-确认付款
+pay_consume_record 交易明细表-账户收支明细-资金流水表-账户金额变化流水
+pay_consume_trade 交易订单表-强调唯一订单-充值则先创建充值订单
+pay_consume_withdraw 提现申请表
+pay_distribution_commission 推广员及收益表-用户赚取汇总
+pay_distribution_withdraw 佣金划转到余额申请表
+pay_payment_type 支付方式表
+pay_recharge_level 定额充值表
+pay_trade_type 交易类型表
+pay_user_bank_card 结算账户表
+pay_user_exp_history 会员经验日志表
+pay_user_pay 用户基础信息表
+pay_user_points_api_history 会员积分日志表
+pay_user_points_history 会员积分日志表
+pay_user_resource 用户资源表-资金账户表
+pt_product_ask_base 商品咨询
+pt_product_assist 商品辅助属性表
+pt_product_assist_index 商品与属性对应表
+pt_product_assist_item 商品辅助属性值表
+pt_product_base 商品基础表-SPU表
+pt_product_brand 品牌表
+pt_product_category 商品分类表
+pt_product_comment 商品评价表
+pt_product_comment_helpful 商品评价有用投票表
+pt_product_comment_reply 商品评价回复表
+pt_product_image 产品图片表，按照颜色规格
+pt_product_index 产品索引表-不读取数据只读主键
+pt_product_info 商品信息表
+pt_product_item 商品SKU表
+pt_product_item_seq ITEM_ID/SKU唯一编号表。
+pt_product_kind 商品种类表-发布后不能修改 实物商品 （物流发货） 虚拟商品 （无需物流）
+pt_product_log 商品日志表
+pt_product_meta 产品数据扩展表-要求买家留言可以在此处
+pt_product_pricing_policy 价格策略表-按客户定价
+pt_product_pricing_policy_level 价格策略表-按客户等级定价
+pt_product_pricing_policy_wholesale 价格策略表-阶梯价
+pt_product_spec 商品规格表
+pt_product_spec_item 商品规格值表
+pt_product_state 产品状态表
+pt_product_tag 商品标签表
+pt_product_type 商品类型表
+pt_product_unit 商品计量单位表-提供修改新增类别功能 - 530
+pt_product_unit_type 商品计量单位类别表
+pt_product_valid_period 虚拟商品信息表
+pt_product_verify 产品审核信息表
+shop_store_analytics 店铺统计表
+shop_store_base 店铺基础信息表
+shop_store_category 市场分类表
+shop_store_employee 卖家用户表—公司员工employee-通过user id启用用户中心
+shop_store_express_logistics 物流 = shop_store_express
+shop_store_grade 店铺等级表
+shop_store_info 店铺表-用户可以多店铺-需要分表
+shop_store_shipping_address 发货地址表
+shop_store_transport_item 自定义物流模板内容表-只处理区域及运费。
+shop_store_transport_type 自定义物流运费及售卖区域类型表
+shop_user_favorites_brand 收藏品牌
+shop_user_favorites_item 收藏的商品-根据SKU
+shop_user_favorites_store 收藏的店铺
+shop_user_product_browse 商品浏览历史表-SPU-不应该直接存数据库
+shop_user_product_buy 用户商品购买数量历史表
+shop_user_product_stock 用户商品存货表
+shop_user_product_stock_history 用户商品存货记录表
+shop_user_search_history 用户搜索历史记录表
+shop_user_sign 用户签到表
+shop_user_voucher 用户优惠券表
+shop_user_voucher_num 用户代金券领取数量表
+sns_story_advertisement
+sns_story_base 动态信息表
+sns_story_category 版块
+sns_story_collection 收藏表
+sns_story_comment 评论表
+sns_story_comment_helpful 评价有用投票表
+sns_story_comment_reply 问答回复表
+sns_story_comment_reply_helpful 评价有用投票表
+sns_story_forward 转播表
+sns_story_like 点赞表
+sns_story_timeline 用户消息时间轴表
+sys_access_history 访问日志表
+sys_config_base 系统参数设置表
+sys_config_type 配置分组表
+sys_contract_type 消费者保障服务表-店铺加入
+sys_crontab_base 计划任务表
+sys_currency_base 货币设置表
+sys_dict_base 字典类型表
+sys_dict_item 字典项表
+sys_district_base 地区表
+sys_express_base 快递表
+sys_feedback_base 平台反馈表
+sys_feedback_category 平台反馈主题分类表
+sys_feedback_type 平台反馈类型表
+sys_filter_keyword 敏感词过滤-启用api
+sys_ip_ban IP禁止表
+sys_lang_meta 用户数据翻译扩展表
+sys_lang_standard 语言翻译表
+sys_log_action 用户行为日志表
+sys_log_error 系统错误日志表
+sys_market_category 市场分类表
+sys_material_base 素材表
+sys_material_gallery 素材分类表
+sys_message_template 消息模板表
+sys_number_seq 编号管理表
+sys_option_base 选项表
+sys_page_base 页面表
+sys_page_category_nav PC分类导航表
+sys_page_mobile_nav 移动端首页分类使用
+sys_page_module 页面模块表
+sys_page_pc_nav 页面导航表
+sys_page_user_form 页面表
+sys_plantform_notice 平台公告表
+sys_user_reg_source 用户来源终端表
+sys_wechat_tplmsg 消息模板表
+trade_chain_code 虚拟兑换码门店自提兑换码表pickupcode
+trade_distribution_generated_commission 平台推广粉丝产生佣金汇总表
+trade_distribution_order 推广订单收益详情表
+trade_distribution_order_item 推广订单商品收益详情表
+trade_order_base 订单详细信息-检索不分表也行，cache
+trade_order_comment 订单店铺评价表
+trade_order_data 订单详细信息
+trade_order_delivery_address 收货地址表
+trade_order_info 订单信息表
+trade_order_invoice 订单发票管理表
+trade_order_item 订单商品表
+trade_order_logistics 订单发货物流信息表
+trade_order_return 退款退货表-发货退货,卖家也可以决定不退货退款，买家申请退款不支持。卖家可以主动退款。
+trade_order_return_item 订单退货详情表
+trade_order_return_reason 退货原因表
+trade_order_state_log 订单状态记录表
+trade_user_cart 购物车表

@@ -153,6 +153,103 @@
         .detail-table tbody tr:hover {
             background-color: #f5f7fa;
         }
+        
+        /* 分页选择器样式 */
+        .pagination-options {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .pagination-options select {
+            margin: 0 5px;
+            padding: 5px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            background-color: white;
+            font-size: 14px;
+        }
+        
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .pagination {
+            display: flex;
+        }
+        
+        /* 管理平台多选框样式 */
+        #manage-platform-select {
+            width: 100%;
+        }
+        
+        #manage-platform-select .multi-select-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        #manage-platform-select .multi-select-header.active {
+            border-color: #1890ff;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+        
+        #manage-platform-select .multi-select-dropdown {
+            display: none;
+            position: absolute;
+            width: 100%;
+            max-height: 250px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            margin-top: 2px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        #manage-platform-select .multi-select-dropdown.active {
+            display: block;
+        }
+        
+        #manage-platform-select .multi-select-option {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        
+        #manage-platform-select .multi-select-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        #manage-platform-select .multi-select-option input {
+            margin-right: 8px;
+        }
+        
+        /* 强制管理平台多选框在平台管理员角色选中时显示 */
+        #add-user-modal input[name="role"][value="platform-admin"]:checked ~ #step-confirm .form-group:has(#manage-platform-select) {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* 确保管理平台下拉框的样式正确 */
+        #manage-platform-select {
+            position: relative;
+            width: 100%;
+        }
+        
+        #manage-platform-select .multi-select-dropdown {
+            width: 100%;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -223,8 +320,8 @@
                             <input type="text" placeholder="请输入姓名">
                         </div>
                         <div class="filter-item">
-                            <label>工号:</label>
-                            <input type="text" placeholder="请输入工号">
+                            <label>邮箱:</label>
+                            <input type="text" placeholder="请输入邮箱">
                         </div>
                         <div class="filter-item">
                             <label>部门:</label>
@@ -313,7 +410,7 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>姓名</th>
-                                    <th>工号</th>
+                                    <th>邮箱</th>
                                     <th>部门</th>
                                     <th>平台</th>
                                     <th>角色</th>
@@ -327,7 +424,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>张三</td>
-                                    <td>ZH001</td>
+                                    <td>zhangsan@yaoyao.com</td>
                                     <td>技术部</td>
                                     <td><span class="platform-badge platform-1">第一平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -343,7 +440,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>李四</td>
-                                    <td>ZH002</td>
+                                    <td>lisi@yaoyao.com</td>
                                     <td>市场部</td>
                                     <td><span class="platform-badge platform-2">第二平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -359,7 +456,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>王五</td>
-                                    <td>ZH003</td>
+                                    <td>wangwu@yaoyao.com</td>
                                     <td>产品部</td>
                                     <td><span class="platform-badge platform-3">第三平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -374,7 +471,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>赵六</td>
-                                    <td>ZH004</td>
+                                    <td>zhaoliu@yaoyao.com</td>
                                     <td>人力资源</td>
                                     <td><span class="platform-badge platform-4">第四平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -389,7 +486,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>钱七</td>
-                                    <td>ZH005</td>
+                                    <td>qianqi@yaoyao.com</td>
                                     <td>技术部</td>
                                     <td><span class="platform-badge platform-5">第五平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -431,8 +528,8 @@
                             <input type="text" placeholder="请输入姓名">
                         </div>
                         <div class="filter-item">
-                            <label>工号:</label>
-                            <input type="text" placeholder="请输入工号">
+                            <label>邮箱:</label>
+                            <input type="text" placeholder="请输入邮箱">
                         </div>
                         <div class="filter-item">
                             <label>部门:</label>
@@ -514,7 +611,7 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>姓名</th>
-                                    <th>工号</th>
+                                    <th>邮箱</th>
                                     <th>部门</th>
                                     <th>平台</th>
                                     <th>角色</th>
@@ -528,7 +625,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>张三</td>
-                                    <td>ZH001</td>
+                                    <td>zhangsan@yaoyao.com</td>
                                     <td>技术部</td>
                                     <td><span class="platform-badge platform-1">第一平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -543,7 +640,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>李四</td>
-                                    <td>ZH002</td>
+                                    <td>lisi@yaoyao.com</td>
                                     <td>市场部</td>
                                     <td><span class="platform-badge platform-2">第二平台</span></td>
                                     <td><span class="role-badge role-platform-admin">平台管理员</span></td>
@@ -558,7 +655,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>王五</td>
-                                    <td>ZH003</td>
+                                    <td>wangwu@yaoyao.com</td>
                                     <td>产品部</td>
                                     <td><span class="platform-badge platform-3">第三平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -573,7 +670,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>赵六</td>
-                                    <td>ZH004</td>
+                                    <td>zhaoliu@yaoyao.com</td>
                                     <td>人力资源</td>
                                     <td><span class="platform-badge platform-4">第四平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -588,7 +685,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>钱七</td>
-                                    <td>ZH005</td>
+                                    <td>qianqi@yaoyao.com</td>
                                     <td>技术部</td>
                                     <td><span class="platform-badge platform-5">第五平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -628,8 +725,8 @@
                             <input type="text" placeholder="请输入姓名">
                         </div>
                         <div class="filter-item">
-                            <label>工号:</label>
-                            <input type="text" placeholder="请输入工号">
+                            <label>邮箱:</label>
+                            <input type="text" placeholder="请输入邮箱">
                         </div>
                         <div class="filter-item">
                             <label>部门:</label>
@@ -711,7 +808,7 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>姓名</th>
-                                    <th>工号</th>
+                                    <th>邮箱</th>
                                     <th>部门</th>
                                     <th>平台</th>
                                     <th>角色</th>
@@ -725,7 +822,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>张三</td>
-                                    <td>ZH001</td>
+                                    <td>zhangsan@yaoyao.com</td>
                                     <td>技术部</td>
                                     <td><span class="platform-badge platform-1">第一平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -740,7 +837,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>李四</td>
-                                    <td>ZH002</td>
+                                    <td>lisi@yaoyao.com</td>
                                     <td>市场部</td>
                                     <td><span class="platform-badge platform-2">第二平台</span></td>
                                     <td><span class="role-badge role-platform-admin">平台管理员</span></td>
@@ -755,7 +852,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>王五</td>
-                                    <td>ZH003</td>
+                                    <td>wangwu@yaoyao.com</td>
                                     <td>产品部</td>
                                     <td><span class="platform-badge platform-3">第三平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -770,7 +867,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>赵六</td>
-                                    <td>ZH004</td>
+                                    <td>zhaoliu@yaoyao.com</td>
                                     <td>人力资源</td>
                                     <td><span class="platform-badge platform-4">第四平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -785,7 +882,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>钱七</td>
-                                    <td>ZH005</td>
+                                    <td>qianqi@yaoyao.com</td>
                                     <td>技术部</td>
                                     <td><span class="platform-badge platform-5">第五平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -803,58 +900,33 @@
                 </div>
             </div>
 
-            <!-- 用户详情弹窗 -->
+            <!-- 用户详情模态框 -->
             <div id="user-detail-modal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3>申请详情 - 张三</h3>
-                        <span class="close-btn">&times;</span>
+                        <h3>用户详情</h3>
+                        <button class="close-btn" onclick="closeModal('user-detail-modal')">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <div class="detail-section">
-                            <h4>申请信息</h4>
-                            <div class="detail-grid">
-                                <div class="detail-item">
-                                    <div class="detail-label">申请人</div>
-                                    <div class="detail-value">张三</div>
+                        <div class="user-info-section">
+                            <h4>基本信息</h4>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">姓名：</div>
+                                    <div class="info-value name-value">张三</div>
                                 </div>
-                                <div class="detail-item">
-                                    <div class="detail-label">所属部门</div>
-                                    <div class="detail-value">技术部</div>
+                                <div class="info-item">
+                                    <div class="info-label">邮箱：</div>
+                                    <div class="info-value email-value">zhangsan@yaoyao.com</div>
+                                    <!-- 原来可能是:
+                                    <div class="info-label">工号：</div>
+                                    <div class="info-value employeeId-value">ZH001</div>
+                                    -->
                                 </div>
-                                <div class="detail-item">
-                                    <div class="detail-label">工号</div>
-                                    <div class="detail-value">ZH001</div>
-                                </div>
-                                <div class="detail-item">
-                                    <div class="detail-label">岗位名称</div>
-                                    <div class="detail-value">高级开发工程师</div>
-                                </div>
-                                <div class="detail-item">
-                                    <div class="detail-label">邮箱</div>
-                                    <div class="detail-value">zhangsan@example.com</div>
-                                </div>
-                                <div class="detail-item">
-                                    <div class="detail-label">申请时间</div>
-                                    <div class="detail-value">2024-10-15 14:30</div>
-                                </div>
-                                <div class="detail-item">
-                                    <div class="detail-label">申请时长</div>
-                                    <div class="detail-value">30天</div>
-                                </div>
-                                <div class="detail-item">
-                                    <div class="detail-label">状态</div>
-                                    <div class="detail-value">待审批</div>
-                                </div>
+                                <!-- 其他信息项... -->
                             </div>
                         </div>
-                        
-                        <div class="detail-section">
-                            <h4>申请原因</h4>
-                            <div class="detail-remarks">
-                                需要使用AI工具提升工作效率
-                            </div>
-                        </div>
+                        <!-- 其他详情部分... -->
                     </div>
                 </div>
             </div>
@@ -922,10 +994,6 @@
                                                 <span class="detail-value" id="user-name">--</span>
                                             </div>
                                             <div class="detail-row">
-                                                <span class="detail-label">工号:</span>
-                                                <span class="detail-value" id="user-employeeId">--</span>
-                                            </div>
-                                            <div class="detail-row">
                                                 <span class="detail-label">部门:</span>
                                                 <span class="detail-value" id="user-department">--</span>
                                             </div>
@@ -979,17 +1047,31 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="form-label required">授权时长</label>
-                                    <select class="form-select" name="duration" required>
-                                        <option value="3days">3天</option>
-                                        <option value="7days">7天</option>
-                                        <option value="30days" selected>30天</option>
-                                        <option value="60days">60天</option>
-                                        <option value="90days">90天</option>
-                                        <option value="1year">1年</option>
-                                        <option value="permanent">长期</option>
-                                    </select>
-                                    <span class="field-hint">选择适合的授权时长，到期后将自动收回权限</span>
+                                    <label class="form-label required">管理平台</label>
+                                    <div class="multi-select" id="manage-platform-select">
+                                        <div class="multi-select-header">
+                                            <span>选择管理平台</span>
+                                            <span class="arrow">▼</span>
+                                        </div>
+                                        <div class="multi-select-dropdown">
+                                            <div class="multi-select-option">
+                                                <input type="checkbox" value="1" checked> 第一平台
+                                            </div>
+                                            <div class="multi-select-option">
+                                                <input type="checkbox" value="2"> 第二平台
+                                            </div>
+                                            <div class="multi-select-option">
+                                                <input type="checkbox" value="3"> 第三平台
+                                            </div>
+                                            <div class="multi-select-option">
+                                                <input type="checkbox" value="4"> 第四平台
+                                            </div>
+                                            <div class="multi-select-option">
+                                                <input type="checkbox" value="5"> 第五平台
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="field-hint">选择用户可以管理的平台，仅在角色为"平台管理员"时有效</span>
                                 </div>
                                 
                                 <div class="form-group">
@@ -1051,6 +1133,9 @@
                     modal.style.display = 'none';
                 }
             });
+            
+            // 为每个分页组件添加页码选择器
+            updatePaginationComponents();
         });
 
         function showTab(tabName) {
@@ -1457,7 +1542,7 @@
             });
         });
 
-        // 显示添加用户弹窗 - 修改为显示第一步
+        // 修改 showAddUserModal 函数确保管理平台多选框在模态框打开时正确初始化
         function showAddUserModal() {
             const modal = document.getElementById('add-user-modal');
             
@@ -1476,10 +1561,22 @@
             searchMessage.className = 'search-message';
             searchMessage.textContent = '';
             
+            // 显示模态框
             modal.style.display = 'flex';
             
-            // Initialize role selection when modal opens
-            initRoleSelection();
+            // 初始化角色选择和管理平台下拉框
+            setTimeout(() => {
+                // 用setTimeout确保DOM已经完全渲染
+                console.log('初始化角色选择和管理平台下拉框');
+                initRoleSelection();
+                
+                // 确保管理平台表单组初始状态是隐藏的（因为默认选择普通用户）
+                const managePlatformGroup = document.querySelector('#manage-platform-select').closest('.form-group');
+                if (managePlatformGroup) {
+                    console.log('确保管理平台表单组初始隐藏');
+                    managePlatformGroup.style.display = 'none';
+                }
+            }, 100);
         }
 
         // 关闭添加用户弹窗
@@ -1527,8 +1624,31 @@
                     // 隐藏搜索消息
                     searchMessage.style.display = 'none';
                     
-                    // Initialize role selection
-                    initRoleSelection();
+                    // 添加延迟确保DOM已更新
+                    setTimeout(() => {
+                        console.log('搜索成功，初始化角色选择');
+                        
+                        // 确保开始时选择普通用户
+                        document.querySelector('#add-user-modal input[name="role"][value="user"]').checked = true;
+                        
+                        // 初始化角色选择（触发handleRoleChange）
+                        initRoleSelection();
+                        
+                        // 确保管理平台多选框隐藏
+                        const managePlatformGroup = document.querySelector('#manage-platform-select').closest('.form-group');
+                        if (managePlatformGroup) {
+                            managePlatformGroup.style.display = 'none';
+                            console.log('确保管理平台表单组初始隐藏');
+                        }
+                        
+                        // 为角色选项添加事件监听器
+                        document.querySelectorAll('#add-user-modal input[name="role"]').forEach(radio => {
+                            radio.addEventListener('change', function() {
+                                console.log('角色选择变更:', this.value);
+                                handleRoleChange();
+                            });
+                        });
+                    }, 100);
                 } else {
                     // 用户未找到
                     searchMessage.className = 'search-message error';
@@ -1545,7 +1665,7 @@
             const users = {
                 'zhangsan@example.com': {
                     name: '张三',
-                    employeeId: 'EMP1001',
+                    employeeId: 'zhangsan@example.com',
                     department: '技术部',
                     position: '后端开发工程师',
                     email: 'zhangsan@example.com',
@@ -1553,7 +1673,7 @@
                 },
                 'lisi@example.com': {
                     name: '李四',
-                    employeeId: 'EMP1002',
+                    employeeId: 'lisi@example.com',
                     department: '集团科技管理部',
                     position: '产品经理',
                     email: 'lisi@example.com',
@@ -1561,7 +1681,7 @@
                 },
                 'wangwu@example.com': {
                     name: '王五',
-                    employeeId: 'EMP1003',
+                    employeeId: 'wangwu@example.com',
                     department: '产品部',
                     position: '产品经理',
                     email: 'wangwu@example.com',
@@ -1569,7 +1689,7 @@
                 },
                 'zhaoliu@example.com': {
                     name: '赵六',
-                    employeeId: 'EMP1004',
+                    employeeId: 'zhaoliu@example.com',
                     department: '人力资源',
                     position: 'HR专员',
                     email: 'zhaoliu@example.com',
@@ -1584,7 +1704,7 @@
         // 填充用户信息到确认页面
         function populateUserInfo(userData) {
             document.getElementById('user-name').textContent = userData.name;
-            document.getElementById('user-employeeId').textContent = userData.employeeId;
+            // document.getElementById('user-employeeId').textContent = userData.employeeId;
             document.getElementById('user-department').textContent = userData.department;
             document.getElementById('user-position').textContent = userData.position;
             document.getElementById('user-email').textContent = userData.email;
@@ -1616,18 +1736,31 @@
         function addUser() {
             // 获取用户信息
             const name = document.getElementById('user-name').textContent;
-            const employeeId = document.getElementById('user-employeeId').textContent;
             const department = document.getElementById('user-department').textContent;
             const position = document.getElementById('user-position').textContent;
             const email = document.getElementById('user-email').textContent;
             
             // 获取授权信息
-            const duration = document.querySelector('#add-user-modal select[name="duration"]').value;
             const reason = document.querySelector('#add-user-modal textarea[name="reason"]').value.trim();
             
             // 获取平台和角色
             const platform = document.getElementById('platform-input').value;
             const role = document.querySelector('#add-user-modal input[name="role"]:checked').value;
+            
+            // 获取管理平台（只在角色为平台管理员时有效）
+            const managePlatforms = [];
+            if (role === 'platform-admin') {
+                const platformCheckboxes = document.querySelectorAll('#manage-platform-select .multi-select-option input:checked');
+                platformCheckboxes.forEach(checkbox => {
+                    managePlatforms.push(checkbox.value);
+                });
+                
+                // 验证至少选择了一个管理平台
+                if (managePlatforms.length === 0) {
+                    alert('请至少选择一个管理平台');
+                    return;
+                }
+            }
             
             // 验证授权理由
             if (!reason) {
@@ -1639,15 +1772,14 @@
             const userData = {
                 user: {
                     name: name,
-                    employeeId: employeeId,
                     department: department,
                     position: position,
                     email: email
                 },
-                duration: duration,
                 reason: reason,
                 platform: platform,
                 role: role,
+                managePlatforms: role === 'platform-admin' ? managePlatforms : [],
                 addTime: new Date().toISOString()
             };
             
@@ -1655,37 +1787,6 @@
             
             // 模拟添加成功 - 添加到已授权用户列表中
             const authorizedTable = document.querySelector('#authorized-tab table tbody');
-            
-            // 生成权限到期日期
-            const today = new Date();
-            let expiryDate = new Date(today);
-            
-            switch(duration) {
-                case '3days':
-                    expiryDate.setDate(today.getDate() + 3);
-                    break;
-                case '7days':
-                    expiryDate.setDate(today.getDate() + 7);
-                    break;
-                case '30days':
-                    expiryDate.setDate(today.getDate() + 30);
-                    break;
-                case '60days':
-                    expiryDate.setDate(today.getDate() + 60);
-                    break;
-                case '90days':
-                    expiryDate.setDate(today.getDate() + 90);
-                    break;
-                case '1year':
-                    expiryDate.setFullYear(today.getFullYear() + 1);
-                    break;
-                case 'permanent':
-                    expiryDate = '永久';
-                    break;
-            }
-            
-            const expiryFormatted = expiryDate === '永久' ? '永久' : 
-                `${expiryDate.getFullYear()}-${(expiryDate.getMonth()+1).toString().padStart(2, '0')}-${expiryDate.getDate().toString().padStart(2, '0')}`;
             
             const now = new Date();
             const dateFormatted = `${now.getFullYear()}-${(now.getMonth()+1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
@@ -1695,15 +1796,13 @@
             newRow.innerHTML = `
                 <td><input type="checkbox"></td>
                 <td>${name}</td>
-                <td>${employeeId}</td>
+                <td>${email}</td>
                 <td>${department}</td>
                 <td><span class="platform-badge platform-${platform}">第${platform}平台</span></td>
                 <td><span class="role-badge ${role === 'user' ? 'role-user' : role === 'platform-admin' ? 'role-platform-admin' : 'role-admin'}">${role === 'user' ? '普通用户' : role === 'platform-admin' ? '平台管理员' : '超级管理员'}</span></td>
                 <td>${dateFormatted}</td>
-                <td>${expiryFormatted}</td>
-                <td>
-                    <div class="status status-active">0次</div>
-                </td>
+                <td>${dateFormatted}</td>
+                <td>0次</td>
                 <td>
                     <button class="action-btn view-btn">查看</button>
                     <button class="action-btn remove-btn">收回权限</button>
@@ -1720,8 +1819,16 @@
                 
                 if (viewBtn) {
                     viewBtn.addEventListener('click', function() {
-                        // 显示用户详情
-                        showUserDetail(name, employeeId, department, dateFormatted, reason, '0次');
+                        // 显示用户详情，包括管理平台信息
+                        let detailInfo = reason;
+                        
+                        // 如果是平台管理员，添加管理平台信息
+                        if (role === 'platform-admin' && managePlatforms.length > 0) {
+                            const platformsText = managePlatforms.map(p => `第${p}平台`).join('、');
+                            detailInfo += `\n\n管理平台：${platformsText}`;
+                        }
+                        
+                        showUserDetail(name, email, department, dateFormatted, detailInfo, '0次');
                     });
                 }
                 
@@ -1772,14 +1879,25 @@
         
         // Initialize role selection when tab is switched or form is shown
         function initRoleSelection() {
-            // Apply initial state for role selection based on user type
-            handlePlatformChange();
+            // 首先确保我们处理的是初始状态
+            document.querySelector('#add-user-modal input[name="role"][value="user"]').checked = true;
             
-            // Add event listener for platform change
-            const platformSelect = document.querySelector('.platform-select');
-            if (platformSelect) {
-                platformSelect.addEventListener('change', handlePlatformChange);
-            }
+            // 然后应用初始状态
+            handleRoleChange();
+            
+            // 添加事件监听器以便角色选择变化时更新显示
+            const roleOptions = document.querySelectorAll('#add-user-modal input[name="role"]');
+            roleOptions.forEach(option => {
+                // 移除现有的监听器以避免重复
+                option.removeEventListener('change', handleRoleChange);
+                // 添加新的监听器
+                option.addEventListener('change', handleRoleChange);
+            });
+            
+            // 初始化管理平台多选下拉框
+            initManagePlatformSelect();
+            
+            console.log('角色选择初始化完成');
         }
 
         // Initialize all multi-select dropdowns
@@ -1881,7 +1999,7 @@
                             <div class="detail-value">${name}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">工号</div>
+                            <div class="detail-label">邮箱</div>
                             <div class="detail-value">${employeeId}</div>
                         </div>
                         <div class="detail-item">
@@ -2212,7 +2330,7 @@
         function showApprovalDetails(row) {
             // 获取基本用户信息
             const name = row.querySelector('td:nth-child(2)').textContent.trim();
-            const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
+            // const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
             const department = row.querySelector('td:nth-child(4)').textContent.trim();
             const platform = row.querySelector('td:nth-child(5)').textContent.trim();
             const role = row.querySelector('td:nth-child(6)').textContent.trim();
@@ -2274,10 +2392,6 @@
                             <div class="detail-item">
                                 <div class="detail-label">所属部门</div>
                                 <div class="detail-value">${department}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">工号</div>
-                                <div class="detail-value">${jobId}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">岗位名称</div>
@@ -2344,7 +2458,7 @@
         function showAuthorizedUserDetails(row) {
             // 获取基本用户信息
             const name = row.querySelector('td:nth-child(2)').textContent.trim();
-            const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
+            // const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
             const department = row.querySelector('td:nth-child(4)').textContent.trim();
             const platform = row.querySelector('td:nth-child(5)').textContent.trim();
             const role = row.querySelector('td:nth-child(6)').textContent.trim();
@@ -2435,7 +2549,7 @@
         function showActiveUserDetails(row) {
             // 获取基本用户信息
             const name = row.querySelector('td:nth-child(2)').textContent.trim();
-            const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
+            // const jobId = row.querySelector('td:nth-child(3)').textContent.trim();
             const department = row.querySelector('td:nth-child(4)').textContent.trim();
             const platform = row.querySelector('td:nth-child(5)').textContent.trim();
             const role = row.querySelector('td:nth-child(6)').textContent.trim();
@@ -2502,10 +2616,6 @@
                             <div class="detail-item">
                                 <div class="detail-label">所属部门</div>
                                 <div class="detail-value">${department}</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">工号</div>
-                                <div class="detail-value">${jobId}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">岗位名称</div>
@@ -3089,6 +3199,364 @@
                 alert(`已强制 ${count} 名用户退出登录`);
             }
         }
+
+        // 搜索用户函数
+        function searchUser() {
+            const email = document.querySelector('#add-user-modal input[name="email"]').value;
+            // 原来可能是:
+            // const employeeId = document.querySelector('#add-user-modal input[name="employeeId"]').value;
+            
+            if (!email) {
+                showSearchMessage('请输入邮箱', 'error');
+                return;
+            }
+            
+            // 模拟API调用
+            showSearchMessage('正在查询用户信息...', 'loading');
+            
+            // 修改API调用参数
+            setTimeout(() => {
+                // 假设这是模拟从后端获取数据
+                const userData = {
+                    name: '张三',
+                    email: email, // 替换原来的 employeeId
+                    department: '技术部',
+                    // 其他用户数据...
+                };
+                
+                displayUserInfo(userData);
+                showSearchMessage('用户信息已找到', 'success');
+            }, 1000);
+        }
+
+        // 显示用户信息函数
+        function displayUserInfo(user) {
+            // 修改显示字段
+            document.querySelector('.user-details .name-value').textContent = user.name;
+            document.querySelector('.user-details .email-value').textContent = user.email;
+            // 原来可能是:
+            // document.querySelector('.user-details .employeeId-value').textContent = user.employeeId;
+            document.querySelector('.user-details .department-value').textContent = user.department;
+            // 其他字段...
+        }
+
+        // 添加用户函数
+        function addUser() {
+            // 获取表单数据
+            const name = document.querySelector('#add-user-modal input[name="name"]').value;
+            const email = document.querySelector('#add-user-modal input[name="email"]').value;
+            // 原来可能是:
+            // const employeeId = document.querySelector('#add-user-modal input[name="employeeId"]').value;
+            const department = document.querySelector('#add-user-modal select[name="department"]').value;
+            
+            // 获取平台和角色 (修复之前的错误)
+            const platform = document.querySelector('#add-user-modal select[name="platform"]').value;
+            const role = document.querySelector('#add-user-modal input[name="role"]:checked').value;
+            
+            // 验证
+            if (!name || !email || !department || !platform || !role) {
+                alert('请填写完整信息');
+                return;
+            }
+            
+            // 构建用户数据
+            const userData = {
+                name,
+                email,  // 替换原来的 employeeId
+                department,
+                platform,
+                role,
+                // 其他数据...
+            };
+            
+            // 提交数据逻辑...
+            console.log('添加用户:', userData);
+            closeModal('add-user-modal');
+            // 刷新用户列表
+            refreshUserList();
+        }
+
+        // 修改分页组件的函数
+        function updatePaginationComponents() {
+            // 获取所有分页组件
+            const paginationElements = document.querySelectorAll('.pagination');
+            
+            paginationElements.forEach(pagination => {
+                // 创建外层容器
+                const paginationContainer = document.createElement('div');
+                paginationContainer.className = 'pagination-container';
+                
+                // 创建选择每页条数的选择器
+                const paginationOptions = document.createElement('div');
+                paginationOptions.className = 'pagination-options';
+                paginationOptions.innerHTML = `
+                  <span>每页显示</span>
+                  <select class="page-size-select">
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  <span>条</span>
+                `;
+                
+                // 将分页组件替换为新的结构
+                const parent = pagination.parentElement;
+                parent.insertBefore(paginationContainer, pagination);
+                
+                // 将原分页组件和选择器添加到新容器中
+                paginationContainer.appendChild(paginationOptions);
+                paginationContainer.appendChild(pagination);
+                
+                // 为选择器添加事件监听器
+                const pageSizeSelect = paginationOptions.querySelector('.page-size-select');
+                pageSizeSelect.addEventListener('change', function() {
+                  const pageSize = parseInt(this.value);
+                  
+                  // 获取当前标签页ID，以确定是哪个表格
+                  let tabId = '';
+                  const tabContent = findParentWithClass(pagination, 'tab-content');
+                  if (tabContent) {
+                    tabId = tabContent.id;
+                  }
+                  
+                  // 实际项目中，这里应该调用加载数据的函数重新加载对应页数的数据
+                  console.log(`切换 ${tabId} 的每页条数为 ${pageSize} 条`);
+                  
+                  // 模拟切换页码 - 实际实现中应该调用加载数据的函数
+                  simulatePageSizeChange(tabId, pageSize);
+                });
+            });
+        }
+
+        // 根据元素查找具有指定类名的父元素
+        function findParentWithClass(element, className) {
+            let parent = element.parentElement;
+            while (parent) {
+                if (parent.classList.contains(className)) {
+                    return parent;
+                }
+                parent = parent.parentElement;
+            }
+            return null;
+        }
+
+        // 模拟页码切换 - 在真实实现中应替换为实际的数据加载函数
+        function simulatePageSizeChange(tabId, pageSize) {
+            // 在实际应用中，这里应该调用API重新加载数据
+            // 这里只是简单地模拟切换页码后的效果
+            
+            // 更新当前活动的页码按钮
+            const paginationButtons = document.querySelectorAll(`#${tabId} .pagination button`);
+            paginationButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            if (paginationButtons.length > 1) {
+                paginationButtons[1].classList.add('active');
+            }
+            
+            // 可以在这里添加一些视觉反馈，例如表格loading状态等
+            const table = document.querySelector(`#${tabId} table`);
+            if (table) {
+                table.style.opacity = '0.6';
+                setTimeout(() => {
+                    table.style.opacity = '1';
+                }, 500);
+            }
+            
+            // 更新表格中显示的记录数量
+            // 实际应用中，这应该由重新加载的数据决定
+            updateTableRows(tabId, pageSize);
+        }
+
+        // 更新表格行数
+        function updateTableRows(tabId, pageSize) {
+            const tbody = document.querySelector(`#${tabId} table tbody`);
+            if (!tbody) return;
+            
+            const rows = tbody.querySelectorAll('tr');
+            
+            // 显示所有行，然后根据pageSize隐藏多余的行
+            rows.forEach((row, index) => {
+                if (index < pageSize) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // 处理角色变更
+        function handleRoleChange() {
+            // 检查当前选择的角色是否为平台管理员
+            const isPlatformAdmin = document.querySelector('#add-user-modal input[name="role"][value="platform-admin"]').checked;
+            
+            // 找到管理平台表单组
+            const managePlatformGroup = document.querySelector('#manage-platform-select').closest('.form-group');
+            
+            console.log('角色变更:', isPlatformAdmin ? '平台管理员' : '普通用户');
+            console.log('管理平台表单组:', managePlatformGroup);
+            
+            // 根据角色设置显示/隐藏
+            if (isPlatformAdmin) {
+                managePlatformGroup.style.display = 'block';
+                managePlatformGroup.style.opacity = '1';
+                managePlatformGroup.style.visibility = 'visible';
+                console.log('显示管理平台选择框');
+            } else {
+                managePlatformGroup.style.display = 'none';
+                console.log('隐藏管理平台选择框');
+            }
+        }
+        
+        // 初始化管理平台多选下拉框
+        function initManagePlatformSelect() {
+            const platformSelect = document.querySelector('#manage-platform-select');
+            if (!platformSelect) return;
+            
+            const header = platformSelect.querySelector('.multi-select-header');
+            const dropdown = platformSelect.querySelector('.multi-select-dropdown');
+            const options = platformSelect.querySelectorAll('.multi-select-option input');
+            const headerText = header.querySelector('span');
+            
+            // 默认隐藏管理平台选项（除非用户是平台管理员）
+            handleRoleChange();
+            
+            // 切换下拉框显示
+            header.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // 关闭其他打开的下拉框
+                document.querySelectorAll('.multi-select-dropdown.active').forEach(d => {
+                    if (d !== dropdown) {
+                        d.classList.remove('active');
+                        d.closest('.multi-select').querySelector('.multi-select-header').classList.remove('active');
+                    }
+                });
+                
+                // 切换当前下拉框
+                dropdown.classList.toggle('active');
+                header.classList.toggle('active');
+            });
+            
+            // 处理选项选择
+            options.forEach(option => {
+                option.addEventListener('change', (e) => {
+                    e.stopPropagation();
+                    updateManagePlatformHeaderText(platformSelect);
+                });
+                
+                // 防止点击选项时关闭下拉框
+                option.parentElement.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+            
+            // 初始化标题文本
+            updateManagePlatformHeaderText(platformSelect);
+        }
+        
+        // 更新管理平台下拉框标题文本
+        function updateManagePlatformHeaderText(select) {
+            const header = select.querySelector('.multi-select-header span');
+            const options = select.querySelectorAll('.multi-select-option input');
+            const selectedOptions = Array.from(options).filter(opt => opt.checked);
+            
+            if (selectedOptions.length === 0) {
+                header.textContent = '请选择管理平台';
+            } else if (selectedOptions.length === options.length) {
+                header.textContent = '管理所有平台';
+            } else if (selectedOptions.length <= 2) {
+                const labels = selectedOptions.map(opt => {
+                    const text = opt.parentElement.textContent.trim();
+                    return text;
+                });
+                header.textContent = labels.join(', ');
+            } else {
+                header.textContent = `已选 ${selectedOptions.length} 个平台`;
+            }
+        }
+
+        // 在页面加载时为管理平台多选框添加样式和事件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 已有的事件处理...
+            
+            // 确保管理平台多选框样式正确
+            const managePlatformSelect = document.querySelector('#manage-platform-select');
+            if (managePlatformSelect) {
+                console.log('初始化管理平台多选框样式');
+                
+                // 确保下拉框的相对定位
+                managePlatformSelect.style.position = 'relative';
+                
+                // 确保多选框下拉菜单的宽度与头部一致
+                const dropdown = managePlatformSelect.querySelector('.multi-select-dropdown');
+                if (dropdown) {
+                    dropdown.style.width = '100%';
+                }
+            }
+        });
+
+        // 用于测试的辅助函数
+        function toggleManagePlatform() {
+            const managePlatformGroup = document.querySelector('#manage-platform-select').closest('.form-group');
+            const currentDisplay = managePlatformGroup.style.display;
+            
+            if (currentDisplay === 'none') {
+                managePlatformGroup.style.display = 'block';
+                document.getElementById('manage-platform-status').textContent = '状态: 显示';
+            } else {
+                managePlatformGroup.style.display = 'none';
+                document.getElementById('manage-platform-status').textContent = '状态: 隐藏';
+            }
+        }
+
+        // 添加DOM观察器以监听模态框的状态变化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 已有的事件处理...
+            
+            // 创建模态框可见性变化观察器
+            const modalObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.attributeName === 'style') {
+                        const modal = document.getElementById('add-user-modal');
+                        const isModalVisible = modal.style.display === 'flex';
+                        
+                        if (isModalVisible) {
+                            console.log('模态框显示了，确保管理平台多选框状态正确');
+                            
+                            // 确保角色选择正确初始化
+                            setTimeout(() => {
+                                // 确保普通用户单选按钮选中
+                                const userRoleRadio = document.querySelector('#add-user-modal input[name="role"][value="user"]');
+                                if (userRoleRadio && !userRoleRadio.checked) {
+                                    userRoleRadio.checked = true;
+                                }
+                                
+                                // 手动触发角色变更处理
+                                handleRoleChange();
+                                
+                                // 强制设置管理平台组的样式
+                                const managePlatformGroup = document.querySelector('#manage-platform-select').closest('.form-group');
+                                if (managePlatformGroup) {
+                                    // 如果是平台管理员则显示，否则隐藏
+                                    const isPlatformAdmin = document.querySelector('#add-user-modal input[name="role"][value="platform-admin"]').checked;
+                                    managePlatformGroup.style.display = isPlatformAdmin ? 'block' : 'none';
+                                    console.log('设置管理平台多选框状态:', isPlatformAdmin ? '显示' : '隐藏');
+                                }
+                            }, 200);
+                        }
+                    }
+                });
+            });
+            
+            // 观察模态框的style属性变化
+            const modal = document.getElementById('add-user-modal');
+            if (modal) {
+                modalObserver.observe(modal, { attributes: true, attributeFilter: ['style'] });
+            }
+        });
     </script>
 </body>
 </html> 

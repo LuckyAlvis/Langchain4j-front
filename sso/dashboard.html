@@ -45,7 +45,7 @@
                 <div class="user-profile">
                     <div class="user-info" onclick="toggleUserMenu()">
                         <div class="avatar">戴</div>
-                        <span class="username">管理员-戴倚凡</span>
+                        <span class="username">超级管理员-戴倚凡</span>
                         <i class="dropdown-icon">▼</i>
                     </div>
                     <div class="user-menu" id="userMenu">
@@ -57,51 +57,78 @@
                 </div>
             </div>
 
-            <!-- 数据看板 -->
+            <!-- 注释掉平台筛选区域 -->
+            <!--
+            <div class="platform-filter-area">
+                <div class="filter-label">平台选择：</div>
+                <div class="multi-select-container">
+                    <div class="multi-select-header" id="platformSelectHeader">
+                        <span class="selected-text">全部</span>
+                        <span class="dropdown-icon">▼</span>
+                    </div>
+                    <div class="multi-select-dropdown" id="platformSelectDropdown">
+                        <div class="multi-select-option">
+                            <label>
+                                <input type="checkbox" value="all" checked id="selectAllPlatforms"> 全部
+                            </label>
+                        </div>
+                        <div class="multi-select-option">
+                            <label>
+                                <input type="checkbox" value="1" class="platform-option"> 第一平台
+                            </label>
+                        </div>
+                        <div class="multi-select-option">
+                            <label>
+                                <input type="checkbox" value="2" class="platform-option"> 第二平台
+                            </label>
+                        </div>
+                        <div class="multi-select-option">
+                            <label>
+                                <input type="checkbox" value="3" class="platform-option"> 第三平台
+                            </label>
+                        </div>
+                        <div class="multi-select-option">
+                            <label>
+                                <input type="checkbox" value="4" class="platform-option"> 第四平台
+                            </label>
+                        </div>
+                        <div class="multi-select-option">
+                            <label>
+                                <input type="checkbox" value="5" class="platform-option"> 第五平台
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button class="platform-search-btn" id="queryPlatformData">查询</button>
+            </div>
+            -->
+
+            <!-- 注释掉数据看板 -->
+            <!--
             <div class="dashboard-stats">
-                <div class="stat-card">
-                    <div class="stat-icon online-users-icon">👥</div>
-                    <div class="stat-content">
-                        <div class="stat-value">42</div>
-                        <div class="stat-label">当前在线用户</div>
-                    </div>
-                    <div class="stat-trend up">12% 较上周</div>
-                </div>
+                <div class="stat-card">...</div>
+                <div class="stat-card">...</div>
+                <div class="stat-card">...</div>
+                <div class="stat-card">...</div>
+            </div>
+            -->
 
-                <div class="stat-card">
-                    <div class="stat-icon daily-visits-icon">📈</div>
-                    <div class="stat-content">
-                        <div class="stat-value">256</div>
-                        <div class="stat-label">今日访问人次</div>
-                    </div>
-                    <div class="stat-trend up">8% 较昨日</div>
+            <!-- 添加新的动态排序折线图容器 -->
+            <div class="card full-width-card">
+                <div class="card-header">
+                    <h3 class="card-title">注册人数变化趋势</h3>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon pending-approvals-icon">⏳</div>
-                    <div class="stat-content">
-                        <div class="stat-value">15</div>
-                        <div class="stat-label">待审批申请</div>
-                    </div>
-                    <div class="stat-trend down">5% 较上周</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon authorized-users-icon">✅</div>
-                    <div class="stat-content">
-                        <div class="stat-value">328</div>
-                        <div class="stat-label">已授权用户</div>
-                    </div>
-                    <div class="stat-trend up">3% 较上月</div>
+                <div class="card-body">
+                    <div id="registrationTrendChart" class="chart-container"></div>
                 </div>
             </div>
 
-            <!-- 在统计卡片下方添加图表区域，包含部门分布和岗位分布两个饼图 -->
+            <!-- 在统计卡片下方添加图表区域，保留原有的饼图 -->
             <div class="chart-row">
                 <!-- 岗位分布饼图 -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">岗位分布</h3>
+                        <h3 class="card-title">岗位总体分布</h3>
                     </div>
                     <div class="card-body">
                         <div id="jobDistributionChart" class="chart-container"></div>
@@ -111,10 +138,33 @@
                 <!-- 部门分布饼图 -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">部门分布</h3>
+                        <h3 class="card-title">部门总体分布</h3>
                     </div>
                     <div class="card-body">
                         <div id="userDistributionChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 添加新的平台对比图表区域 -->
+            <div class="full-width-chart-row">
+                <!-- 岗位分布对比柱状图 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">各平台岗位分布对比</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="jobComparisonChart" class="chart-container"></div>
+                    </div>
+                </div>
+                
+                <!-- 部门分布对比柱状图 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">各平台部门分布对比</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="deptComparisonChart" class="chart-container"></div>
                     </div>
                 </div>
             </div>
@@ -246,8 +296,8 @@
                             <div class="detail-value">技术部</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">工号</div>
-                            <div class="detail-value">ZH001</div>
+                            <div class="detail-label">邮箱</div>
+                            <div class="detail-value">zhangsan@example.com</div>
                         </div>
                         <div class="detail-item">
                             <div class="detail-label">岗位名称</div>
@@ -293,6 +343,10 @@
     </div>
 
     <script>
+        // 在document.ready之前，添加全局变量
+        let jobComparisonChart = null;
+        let deptComparisonChart = null;
+
         // 修复系统概览页面的问题
         document.addEventListener('DOMContentLoaded', function() {
             // ... existing code ...
@@ -323,198 +377,473 @@
             });
             
             // 确保图表正确初始化
-            initCharts();
+            initECharts();
+            initComparisonCharts();
+            initRegistrationTrendChart();
         });
 
         // 确保图表初始化函数正确定义
-        function initCharts() {
-            // 岗位分布图表
-            const positionChart = echarts.init(document.getElementById('position-chart'));
-            positionChart.setOption({
-                title: {
-                    text: '岗位分布',
-                    left: 'center'
-                },
+        function initECharts() {
+            // 初始化部门分布ECharts实例
+            var deptChartDom = document.getElementById('userDistributionChart');
+            var deptChart = echarts.init(deptChartDom);
+
+            // 部门分布配置项和数据
+            var deptOption = {
                 tooltip: {
-                    trigger: 'item'
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
                 },
                 legend: {
-                    orient: 'vertical',
-                    left: 'left'
-                },
-                series: [
-                    {
-                        name: '岗位分布',
-                        type: 'pie',
-                        radius: '50%',
-                        data: [
-                            { value: 48, name: '开发' },
-                            { value: 32, name: '设计' },
-                            { value: 20, name: '产品' },
-                            { value: 15, name: '测试' },
-                            { value: 10, name: '运营' }
-                        ],
-                        emphasis: {
-                            itemStyle: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        }
-                    }
-                ]
-            });
-            
-            // 部门分布图表
-            const departmentChart = echarts.init(document.getElementById('department-chart'));
-            departmentChart.setOption({
-                title: {
-                    text: '部门分布',
-                    left: 'center'
-                },
-                tooltip: {
-                    trigger: 'item'
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left'
+                    orient: 'horizontal',
+                    bottom: 0,
+                    data: ['技术部', '市场部', '产品部', '其他部门']
                 },
                 series: [
                     {
                         name: '部门分布',
                         type: 'pie',
-                        radius: '50%',
-                        data: [
-                            { value: 60, name: '技术部' },
-                            { value: 40, name: '产品部' },
-                            { value: 30, name: '设计部' },
-                            { value: 20, name: '市场部' },
-                            { value: 10, name: '行政部' }
-                        ],
+                        radius: ['45%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
                         emphasis: {
-                            itemStyle: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            label: {
+                                show: true,
+                                fontSize: '18',
+                                fontWeight: 'bold'
                             }
-                        }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            {value: 148, name: '技术部', itemStyle: {color: '#1890ff'}},
+                            {value: 82, name: '市场部', itemStyle: {color: '#faad14'}},
+                            {value: 66, name: '产品部', itemStyle: {color: '#722ed1'}},
+                            {value: 32, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
+                        ]
                     }
                 ]
-            });
+            };
+
+            // 使用配置项显示部门分布图表
+            deptChart.setOption(deptOption);
+
+            // 初始化岗位分布ECharts实例
+            var jobChartDom = document.getElementById('jobDistributionChart');
+            var jobChart = echarts.init(jobChartDom);
+
+            // 岗位分布配置项和数据
+            var jobOption = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
+                },
+                legend: {
+                    orient: 'horizontal',
+                    bottom: 0,
+                    data: ['全栈开发工程师', '产品经理', '后端开发工程师', '前端开发工程师', '业务人员']
+                },
+                series: [
+                    {
+                        name: '岗位分布',
+                        type: 'pie',
+                        radius: ['45%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '18',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            {value: 120, name: '全栈开发工程师', itemStyle: {color: '#52c41a'}},
+                            {value: 56, name: '产品经理', itemStyle: {color: '#13c2c2'}},
+                            {value: 42, name: '后端开发工程师', itemStyle: {color: '#eb2f96'}},
+                            {value: 68, name: '前端开发工程师', itemStyle: {color: '#faad14'}},
+                            {value: 42, name: '业务人员', itemStyle: {color: '#2C4CDD'}}
+                        ]
+                    }
+                ]
+            };
+
+            // 使用配置项显示岗位分布图表
+            jobChart.setOption(jobOption);
         }
 
-        // 初始化部门分布ECharts实例
-        var deptChartDom = document.getElementById('userDistributionChart');
-        var deptChart = echarts.init(deptChartDom);
-
-        // 部门分布配置项和数据
-        var deptOption = {
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
-            },
-            legend: {
-                orient: 'horizontal',
-                bottom: 0,
-                data: ['技术部', '市场部', '产品部', '其他部门']
-            },
-            series: [
-                {
-                    name: '部门分布',
-                    type: 'pie',
-                    radius: ['45%', '70%'],
-                    avoidLabelOverlap: false,
-                    itemStyle: {
-                        borderRadius: 10,
-                        borderColor: '#fff',
-                        borderWidth: 2
-                    },
-                    label: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        label: {
-                            show: true,
-                            fontSize: '18',
-                            fontWeight: 'bold'
+        // 添加初始化对比图表函数
+        function initComparisonCharts() {
+            // 初始化岗位分布对比图
+            const jobCompDom = document.getElementById('jobComparisonChart');
+            if (jobCompDom) {
+                jobComparisonChart = echarts.init(jobCompDom);
+                
+                // 基础配置
+                const jobCompOption = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        },
+                        formatter: function(params) {
+                            let result = params[0].name + '<br/>';
+                            let total = 0;
+                            
+                            params.forEach(param => {
+                                total += param.value;
+                                const colorSpan = `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${param.color};"></span>`;
+                                result += colorSpan + param.seriesName + ': ' + param.value + ' (' + ((param.value / total) * 100).toFixed(1) + '%)<br/>';
+                            });
+                            
+                            result += `<b>总计: ${total}</b>`;
+                            return result;
                         }
                     },
-                    labelLine: {
-                        show: false
+                    legend: {
+                        data: ['全栈开发工程师', '产品经理', '后端开发工程师', '前端开发工程师', '业务人员'],
+                        right: 10,
+                        top: 10
                     },
-                    data: [
-                        {value: 148, name: '技术部', itemStyle: {color: '#1890ff'}},
-                        {value: 82, name: '市场部', itemStyle: {color: '#faad14'}},
-                        {value: 66, name: '产品部', itemStyle: {color: '#722ed1'}},
-                        {value: 32, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
-                    ]
-                }
-            ]
-        };
-
-        // 使用配置项显示部门分布图表
-        deptChart.setOption(deptOption);
-
-        // 初始化岗位分布ECharts实例
-        var jobChartDom = document.getElementById('jobDistributionChart');
-        var jobChart = echarts.init(jobChartDom);
-
-        // 岗位分布配置项和数据
-        var jobOption = {
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
-            },
-            legend: {
-                orient: 'horizontal',
-                bottom: 0,
-                data: ['开发工程师', '产品经理', '设计师', '市场营销', '其他岗位']
-            },
-            series: [
-                {
-                    name: '岗位分布',
-                    type: 'pie',
-                    radius: ['45%', '70%'],
-                    avoidLabelOverlap: false,
-                    itemStyle: {
-                        borderRadius: 10,
-                        borderColor: '#fff',
-                        borderWidth: 2
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '15%',
+                        top: '15%',
+                        containLabel: true
                     },
-                    label: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        label: {
-                            show: true,
-                            fontSize: '18',
-                            fontWeight: 'bold'
+                    yAxis: {
+                        type: 'category',
+                        data: ['第一平台', '第二平台', '第三平台', '第四平台', '第五平台'],
+                        axisLabel: {
+                            interval: 0
                         }
                     },
-                    labelLine: {
-                        show: false
+                    xAxis: {
+                        type: 'value',
+                        name: '人数',
+                        nameLocation: 'end'
                     },
-                    data: [
-                        {value: 120, name: '开发工程师', itemStyle: {color: '#52c41a'}},
-                        {value: 56, name: '产品经理', itemStyle: {color: '#13c2c2'}},
-                        {value: 42, name: '设计师', itemStyle: {color: '#eb2f96'}},
-                        {value: 68, name: '市场营销', itemStyle: {color: '#faad14'}},
-                        {value: 42, name: '其他岗位', itemStyle: {color: '#d9d9d9'}}
+                    series: [
+                        {
+                            name: '全栈开发工程师',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#52c41a'},
+                            data: [65, 30, 15, 8, 2],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        },
+                        {
+                            name: '产品经理',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#13c2c2'},
+                            data: [25, 18, 12, 5, 1],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        },
+                        {
+                            name: '后端开发工程师',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#eb2f96'},
+                            data: [20, 15, 8, 3, 1],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        },
+                        {
+                            name: '前端开发工程师',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#faad14'},
+                            data: [30, 20, 12, 6, 2],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        },
+                        {
+                            name: '业务人员',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#2C4CDD'},
+                            data: [15, 10, 5, 2, 0],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        }
                     ]
-                }
-            ]
-        };
+                };
+                
+                jobComparisonChart.setOption(jobCompOption);
+            }
+            
+            // 初始化部门分布对比图
+            const deptCompDom = document.getElementById('deptComparisonChart');
+            if (deptCompDom) {
+                deptComparisonChart = echarts.init(deptCompDom);
+                
+                // 基础配置
+                const deptCompOption = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        },
+                        formatter: function(params) {
+                            let result = params[0].name + '<br/>';
+                            let total = 0;
+                            
+                            params.forEach(param => {
+                                total += param.value;
+                                const colorSpan = `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${param.color};"></span>`;
+                                result += colorSpan + param.seriesName + ': ' + param.value + ' (' + ((param.value / total) * 100).toFixed(1) + '%)<br/>';
+                            });
+                            
+                            result += `<b>总计: ${total}</b>`;
+                            return result;
+                        }
+                    },
+                    legend: {
+                        data: ['技术部', '市场部', '产品部', '其他部门'],
+                        right: 10,
+                        top: 10
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '15%',
+                        top: '15%',
+                        containLabel: true
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: ['第一平台', '第二平台', '第三平台', '第四平台', '第五平台'],
+                        axisLabel: {
+                            interval: 0
+                        }
+                    },
+                    xAxis: {
+                        type: 'value',
+                        name: '人数',
+                        nameLocation: 'end'
+                    },
+                    series: [
+                        {
+                            name: '技术部',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#1890ff'},
+                            data: [70, 35, 20, 10, 3],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        },
+                        {
+                            name: '市场部',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#faad14'},
+                            data: [35, 25, 15, 8, 2],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        },
+                        {
+                            name: '产品部',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#722ed1'},
+                            data: [30, 20, 12, 5, 1],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        },
+                        {
+                            name: '其他部门',
+                            type: 'bar',
+                            stack: '总量',
+                            emphasis: {
+                                focus: 'series'
+                            },
+                            itemStyle: {color: '#bfbfbf'},
+                            data: [15, 8, 4, 2, 0],
+                            label: {
+                                show: false,
+                                position: 'insideRight'
+                            }
+                        }
+                    ]
+                };
+                
+                deptComparisonChart.setOption(deptCompOption);
+            }
+        }
 
-        // 使用配置项显示岗位分布图表
-        jobChart.setOption(jobOption);
-
-        // 窗口大小变化时调整图表大小
-        window.addEventListener('resize', function () {
-            deptChart.resize();
-            jobChart.resize();
-        });
+        // 添加更新对比图表函数
+        function updateComparisonCharts(platformIds) {
+            const platformNames = {
+                '1': '第一平台',
+                '2': '第二平台',
+                '3': '第三平台',
+                '4': '第四平台',
+                '5': '第五平台'
+            };
+            
+            // 筛选并排序选中的平台
+            const selectedPlatformNames = platformIds.map(id => platformNames[id]).filter(Boolean);
+            
+            // 准备岗位分布数据
+            const jobSeriesData = {};
+            const jobCategories = ['全栈开发工程师', '产品经理', '后端开发工程师', '前端开发工程师', '业务人员'];
+            
+            // 初始化数据结构
+            jobCategories.forEach(category => {
+                jobSeriesData[category] = [];
+            });
+            
+            // 填充各平台各岗位的数据
+            platformIds.forEach(platformId => {
+                const platformData = window.platformData[platformId];
+                
+                jobCategories.forEach(category => {
+                    const categoryData = platformData.jobDistribution.find(item => item.name === category);
+                    jobSeriesData[category].push(categoryData ? categoryData.value : 0);
+                });
+            });
+            
+            // 更新岗位分布对比图
+            if (jobComparisonChart) {
+                jobComparisonChart.setOption({
+                    yAxis: {
+                        data: selectedPlatformNames
+                    },
+                    series: [
+                        {
+                            name: '全栈开发工程师',
+                            data: jobSeriesData['全栈开发工程师']
+                        },
+                        {
+                            name: '产品经理',
+                            data: jobSeriesData['产品经理']
+                        },
+                        {
+                            name: '后端开发工程师',
+                            data: jobSeriesData['后端开发工程师']
+                        },
+                        {
+                            name: '前端开发工程师',
+                            data: jobSeriesData['前端开发工程师']
+                        },
+                        {
+                            name: '业务人员',
+                            data: jobSeriesData['业务人员']
+                        }
+                    ]
+                });
+            }
+            
+            // 准备部门分布数据
+            const deptSeriesData = {};
+            const deptCategories = ['技术部', '市场部', '产品部', '其他部门'];
+            
+            // 初始化数据结构
+            deptCategories.forEach(category => {
+                deptSeriesData[category] = [];
+            });
+            
+            // 填充各平台各部门的数据
+            platformIds.forEach(platformId => {
+                const platformData = window.platformData[platformId];
+                
+                deptCategories.forEach(category => {
+                    const categoryData = platformData.deptDistribution.find(item => item.name === category);
+                    deptSeriesData[category].push(categoryData ? categoryData.value : 0);
+                });
+            });
+            
+            // 更新部门分布对比图
+            if (deptComparisonChart) {
+                deptComparisonChart.setOption({
+                    yAxis: {
+                        data: selectedPlatformNames
+                    },
+                    series: [
+                        {
+                            name: '技术部',
+                            data: deptSeriesData['技术部']
+                        },
+                        {
+                            name: '市场部',
+                            data: deptSeriesData['市场部']
+                        },
+                        {
+                            name: '产品部',
+                            data: deptSeriesData['产品部']
+                        },
+                        {
+                            name: '其他部门',
+                            data: deptSeriesData['其他部门']
+                        }
+                    ]
+                });
+            }
+        }
 
         // 用户菜单相关功能
         function toggleUserMenu() {
@@ -638,7 +967,7 @@
                 } else if (userName.includes('钱七') || userName.includes('孙七')) {
                     jobId = 'ZH005';
                     department = '技术部';
-                    position = '开发工程师';
+                    position = '全栈开发工程师';
                     email = 'qianqi@example.com';
                     duration = '长期';
                 }
@@ -652,7 +981,7 @@
                     if (label && value) {
                         if (label.textContent === '申请人') {
                             value.textContent = userName;
-                        } else if (label.textContent === '工号') {
+                        } else if (label.textContent === '邮箱') {
                             value.textContent = jobId;
                         } else if (label.textContent === '所属部门') {
                             value.textContent = department;
@@ -774,8 +1103,8 @@
                                                     userName === '赵六' ? '产品部' : '市场部';
                                 break;
                             case 2:
-                                label.textContent = '工号';
-                                value.textContent = 'ZH001';
+                                label.textContent = '邮箱';
+                                value.textContent = 'zhangsan@example.com';
                                 break;
                             case 3:
                                 label.textContent = '岗位名称';
@@ -821,6 +1150,620 @@
                 }
             });
         });
+
+        // 平台数据 - 模拟各平台的数据
+        const platformData = {
+            all: {
+                onlineUsers: 42,
+                dailyVisits: 256,
+                pendingApprovals: 15,
+                authorizedUsers: 328,
+                jobDistribution: [
+                    {value: 120, name: '全栈开发工程师', itemStyle: {color: '#52c41a'}},
+                    {value: 56, name: '产品经理', itemStyle: {color: '#13c2c2'}},
+                    {value: 42, name: '后端开发工程师', itemStyle: {color: '#eb2f96'}},
+                    {value: 68, name: '前端开发工程师', itemStyle: {color: '#faad14'}},
+                    {value: 42, name: '业务人员', itemStyle: {color: '#2C4CDD'}}
+                ],
+                deptDistribution: [
+                    {value: 148, name: '技术部', itemStyle: {color: '#1890ff'}},
+                    {value: 82, name: '市场部', itemStyle: {color: '#faad14'}},
+                    {value: 66, name: '产品部', itemStyle: {color: '#722ed1'}},
+                    {value: 32, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
+                ]
+            },
+            1: {
+                onlineUsers: 18,
+                dailyVisits: 112,
+                pendingApprovals: 7,
+                authorizedUsers: 145,
+                jobDistribution: [
+                    {value: 65, name: '全栈开发工程师', itemStyle: {color: '#52c41a'}},
+                    {value: 25, name: '产品经理', itemStyle: {color: '#13c2c2'}},
+                    {value: 18, name: '后端开发工程师', itemStyle: {color: '#eb2f96'}},
+                    {value: 22, name: '前端开发工程师', itemStyle: {color: '#faad14'}},
+                    {value: 15, name: '业务人员', itemStyle: {color: '#2C4CDD'}}
+                ],
+                deptDistribution: [
+                    {value: 75, name: '技术部', itemStyle: {color: '#1890ff'}},
+                    {value: 35, name: '市场部', itemStyle: {color: '#faad14'}},
+                    {value: 25, name: '产品部', itemStyle: {color: '#722ed1'}},
+                    {value: 10, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
+                ]
+            },
+            2: {
+                onlineUsers: 12,
+                dailyVisits: 84,
+                pendingApprovals: 4,
+                authorizedUsers: 93,
+                jobDistribution: [
+                    {value: 30, name: '全栈开发工程师', itemStyle: {color: '#52c41a'}},
+                    {value: 16, name: '产品经理', itemStyle: {color: '#13c2c2'}},
+                    {value: 12, name: '后端开发工程师', itemStyle: {color: '#eb2f96'}},
+                    {value: 25, name: '前端开发工程师', itemStyle: {color: '#faad14'}},
+                    {value: 10, name: '业务人员', itemStyle: {color: '#2C4CDD'}}
+                ],
+                deptDistribution: [
+                    {value: 38, name: '技术部', itemStyle: {color: '#1890ff'}},
+                    {value: 28, name: '市场部', itemStyle: {color: '#faad14'}},
+                    {value: 18, name: '产品部', itemStyle: {color: '#722ed1'}},
+                    {value: 9, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
+                ]
+            },
+            3: {
+                onlineUsers: 8,
+                dailyVisits: 32,
+                pendingApprovals: 2,
+                authorizedUsers: 45,
+                jobDistribution: [
+                    {value: 15, name: '全栈开发工程师', itemStyle: {color: '#52c41a'}},
+                    {value: 8, name: '产品经理', itemStyle: {color: '#13c2c2'}},
+                    {value: 7, name: '后端开发工程师', itemStyle: {color: '#eb2f96'}},
+                    {value: 10, name: '前端开发工程师', itemStyle: {color: '#faad14'}},
+                    {value: 5, name: '业务人员', itemStyle: {color: '#2C4CDD'}}
+                ],
+                deptDistribution: [
+                    {value: 20, name: '技术部', itemStyle: {color: '#1890ff'}},
+                    {value: 12, name: '市场部', itemStyle: {color: '#faad14'}},
+                    {value: 10, name: '产品部', itemStyle: {color: '#722ed1'}},
+                    {value: 3, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
+                ]
+            },
+            4: {
+                onlineUsers: 3,
+                dailyVisits: 18,
+                pendingApprovals: 1,
+                authorizedUsers: 25,
+                jobDistribution: [
+                    {value: 8, name: '全栈开发工程师', itemStyle: {color: '#52c41a'}},
+                    {value: 5, name: '产品经理', itemStyle: {color: '#13c2c2'}},
+                    {value: 3, name: '后端开发工程师', itemStyle: {color: '#eb2f96'}},
+                    {value: 6, name: '前端开发工程师', itemStyle: {color: '#faad14'}},
+                    {value: 3, name: '业务人员', itemStyle: {color: '#2C4CDD'}}
+                ],
+                deptDistribution: [
+                    {value: 10, name: '技术部', itemStyle: {color: '#1890ff'}},
+                    {value: 5, name: '市场部', itemStyle: {color: '#faad14'}},
+                    {value: 7, name: '产品部', itemStyle: {color: '#722ed1'}},
+                    {value: 3, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
+                ]
+            },
+            5: {
+                onlineUsers: 1,
+                dailyVisits: 10,
+                pendingApprovals: 1,
+                authorizedUsers: 20,
+                jobDistribution: [
+                    {value: 2, name: '全栈开发工程师', itemStyle: {color: '#52c41a'}},
+                    {value: 2, name: '产品经理', itemStyle: {color: '#13c2c2'}},
+                    {value: 2, name: '后端开发工程师', itemStyle: {color: '#eb2f96'}},
+                    {value: 5, name: '前端开发工程师', itemStyle: {color: '#faad14'}},
+                    {value: 9, name: '业务人员', itemStyle: {color: '#2C4CDD'}}
+                ],
+                deptDistribution: [
+                    {value: 5, name: '技术部', itemStyle: {color: '#1890ff'}},
+                    {value: 2, name: '市场部', itemStyle: {color: '#faad14'}},
+                    {value: 6, name: '产品部', itemStyle: {color: '#722ed1'}},
+                    {value: 7, name: '其他部门', itemStyle: {color: '#bfbfbf'}}
+                ]
+            }
+        };
+        
+        // 平台选择相关逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const selectAllCheckbox = document.getElementById('selectAllPlatforms');
+            const platformOptions = document.querySelectorAll('.platform-option');
+            const queryButton = document.getElementById('queryPlatformData');
+            
+            const multiSelectHeader = document.getElementById('platformSelectHeader');
+            const multiSelectDropdown = document.getElementById('platformSelectDropdown');
+            const selectedTextSpan = multiSelectHeader.querySelector('.selected-text');
+            
+            // 点击头部打开/关闭下拉框
+            multiSelectHeader.addEventListener('click', function(e) {
+                e.stopPropagation();
+                multiSelectHeader.classList.toggle('active');
+                multiSelectDropdown.classList.toggle('visible');
+            });
+            
+            // 点击其他地方关闭下拉框
+            document.addEventListener('click', function() {
+                multiSelectHeader.classList.remove('active');
+                multiSelectDropdown.classList.remove('visible');
+            });
+            
+            // 防止点击下拉框内部时关闭下拉框
+            multiSelectDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+            
+            // 全选/取消全选
+            selectAllCheckbox.addEventListener('change', function() {
+                platformOptions.forEach(option => {
+                    option.checked = this.checked;
+                    option.disabled = this.checked;
+                });
+                
+                // 更新选中文本
+                updateSelectedText();
+            });
+            
+            // 单个平台选择时更新全选状态
+            platformOptions.forEach(option => {
+                option.addEventListener('change', function() {
+                    // 如果取消勾选某个平台，则取消全选
+                    if (!this.checked && selectAllCheckbox.checked) {
+                        selectAllCheckbox.checked = false;
+                        platformOptions.forEach(opt => {
+                            opt.disabled = false;
+                        });
+                    }
+                    
+                    // 如果所有平台都被选中，则自动勾选全选
+                    const allSelected = Array.from(platformOptions).every(opt => opt.checked);
+                    if (allSelected) {
+                        selectAllCheckbox.checked = true;
+                        platformOptions.forEach(opt => {
+                            opt.disabled = true;
+                        });
+                    }
+                    
+                    // 更新选中文本
+                    updateSelectedText();
+                });
+            });
+            
+            // 更新选中平台的显示文本
+            function updateSelectedText() {
+                if (selectAllCheckbox.checked) {
+                    selectedTextSpan.textContent = '全部';
+                    return;
+                }
+                
+                const selectedPlatforms = Array.from(platformOptions)
+                    .filter(option => option.checked)
+                    .map(option => {
+                        // 通过查找相邻文本获取平台名称
+                        return option.parentNode.textContent.trim();
+                    });
+                
+                if (selectedPlatforms.length === 0) {
+                    selectedTextSpan.textContent = '请选择平台';
+                } else if (selectedPlatforms.length <= 2) {
+                    selectedTextSpan.textContent = selectedPlatforms.join('、');
+                } else {
+                    selectedTextSpan.textContent = `已选择 ${selectedPlatforms.length} 个平台`;
+                }
+            }
+            
+            // 查询按钮点击事件
+            queryButton.addEventListener('click', function() {
+                // 关闭下拉框
+                multiSelectHeader.classList.remove('active');
+                multiSelectDropdown.classList.remove('visible');
+                
+                updateDashboard();
+            });
+            
+            // 初始加载时更新仪表盘
+            updateDashboard();
+        });
+        
+        // 根据选择的平台更新仪表盘数据
+        function updateDashboard() {
+            const selectAllCheckbox = document.getElementById('selectAllPlatforms');
+            const platformOptions = document.querySelectorAll('.platform-option');
+            
+            // 如果选择了"全部"，直接使用全部数据
+            if (selectAllCheckbox.checked) {
+                updateStatCards(platformData.all);
+                updatePieCharts(platformData.all);
+                updateComparisonCharts(Object.keys(platformData).filter(key => key !== 'all'));
+                return;
+            }
+            
+            // 获取选中的平台
+            const selectedPlatforms = Array.from(platformOptions)
+                .filter(option => option.checked)
+                .map(option => option.value);
+            
+            // 如果没有选择平台，显示提示并返回
+            if (selectedPlatforms.length === 0) {
+                alert('请至少选择一个平台');
+                return;
+            }
+            
+            // 合并选中平台的数据
+            const mergedData = mergeSelectedPlatformsData(selectedPlatforms);
+            
+            // 更新统计卡片和饼图
+            updateStatCards(mergedData);
+            updatePieCharts(mergedData);
+            
+            // 更新对比图表
+            updateComparisonCharts(selectedPlatforms);
+        }
+        
+        // 合并选中平台的数据
+        function mergeSelectedPlatformsData(platforms) {
+            // 初始化合并后的数据结构
+            const merged = {
+                onlineUsers: 0,
+                dailyVisits: 0,
+                pendingApprovals: 0,
+                authorizedUsers: 0,
+                jobDistribution: [],
+                deptDistribution: []
+            };
+            
+            // 合并数字统计
+            platforms.forEach(platform => {
+                const data = platformData[platform];
+                merged.onlineUsers += data.onlineUsers;
+                merged.dailyVisits += data.dailyVisits;
+                merged.pendingApprovals += data.pendingApprovals;
+                merged.authorizedUsers += data.authorizedUsers;
+            });
+            
+            // 合并岗位分布数据
+            const jobCategories = ['全栈开发工程师', '产品经理', '后端开发工程师', '前端开发工程师', '业务人员'];
+            const jobColors = ['#52c41a', '#13c2c2', '#eb2f96', '#faad14', '#2C4CDD'];
+            
+            jobCategories.forEach((category, index) => {
+                const totalValue = platforms.reduce((sum, platform) => {
+                    const categoryData = platformData[platform].jobDistribution.find(item => item.name === category);
+                    return sum + (categoryData ? categoryData.value : 0);
+                }, 0);
+                
+                merged.jobDistribution.push({
+                    value: totalValue,
+                    name: category,
+                    itemStyle: {color: jobColors[index]}
+                });
+            });
+            
+            // 合并部门分布数据
+            const deptCategories = ['技术部', '市场部', '产品部', '其他部门'];
+            const deptColors = ['#1890ff', '#faad14', '#722ed1', '#bfbfbf'];
+            
+            deptCategories.forEach((category, index) => {
+                const totalValue = platforms.reduce((sum, platform) => {
+                    const categoryData = platformData[platform].deptDistribution.find(item => item.name === category);
+                    return sum + (categoryData ? categoryData.value : 0);
+                }, 0);
+                
+                merged.deptDistribution.push({
+                    value: totalValue,
+                    name: category,
+                    itemStyle: {color: deptColors[index]}
+                });
+            });
+            
+            return merged;
+        }
+        
+        // 更新统计卡片
+        function updateStatCards(data) {
+            document.querySelector('.stat-value:nth-child(1)').textContent = data.onlineUsers;
+            document.querySelector('.dashboard-stats .stat-card:nth-child(2) .stat-value').textContent = data.dailyVisits;
+            document.querySelector('.dashboard-stats .stat-card:nth-child(3) .stat-value').textContent = data.pendingApprovals;
+            document.querySelector('.dashboard-stats .stat-card:nth-child(4) .stat-value').textContent = data.authorizedUsers;
+        }
+        
+        // 更新饼图 (原updateCharts函数改名)
+        function updatePieCharts(data) {
+            // 更新岗位分布饼图
+            const jobChart = echarts.getInstanceByDom(document.getElementById('jobDistributionChart'));
+            if (jobChart) {
+                jobChart.setOption({
+                    series: [{
+                        data: data.jobDistribution
+                    }]
+                });
+            }
+            
+            // 更新部门分布饼图
+            const deptChart = echarts.getInstanceByDom(document.getElementById('userDistributionChart'));
+            if (deptChart) {
+                deptChart.setOption({
+                    series: [{
+                        data: data.deptDistribution
+                    }]
+                });
+            }
+        }
+
+        // 初始化动态排序折线图
+        function initRegistrationTrendChart() {
+            const chartDom = document.getElementById('registrationTrendChart');
+            if (!chartDom) return;
+            
+            const myChart = echarts.init(chartDom);
+            
+            // 平台列表
+            const platforms = [
+                '第一平台',
+                '第二平台',
+                '第三平台',
+                '第四平台',
+                '第五平台'
+            ];
+            
+            // 平台颜色映射
+            const platformColors = {
+                '第一平台': '#1890ff',
+                '第二平台': '#52c41a',
+                '第三平台': '#faad14',
+                '第四平台': '#f5222d',
+                '第五平台': '#722ed1'
+            };
+            
+            // 生成模拟数据 - 30天的各平台注册人数
+            const generateMockData = () => {
+                const now = new Date('2025-04-23'); // 固定日期，避免每次刷新变化
+                const data = [];
+                
+                // 为每个平台生成基础趋势
+                const baseTrends = {
+                    '第一平台': { base: 150, growth: 1.3, variance: 20 },
+                    '第二平台': { base: 100, growth: 1.3, variance: 15 },
+                    '第三平台': { base: 70, growth: 1.3, variance: 10 },
+                    '第四平台': { base: 40, growth: 1.2, variance: 8 },
+                    '第五平台': { base: 20, growth: 1.1, variance: 5 }
+                };
+                
+                // 生成30天的数据
+                for (let i = 29; i >= 0; i--) {
+                    const date = new Date(now);
+                    date.setDate(date.getDate() - i);
+                    const dateStr = date.toISOString().slice(0, 10);
+                    
+                    platforms.forEach(platform => {
+                        const trend = baseTrends[platform];
+                        const dayNum = 30 - i;
+                        
+                        // 计算当天注册数（基础值 + 增长 + 随机波动）
+                        const base = trend.base;
+                        const growth = Math.pow(trend.growth, dayNum / 5); // 使增长更加平滑
+                        const variance = Math.random() * trend.variance * 2 - trend.variance;
+                        
+                        const registrations = Math.floor(base * growth + variance);
+                        
+                        data.push({
+                            Date: dateStr,
+                            Platform: platform,
+                            Registrations: Math.max(1, registrations) // 确保至少有1个注册
+                        });
+                    });
+                }
+                
+                return data;
+            };
+            
+            const rawData = generateMockData();
+            
+            // 在创建系列之前，预先计算每个平台最后一天的数据
+            const lastDayData = {};
+            platforms.forEach(platform => {
+                const platformData = rawData.filter(d => d.Platform === platform);
+                const sortedData = platformData.sort((a, b) => new Date(b.Date) - new Date(a.Date));
+                lastDayData[platform] = sortedData[0].Registrations;
+            });
+            
+            // 为每个平台创建数据集和系列
+            const datasetWithFilters = [];
+            const seriesList = [];
+            
+            platforms.forEach(platform => {
+                const datasetId = 'dataset_' + platform.replace(/\s+/g, '_');
+                
+                datasetWithFilters.push({
+                    id: datasetId,
+                    fromDatasetId: 'dataset_raw',
+                    transform: {
+                        type: 'filter',
+                        config: {
+                            dimension: 'Platform', 
+                            '=': platform
+                        }
+                    }
+                });
+                
+                seriesList.push({
+                    type: 'line',
+                    datasetId: datasetId,
+                    showSymbol: false,
+                    name: platform,
+                    // 指定线条颜色，保持一致性
+                    lineStyle: {
+                        color: platformColors[platform]
+                    },
+                    itemStyle: {
+                        color: platformColors[platform]
+                    },
+                    endLabel: {
+                        show: true,
+                        formatter: function(params) {
+                            // 更健壮的数据提取方式
+                            let registrationValue;
+                            
+                            // 检查不同可能的数据结构
+                            if (typeof params.value === 'object') {
+                                if (params.value.Registrations !== undefined) {
+                                    // 如果是对象格式 {Date, Platform, Registrations}
+                                    registrationValue = params.value.Registrations;
+                                } else if (Array.isArray(params.value) && params.value.length > 2) {
+                                    // 如果是数组格式 [Date, Platform, Registrations]
+                                    registrationValue = params.value[2];
+                                } else {
+                                    // 备用，尝试从原始数据中获取
+                                    const lastData = rawData.filter(d => 
+                                        d.Platform === platform).sort((a, b) => 
+                                        new Date(b.Date) - new Date(a.Date))[0];
+                                    
+                                    registrationValue = lastData ? lastData.Registrations : '';
+                                }
+                            } else {
+                                // 直接使用值
+                                registrationValue = params.value;
+                            }
+                            
+                            return platform + ': ' + (registrationValue !== undefined ? registrationValue : '');
+                        },
+                        backgroundColor: '#fff',
+                        padding: [3, 5],
+                        borderRadius: 3,
+                        shadowColor: 'rgba(0, 0, 0, 0.1)',
+                        shadowBlur: 3
+                    },
+                    labelLayout: {
+                        moveOverlap: 'shiftY',
+                        draggable: true
+                    },
+                    emphasis: {
+                        focus: 'series'
+                    },
+                    encode: {
+                        x: 'Date',
+                        y: 'Registrations',
+                        label: ['Platform', 'Registrations'],
+                        itemName: 'Date',
+                        tooltip: ['Registrations']
+                    }
+                });
+            });
+            
+            const option = {
+                animationDuration: 300,
+                dataset: [
+                    {
+                        id: 'dataset_raw',
+                        source: rawData
+                    },
+                    ...datasetWithFilters
+                ],
+                title: {
+                    text: '近30天注册人数变化趋势',
+                    left: 'center'
+                },
+                tooltip: {
+                    order: 'valueDesc',
+                    trigger: 'axis',
+                    formatter: function(params) {
+                        let result = params[0].axisValue + '<br>';
+                        
+                        // 按数值从大到小排序
+                        params.sort((a, b) => {
+                            // 修复：确保我们获取的是数字而不是undefined
+                            const valueA = typeof a.value[2] === 'number' ? a.value[2] : a.value.Registrations;
+                            const valueB = typeof b.value[2] === 'number' ? b.value[2] : b.value.Registrations;
+                            return valueB - valueA;
+                        });
+                        
+                        params.forEach(param => {
+                            // 修复：根据数据结构正确获取值
+                            const value = typeof param.value[2] === 'number' ? 
+                                          param.value[2] : 
+                                          (param.value.Registrations !== undefined ? 
+                                           param.value.Registrations : 
+                                           param.value);
+                            
+                            const colorSpan = `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${param.color};"></span>`;
+                            result += colorSpan + param.seriesName + ': ' + value + '<br>';
+                        });
+                        
+                        return result;
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    nameLocation: 'middle',
+                    axisLabel: {
+                        formatter: function(value) {
+                            // 只显示月和日
+                            const date = new Date(value);
+                            return (date.getMonth() + 1) + '-' + date.getDate();
+                        }
+                    }
+                },
+                yAxis: {
+                    name: '注册人数',
+                    nameTextStyle: {
+                        padding: [0, 0, 0, 40]  // 增加名称与轴的距离
+                    }
+                },
+                grid: {
+                    right: 140,
+                    left: 80,
+                    bottom: 80
+                },
+                legend: {
+                    type: 'scroll',
+                    orient: 'horizontal',
+                    bottom: 10,
+                    textStyle: {
+                        color: '#333'
+                    },
+                    selectedMode: true
+                },
+                series: seriesList
+            };
+            
+            myChart.setOption(option);
+            
+            // 改为使用 rendered 事件，在渲染完成后修复 endLabel
+            myChart.on('rendered', function() {
+                // 确保图表已正确渲染并包含所有数据点
+                platforms.forEach((platform, index) => {
+                    // 获取对应平台的最后一天数据
+                    const lastDayValue = lastDayData[platform];
+                    
+                    // 在动画完成后，设置固定的endLabel
+                    myChart.setOption({
+                        series: [{
+                            name: platform,
+                            endLabel: {
+                                show: true,
+                                formatter: platform + ': ' + lastDayValue,
+                                backgroundColor: '#fff',
+                                padding: [3, 5],
+                                borderRadius: 3,
+                                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                                shadowBlur: 3
+                            }
+                        }]
+                    }, {replaceMerge: false, notMerge: false});
+                });
+            });
+            
+            // 添加到window.resize事件处理中
+            if (window.echartInstances) {
+                window.echartInstances.push(myChart);
+            } else {
+                window.echartInstances = [myChart];
+            }
+        }
     </script>
 </body>
 </html> 

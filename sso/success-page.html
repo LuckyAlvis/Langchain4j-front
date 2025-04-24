@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申请提交成功 - 耀耀工厂</title>
+    <link rel="stylesheet" href="permission-admin.css">
+    <style>
+        body {
+            background-color: #f5f7fa;
+            margin: 0;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        .success-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #f6ffed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            position: relative;
+            border: 1px solid #b7eb8f;
+        }
+        
+        .checkmark {
+            border-radius: 50%;
+            display: block;
+            stroke-width: 4;
+            stroke: #52c41a;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #52c41a;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 4;
+            stroke-miterlimit: 10;
+            stroke: #52c41a;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+        
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 50px #f6ffed;
+            }
+        }
+        
+        .success-title {
+            font-size: 24px;
+            color: #323233;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .success-message {
+            font-size: 16px;
+            color: #646566;
+            margin-bottom: 32px;
+            max-width: 540px;
+            line-height: 1.6;
+        }
+        
+        .back-button {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 0 20px;
+            background-color: #1890ff;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-right: 16px;
+            cursor: pointer;
+        }
+        
+        .back-button:hover {
+            background-color: #40a9ff;
+        }
+        
+        .home-button {
+            display: inline-block;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 0 20px;
+            background-color: white;
+            color: #1890ff;
+            border: 1px solid #1890ff;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .home-button:hover {
+            background-color: #e6f7ff;
+        }
+        
+        .request-info {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            text-align: left;
+            width: 100%;
+            max-width: 540px;
+        }
+        
+        .request-info h3 {
+            color: #323233;
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 12px;
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        
+        .info-label {
+            color: #969799;
+            width: 100px;
+            flex-shrink: 0;
+        }
+        
+        .info-value {
+            color: #323233;
+            flex: 1;
+        }
+        
+        .info-highlight {
+            color: #1890ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+        </div>
+        
+        <h1 class="success-title">申请提交成功</h1>
+        <p class="success-message">您的权限申请已成功提交，系统已通知平台管理员进行审批<br>审批结果将通过系统通知告知您，您可提前查阅熟悉耀耀工厂使用文档</p>
+        
+        <div>
+            <a href="https://cohlzhtweb.feishu.cn/file/QOA1byvBWoigMfxp7Z8cEHvrntd" class="back-button">查看文档</a>
+            <a href="permission-request.html" class="home-button">继续申请</a>
+        </div>
+    </div>
+    
+    <script>
+        // 获取当前日期和时间并格式化显示
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+        
+        // 生成一个随机的申请单号
+        function generateRequestId() {
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            
+            return `REQ${year}${month}${day}${random}`;
+        }
+        
+        // 设置申请时间和申请单号
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            document.getElementById('requestTime').textContent = formatDate(now);
+            document.getElementById('requestId').textContent = generateRequestId();
+            
+            // 接收并存储URL参数中的信息（如果有）
+            const urlParams = new URLSearchParams(window.location.search);
+            const platform = urlParams.get('platform');
+            const reason = urlParams.get('reason');
+            
+            // 如果URL中有平台信息，则可以显示
+            if (platform) {
+                // 创建平台信息显示元素
+                const platformInfoItem = document.createElement('div');
+                platformInfoItem.className = 'info-item';
+                platformInfoItem.innerHTML = `
+                    <div class="info-label">申请平台：</div>
+                    <div class="info-value">${platform}</div>
+                `;
+                
+                // 插入到申请信息区域
+                const requestInfo = document.querySelector('.request-info');
+                requestInfo.appendChild(platformInfoItem);
+            }
+        });
+    </script>
+</body>
+</html> 

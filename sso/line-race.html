@@ -1,0 +1,227 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=line-race
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/zh/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var ROOT_PATH = 'https://echarts.apache.org/examples';
+    var option;
+
+    // 生成30天的模拟数据
+    const generateData = function() {
+      const platforms = ['Platform1', 'Platform2', 'Platform3', 'Platform4', 'Platform5'];
+      const now = new Date('2025-04-23'); // 固定日期，与dashboard保持一致
+      const data = [];
+      
+      // 第一行是表头
+      data.push(["注册量", "活跃度", "总用户数", "平台", "日期"]);
+      
+      // 为每个平台生成基础趋势
+      const baseTrends = {
+        'Platform1': { base: 150, growth: 1.8, variance: 20 },
+        'Platform2': { base: 100, growth: 1.5, variance: 15 },
+        'Platform3': { base: 70, growth: 1.3, variance: 10 },
+        'Platform4': { base: 40, growth: 1.2, variance: 8 },
+        'Platform5': { base: 20, growth: 1.1, variance: 5 }
+      };
+      
+      // 生成30天的数据
+      for (let i = 29; i >= 0; i--) {
+        const date = new Date(now);
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toISOString().slice(0, 10);
+        
+        platforms.forEach(platform => {
+          const trend = baseTrends[platform];
+          const dayNum = 30 - i;
+          
+          // 计算当天注册数（基础值 + 增长 + 随机波动）
+          const base = trend.base;
+          const growth = Math.pow(trend.growth, dayNum / 5); // 使增长更加平滑
+          const variance = Math.random() * trend.variance * 2 - trend.variance;
+          
+          const registrations = Math.floor(base * growth + variance);
+          const activity = 60 + Math.random() * 30; // 活跃度在60-90之间
+          const totalUsers = 1000 + dayNum * base * 2 + Math.random() * 500; // 总用户数增长
+          
+          data.push([
+            Math.max(1, registrations), // 注册量
+            activity.toFixed(1), // 活跃度
+            Math.floor(totalUsers), // 总用户数
+            platform, // 平台
+            dateStr // 日期
+          ]);
+        });
+      }
+      
+      return data;
+    };
+
+    const rawData = generateData();
+    
+    // 直接调用run函数，传入数据
+    run(rawData);
+    
+function run(_rawData) {
+  const platforms = [
+    'Platform1',
+    'Platform2',
+    'Platform3',
+    'Platform4',
+    'Platform5'
+  ];
+  
+  // 平台颜色映射，保持与dashboard一致
+  const platformColors = {
+    'Platform1': '#1890ff',
+    'Platform2': '#52c41a',
+    'Platform3': '#faad14',
+    'Platform4': '#f5222d',
+    'Platform5': '#722ed1'
+  };
+  
+  const datasetWithFilters = [];
+  const seriesList = [];
+  
+  echarts.util.each(platforms, function (platform) {
+    var datasetId = 'dataset_' + platform;
+    datasetWithFilters.push({
+      id: datasetId,
+      fromDatasetId: 'dataset_raw',
+      transform: {
+        type: 'filter',
+        config: {
+          and: [
+            { dimension: 3, '=': platform }
+          ]
+        }
+      }
+    });
+    
+    seriesList.push({
+      type: 'line',
+      datasetId: datasetId,
+      showSymbol: false,
+      name: platform,
+      lineStyle: {
+        color: platformColors[platform]
+      },
+      itemStyle: {
+        color: platformColors[platform]
+      },
+      endLabel: {
+        show: true,
+        formatter: function (params) {
+          return params.value[3] + ': ' + params.value[0];
+        }
+      },
+      labelLayout: {
+        moveOverlap: 'shiftY'
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      encode: {
+        x: 4, // 日期
+        y: 0, // 注册量
+        label: [3, 0], // 平台, 注册量
+        itemName: 4,
+        tooltip: [0]
+      }
+    });
+  });
+  
+  option = {
+    animationDuration: 100,
+    dataset: [
+      {
+        id: 'dataset_raw',
+        source: _rawData
+      },
+      ...datasetWithFilters
+    ],
+    title: {
+      text: 'Platform Registration Trends (Last 30 Days)',
+      textStyle: {
+        fontSize: 16,
+        fontWeight: 'normal'
+      }
+    },
+    tooltip: {
+      order: 'valueDesc',
+      trigger: 'axis'
+    },
+    legend: {
+      data: platforms,
+      right: 10,
+      top: 'center',
+      orient: 'vertical'
+    },
+    grid: {
+      left: '3%',
+      right: '15%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      nameLocation: 'middle',
+      axisLabel: {
+        formatter: function(value) {
+          // 简化日期显示
+          return value.substr(5); // 只显示月-日
+        }
+      }
+    },
+    yAxis: {
+      name: 'Registrations'
+    },
+    series: seriesList
+  };
+  
+  return option;
+}
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

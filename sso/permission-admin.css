@@ -872,6 +872,7 @@ input, select {
     border-radius: 12px;
     width: 90%;
     max-width: 700px;
+    max-height: 115vh;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     overflow: hidden;
 }
@@ -916,7 +917,7 @@ input, select {
 
 #add-user-modal .modal-body {
     padding: 24px;
-    max-height: 70vh;
+    max-height: 80vh;
     overflow-y: auto;
 }
 

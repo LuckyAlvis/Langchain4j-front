@@ -546,4 +546,189 @@
 
 .cancel-btn:hover {
     background-color: #f5f5f5;
+}
+
+/* 平台筛选区域样式 */
+.platform-filter-area {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filter-label {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    margin-right: 16px;
+    white-space: nowrap;
+}
+
+/* 多选下拉框样式 */
+.multi-select-container {
+    position: relative;
+    width: 300px;
+    flex: 1;
+    max-width: 400px;
+}
+
+.multi-select-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.multi-select-header:hover {
+    border-color: #40a9ff;
+}
+
+.multi-select-header.active {
+    border-color: #1890ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.selected-text {
+    font-size: 14px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdown-icon {
+    font-size: 12px;
+    color: #999;
+    transition: transform 0.3s;
+}
+
+.multi-select-header.active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.multi-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    margin-top: 4px;
+    display: none;
+}
+
+.multi-select-dropdown.visible {
+    display: block;
+}
+
+.multi-select-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.multi-select-option:hover {
+    background-color: #f5f5f5;
+}
+
+.multi-select-option label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.multi-select-option input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.platform-search-btn {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-left: 20px;
+}
+
+.platform-search-btn:hover {
+    background-color: #40a9ff;
+}
+
+@media (max-width: 768px) {
+    .platform-filter-area {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .filter-label {
+        margin-bottom: 10px;
+    }
+    
+    .multi-select-container {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 10px;
+    }
+    
+    .platform-search-btn {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+}
+
+/* 全宽图表行样式 */
+.full-width-chart-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* 调整图表容器高度 */
+.chart-container {
+    height: 350px;
+    width: 100%;
+}
+
+/* 图表标题样式调整 */
+.card-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* 响应式布局调整 */
+@media (max-width: 1200px) {
+    .full-width-chart-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 全宽卡片样式 */
+.full-width-card {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.full-width-card .chart-container {
+    height: 500px;
 } 

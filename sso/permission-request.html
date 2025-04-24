@@ -286,15 +286,15 @@
                     
                     <form id="permissionRequestForm">
                         <div class="form-group">
-                            <label class="form-label required">申请人信息</label>
+                            <!-- <label class="form-label required">申请人信息</label>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                                 <div>
                                     <label class="form-label">姓名</label>
                                     <input type="text" class="form-input" name="name" placeholder="请输入姓名">
                                 </div>
                                 <div>
-                                    <label class="form-label">工号</label>
-                                    <input type="text" class="form-input" name="employeeId" placeholder="请输入工号">
+                                    <label class="form-label">邮箱</label>
+                                    <input type="text" class="form-input" name="employeeId" placeholder="请输入邮箱">
                                 </div>
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
@@ -319,14 +319,14 @@
                                         <option value="other">其他</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div style="margin-top: 15px;">
-                                <label class="form-label">电子邮箱</label>
+                                <label class="form-label required">电子邮箱</label>
                                 <input type="email" class="form-input" name="email" placeholder="请输入公司邮箱">
                             </div>
                         </div>
                         
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label class="form-label required">申请时长</label>
                             <div class="duration-options">
                                 <div class="duration-option">
@@ -358,7 +358,7 @@
                                     <label for="duration7">长期</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
                         <div class="form-group">
                             <label class="form-label required">申请原因</label>
@@ -410,34 +410,34 @@
         // 提交表单
         function submitForm() {
             // 获取表单数据
-            const name = document.querySelector('input[name="name"]').value.trim();
-            const employeeId = document.querySelector('input[name="employeeId"]').value.trim();
-            const department = document.querySelector('input[name="department"]').value.trim();
-            const position = document.querySelector('select[name="position"]').value;
+            // const name = document.querySelector('input[name="name"]').value.trim();
+            // const employeeId = document.querySelector('input[name="employeeId"]').value.trim();
+            // const department = document.querySelector('input[name="department"]').value.trim();
+            // const position = document.querySelector('select[name="position"]').value;
             const email = document.querySelector('input[name="email"]').value.trim();
-            const duration = document.querySelector('input[name="duration"]:checked').value;
+            // const duration = document.querySelector('input[name="duration"]:checked').value;
             const reason = document.querySelector('textarea[name="reason"]').value.trim();
             
-            // 表单验证
-            if (!name) {
-                alert('请输入姓名');
-                return;
-            }
+            // // 表单验证
+            // if (!name) {
+            //     alert('请输入姓名');
+            //     return;
+            // }
             
-            if (!employeeId) {
-                alert('请输入工号');
-                return;
-            }
+            // if (!employeeId) {
+            //     alert('请输入邮箱');
+            //     return;
+            // }
             
-            if (!department) {
-                alert('请输入部门');
-                return;
-            }
+            // if (!department) {
+            //     alert('请输入部门');
+            //     return;
+            // }
             
-            if (!position) {
-                alert('请选择岗位');
-                return;
-            }
+            // if (!position) {
+            //     alert('请选择岗位');
+            //     return;
+            // }
             
             if (!email) {
                 alert('请输入电子邮箱');
@@ -455,13 +455,13 @@
             // 构建申请数据
             const applicationData = {
                 applicant: {
-                    name: name,
-                    employeeId: employeeId,
-                    department: department,
-                    position: position,
+                    // name: name,
+                    // employeeId: employeeId,
+                    // department: department,
+                    // position: position,
                     email: email
                 },
-                duration: duration,
+                // duration: duration,
                 reason: reason,
                 applyTime: new Date().toISOString()
             };
