@@ -293,8 +293,8 @@
                                     <input type="text" class="form-input" name="name" placeholder="请输入姓名">
                                 </div>
                                 <div>
-                                    <label class="form-label">邮箱</label>
-                                    <input type="text" class="form-input" name="employeeId" placeholder="请输入邮箱">
+                                    <label class="form-label">域账号</label>
+                                    <input type="text" class="form-input" name="employeeId" placeholder="请输入域账号">
                                 </div>
                             </div>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
@@ -320,8 +320,9 @@
                                 </div>
                             </div> -->
                             <div style="margin-top: 15px;">
-                                <label class="form-label required">电子邮箱</label>
-                                <input type="email" class="form-input" name="email" placeholder="请输入公司邮箱">
+                                <label class="form-label required">域账号</label>
+                                <div class="form-tip">请检查是否为自己的域账号名</div>
+                                <input type="email" class="form-input" name="email" value="yifan.dai" disabled>
                             </div>
                         </div>
                         
@@ -411,21 +412,12 @@
             const email = document.querySelector('input[name="email"]').value.trim();
             const reason = document.querySelector('textarea[name="reason"]').value.trim();
             
-            // 验证
-            if (!email) {
-                alert('请输入电子邮箱');
-                return;
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert('请输入有效的电子邮箱');
-                return;
-            }
-            
             if (!reason) {
                 alert('请填写申请原因');
                 return;
             }
             
-            // 保存邮箱到localStorage
+            // 保存域账号到localStorage
             localStorage.setItem('userEmail', email);
             
             // 构建申请数据

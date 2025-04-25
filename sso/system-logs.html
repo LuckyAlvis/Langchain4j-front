@@ -83,7 +83,7 @@
                                 <option value="new">权限申请</option>
                                 <option value="revoke">权限收回</option>
                                 <option value="direct">直接授权</option>
-                                <option value="force-logout">强制退出</option>
+<!--                                <option value="force-logout">强制退出</option>-->
                             </select>
                         </div>
                         <div class="filter-item">
@@ -95,7 +95,7 @@
                             <input type="text" placeholder="请输入操作人姓名">
                         </div>
                         <div class="filter-item">
-                            <label>时间范围:</label>
+                            <label>日志产生时间:</label>
                             <input type="date" class="date-picker">
                             <span class="date-separator">至</span>
                             <input type="date" class="date-picker">
@@ -256,21 +256,21 @@
                         </div>
 
                         <!-- 添加强制退出的样例数据 -->
-                        <div class="log-item">
-                            <div class="log-icon force-logout">⊗</div>
-                            <div class="log-content">
-                                <div class="log-text">
-                                    <div class="log-title">强制退出 - 李四</div>
-                                    <div class="log-meta">
-                                        <span class="log-time">2分钟前</span>
-                                        <span class="log-operator">戴倚凡</span>
-                                    </div>
-                                </div>
-                                <div class="log-detail">
-                                    <button class="view-detail-btn">查看详情</button>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="log-item">-->
+<!--                            <div class="log-icon force-logout">⊗</div>-->
+<!--                            <div class="log-content">-->
+<!--                                <div class="log-text">-->
+<!--                                    <div class="log-title">强制退出 - 李四</div>-->
+<!--                                    <div class="log-meta">-->
+<!--                                        <span class="log-time">2分钟前</span>-->
+<!--                                        <span class="log-operator">戴倚凡</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="log-detail">-->
+<!--                                    <button class="view-detail-btn">查看详情</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                     
                     <!-- 分页 -->
@@ -594,7 +594,7 @@
                         <div class="detail-section">
                             <h4>申请状态</h4>
                             <div class="detail-remarks" style="border-left-color: #faad14; background-color: #fffbe6;">
-                                申请已提交，等待管理员审批。预计处理时间：24小时内。
+                                申请已提交，等待平台管理员审批。预计处理时间：24小时内。
                             </div>
                         </div>
                     `;
@@ -668,7 +668,7 @@
                     <div class="detail-section">
                         <h4>授权备注</h4>
                         <div class="detail-remarks">
-                            管理员戴倚凡直接授予用户权限，长期有效。
+                            超级管理员戴倚凡直接授予用户权限，长期有效。
                         </div>
                     </div>
                     

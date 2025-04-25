@@ -304,7 +304,7 @@
             <div class="tabs">
                 <div class="tab-item" onclick="showTab('approval')">权限审批</div>
                 <div class="tab-item active" onclick="showTab('authorized')">已授权用户</div>
-                <div class="tab-item" onclick="showTab('active')">当前登录用户</div>
+<!--                <div class="tab-item" onclick="showTab('active')">当前登录用户</div>-->
             </div>
 
             <!-- 权限审批内容卡片 -->
@@ -320,8 +320,8 @@
                             <input type="text" placeholder="请输入姓名">
                         </div>
                         <div class="filter-item">
-                            <label>邮箱:</label>
-                            <input type="text" placeholder="请输入邮箱">
+                            <label>域账号:</label>
+                            <input type="text" placeholder="请输入域账号">
                         </div>
                         <div class="filter-item">
                             <label>部门:</label>
@@ -342,7 +342,7 @@
                             <input type="date" class="date-picker">
                         </div>
                         <div class="filter-item">
-                            <label>状态:</label>
+                            <label>审批状态:</label>
                             <select>
                                 <option value="">全部</option>
                                 <option value="pending">待审批</option>
@@ -376,23 +376,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="filter-item">
-                            <label>角色:</label>
-                            <div class="multi-select" id="approval-role-filter">
-                                <div class="multi-select-header">
-                                    <span>全部</span>
-                                    <span class="arrow">▼</span>
-                                </div>
-                                <div class="multi-select-dropdown">
-                                    <div class="multi-select-option">
-                                    <input type="checkbox" value="user" checked> 普通用户
-                                </div>
-                                    <div class="multi-select-option">
-                                    <input type="checkbox" value="platform-admin" checked> 平台管理员
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="filter-item">-->
+<!--                            <label>角色:</label>-->
+<!--                            <div class="multi-select" id="approval-role-filter">-->
+<!--                                <div class="multi-select-header">-->
+<!--                                    <span>全部</span>-->
+<!--                                    <span class="arrow">▼</span>-->
+<!--                                </div>-->
+<!--                                <div class="multi-select-dropdown">-->
+<!--                                    <div class="multi-select-option">-->
+<!--                                    <input type="checkbox" value="user" checked> 普通用户-->
+<!--                                </div>-->
+<!--                                    <div class="multi-select-option">-->
+<!--                                    <input type="checkbox" value="platform-admin" checked> 平台管理员-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="filter-item">
                             <button class="search-btn">搜索</button>
                             <button class="reset-btn">重置</button>
@@ -412,11 +412,11 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>姓名</th>
-                                    <th>邮箱</th>
+                                    <th>域账号</th>
                                     <th>部门</th>
                                     <th>平台</th>
                                     <th>角色</th>
-                                    <th>申请时间</th>
+                                    <th>申请时间<span style="color: red">(默认倒序排列)</span></th>
                                     <th>申请理由</th>
                                     <th>状态</th>
                                     <th>操作</th>
@@ -426,11 +426,11 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>张三</td>
-                                    <td>zhangsan@yaoyao.com</td>
+                                    <td>zhangsan</td>
                                     <td>中國建築國際-中建香港-海宏技術有限公司-海宏公司團隊(駐深)-數字化提升部二部</td>
                                     <td><span class="platform-badge platform-1">第一平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-10-15 14:30</td>
+                                    <td>2025-04-25 14:30</td>
                                     <td>需要使用AI工具提升工作效率</td>
                                     <td><span class="status status-pending">待审批</span></td>
                                     <td>
@@ -442,11 +442,11 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>李四</td>
-                                    <td>lisi@yaoyao.com</td>
+                                    <td>lisi</td>
                                     <td>中國建築國際-信息化管理部</td>
                                     <td><span class="platform-badge platform-2">第二平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-10-15 10:15</td>
+                                    <td>2025-04-24 10:15</td>
                                     <td>需要调研AI产品功能</td>
                                     <td><span class="status status-pending">待审批</span></td>
                                     <td>
@@ -458,11 +458,11 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>王五</td>
-                                    <td>wangwu@yaoyao.com</td>
+                                    <td>wangwu</td>
                                     <td>中國建築國際-信息化管理部</td>
                                     <td><span class="platform-badge platform-3">第三平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-07-05 10:00</td>
+                                    <td>2025-04-23 10:00</td>
                                     <td>产品设计需要使用AI助手</td>
                                     <td><span class="status status-approved">已通过</span></td>
                                     <td>
@@ -473,11 +473,11 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>赵六</td>
-                                    <td>zhaoliu@yaoyao.com</td>
+                                    <td>zhaoliu</td>
                                     <td>中國建築國際-中建香港-中國建築國際-中建香港-中國建築國際-中建香港-人力资源部部部</td>
                                     <td><span class="platform-badge platform-4">第四平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-09-30 09:30</td>
+                                    <td>2025-04-22 09:30</td>
                                     <td>部门需开发问答智能体，烦请审批</td>
                                     <td><span class="status status-rejected">已拒绝</span></td>
                                     <td>
@@ -488,11 +488,11 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>钱七</td>
-                                    <td>qianqi@yaoyao.com</td>
+                                    <td>qianqi</td>
                                     <td>中國建築國際-中建香港-海宏技術有限公司-海宏公司團隊(駐深)-數字化提升部二部</td>
                                     <td><span class="platform-badge platform-5">第五平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-10-01 09:30</td>
+                                    <td>2025-04-21 09:30</td>
                                     <td>开发需要使用AI接口</td>
                                     <td><span class="status status-pending">待审批</span></td>
                                     <td>
@@ -530,8 +530,8 @@
                             <input type="text" placeholder="请输入姓名">
                         </div>
                         <div class="filter-item">
-                            <label>邮箱:</label>
-                            <input type="text" placeholder="请输入邮箱">
+                            <label>域账号:</label>
+                            <input type="text" placeholder="请输入域账号">
                         </div>
                         <div class="filter-item">
                             <label>部门:</label>
@@ -615,13 +615,13 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>姓名</th>
-                                    <th>邮箱</th>
+                                    <th>域账号</th>
                                     <th>部门</th>
                                     <th>平台</th>
                                     <th>角色</th>
-                                    <th>授权时间</th>
+                                    <th>授权时间<span style="color: red">(默认倒序排列)</span></th>
                                     <th>最近登录</th>
-                                    <th>访问次数</th>
+<!--                                    <th>访问次数</th>-->
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -629,13 +629,13 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>张三</td>
-                                    <td>zhangsan@yaoyao.com</td>
+                                    <td>zhangsan</td>
                                     <td>中國建築國際-中建香港-海宏技術有限公司-海宏公司團隊(駐深)-數字化提升部二部</td>
                                     <td><span class="platform-badge platform-1">第一平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-09-15</td>
-                                    <td>2024-10-15 14:30</td>
-                                    <td>42次</td>
+                                    <td>2025-04-25 08:28</td>
+                                    <td>2025-04-25 14:30</td>
+<!--                                    <td>42次</td>-->
                                     <td>
                                         <button class="action-btn view-btn">查看</button>
                                         <button class="action-btn remove-btn">收回权限</button>
@@ -644,13 +644,13 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>李四</td>
-                                    <td>lisi@yaoyao.com</td>
+                                    <td>lisi</td>
                                     <td>中國建築國際-信息化管理部</td>
-                                    <td><span class="platform-badge platform-2">第二平台</span></td>
+                                    <td><span class="platform-badge platform-2">第二平台</span><span class="platform-badge platform-3">第三平台</span></td>
                                     <td><span class="role-badge role-platform-admin">平台管理员</span></td>
-                                    <td>2024-08-20</td>
-                                    <td>2024-10-15 09:15</td>
-                                    <td>68次</td>
+                                    <td>2025-04-24 08:28</td>
+                                    <td>2025-04-25 08:31</td>
+<!--                                    <td>68次</td>-->
                                     <td>
                                         <button class="action-btn view-btn">查看</button>
                                         <button class="action-btn remove-btn">收回权限</button>
@@ -659,13 +659,13 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>王五</td>
-                                    <td>wangwu@yaoyao.com</td>
+                                    <td>wangwu</td>
                                     <td>中國建築國際-中建澳門-总部部门-信息化管理部</td>
                                     <td><span class="platform-badge platform-3">第三平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-07-05</td>
-                                    <td>2024-10-14 16:45</td>
-                                    <td>126次</td>
+                                    <td>2025-04-23 08:28</td>
+                                    <td>2025-04-24 18:20</td>
+<!--                                    <td>126次</td>-->
                                     <td>
                                         <button class="action-btn view-btn">查看</button>
                                         <button class="action-btn remove-btn">收回权限</button>
@@ -674,13 +674,13 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>赵六</td>
-                                    <td>zhaoliu@yaoyao.com</td>
+                                    <td>zhaoliu</td>
                                     <td>中國建築國際-中建香港-中國建築國際-中建香港-中國建築國際-中建香港-人力资源部部部</td>
                                     <td><span class="platform-badge platform-4">第四平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-09-30</td>
-                                    <td>2024-10-13 11:20</td>
-                                    <td>18次</td>
+                                    <td>2025-04-22 08:28</td>
+                                    <td>2025-04-25 12:11</td>
+<!--                                    <td>18次</td>-->
                                     <td>
                                         <button class="action-btn view-btn">查看</button>
                                         <button class="action-btn remove-btn">收回权限</button>
@@ -689,13 +689,13 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>钱七</td>
-                                    <td>qianqi@yaoyao.com</td>
+                                    <td>qianqi</td>
                                     <td>中國建築國際-中建香港-海宏技術有限公司-海宏公司團隊(駐深)-數字化提升部二部</td>
                                     <td><span class="platform-badge platform-5">第五平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
-                                    <td>2024-10-01</td>
-                                    <td>2024-10-15 08:30</td>
-                                    <td>24次</td>
+                                    <td>2025-04-21 08:28</td>
+                                    <td>2025-04-24 11:30</td>
+<!--                                    <td>24次</td>-->
                                     <td>
                                         <button class="action-btn view-btn">查看</button>
                                         <button class="action-btn remove-btn">收回权限</button>
@@ -729,8 +729,8 @@
                             <input type="text" placeholder="请输入姓名">
                         </div>
                         <div class="filter-item">
-                            <label>邮箱:</label>
-                            <input type="text" placeholder="请输入邮箱">
+                            <label>域账号:</label>
+                            <input type="text" placeholder="请输入域账号">
                         </div>
                         <div class="filter-item">
                             <label>部门:</label>
@@ -814,7 +814,7 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>姓名</th>
-                                    <th>邮箱</th>
+                                    <th>域账号</th>
                                     <th>部门</th>
                                     <th>平台</th>
                                     <th>角色</th>
@@ -828,7 +828,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>张三</td>
-                                    <td>zhangsan@yaoyao.com</td>
+                                    <td>zhangsan</td>
                                     <td>中國建築國際-中建香港-海宏技術有限公司-海宏公司團隊(駐深)-數字化提升部二部</td>
                                     <td><span class="platform-badge platform-1">第一平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -843,7 +843,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>李四</td>
-                                    <td>lisi@yaoyao.com</td>
+                                    <td>lisi</td>
                                     <td>中國建築國際-信息化管理部</td>
                                     <td><span class="platform-badge platform-2">第二平台</span></td>
                                     <td><span class="role-badge role-platform-admin">平台管理员</span></td>
@@ -858,7 +858,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>王五</td>
-                                    <td>wangwu@yaoyao.com</td>
+                                    <td>wangwu</td>
                                     <td>中國建築國際-信息化管理部</td>
                                     <td><span class="platform-badge platform-3">第三平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -873,7 +873,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>赵六</td>
-                                    <td>zhaoliu@yaoyao.com</td>
+                                    <td>zhaoliu</td>
                                     <td>中國建築國際-中建香港-中國建築國際-中建香港-中國建築國際-中建香港-人力资源部部部</td>
                                     <td><span class="platform-badge platform-4">第四平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -888,7 +888,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>钱七</td>
-                                    <td>qianqi@yaoyao.com</td>
+                                    <td>qianqi</td>
                                     <td>中國建築國際-中建香港-海宏技術有限公司-海宏公司團隊(駐深)-數字化提升部二部</td>
                                     <td><span class="platform-badge platform-5">第五平台</span></td>
                                     <td><span class="role-badge role-user">普通用户</span></td>
@@ -922,8 +922,8 @@
                                     <div class="info-value name-value">张三</div>
                                 </div>
                                 <div class="info-item">
-                                    <div class="info-label">邮箱：</div>
-                                    <div class="info-value email-value">zhangsan@yaoyao.com</div>
+                                    <div class="info-label">域账号：</div>
+                                    <div class="info-value email-value">zhangsan</div>
                                     <!-- 原来可能是:
                                     <div class="info-label">工号：</div>
                                     <div class="info-value employeeId-value">ZH001</div>
@@ -959,7 +959,7 @@
                 </div>
             </div>
 
-            <!-- 修改添加用户权限弹窗，改为先根据邮箱查找用户，再确认添加 -->
+            <!-- 修改添加用户权限弹窗，改为先根据域账号查找用户，再确认添加 -->
             <div class="modal" id="add-user-modal">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -968,15 +968,15 @@
                     </div>
                     <div class="modal-body">
                         <form id="addUserForm">
-                            <!-- 第一步：邮箱搜索表单 -->
+                            <!-- 第一步：域账号搜索表单 -->
                             <div id="step-search" style="display: block;">
                                 <div class="form-group">
-                                    <label class="form-label required">用户邮箱</label>
+                                    <label class="form-label required">用户域账号</label>
                                     <div class="email-search-container">
-                                        <input type="email" class="form-input" id="search-email" placeholder="请输入企业邮箱进行查找" required>
+                                        <input type="text" class="form-input" id="search-email" placeholder="请输入企业域账号进行查找" required>
                                         <!-- <button type="button" class="search-user-btn" onclick="searchUserByEmail()">查找用户</button> -->
                                     </div>
-                                    <span class="field-hint">请输入用户的完整企业邮箱，将从企业IM系统中查找对应的用户信息</span>
+                                    <span class="field-hint">请输入用户的完整企业域账号，将从企业IM系统中查找对应的用户信息</span>
                                 </div>
                                 <div id="email-search-message" class="search-message" style="display: none;"></div>
                             </div>
@@ -1008,7 +1008,7 @@
                                                 <span class="detail-value" id="user-position">--</span>
                                             </div>
                                             <div class="detail-row">
-                                                <span class="detail-label">邮箱:</span>
+                                                <span class="detail-label">域账号:</span>
                                                 <span class="detail-value" id="user-email">--</span>
                                             </div>
                                             <!-- 添加所属平台 -->
@@ -1558,7 +1558,7 @@
             document.getElementById('step-search-btn').style.display = 'block';
             document.getElementById('step-confirm-btn').style.display = 'none';
             
-            // 清空邮箱搜索框
+            // 清空域账号搜索框
             document.getElementById('search-email').value = '';
             
             // 隐藏搜索消息
@@ -1594,18 +1594,18 @@
             document.getElementById('addUserForm').reset();
         }
 
-        // 根据邮箱查找用户
+        // 根据域账号查找用户
         function searchUserByEmail() {
             const email = document.getElementById('search-email').value.trim();
             const searchMessage = document.getElementById('email-search-message');
             
-            // 验证邮箱格式
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                searchMessage.className = 'search-message error';
-                searchMessage.textContent = '请输入有效的企业邮箱地址';
-                searchMessage.style.display = 'block';
-                return;
-            }
+            // 验证域账号格式
+            // if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            //     searchMessage.className = 'search-message error';
+            //     searchMessage.textContent = '请输入有效的企业域账号地址';
+            //     searchMessage.style.display = 'block';
+            //     return;
+            // }
             
             // 显示加载状态
             searchMessage.className = 'search-message loading';
@@ -1658,63 +1658,63 @@
                 } else {
                     // 用户未找到
                     searchMessage.className = 'search-message error';
-                    searchMessage.textContent = '未找到此邮箱对应的用户，请检查邮箱地址是否正确';
-                    searchMessage.innerHTML += '<br>样例: zhangsan@example.com, lisi@example.com';
+                    searchMessage.textContent = '未找到此域账号对应的用户，请检查域账号地址是否正确';
+                    searchMessage.innerHTML += '<br>样例: zhangsan, lisi';
                     searchMessage.style.display = 'block';
                 }
             }, 1000); // 模拟1秒延迟
         }
 
-        // 模拟根据邮箱搜索用户（实际实现中应该调用后端API）
+        // 模拟根据域账号搜索用户（实际实现中应该调用后端API）
         function mockSearchUserByEmail(email) {
             // 模拟的用户数据库
             const users = {
-                'zhangsan@example.com': {
+                'zhangsan': {
                     name: '张三',
-                    employeeId: 'zhangsan@example.com',
+                    employeeId: 'zhangsan',
                     department: '中國建築國際-信息化管理部',
                     position: '高级Java开发工程师',
-                    email: 'zhangsan@example.com',
+                    email: 'zhangsan',
                     platform: '一'  // 添加平台信息
                 },
-                'lisi@example.com': {
+                'lisi': {
                     name: '李四',
-                    employeeId: 'lisi@example.com',
+                    employeeId: 'lisi',
                     department: '中國建築國際-中建香港-房屋公司-房屋公司團隊（駐深）',
                     position: '高级Java开发工程师',
-                    email: 'lisi@example.com',
+                    email: 'lisi',
                     platform: '二'  // 添加平台信息
                 },
-                'wangwu@example.com': {
+                'wangwu': {
                     name: '王五',
-                    employeeId: 'wangwu@example.com',
+                    employeeId: 'wangwu',
                     department: '中國建築國際-中建香港-海宏技術有限公司-海宏公司團隊(駐深)-數字化提升部二部',
                     position: '高级Java开发工程师',
-                    email: 'wangwu@example.com',
+                    email: 'wangwu',
                     platform: '三'  // 添加平台信息
                 },
-                'zhaoliu@example.com': {
+                'zhaoliu': {
                     name: '赵六',
-                    employeeId: 'zhaoliu@example.com',
+                    employeeId: 'zhaoliu',
                     department: '中國建築國際-中建香港-中國建築國際-中建香港-中國建築國際-中建香港-中國建築國際-中建香港-人力资源部部部部',
                     position: '高级Java开发工程师',
-                    email: 'zhaoliu@example.com',
+                    email: 'zhaoliu',
                     platform: '四'  // 添加平台信息
                 },
-                'qianqi@example.com': {
+                'qianqi': {
                     name: '钱七',
-                    employeeId: 'qianqi@example.com',
+                    employeeId: 'qianqi',
                     department: '中國建築國際-金融業務部',
                     position: '高级Java开发工程师',
-                    email: 'qianqi@example.com',
+                    email: 'qianqi',
                     platform: '二'  // 添加平台信息
                 },
-                'liuer@example.com': {
+                'liuer': {
                     name: '刘二',
-                    employeeId: 'liuer@example.com',
+                    employeeId: 'liuer',
                     department: '中國建築國際-中建澳門-总部部门-信息化管理部',
                     position: '高级Java开发工程师',
-                    email: 'liuer@example.com',
+                    email: 'liuer',
                     platform: '三'  // 添加平台信息
                 }
             };
@@ -2021,7 +2021,7 @@
                             <div class="detail-value">${name}</div>
                         </div>
                         <div class="detail-item">
-                            <div class="detail-label">邮箱</div>
+                            <div class="detail-label">域账号</div>
                             <div class="detail-value">${employeeId}</div>
                         </div>
                         <div class="detail-item">
@@ -2376,22 +2376,22 @@
             
             // 根据不同用户设置不同信息
             if (name.includes('张三')) {
-                email = 'zhangsan@example.com';
+                email = 'zhangsan';
                 position = '高级Java开发工程师';
             } else if (name.includes('李四')) {
-                email = 'lisi@example.com';
+                email = 'lisi';
                 position = '高级Java开发工程师';
             } else if (name.includes('王五')) {
-                email = 'wangwu@example.com';
+                email = 'wangwu';
                 position = '高级Java开发工程师';
             } else if (name.includes('赵六')) {
-                email = 'zhaoliu@example.com';
+                email = 'zhaoliu';
                 position = '高级Java开发工程师';
             } else if (name.includes('钱七')) {
-                email = 'qianqi@example.com';
+                email = 'qianqi';
                 position = '高级Java开发工程师';
             } else if (name.includes('刘二')) {
-                email = 'liuer@example.com';
+                email = 'liuer';
                 position = '高级Java开发工程师';
             }
             
@@ -2418,7 +2418,7 @@
                                 <div class="detail-value">${position}</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-label">邮箱</div>
+                                <div class="detail-label">域账号</div>
                                 <div class="detail-value">${email}</div>
                             </div>
                             <div class="detail-item">
@@ -2482,22 +2482,22 @@
             
             // 根据不同用户设置不同信息
             if (name.includes('张三')) {
-                email = 'zhangsan@example.com';
+                email = 'zhangsan';
                 position = '高级Java开发工程师';
             } else if (name.includes('李四')) {
-                email = 'lisi@example.com';
+                email = 'lisi';
                 position = '高级Java开发工程师';
             } else if (name.includes('王五')) {
-                email = 'wangwu@example.com';
+                email = 'wangwu';
                 position = '高级Java开发工程师';
             } else if (name.includes('赵六')) {
-                email = 'zhaoliu@example.com';
+                email = 'zhaoliu';
                 position = '高级Java开发工程师';
             } else if (name.includes('钱七')) {
-                email = 'qianqi@example.com';
+                email = 'qianqi';
                 position = '高级Java开发工程师';
             } else if (name.includes('刘二')) {
-                email = 'liuer@example.com';
+                email = 'liuer';
                 position = '高级Java开发工程师';
             }
             
@@ -2528,7 +2528,7 @@
                                 <div class="detail-value">${position}</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-label">邮箱</div>
+                                <div class="detail-label">域账号</div>
                                 <div class="detail-value">${email}</div>
                             </div>
                             <div class="detail-item">
@@ -2568,22 +2568,22 @@
             
             // 根据不同用户设置不同信息
             if (name.includes('张三')) {
-                email = 'zhangsan@example.com';
+                email = 'zhangsan';
                 position = '高级Java开发工程师';
             } else if (name.includes('李四')) {
-                email = 'lisi@example.com';
+                email = 'lisi';
                 position = '高级Java开发工程师';
             } else if (name.includes('王五')) {
-                email = 'wangwu@example.com';
+                email = 'wangwu';
                 position = '高级Java开发工程师';
             } else if (name.includes('赵六')) {
-                email = 'zhaoliu@example.com';
+                email = 'zhaoliu';
                 position = '高级Java开发工程师';
             } else if (name.includes('钱七')) {
-                email = 'qianqi@example.com';
+                email = 'qianqi';
                 position = '高级Java开发工程师';
             } else if (name.includes('刘二')) {
-                email = 'liuer@example.com';
+                email = 'liuer';
                 position = '高级Java开发工程师';
             }
             
@@ -2631,7 +2631,7 @@
                                 <div class="detail-value">${position}</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-label">邮箱</div>
+                                <div class="detail-label">域账号</div>
                                 <div class="detail-value">${email}</div>
                             </div>
                             <div class="detail-item">
@@ -3216,7 +3216,7 @@
             // const employeeId = document.querySelector('#add-user-modal input[name="employeeId"]').value;
             
             if (!email) {
-                showSearchMessage('请输入邮箱', 'error');
+                showSearchMessage('请输入域账号', 'error');
                 return;
             }
             

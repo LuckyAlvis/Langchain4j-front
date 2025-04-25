@@ -113,7 +113,6 @@
             color: white;
             text-decoration: none;
             transition: background-color 0.3s;
-            margin-right: 16px;
             cursor: pointer;
         }
         
@@ -197,7 +196,6 @@
         
         <div>
             <a href="https://cohlzhtweb.feishu.cn/file/QOA1byvBWoigMfxp7Z8cEHvrntd" class="back-button">查看文档</a>
-            <a href="permission-request.html" class="home-button">继续申请</a>
         </div>
     </div>
     
@@ -241,10 +239,6 @@
                 // 创建平台信息显示元素
                 const platformInfoItem = document.createElement('div');
                 platformInfoItem.className = 'info-item';
-                platformInfoItem.innerHTML = `
-                    <div class="info-label">申请平台：</div>
-                    <div class="info-value">${platform}</div>
-                `;
                 
                 // 插入到申请信息区域
                 const requestInfo = document.querySelector('.request-info');
@@ -253,15 +247,4 @@
         });
     </script>
 </body>
-</html> 
-            // 从localStorage获取状态（与URL参数结合使用）
-            const localStatus = localStorage.getItem('requestStatus');
-            if (localStatus === 'rejected' && status !== 'pending') {
-                document.getElementById('success-view').style.display = 'none';
-                document.getElementById('rejected-view').style.display = 'flex';
-            }
-        });
-    </script>
-</body>
-</html> 
-</html> 
+</html>
